@@ -18,6 +18,7 @@ import type {
 
 export const CONFIG = {
   apiUrl: import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1',
+  analyticsId: import.meta.env.VITE_ANALYTICS_ID || '',
   environment: import.meta.env.VITE_ENV || 'development',
   isDevelopment: import.meta.env.DEV,
   isProduction: import.meta.env.PROD,

@@ -14,7 +14,7 @@ import { FORM_CONFIG } from '@/lib/constants/config';
  */
 const isDisposableEmail = (email: string): boolean => {
   const domain = email.split('@')[1]?.toLowerCase();
-  return domain ? FORM_CONFIG.disposableEmailDomains.includes(domain) : false;
+  return domain ? (FORM_CONFIG.disposableEmailDomains as readonly string[]).includes(domain) : false;
 };
 
 /**

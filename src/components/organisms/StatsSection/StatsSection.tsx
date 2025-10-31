@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
 import { STATS } from '@/lib/constants/config';
 import type { Stat } from '@/types';
@@ -9,8 +9,7 @@ import type { Stat } from '@/types';
 
 // Animated Counter Component
 const AnimatedCounter = ({ 
-  value, 
-  duration = 2 
+  value
 }: { 
   value: number; 
   duration?: number;

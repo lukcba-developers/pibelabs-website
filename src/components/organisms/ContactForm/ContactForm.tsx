@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -34,7 +34,7 @@ const ContactForm = () => {
 
   // Watch email field for suggestions
   const emailValue = watch('email');
-
+  
   // Check for email typos
   const checkEmailTypo = (email: string) => {
     if (email && email.includes('@')) {
@@ -44,6 +44,13 @@ const ContactForm = () => {
       setEmailSuggestion(null);
     }
   };
+  
+  // Use emailValue to check for typos
+  useEffect(() => {
+    if (emailValue) {
+      checkEmailTypo(emailValue);
+    }
+  }, [emailValue]);
 
   // Handle form submission
   const onSubmit = async (data: ContactFormData) => {
@@ -247,11 +254,12 @@ const ContactForm = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               >
-                <label className="block mb-2 font-rajdhani font-medium text-white">
+                <label htmlFor="service-select" className="block mb-2 font-rajdhani font-medium text-white">
                   Servicio de Interés
                   <span className="text-magenta-neon ml-1">*</span>
                 </label>
                 <select
+                  id="service-select"
                   {...register('service')}
                   className="w-full px-4 py-3 bg-dark-primary text-white border-2 border-gray-600 rounded-lg font-poppins focus:outline-none focus:border-cyan-neon focus:ring-2 focus:ring-cyan-neon transition-all"
                   required

@@ -122,7 +122,11 @@ export function randomInt(min: number, max: number): number {
  * Get random item from array
  */
 export function randomItem<T>(array: T[]): T {
-  return array[randomInt(0, array.length - 1)];
+  const item = array[randomInt(0, array.length - 1)];
+  if (item === undefined) {
+    throw new Error('Array is empty');
+  }
+  return item;
 }
 
 /**
@@ -132,7 +136,12 @@ export function shuffle<T>(array: T[]): T[] {
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    const tempI = newArray[i];
+    const tempJ = newArray[j];
+    if (tempI !== undefined && tempJ !== undefined) {
+      newArray[i] = tempJ;
+      newArray[j] = tempI;
+    }
   }
   return newArray;
 }
@@ -161,6 +170,7 @@ export function unique<T>(array: T[]): T[] {
 /**
  * Debounce function
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number
@@ -183,6 +193,7 @@ export function debounce<T extends (...args: any[]) => any>(
 /**
  * Throttle function
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function throttle<T extends (...args: any[]) => any>(
   func: T,
   limit: number
@@ -203,12 +214,14 @@ export function throttle<T extends (...args: any[]) => any>(
  */
 export function deepClone<T>(obj: T): T {
   if (obj === null || typeof obj !== 'object') return obj;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (obj instanceof Date) return new Date(obj.getTime()) as any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (obj instanceof Array) return obj.map((item) => deepClone(item)) as any;
   if (obj instanceof Object) {
     const clonedObj = {} as T;
     for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
         clonedObj[key] = deepClone(obj[key]);
       }
     }
@@ -220,6 +233,7 @@ export function deepClone<T>(obj: T): T {
 /**
  * Check if object is empty
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isEmpty(obj: any): boolean {
   if (obj === null || obj === undefined) return true;
   if (typeof obj === 'string' || Array.isArray(obj)) return obj.length === 0;
@@ -275,6 +289,7 @@ export function parseQueryString(queryString: string): Record<string, string> {
 /**
  * Build query string from object
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function buildQueryString(params: Record<string, any>): string {
   const searchParams = new URLSearchParams();
   

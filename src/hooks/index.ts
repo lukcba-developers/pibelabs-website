@@ -132,7 +132,9 @@ export function useOnScreen(
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIntersecting(entry.isIntersecting);
+        if (entry) {
+          setIntersecting(entry.isIntersecting);
+        }
       },
       { rootMargin }
     );

@@ -2,6 +2,8 @@ import { lazy, Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Loader } from './components/atoms/Loader';
 import { ScrollToTop } from './components/atoms/ScrollToTop';
+import ErrorBoundary from './components/atoms/ErrorBoundary';
+import SEO from './components/atoms/SEO';
 
 // Eager load Header (always visible)
 import Header from './components/organisms/Header';
@@ -22,7 +24,9 @@ const Footer = lazy(() => import('./components/organisms/Footer'));
 
 function App() {
   return (
-    <div className="App">
+    <ErrorBoundary>
+      <SEO />
+      <div className="App">
       {/* Skip to main content for accessibility */}
       <a 
         href="#main-content" 
@@ -90,7 +94,8 @@ function App() {
           },
         }}
       />
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 }
 
