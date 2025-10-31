@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { SERVICES } from '@/lib/constants/config';
 import type { Service } from '@/types';
@@ -6,7 +7,7 @@ import type { Service } from '@/types';
    Services Grid Component (Organism)
    ============================================ */
 
-const ServiceCard = ({ service, index }: { service: Service; index: number }) => {
+const ServiceCard = memo(({ service, index }: { service: Service; index: number }) => {
   const isEven = index % 2 === 0;
 
   return (
@@ -112,9 +113,11 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
       />
     </motion.div>
   );
-};
+});
 
-const ServicesGrid = () => {
+ServiceCard.displayName = 'ServiceCard';
+
+const ServicesGrid = memo(() => {
   return (
     <section id="services" className="section bg-light-secondary py-20">
       <div className="container mx-auto px-4">
@@ -178,6 +181,8 @@ const ServicesGrid = () => {
       </div>
     </section>
   );
-};
+});
+
+ServicesGrid.displayName = 'ServicesGrid';
 
 export default ServicesGrid;

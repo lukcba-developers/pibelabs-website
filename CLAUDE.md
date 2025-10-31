@@ -259,8 +259,27 @@ import { ANIMATION_CONFIG } from '@/lib/constants/config';
 
 The project supports multiple deployment targets:
 
+### Hostinger (Automatic via GitHub Actions)
+
+The project includes automatic deployment to Hostinger via FTP on every push to `main`:
+
+- **Workflow**: `.github/workflows/deploy-hostinger.yml`
+- **Trigger**: Automatic on push to `main` branch, or manual via GitHub Actions UI
+- **Process**: Lints → Type-checks → Builds → Deploys to Hostinger via FTP
+- **Required Secrets** (see `DEPLOY_SETUP.md` for details):
+  - `FTP_SERVER` - Hostinger FTP hostname
+  - `FTP_USERNAME` - FTP username
+  - `FTP_PASSWORD` - FTP password
+  - `FTP_SERVER_DIR` - Target directory (e.g., `/public_html/`)
+
+**Note**: The build output directory is `dist/` (Vite default), not `build/`.
+
+### Other Deployment Options
+
 - **Docker**: Production-ready Nginx container
 - **Vercel**: `npm run deploy:vercel`
 - **Netlify**: `npm run deploy:netlify`
 
 All builds run TypeScript type checking before bundling - builds will fail on type errors.
+
+For detailed Hostinger setup instructions, see `DEPLOY_SETUP.md`.

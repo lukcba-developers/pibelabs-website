@@ -1,5 +1,7 @@
 import { lazy, Suspense } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { Loader } from './components/atoms/Loader';
+import { ScrollToTop } from './components/atoms/ScrollToTop';
 
 // Eager load Header (always visible)
 import Header from './components/organisms/Header';
@@ -60,6 +62,34 @@ function App() {
         {/* Footer */}
         <Footer />
       </Suspense>
+
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
+
+      {/* Toast Notifications */}
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#0a0e27',
+            color: '#fff',
+            border: '1px solid #00d9ff',
+          },
+          success: {
+            iconTheme: {
+              primary: '#00d9ff',
+              secondary: '#fff',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: '#ff006a',
+              secondary: '#fff',
+            },
+          },
+        }}
+      />
     </div>
   );
 }
