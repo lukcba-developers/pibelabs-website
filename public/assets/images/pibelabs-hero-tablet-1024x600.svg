@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 600" width="1024" height="600">
+  <defs>
+    <linearGradient id="tabBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a1f3a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f1629;stop-opacity:1" />
+    </linearGradient>
+    
+    <radialGradient id="tabGlow1">
+      <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:0.18" />
+      <stop offset="100%" style="stop-color:#00D9FF;stop-opacity:0" />
+    </radialGradient>
+    
+    <radialGradient id="tabGlow2">
+      <stop offset="0%" style="stop-color:#FF00FF;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#FF00FF;stop-opacity:0" />
+    </radialGradient>
+    
+    <filter id="tabGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <pattern id="tabGrid" width="35" height="35" patternUnits="userSpaceOnUse">
+      <path d="M 35 0 L 0 0 0 35" fill="none" stroke="#00D9FF" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+  </defs>
+  
+  <!-- Fondo -->
+  <rect width="1024" height="600" fill="url(#tabBg)"/>
+  <rect width="1024" height="600" fill="url(#tabGrid)"/>
+  
+  <!-- Resplandores -->
+  <circle cx="200" cy="140" r="320" fill="url(#tabGlow1)"/>
+  <circle cx="850" cy="460" r="380" fill="url(#tabGlow2)"/>
+  
+  <!-- Logo isotipo (izquierda) -->
+  <g transform="translate(200, 160)">
+    <circle cx="0" cy="0" r="95" fill="none" stroke="#00D9FF" stroke-width="2" opacity="0.35" stroke-dasharray="7,7"/>
+    <circle cx="0" cy="0" r="105" fill="none" stroke="#FF00FF" stroke-width="1.5" opacity="0.25" stroke-dasharray="10,5"/>
+    
+    <path d="M 0 -70 L 61 -35 L 61 35 L 0 70 L -61 35 L -61 -35 Z" 
+          fill="#1a1f3a" stroke="#00F0FF" stroke-width="3.5" filter="url(#tabGlow)"/>
+    
+    <circle cx="0" cy="0" r="35" fill="#00D9FF" opacity="0.5" filter="url(#tabGlow)"/>
+    <circle cx="0" cy="0" r="24" fill="#00F0FF" opacity="0.85"/>
+    <circle cx="0" cy="0" r="12" fill="#FFFFFF"/>
+    
+    <!-- Hexágonos flotantes -->
+    <path d="M 85 -45 L 105 -33 L 105 -9 L 85 3 L 65 -9 L 65 -33 Z" 
+          fill="none" stroke="#00F0FF" stroke-width="2.8" opacity="0.75"/>
+    <path d="M 85 45 L 105 57 L 105 81 L 85 93 L 65 81 L 65 57 Z" 
+          fill="none" stroke="#FF10FF" stroke-width="2.8" opacity="0.75"/>
+    
+    <!-- Partículas -->
+    <circle cx="75" cy="0" r="5" fill="#00F0FF" filter="url(#tabGlow)"/>
+    <circle cx="-75" cy="0" r="5" fill="#FF10FF" filter="url(#tabGlow)"/>
+    <circle cx="0" cy="-85" r="4" fill="#00F0FF" opacity="0.8"/>
+  </g>
+  
+  <!-- Texto -->
+  <g transform="translate(450, 230)">
+    <text x="0" y="0" font-family="'Orbitron', sans-serif" font-size="76" font-weight="900" 
+          fill="#FFFFFF" letter-spacing="2.5">
+      PIBE<tspan fill="#00F0FF" filter="url(#tabGlow)">LABS</tspan>
+    </text>
+    
+    <text x="0" y="55" font-family="'Rajdhani', sans-serif" font-size="28" font-weight="400" 
+          fill="#8B95A5" letter-spacing="4">
+      NEXT-GEN INNOVATION
+    </text>
+    
+    <text x="0" y="100" font-family="'Rajdhani', sans-serif" font-size="20" font-weight="300" 
+          fill="#6B7588" letter-spacing="0.8">
+      Transformamos ideas en experiencias
+    </text>
+    <text x="0" y="125" font-family="'Rajdhani', sans-serif" font-size="20" font-weight="300" 
+          fill="#6B7588" letter-spacing="0.8">
+      digitales futuristas
+    </text>
+    
+    <!-- Línea decorativa -->
+    <line x1="0" y1="150" x2="220" y2="150" stroke="#00D9FF" stroke-width="2" opacity="0.5"/>
+    <circle cx="0" cy="150" r="3.5" fill="#00F0FF" filter="url(#tabGlow)"/>
+    <circle cx="220" cy="150" r="3.5" fill="#00F0FF" filter="url(#tabGlow)"/>
+  </g>
+  
+  <!-- Elementos HUD en esquinas -->
+  <g opacity="0.45">
+    <line x1="40" y1="40" x2="110" y2="40" stroke="#00D9FF" stroke-width="2"/>
+    <line x1="40" y1="40" x2="40" y2="110" stroke="#00D9FF" stroke-width="2"/>
+    <circle cx="40" cy="40" r="4.5" fill="#00F0FF" filter="url(#tabGlow)"/>
+    
+    <line x1="984" y1="40" x2="914" y2="40" stroke="#FF00FF" stroke-width="2"/>
+    <line x1="984" y1="40" x2="984" y2="110" stroke="#FF00FF" stroke-width="2"/>
+    <circle cx="984" cy="40" r="4.5" fill="#FF10FF" filter="url(#tabGlow)"/>
+    
+    <line x1="40" y1="560" x2="110" y2="560" stroke="#FF00FF" stroke-width="2"/>
+    <line x1="40" y1="560" x2="40" y2="490" stroke="#FF00FF" stroke-width="2"/>
+    <circle cx="40" cy="560" r="4.5" fill="#FF10FF" filter="url(#tabGlow)"/>
+    
+    <line x1="984" y1="560" x2="914" y2="560" stroke="#00D9FF" stroke-width="2"/>
+    <line x1="984" y1="560" x2="984" y2="490" stroke="#00D9FF" stroke-width="2"/>
+    <circle cx="984" cy="560" r="4.5" fill="#00F0FF" filter="url(#tabGlow)"/>
+  </g>
+</svg>

@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 600" width="768" height="600">
+  <defs>
+    <linearGradient id="mobBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a1f3a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f1629;stop-opacity:1" />
+    </linearGradient>
+    
+    <radialGradient id="mobGlow1">
+      <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#00D9FF;stop-opacity:0" />
+    </radialGradient>
+    
+    <radialGradient id="mobGlow2">
+      <stop offset="0%" style="stop-color:#FF00FF;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#FF00FF;stop-opacity:0" />
+    </radialGradient>
+    
+    <filter id="mobGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <pattern id="mobGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#00D9FF" stroke-width="0.5" opacity="0.08"/>
+    </pattern>
+  </defs>
+  
+  <!-- Fondo -->
+  <rect width="768" height="600" fill="url(#mobBg)"/>
+  <rect width="768" height="600" fill="url(#mobGrid)"/>
+  
+  <!-- Resplandores -->
+  <circle cx="150" cy="120" r="250" fill="url(#mobGlow1)"/>
+  <circle cx="620" cy="480" r="280" fill="url(#mobGlow2)"/>
+  
+  <!-- Logo isotipo centrado arriba -->
+  <g transform="translate(384, 150)">
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#00D9FF" stroke-width="1.5" opacity="0.3" stroke-dasharray="6,6"/>
+    <circle cx="0" cy="0" r="90" fill="none" stroke="#FF00FF" stroke-width="1" opacity="0.2" stroke-dasharray="9,5"/>
+    
+    <path d="M 0 -60 L 52 -30 L 52 30 L 0 60 L -52 30 L -52 -30 Z" 
+          fill="#1a1f3a" stroke="#00F0FF" stroke-width="3.5" filter="url(#mobGlow)"/>
+    
+    <circle cx="0" cy="0" r="30" fill="#00D9FF" opacity="0.4" filter="url(#mobGlow)"/>
+    <circle cx="0" cy="0" r="20" fill="#00F0FF" opacity="0.8"/>
+    <circle cx="0" cy="0" r="10" fill="#FFFFFF"/>
+    
+    <!-- Hexágonos flotantes -->
+    <path d="M 70 -35 L 88 -25 L 88 -5 L 70 5 L 52 -5 L 52 -25 Z" 
+          fill="none" stroke="#00F0FF" stroke-width="2.5" opacity="0.7"/>
+    <path d="M 70 35 L 88 45 L 88 65 L 70 75 L 52 65 L 52 45 Z" 
+          fill="none" stroke="#FF10FF" stroke-width="2.5" opacity="0.7"/>
+    
+    <!-- Partículas -->
+    <circle cx="65" cy="0" r="4" fill="#00F0FF" filter="url(#mobGlow)"/>
+    <circle cx="-65" cy="0" r="4" fill="#FF10FF" filter="url(#mobGlow)"/>
+  </g>
+  
+  <!-- Texto centrado -->
+  <g transform="translate(384, 320)">
+    <text x="0" y="0" font-family="'Orbitron', sans-serif" font-size="56" font-weight="900" 
+          fill="#FFFFFF" text-anchor="middle" letter-spacing="2">
+      PIBE<tspan fill="#00F0FF" filter="url(#mobGlow)">LABS</tspan>
+    </text>
+    
+    <text x="0" y="45" font-family="'Rajdhani', sans-serif" font-size="20" font-weight="400" 
+          fill="#8B95A5" text-anchor="middle" letter-spacing="3">
+      NEXT-GEN INNOVATION
+    </text>
+    
+    <text x="0" y="80" font-family="'Rajdhani', sans-serif" font-size="16" font-weight="300" 
+          fill="#6B7588" text-anchor="middle" letter-spacing="0.5">
+      Transformamos ideas en
+    </text>
+    <text x="0" y="102" font-family="'Rajdhani', sans-serif" font-size="16" font-weight="300" 
+          fill="#6B7588" text-anchor="middle" letter-spacing="0.5">
+      experiencias digitales futuristas
+    </text>
+    
+    <!-- Línea decorativa -->
+    <line x1="-100" y1="125" x2="100" y2="125" stroke="#00D9FF" stroke-width="2" opacity="0.5"/>
+    <circle cx="-100" cy="125" r="3" fill="#00F0FF" filter="url(#mobGlow)"/>
+    <circle cx="100" cy="125" r="3" fill="#00F0FF" filter="url(#mobGlow)"/>
+  </g>
+  
+  <!-- Elementos HUD en esquinas (simplificados) -->
+  <g opacity="0.4">
+    <line x1="30" y1="30" x2="80" y2="30" stroke="#00D9FF" stroke-width="2"/>
+    <line x1="30" y1="30" x2="30" y2="80" stroke="#00D9FF" stroke-width="2"/>
+    <circle cx="30" cy="30" r="4" fill="#00F0FF" filter="url(#mobGlow)"/>
+    
+    <line x1="738" y1="30" x2="688" y2="30" stroke="#FF00FF" stroke-width="2"/>
+    <line x1="738" y1="30" x2="738" y2="80" stroke="#FF00FF" stroke-width="2"/>
+    <circle cx="738" cy="30" r="4" fill="#FF10FF" filter="url(#mobGlow)"/>
+    
+    <line x1="30" y1="570" x2="80" y2="570" stroke="#FF00FF" stroke-width="2"/>
+    <line x1="30" y1="570" x2="30" y2="520" stroke="#FF00FF" stroke-width="2"/>
+    <circle cx="30" cy="570" r="4" fill="#FF10FF" filter="url(#mobGlow)"/>
+    
+    <line x1="738" y1="570" x2="688" y2="570" stroke="#00D9FF" stroke-width="2"/>
+    <line x1="738" y1="570" x2="738" y2="520" stroke="#00D9FF" stroke-width="2"/>
+    <circle cx="738" cy="570" r="4" fill="#00F0FF" filter="url(#mobGlow)"/>
+  </g>
+</svg>

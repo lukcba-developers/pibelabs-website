@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300">
+  <!-- Fondo blanco -->
+  <rect width="800" height="300" fill="#FFFFFF"/>
+  
+  <!-- Definiciones de gradientes y efectos futuristas -->
+  <defs>
+    <!-- Gradiente cian neón -->
+    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0099CC;stop-opacity:0.8" />
+    </linearGradient>
+    
+    <!-- Gradiente magenta neón -->
+    <linearGradient id="magentaGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF00FF;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#CC00CC;stop-opacity:0.7" />
+    </linearGradient>
+    
+    <!-- Gradiente holográfico -->
+    <linearGradient id="holoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:0.6" />
+      <stop offset="50%" style="stop-color:#FF00FF;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#00D9FF;stop-opacity:0.6" />
+    </linearGradient>
+    
+    <!-- Filtro de brillo neón -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Filtro de brillo intenso -->
+    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Isotipo futurista: Interfaz holográfica hexagonal con núcleo de IA -->
+  <g id="futuristic-isotipo" transform="translate(90, 75)">
+    
+    <!-- Anillos orbitales exteriores (estilo interfaz HUD) -->
+    <circle cx="70" cy="75" r="65" fill="none" stroke="#00D9FF" stroke-width="1.5" opacity="0.3" stroke-dasharray="5,5"/>
+    <circle cx="70" cy="75" r="72" fill="none" stroke="#FF00FF" stroke-width="1" opacity="0.2" stroke-dasharray="8,4"/>
+    
+    <!-- Hexágono principal (núcleo central) -->
+    <path d="M 70 30 L 100 45 L 100 75 L 70 90 L 40 75 L 40 45 Z" 
+          fill="#2C3E50" stroke="#00D9FF" stroke-width="2.5" filter="url(#neonGlow)"/>
+    
+    <!-- Núcleo de energía interno -->
+    <circle cx="70" cy="60" r="18" fill="url(#cyanGlow)" opacity="0.7" filter="url(#strongGlow)"/>
+    <circle cx="70" cy="60" r="12" fill="#00D9FF" opacity="0.9"/>
+    <circle cx="70" cy="60" r="6" fill="#FFFFFF" opacity="0.95"/>
+    
+    <!-- Partículas de datos orbitando -->
+    <circle cx="105" cy="60" r="3" fill="#00D9FF" filter="url(#neonGlow)">
+      <animateTransform attributeName="transform" type="rotate" 
+                        from="0 70 60" to="360 70 60" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="35" cy="60" r="3" fill="#FF00FF" filter="url(#neonGlow)">
+      <animateTransform attributeName="transform" type="rotate" 
+                        from="0 70 60" to="360 70 60" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="70" cy="25" r="2.5" fill="#00D9FF" opacity="0.8" filter="url(#neonGlow)">
+      <animateTransform attributeName="transform" type="rotate" 
+                        from="0 70 60" to="360 70 60" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Hexágonos flotantes conectados (red neural) -->
+    <g opacity="0.8">
+      <!-- Hexágono superior derecho -->
+      <path d="M 130 35 L 145 42.5 L 145 57.5 L 130 65 L 115 57.5 L 115 42.5 Z" 
+            fill="none" stroke="#00D9FF" stroke-width="2" filter="url(#neonGlow)"/>
+      <path d="M 127 45 L 133 48 L 133 54 L 127 57 L 121 54 L 121 48 Z" 
+            fill="#00D9FF" opacity="0.4"/>
+      
+      <!-- Hexágono inferior derecho -->
+      <path d="M 130 85 L 145 92.5 L 145 107.5 L 130 115 L 115 107.5 L 115 92.5 Z" 
+            fill="none" stroke="#FF00FF" stroke-width="2" filter="url(#neonGlow)"/>
+      <path d="M 127 95 L 133 98 L 133 104 L 127 107 L 121 104 L 121 98 Z" 
+            fill="#FF00FF" opacity="0.4"/>
+      
+      <!-- Hexágono izquierdo -->
+      <path d="M 10 60 L 25 67.5 L 25 82.5 L 10 90 L -5 82.5 L -5 67.5 Z" 
+            fill="none" stroke="#FF00FF" stroke-width="2" filter="url(#neonGlow)"/>
+      <path d="M 7 70 L 13 73 L 13 79 L 7 82 L 1 79 L 1 73 Z" 
+            fill="#FF00FF" opacity="0.5"/>
+    </g>
+    
+    <!-- Líneas de conexión (flujo de datos) -->
+    <line x1="100" y1="60" x2="115" y2="50" stroke="url(#holoGradient)" stroke-width="2" opacity="0.6"/>
+    <line x1="100" y1="75" x2="115" y2="100" stroke="url(#holoGradient)" stroke-width="2" opacity="0.6"/>
+    <line x1="40" y1="75" x2="25" y2="75" stroke="url(#holoGradient)" stroke-width="2" opacity="0.6"/>
+    
+    <!-- Puntos de conexión brillantes -->
+    <circle cx="100" cy="60" r="2.5" fill="#00D9FF" filter="url(#strongGlow)"/>
+    <circle cx="115" cy="50" r="2.5" fill="#00D9FF" filter="url(#strongGlow)"/>
+    <circle cx="100" cy="75" r="2.5" fill="#FF00FF" filter="url(#strongGlow)"/>
+    <circle cx="115" cy="100" r="2.5" fill="#FF00FF" filter="url(#strongGlow)"/>
+    <circle cx="40" cy="75" r="2.5" fill="#FF00FF" filter="url(#strongGlow)"/>
+    <circle cx="25" cy="75" r="2.5" fill="#FF00FF" filter="url(#strongGlow)"/>
+    
+    <!-- Elementos de interfaz HUD -->
+    <g opacity="0.4">
+      <line x1="0" y1="10" x2="25" y2="10" stroke="#00D9FF" stroke-width="1"/>
+      <line x1="0" y1="140" x2="25" y2="140" stroke="#FF00FF" stroke-width="1"/>
+      <rect x="145" y="8" width="20" height="4" fill="#00D9FF"/>
+      <rect x="145" y="138" width="20" height="4" fill="#FF00FF"/>
+    </g>
+    
+    <!-- Scanlines futuristas -->
+    <rect x="0" y="0" width="170" height="150" fill="none" stroke="url(#holoGradient)" 
+          stroke-width="0.5" opacity="0.15" stroke-dasharray="2,3"/>
+  </g>
+  
+  <!-- Tipografía futurista -->
+  <g id="typography">
+    <!-- PIBE (Gris oscuro con acento cian) -->
+    <text x="290" y="165" font-family="'Orbitron', 'Rajdhani', 'Exo 2', 'Poppins', sans-serif" 
+          font-size="78" font-weight="800" fill="#2C3E50" letter-spacing="2">PIBE</text>
+    
+    <!-- Efecto de escaneo en PIBE -->
+    <text x="290" y="165" font-family="'Orbitron', 'Rajdhani', 'Exo 2', 'Poppins', sans-serif" 
+          font-size="78" font-weight="800" fill="#00D9FF" letter-spacing="2" opacity="0.2">PIBE</text>
+    
+    <!-- LABS (Cian neón) -->
+    <text x="480" y="165" font-family="'Orbitron', 'Rajdhani', 'Exo 2', 'Poppins', sans-serif" 
+          font-size="78" font-weight="800" fill="#00D9FF" letter-spacing="2" filter="url(#neonGlow)">LABS</text>
+    
+    <!-- Detalles tecnológicos en el texto -->
+    <line x1="290" y1="175" x2="310" y2="175" stroke="#00D9FF" stroke-width="2" opacity="0.5"/>
+    <line x1="630" y1="175" x2="650" y2="175" stroke="#FF00FF" stroke-width="2" opacity="0.5"/>
+    
+    <!-- Tagline futurista -->
+    <text x="290" y="198" font-family="'Rajdhani', 'Orbitron', sans-serif" 
+          font-size="14" font-weight="500" fill="#7F8C8D" letter-spacing="6" opacity="0.7">NEXT-GEN INNOVATION</text>
+    
+    <!-- Código binario decorativo -->
+    <text x="290" y="215" font-family="'Courier New', monospace" 
+          font-size="9" font-weight="400" fill="#00D9FF" opacity="0.3" letter-spacing="2">01001000 01000101 01011000</text>
+  </g>
+  
+  <!-- Elementos decorativos adicionales -->
+  <g opacity="0.2">
+    <rect x="275" y="80" width="2" height="15" fill="#00D9FF"/>
+    <rect x="655" y="170" width="2" height="15" fill="#FF00FF"/>
+    <circle cx="276" cy="88" r="1.5" fill="#00D9FF"/>
+    <circle cx="656" cy="178" r="1.5" fill="#FF00FF"/>
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <filter id="devGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <linearGradient id="devCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00F0FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00D9FF;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#00D9FF" stroke-width="2" opacity="0.2"/>
+  <circle cx="100" cy="100" r="80" fill="#F0F9FF"/>
+  
+  <path d="M 65 85 L 80 100 L 65 115" fill="none" stroke="url(#devCyan)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#devGlow)"/>
+  <path d="M 135 85 L 120 100 L 135 115" fill="none" stroke="url(#devCyan)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#devGlow)"/>
+  <line x1="95" y1="80" x2="105" y2="120" stroke="url(#devCyan)" stroke-width="5" stroke-linecap="round" filter="url(#devGlow)"/>
+  
+  <text x="100" y="175" font-family="'Rajdhani', sans-serif" font-size="16" font-weight="600" fill="#2C3E50" text-anchor="middle">DESARROLLO</text>
+</svg>

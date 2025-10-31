@@ -1,0 +1,11 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://pibelabs.com/sitemap.xml
+
+# Block access to admin/sensitive paths (if any in the future)
+# User-agent: *
+# Disallow: /admin/
+# Disallow: /api/

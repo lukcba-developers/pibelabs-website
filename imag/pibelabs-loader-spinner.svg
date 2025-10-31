@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="spinnerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00F0FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF10FF;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="spinnerGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Fondo transparente o blanco -->
+  <rect width="200" height="200" fill="transparent"/>
+  
+  <!-- Anillo exterior giratorio -->
+  <circle cx="100" cy="100" r="70" fill="none" stroke="url(#spinnerGrad)" 
+          stroke-width="3" stroke-dasharray="340 100" opacity="0.6" filter="url(#spinnerGlow)">
+    <animateTransform attributeName="transform" type="rotate" 
+                      from="0 100 100" to="360 100 100" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Anillo medio giratorio (sentido contrario) -->
+  <circle cx="100" cy="100" r="55" fill="none" stroke="#00D9FF" 
+          stroke-width="2.5" stroke-dasharray="260 85" opacity="0.5">
+    <animateTransform attributeName="transform" type="rotate" 
+                      from="360 100 100" to="0 100 100" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Anillo interior -->
+  <circle cx="100" cy="100" r="40" fill="none" stroke="#FF00FF" 
+          stroke-width="2" stroke-dasharray="180 70" opacity="0.4">
+    <animateTransform attributeName="transform" type="rotate" 
+                      from="0 100 100" to="360 100 100" dur="1s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Hexágono central pulsante -->
+  <path d="M 100 65 L 120 75 L 120 95 L 100 105 L 80 95 L 80 75 Z" 
+        fill="#1a1f3a" stroke="#00F0FF" stroke-width="2" filter="url(#spinnerGlow)">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Núcleo brillante -->
+  <circle cx="100" cy="85" r="8" fill="#00F0FF" filter="url(#spinnerGlow)">
+    <animate attributeName="r" values="6;10;6" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Partículas orbitando -->
+  <circle cx="100" cy="30" r="4" fill="#00D9FF" filter="url(#spinnerGlow)">
+    <animateTransform attributeName="transform" type="rotate" 
+                      from="0 100 100" to="360 100 100" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="170" cy="100" r="3.5" fill="#FF00FF" filter="url(#spinnerGlow)">
+    <animateTransform attributeName="transform" type="rotate" 
+                      from="0 100 100" to="360 100 100" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Texto de carga (opcional) -->
+  <text x="100" y="165" font-family="'Rajdhani', sans-serif" font-size="14" 
+        font-weight="500" fill="#00D9FF" text-anchor="middle" opacity="0.7">
+    LOADING...
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite"/>
+  </text>
+</svg>

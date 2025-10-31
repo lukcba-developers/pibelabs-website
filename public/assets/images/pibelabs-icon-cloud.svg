@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <filter id="cloudGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <linearGradient id="cloudMagenta" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF10FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF00FF;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#FF00FF" stroke-width="2" opacity="0.2"/>
+  <circle cx="100" cy="100" r="80" fill="#FFF0FF"/>
+  
+  <!-- Nube + Servidor -->
+  <path d="M 80 95 Q 75 85 85 80 Q 95 75 105 80 Q 115 75 120 85 Q 130 90 125 100 L 80 100 Z" 
+        fill="none" stroke="url(#cloudMagenta)" stroke-width="5" stroke-linejoin="round" filter="url(#cloudGlow)"/>
+  <rect x="85" y="105" width="30" height="18" rx="2" fill="none" stroke="url(#cloudMagenta)" stroke-width="4.5" filter="url(#cloudGlow)"/>
+  <line x1="90" y1="110" x2="110" y2="110" stroke="url(#cloudMagenta)" stroke-width="3" opacity="0.6"/>
+  <line x1="90" y1="116" x2="110" y2="116" stroke="url(#cloudMagenta)" stroke-width="3" opacity="0.6"/>
+  
+  <text x="100" y="175" font-family="'Rajdhani', sans-serif" font-size="16" font-weight="600" fill="#2C3E50" text-anchor="middle">CLOUD</text>
+</svg>

@@ -1,0 +1,287 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   PIBELABS - Global Styles & CSS Variables
+   ============================================ */
+
+:root {
+  /* Colors */
+  --cyan-neon: #00D9FF;
+  --cyan-bright: #00F0FF;
+  --magenta-neon: #FF00FF;
+  --magenta-bright: #FF10FF;
+  --gray-dark: #2C3E50;
+  
+  --dark-primary: #0a0e27;
+  --dark-secondary: #1a1f3a;
+  --light-primary: #FFFFFF;
+  --light-secondary: #FAFBFC;
+  
+  --text-primary: #2C3E50;
+  --text-secondary: #7F8C8D;
+  --text-tertiary: #6B7588;
+  --text-light: #FFFFFF;
+  
+  /* Spacing (8pt grid) */
+  --spacing-unit: 8px;
+  
+  /* Animation durations */
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Z-index layers */
+  --z-background: -1;
+  --z-content: 1;
+  --z-header: 100;
+  --z-modal: 1000;
+  --z-toast: 2000;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--light-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 5rem 0;
+}
+
+.section-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Glow effects */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.6));
+}
+
+.glow-magenta {
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+  filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.6));
+}
+
+.glow-text-cyan {
+  text-shadow: 
+    0 0 10px rgba(0, 217, 255, 0.8),
+    0 0 20px rgba(0, 217, 255, 0.6),
+    0 0 30px rgba(0, 217, 255, 0.4);
+}
+
+.glow-text-magenta {
+  text-shadow: 
+    0 0 10px rgba(255, 0, 255, 0.8),
+    0 0 20px rgba(255, 0, 255, 0.6),
+    0 0 30px rgba(255, 0, 255, 0.4);
+}
+
+/* Gradient backgrounds */
+.bg-gradient-cyber {
+  background: linear-gradient(135deg, var(--cyan-neon) 0%, var(--magenta-neon) 100%);
+}
+
+.bg-gradient-dark {
+  background: linear-gradient(180deg, var(--dark-primary) 0%, var(--dark-secondary) 100%);
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 217, 255, 0.8);
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--cyan-neon);
+  color: var(--dark-primary);
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 9999;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus visible */
+*:focus-visible {
+  outline: 2px solid var(--cyan-neon);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================
+   Responsive Breakpoints
+   ============================================ */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .section {
+    padding: 3rem 0;
+  }
+}
+
+/* ============================================
+   Dark Mode Support (Future)
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  /* Dark mode styles can be added here */
+}
