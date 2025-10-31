@@ -8,7 +8,7 @@ import { TESTIMONIALS, CLIENT_LOGOS } from '@/lib/constants/config';
 
 const SocialProof = () => {
   return (
-    <section className="py-20 bg-dark-secondary">
+    <section className="section-padding bg-dark-secondary">
       <div className="container mx-auto px-4">
         {/* Clients Logos */}
         <motion.div

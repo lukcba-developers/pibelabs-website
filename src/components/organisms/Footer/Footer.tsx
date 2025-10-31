@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { COMPANY_INFO, NAV_LINKS } from '@/lib/constants/config';
+import Newsletter from '@/components/molecules/Newsletter';
 
 /* ============================================
    Footer Component (Organism)
@@ -16,9 +17,16 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-dark-primary border-t border-cyan-neon/20 py-12">
+    <footer className="bg-dark-primary border-t border-cyan-neon/20">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        {/* Newsletter Section - NEW */}
+        <div className="py-12 border-b border-gray-800">
+          <Newsletter />
+        </div>
+
+        {/* Main Footer Content */}
+        <div className="py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Logo & Description */}
           <motion.div
             className="col-span-1 md:col-span-2"
@@ -177,6 +185,7 @@ const Footer = () => {
             />
           </svg>
         </motion.button>
+        </div>
       </div>
     </footer>
   );

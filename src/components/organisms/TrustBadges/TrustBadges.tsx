@@ -46,7 +46,7 @@ const TrustBadges = () => {
   ];
 
   return (
-    <section className="py-16 bg-dark-primary">
+    <section className="section-padding bg-dark-primary">
       <div className="container mx-auto px-4">
         <motion.div
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6"

@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { SERVICES } from '@/lib/constants/config';
+import Card from '@/components/molecules/Card';
 import type { Service } from '@/types';
 
 /* ============================================
@@ -119,7 +120,7 @@ ServiceCard.displayName = 'ServiceCard';
 
 const ServicesGrid = memo(() => {
   return (
-    <section id="services" className="section bg-light-secondary py-20">
+    <section id="services" className="section-padding bg-light-secondary">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
