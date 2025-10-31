@@ -31,6 +31,8 @@ export const CONFIG = {
 export const COMPANY_INFO = {
   name: 'PibeLabs',
   tagline: 'Next-Gen Innovation Studio',
+  heroHeadline: 'Transformamos ideas en productos digitales que escalan',
+  heroSubheadline: 'De MVP a enterprise: desarrollo ágil con estándares de calidad internacional. Stack moderno, equipo senior, resultados medibles.',
   description: 'Estudio de innovación tecnológica especializado en desarrollo web, inteligencia artificial, diseño UX/UI y soluciones cloud.',
   email: 'contact@pibelabs.com',
   phone: '+54 11 1234-5678',
@@ -41,6 +43,11 @@ export const COMPANY_INFO = {
     github: 'https://github.com/pibelabs',
     twitter: 'https://twitter.com/pibelabs',
   },
+  stats: [
+    { value: '50+', label: 'Proyectos exitosos' },
+    { value: '98%', label: 'Retención clientes' },
+    { value: '4sem', label: 'MVP a producción' },
+  ],
 } as const;
 
 // ============================================

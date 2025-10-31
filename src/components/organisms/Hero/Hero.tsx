@@ -119,67 +119,80 @@ const Hero = () => {
             />
           </motion.div>
 
-          {/* Main Title - Improved typography hierarchy */}
+          {/* Main Title - Improved with better copy */}
           <motion.h1
-            className="font-orbitron font-black text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-6 leading-tight"
+            className="font-orbitron font-black text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-6 leading-tight px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <span className="inline-block bg-gradient-to-r from-cyan-400 via-cyan-300 to-magenta-400 bg-clip-text text-transparent drop-shadow-lg">
-              {COMPANY_INFO.name}
+              {COMPANY_INFO.heroHeadline}
             </span>
           </motion.h1>
 
-          {/* Subtitle - Better contrast */}
+          {/* Subtitle - Enhanced description */}
           <motion.p
-            className="font-rajdhani text-2xl md:text-3xl lg:text-4xl text-cyan-300 font-semibold mb-4 tracking-wide"
+            className="font-poppins text-lg md:text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto mb-10 leading-relaxed px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            {COMPANY_INFO.tagline}
+            {COMPANY_INFO.heroSubheadline}
           </motion.p>
 
-          {/* Description - Improved readability */}
-          <motion.p
-            className="font-poppins text-base md:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed"
+          {/* CTA Buttons - More prominent with better copy */}
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            Transformamos ideas en soluciones tecnológicas innovadoras.
-            <br className="hidden md:block" />
-            <span className="text-cyan-400 font-medium">Desarrollo Web · IA · Diseño UX/UI · Cloud</span>
-          </motion.p>
-
-          {/* CTA Buttons - Enhanced visibility and hierarchy */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            {/* Primary CTA - More prominent */}
+            {/* Primary CTA - Enhanced */}
             <motion.button
               onClick={scrollToContact}
-              className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-white font-rajdhani font-bold text-lg rounded-xl shadow-lg shadow-cyan-500/50 hover:shadow-cyan-400/60 transition-all duration-300 min-w-[200px]"
-              whileHover={{ scale: 1.05, y: -2 }}
+              className="group relative px-10 py-5 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-white font-rajdhani font-bold text-xl rounded-xl shadow-[0_0_30px_rgba(0,217,255,0.6)] hover:shadow-[0_0_50px_rgba(0,217,255,0.9)] transition-all duration-300 min-w-[280px]"
+              whileHover={{ scale: 1.05, y: -3 }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="relative z-10">Comenzar Proyecto</span>
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+              <span className="relative z-10">Agenda consulta gratuita →</span>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
             </motion.button>
 
             {/* Secondary CTA */}
             <motion.button
               onClick={scrollToServices}
-              className="group px-8 py-4 bg-transparent border-2 border-cyan-400 hover:border-cyan-300 text-cyan-400 hover:text-cyan-300 font-rajdhani font-bold text-lg rounded-xl hover:bg-cyan-400/10 transition-all duration-300 min-w-[200px]"
-              whileHover={{ scale: 1.05, y: -2 }}
+              className="group px-10 py-5 bg-transparent border-2 border-cyan-400 hover:border-cyan-300 text-cyan-400 hover:text-cyan-300 font-rajdhani font-bold text-xl rounded-xl hover:bg-cyan-400/10 transition-all duration-300 min-w-[280px]"
+              whileHover={{ scale: 1.05, y: -3 }}
               whileTap={{ scale: 0.98 }}
             >
-              Ver Servicios
+              Ver casos de éxito
             </motion.button>
+          </motion.div>
+
+          {/* Stats Counter - NEW */}
+          <motion.div
+            className="grid grid-cols-3 gap-8 max-w-2xl mx-auto mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            {COMPANY_INFO.stats.map((stat, index) => (
+              <motion.div 
+                key={stat.label} 
+                className="text-center"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.9 + index * 0.1 }}
+              >
+                <div className="text-3xl md:text-4xl font-orbitron font-bold text-cyan-neon mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-xs md:text-sm text-gray-300 font-rajdhani uppercase tracking-wide">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Trust Indicators - Social Proof */}

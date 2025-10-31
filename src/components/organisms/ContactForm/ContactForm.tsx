@@ -192,10 +192,14 @@ const ContactForm = () => {
                   type="text"
                   name="name"
                   label="Nombre Completo"
-                  placeholder="Juan Pérez"
+                  placeholder="Ej: Juan Pérez"
                   required
                   error={errors.name?.message}
-                  className="bg-dark-primary text-white"
+                  className={`bg-dark-primary text-white border-2 transition-all duration-300 ${
+                    errors.name 
+                      ? 'border-red-500 animate-shake' 
+                      : 'border-gray-600 focus:border-cyan-neon focus:ring-4 focus:ring-cyan-neon/30 focus:shadow-[0_0_20px_rgba(0,217,255,0.4)]'
+                  }`}
                 />
               </motion.div>
 
@@ -206,15 +210,26 @@ const ContactForm = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
+                <label htmlFor="email" className="block mb-2 font-rajdhani font-medium text-white">
+                  Email
+                  <span className="text-cyan-neon ml-1">*</span>
+                  <span className="text-xs text-gray-400 font-normal ml-2">
+                    (Nunca spam, prometido 🤝)
+                  </span>
+                </label>
                 <Input
                   {...register('email')}
+                  id="email"
                   type="email"
                   name="email"
-                  label="Email"
-                  placeholder="juan@empresa.com"
+                  placeholder="tu@email.com"
                   required
                   error={errors.email?.message}
-                  className="bg-dark-primary text-white"
+                  className={`bg-dark-primary text-white border-2 transition-all duration-300 ${
+                    errors.email 
+                      ? 'border-red-500 animate-shake' 
+                      : 'border-gray-600 focus:border-cyan-neon focus:ring-4 focus:ring-cyan-neon/30 focus:shadow-[0_0_20px_rgba(0,217,255,0.4)]'
+                  }`}
                   onBlur={(e) => checkEmailTypo(e.target.value)}
                 />
 
@@ -257,6 +272,9 @@ const ContactForm = () => {
                 <label htmlFor="service-select" className="block mb-2 font-rajdhani font-medium text-white">
                   Servicio de Interés
                   <span className="text-magenta-neon ml-1">*</span>
+                  <span className="text-xs text-gray-400 font-normal ml-2">
+                    (Elige el que mejor se ajuste)
+                  </span>
                 </label>
                 <select
                   id="service-select"

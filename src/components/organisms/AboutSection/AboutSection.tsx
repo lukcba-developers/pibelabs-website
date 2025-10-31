@@ -201,7 +201,7 @@ const AboutSection = () => {
               <span className="text-3xl">🎯</span>
               <div>
                 <h3 className="font-rajdhani font-bold text-white mb-1">Misión</h3>
-                <p className="font-poppins text-sm text-gray-400">
+                <p className="font-poppins text-sm text-gray-200">
                   Crear soluciones tecnológicas que impulsen el éxito de nuestros clientes
                 </p>
               </div>
@@ -210,7 +210,7 @@ const AboutSection = () => {
               <span className="text-3xl">👁️</span>
               <div>
                 <h3 className="font-rajdhani font-bold text-white mb-1">Visión</h3>
-                <p className="font-poppins text-sm text-gray-400">
+                <p className="font-poppins text-sm text-gray-200">
                   Ser líderes en innovación tecnológica en América Latina
                 </p>
               </div>
@@ -219,7 +219,7 @@ const AboutSection = () => {
               <span className="text-3xl">💎</span>
               <div>
                 <h3 className="font-rajdhani font-bold text-white mb-1">Valores</h3>
-                <p className="font-poppins text-sm text-gray-400">
+                <p className="font-poppins text-sm text-gray-200">
                   Excelencia, innovación, transparencia y compromiso
                 </p>
               </div>

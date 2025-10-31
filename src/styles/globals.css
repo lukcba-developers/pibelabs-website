@@ -283,5 +283,55 @@ p {
    ============================================ */
 
 @media (prefers-color-scheme: dark) {
-  /* Dark mode styles can be added here */
+  /* Dark Mode Support (Future) */
+}
+
+/* ============================================
+   Animations for Enhanced UX
+   ============================================ */
+
+/* Shake animation for form errors */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Pulse animation for CTAs */
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(0, 217, 255, 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Improved Spacing Variables */
+:root {
+  --space-section: 6rem;
+  --space-section-mobile: 4rem;
+  --space-card-gap: 2rem;
+  --space-component: 1.5rem;
+}
+
+/* Section padding utility */
+.section-padding {
+  padding-top: var(--space-section);
+  padding-bottom: var(--space-section);
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding-top: var(--space-section-mobile);
+    padding-bottom: var(--space-section-mobile);
+  }
 }
