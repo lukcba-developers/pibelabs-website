@@ -12,7 +12,9 @@ import Header from './components/organisms/Header';
 const Hero = lazy(() => import('./components/organisms/Hero'));
 const StatsSection = lazy(() => import('./components/organisms/StatsSection'));
 const ServicesGrid = lazy(() => import('./components/organisms/ServicesGrid'));
+const TrustBadges = lazy(() => import('./components/organisms/TrustBadges'));
 const PortfolioSection = lazy(() => import('./components/organisms/PortfolioSection'));
+const SocialProof = lazy(() => import('./components/organisms/SocialProof'));
 const AboutSection = lazy(() => import('./components/organisms/AboutSection'));
 const BlogSection = lazy(() => import('./components/organisms/BlogSection'));
 const ContactForm = lazy(() => import('./components/organisms/ContactForm'));
@@ -44,6 +46,9 @@ function App() {
           {/* Hero Section */}
           <Hero />
 
+          {/* Trust Badges - NEW */}
+          <TrustBadges />
+
           {/* Stats Section */}
           <StatsSection />
 
@@ -52,6 +57,9 @@ function App() {
 
           {/* Portfolio Section */}
           <PortfolioSection />
+
+          {/* Social Proof - NEW */}
+          <SocialProof />
 
           {/* About Section (Team & Testimonials) */}
           <AboutSection />

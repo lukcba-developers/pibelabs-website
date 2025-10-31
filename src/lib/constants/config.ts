@@ -479,36 +479,67 @@ export const TEAM_MEMBERS: TeamMember[] = [
 ];
 
 // ============================================
-// Testimonials
+// Testimonials & Social Proof  
 // ============================================
 
-export const TESTIMONIALS: Testimonial[] = [
+export const TESTIMONIALS = [
   {
-    id: 'testimonio-1',
-    name: 'Roberto Sánchez',
-    role: 'CEO',
-    company: 'TechCorp',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Roberto',
-    content: 'PibeLabs transformó completamente nuestra presencia digital. El equipo es increíblemente profesional y los resultados superaron nuestras expectativas.',
+    id: 1,
+    text: "PibeLabs transformó nuestra idea en un MVP funcional en 4 semanas. Su expertise técnico y comunicación constante fue excepcional.",
+    author: "María González",
+    role: "CTO",
+    company: "TechCorp",
+    image: "https://i.pravatar.cc/150?img=5",
+    linkedin: "https://linkedin.com/in/mariagonzalez",
     rating: 5,
   },
   {
-    id: 'testimonio-2',
-    name: 'Laura Fernández',
-    role: 'Product Manager',
-    company: 'StartupXYZ',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Laura',
-    content: 'Trabajar con PibeLabs fue una experiencia excepcional. Su expertise en IA nos ayudó a implementar soluciones que pensábamos imposibles.',
+    id: 2,
+    text: "El equipo de PibeLabs superó nuestras expectativas. Código limpio, arquitectura escalable y entrega antes de tiempo.",
+    author: "Carlos Méndez",
+    role: "Founder & CEO",
+    company: "StartupX",
+    image: "https://i.pravatar.cc/150?img=12",
+    linkedin: "https://linkedin.com/in/carlosmendez",
     rating: 5,
   },
   {
-    id: 'testimonio-3',
-    name: 'Diego López',
-    role: 'CTO',
-    company: 'FinanceApp',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Diego',
-    content: 'La atención al detalle y el compromiso con la calidad de PibeLabs es sobresaliente. Recomiendo sus servicios sin dudarlo.',
+    id: 3,
+    text: "Trabajar con PibeLabs fue una experiencia increíble. Entendieron nuestra visión y la ejecutaron perfectamente.",
+    author: "Ana Silva",
+    role: "Product Manager",
+    company: "InnovateCo",
+    image: "https://i.pravatar.cc/150?img=9",
+    linkedin: "https://linkedin.com/in/anasilva",
     rating: 5,
+  },
+] as const;
+
+export const CLIENT_LOGOS = [
+  { name: "TechCorp", logo: "https://via.placeholder.com/120x40/0a0e27/00d9ff?text=TechCorp" },
+  { name: "StartupX", logo: "https://via.placeholder.com/120x40/0a0e27/ff006a?text=StartupX" },
+  { name: "InnovateCo", logo: "https://via.placeholder.com/120x40/0a0e27/00d9ff?text=InnovateCo" },
+  { name: "DataFlow", logo: "https://via.placeholder.com/120x40/0a0e27/ff006a?text=DataFlow" },
+  { name: "CloudNet", logo: "https://via.placeholder.com/120x40/0a0e27/00d9ff?text=CloudNet" },
+  { name: "DevOps Pro", logo: "https://via.placeholder.com/120x40/0a0e27/ff006a?text=DevOps+Pro" },
+] as const;
+
+// ============================================
+// Team Members
+// ============================================
+
+export const TEAM_MEMBERS: TeamMember[] = [
+  {
+    id: 1,
+    name: 'Lucas García',
+    role: 'CEO & Full-Stack Developer',
+    bio: 'Apasionado por crear soluciones tecnológicas innovadoras.',
+    image: '/team/lucas.jpg',
+    skills: ['React', 'Node.js', 'AWS'],
+    social: {
+      linkedin: 'https://linkedin.com/in/lucasgarcia',
+      github: 'https://github.com/lucasgarcia',
+    },
   },
 ];
 
