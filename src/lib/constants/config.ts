@@ -525,25 +525,6 @@ export const CLIENT_LOGOS = [
 ] as const;
 
 // ============================================
-// Team Members
-// ============================================
-
-export const TEAM_MEMBERS: TeamMember[] = [
-  {
-    id: 1,
-    name: 'Lucas García',
-    role: 'CEO & Full-Stack Developer',
-    bio: 'Apasionado por crear soluciones tecnológicas innovadoras.',
-    image: '/team/lucas.jpg',
-    skills: ['React', 'Node.js', 'AWS'],
-    social: {
-      linkedin: 'https://linkedin.com/in/lucasgarcia',
-      github: 'https://github.com/lucasgarcia',
-    },
-  },
-];
-
-// ============================================
 // SEO Configuration
 // ============================================
 

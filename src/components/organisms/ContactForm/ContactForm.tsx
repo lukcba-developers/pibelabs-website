@@ -219,7 +219,6 @@ const ContactForm = () => {
                 </label>
                 <Input
                   {...register('email')}
-                  id="email"
                   type="email"
                   name="email"
                   placeholder="tu@email.com"

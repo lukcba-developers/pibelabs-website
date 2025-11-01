@@ -213,12 +213,13 @@ export interface TeamMember {
 // ============================================
 
 export interface Testimonial {
-  id: string;
-  name: string;
+  id: number;
+  text: string;
+  author: string;
   role: string;
   company: string;
-  avatar?: string;
-  content: string;
+  image: string;
+  linkedin: string;
   rating: number;
 }
 
