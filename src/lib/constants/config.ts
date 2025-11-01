@@ -32,13 +32,23 @@ export const COMPANY_INFO = {
   tagline: 'Next-Gen Innovation Studio',
   heroHeadline: 'Transformamos ideas en productos digitales que escalan',
   heroSubheadline: 'De MVP a enterprise: desarrollo ágil con estándares de calidad internacional. Stack moderno, equipo senior, resultados medibles.',
-  description: 'Estudio de innovación tecnológica especializado en desarrollo web, inteligencia artificial, diseño UX/UI y soluciones cloud.',
+  description: 'Estudio de innovación tecnológica fundado por Lucas CBA y Juan Carlos Ferri, especializado en desarrollo web, inteligencia artificial, diseño UX/UI y soluciones cloud.',
   email: 'contact@pibelabs.com',
   phone: '+54 11 1234-5678',
   whatsapp: '5493513088400', // Formato internacional sin símbolos para wa.me
   whatsappDisplay: '+54 9 351 3088400', // Formato para mostrar al usuario
   location: 'Buenos Aires, Argentina',
   website: 'https://pibelabs.com',
+  founders: [
+    {
+      name: 'Lucas CBA',
+      linkedin: 'https://www.linkedin.com/in/lukcba/',
+    },
+    {
+      name: 'Juan Carlos Ferri',
+      linkedin: 'https://www.linkedin.com/in/jcferri/',
+    },
+  ],
   social: {
     linkedin: 'https://linkedin.com/company/pibelabs',
     github: 'https://github.com/pibelabs',
@@ -429,53 +439,28 @@ export const BLOG_POSTS: BlogPost[] = [
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    id: 'maria-gonzalez',
-    name: 'María González',
-    role: 'CEO & AI Specialist',
-    bio: 'Experta en IA con más de 10 años de experiencia. Apasionada por crear soluciones que impacten positivamente en la sociedad.',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Maria',
+    id: 'lucas-cba',
+    name: 'Lucas CBA',
+    role: 'Co-Founder & Software Engineer',
+    bio: 'Ingeniero de software full-stack con experiencia en desarrollo de aplicaciones web modernas y arquitecturas escalables.',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Lucas',
     social: {
-      linkedin: 'https://linkedin.com/in/mariagonzalez',
-      github: 'https://github.com/mariagonzalez',
-      twitter: 'https://twitter.com/mariagonzalez',
+      linkedin: 'https://www.linkedin.com/in/lukcba/',
+      github: 'https://github.com/lukcba',
     },
-    skills: ['Machine Learning', 'Python', 'TensorFlow', 'Leadership'],
+    skills: ['React', 'TypeScript', 'Node.js', 'Full-Stack'],
   },
   {
-    id: 'carlos-rodriguez',
-    name: 'Carlos Rodríguez',
-    role: 'CTO & Full Stack Developer',
-    bio: 'Arquitecto de software con pasión por crear productos escalables y de alto rendimiento.',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos',
+    id: 'juan-carlos-ferri',
+    name: 'Juan Carlos Ferri',
+    role: 'Co-Founder & Software Engineer',
+    bio: 'Ingeniero de software especializado en soluciones innovadoras y desarrollo de productos digitales.',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=JuanCarlos',
     social: {
-      linkedin: 'https://linkedin.com/in/carlosrodriguez',
-      github: 'https://github.com/carlosrodriguez',
+      linkedin: 'https://www.linkedin.com/in/jcferri/',
+      github: 'https://github.com/jcferri',
     },
-    skills: ['React', 'Node.js', 'AWS', 'Architecture'],
-  },
-  {
-    id: 'ana-martinez',
-    name: 'Ana Martínez',
-    role: 'Lead Designer & UX Expert',
-    bio: 'Diseñadora con enfoque en crear experiencias memorables y accesibles para todos.',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ana',
-    social: {
-      linkedin: 'https://linkedin.com/in/anamartinez',
-      twitter: 'https://twitter.com/anamartinez',
-    },
-    skills: ['UI/UX', 'Figma', 'Design Systems', 'Research'],
-  },
-  {
-    id: 'juan-perez',
-    name: 'Juan Pérez',
-    role: 'DevOps Engineer',
-    bio: 'Especialista en infraestructura cloud y automatización de procesos.',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Juan',
-    social: {
-      linkedin: 'https://linkedin.com/in/juanperez',
-      github: 'https://github.com/juanperez',
-    },
-    skills: ['Kubernetes', 'Docker', 'CI/CD', 'Terraform'],
+    skills: ['Full-Stack', 'Architecture', 'Innovation', 'Product'],
   },
 ];
 

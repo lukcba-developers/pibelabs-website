@@ -154,9 +154,31 @@ const Footer = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <p className="font-poppins text-sm text-gray-400 text-center md:text-left">
-            © {currentYear} {COMPANY_INFO.name}. Todos los derechos reservados.
-          </p>
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <p className="font-poppins text-sm text-gray-400 text-center md:text-left">
+              © {currentYear} {COMPANY_INFO.name}. Todos los derechos reservados.
+            </p>
+            <p className="font-poppins text-xs text-gray-500 text-center md:text-left">
+              Fundado por{' '}
+              <a 
+                href={COMPANY_INFO.founders?.[0]?.linkedin} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-cyan-neon hover:text-cyan-bright transition-colors"
+              >
+                {COMPANY_INFO.founders?.[0]?.name}
+              </a>
+              {' y '}
+              <a 
+                href={COMPANY_INFO.founders?.[1]?.linkedin} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-cyan-neon hover:text-cyan-bright transition-colors"
+              >
+                {COMPANY_INFO.founders?.[1]?.name}
+              </a>
+            </p>
+          </div>
           <p className="font-poppins text-xs text-gray-500 text-center md:text-right">
             Diseñado y desarrollado con <span className="text-magenta-neon">❤️</span> y tecnología de vanguardia
           </p>
