@@ -70,9 +70,9 @@ const PortfolioModal = ({ project, isOpen, onClose }: PortfolioModalProps) => {
               </div>
 
               <div className="flex gap-4">
-                {project.demo && (
+                {project.link && (
                   <a
-                    href={project.demo}
+                    href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-rajdhani font-bold rounded-xl"

@@ -1,11 +1,10 @@
-import type { 
-  Service, 
-  NavLink, 
-  Stat, 
+import type {
+  Service,
+  NavLink,
+  Stat,
   PortfolioProject,
   BlogPost,
-  TeamMember,
-  Testimonial 
+  TeamMember
 } from '@/types';
 
 /* ============================================

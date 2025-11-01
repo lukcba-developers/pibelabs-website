@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { SERVICES } from '@/lib/constants/config';
-import Card from '@/components/molecules/Card';
 import type { Service } from '@/types';
 
 /* ============================================

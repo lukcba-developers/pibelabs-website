@@ -1,9 +1,11 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Loader } from './components/atoms/Loader';
 import { ScrollToTop } from './components/atoms/ScrollToTop';
 import ErrorBoundary from './components/atoms/ErrorBoundary';
 import SEO from './components/atoms/SEO';
+import { initGA } from '@/lib/analytics';
+import { reportWebVitals, logWebVitals } from '@/lib/performance/webVitals';
 
 // Eager load Header (always visible)
 import Header from './components/organisms/Header';
@@ -25,6 +27,11 @@ const Footer = lazy(() => import('./components/organisms/Footer'));
    ============================================ */
 
 function App() {
+  useEffect(() => {
+    initGA();
+    reportWebVitals(logWebVitals);
+  }, []);
+
   return (
     <ErrorBoundary>
       <SEO />

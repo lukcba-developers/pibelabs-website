@@ -141,21 +141,21 @@ const TestimonialCard = ({ testimonial, index }: { testimonial: Testimonial; ind
 
       {/* Content */}
       <p className="font-poppins text-text-secondary mb-6 italic">
-        "{testimonial.content}"
+        "{testimonial.text}"
       </p>
 
       {/* Author */}
       <div className="flex items-center gap-3">
-        {testimonial.avatar && (
+        {testimonial.image && (
           <img
-            src={testimonial.avatar}
-            alt={testimonial.name}
+            src={testimonial.image}
+            alt={testimonial.author}
             className="w-12 h-12 rounded-full"
           />
         )}
         <div>
           <p className="font-rajdhani font-semibold text-gray-dark">
-            {testimonial.name}
+            {testimonial.author}
           </p>
           <p className="font-poppins text-sm text-text-tertiary">
             {testimonial.role} @ {testimonial.company}

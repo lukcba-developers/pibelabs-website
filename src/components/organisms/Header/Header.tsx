@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NAV_LINKS } from '@/lib/constants/config';
-import { Menu } from 'lucide-react';
-import MobileMenu from '@/components/organisms/MobileMenu';
 
 /* ============================================
    Header Component (Organism)
