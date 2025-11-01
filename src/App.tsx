@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Loader } from './components/atoms/Loader';
-import { ScrollToTop } from './components/atoms/ScrollToTop';
+import ScrollToTop from './components/atoms/ScrollToTop';
 import ErrorBoundary from './components/atoms/ErrorBoundary';
 import SEO from './components/atoms/SEO';
 import { initGA } from '@/lib/analytics';
@@ -17,10 +17,14 @@ const ServicesGrid = lazy(() => import('./components/organisms/ServicesGrid'));
 const TrustBadges = lazy(() => import('./components/organisms/TrustBadges'));
 const PortfolioSection = lazy(() => import('./components/organisms/PortfolioSection'));
 const SocialProof = lazy(() => import('./components/organisms/SocialProof'));
+const TestimonialCarousel = lazy(() => import('./components/organisms/TestimonialCarousel'));
 const AboutSection = lazy(() => import('./components/organisms/AboutSection'));
+const FAQSection = lazy(() => import('./components/organisms/FAQSection'));
 const BlogSection = lazy(() => import('./components/organisms/BlogSection'));
 const ContactForm = lazy(() => import('./components/organisms/ContactForm'));
 const Footer = lazy(() => import('./components/organisms/Footer'));
+const WhatsAppWidget = lazy(() => import('./components/atoms/WhatsAppWidget'));
+const FloatingWhatsApp = lazy(() => import('./components/molecules/FloatingWhatsApp'));
 
 /* ============================================
    Main App Component with Code Splitting
@@ -68,8 +72,18 @@ function App() {
           {/* Social Proof - NEW */}
           <SocialProof />
 
+          {/* Testimonial Carousel - NEW */}
+          <Suspense fallback={<Loader />}>
+            <TestimonialCarousel />
+          </Suspense>
+
           {/* About Section (Team & Testimonials) */}
           <AboutSection />
+
+          {/* FAQ Section - NEW */}
+          <Suspense fallback={<Loader />}>
+            <FAQSection />
+          </Suspense>
 
           {/* Blog Section */}
           <BlogSection />
@@ -80,6 +94,14 @@ function App() {
 
         {/* Footer */}
         <Footer />
+      </Suspense>
+
+      {/* Floating WhatsApp Button */}
+      <Suspense fallback={null}>
+        <WhatsAppWidget 
+          phoneNumber="5491112345678"
+          message="¡Hola! Me gustaría obtener más información sobre sus servicios."
+        />
       </Suspense>
 
       {/* Scroll to Top Button */}

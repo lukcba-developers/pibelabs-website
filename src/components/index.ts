@@ -2,7 +2,7 @@
 export { default as Button } from './atoms/Button';
 export { default as Input } from './atoms/Input';
 export { Loader } from './atoms/Loader';
-export { ScrollToTop } from './atoms/ScrollToTop';
+export { default as ScrollToTop } from './atoms/ScrollToTop';
 
 // Molecules
 // TODO: Add molecule exports here

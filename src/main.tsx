@@ -1,11 +1,11 @@
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './styles/globals.css';
-import { initAnalytics } from './lib/analytics';
+import { initGA } from './lib/analytics';
 import { logPerformanceMetrics } from './lib/performance';
 
 // Initialize analytics
-initAnalytics();
+initGA();
 
 // Log performance metrics in development
 if (import.meta.env.DEV) {

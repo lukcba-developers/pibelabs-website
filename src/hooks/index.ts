@@ -403,3 +403,82 @@ export function useTimeout(callback: () => void, delay: number | null) {
     return () => clearTimeout(id);
   }, [delay]);
 }
+
+/**
+ * useWhatsApp
+ * Hook for WhatsApp integration with pre-configured messages
+ */
+export function useWhatsApp() {
+  const {
+    openWhatsApp,
+    createGeneralContactMessage,
+    createServiceInquiryMessage,
+    createQuoteRequestMessage,
+    createPortfolioInquiryMessage,
+    createTeamInquiryMessage,
+    createContactFormMessage,
+    createBlogInquiryMessage,
+    createTechInquiryMessage
+  } = require('@/lib/utils/whatsapp');
+
+  const sendMessage = useCallback((message: string) => {
+    openWhatsApp(message);
+  }, []);
+
+  const sendGeneralContact = useCallback(() => {
+    const message = createGeneralContactMessage();
+    openWhatsApp(message);
+  }, []);
+
+  const sendServiceInquiry = useCallback((serviceName: string) => {
+    const message = createServiceInquiryMessage(serviceName);
+    openWhatsApp(message);
+  }, []);
+
+  const sendQuoteRequest = useCallback((serviceName?: string, projectDetails?: string) => {
+    const message = createQuoteRequestMessage(serviceName, projectDetails);
+    openWhatsApp(message);
+  }, []);
+
+  const sendPortfolioInquiry = useCallback((projectName: string) => {
+    const message = createPortfolioInquiryMessage(projectName);
+    openWhatsApp(message);
+  }, []);
+
+  const sendTeamInquiry = useCallback((position?: string) => {
+    const message = createTeamInquiryMessage(position);
+    openWhatsApp(message);
+  }, []);
+
+  const sendContactFormMessage = useCallback((formData: {
+    name: string;
+    email: string;
+    service?: string;
+    message: string;
+  }) => {
+    const message = createContactFormMessage(formData);
+    openWhatsApp(message);
+  }, []);
+
+  const sendBlogInquiry = useCallback((blogTitle: string) => {
+    const message = createBlogInquiryMessage(blogTitle);
+    openWhatsApp(message);
+  }, []);
+
+  const sendTechInquiry = useCallback((technology: string) => {
+    const message = createTechInquiryMessage(technology);
+    openWhatsApp(message);
+  }, []);
+
+  return {
+    sendMessage,
+    sendGeneralContact,
+    sendServiceInquiry,
+    sendQuoteRequest,
+    sendPortfolioInquiry,
+    sendTeamInquiry,
+    sendContactFormMessage,
+    sendBlogInquiry,
+    sendTechInquiry,
+  };
+}

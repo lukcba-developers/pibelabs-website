@@ -35,6 +35,8 @@ export const COMPANY_INFO = {
   description: 'Estudio de innovación tecnológica especializado en desarrollo web, inteligencia artificial, diseño UX/UI y soluciones cloud.',
   email: 'contact@pibelabs.com',
   phone: '+54 11 1234-5678',
+  whatsapp: '5493513088400', // Formato internacional sin símbolos para wa.me
+  whatsappDisplay: '+54 9 351 3088400', // Formato para mostrar al usuario
   location: 'Buenos Aires, Argentina',
   website: 'https://pibelabs.com',
   social: {
