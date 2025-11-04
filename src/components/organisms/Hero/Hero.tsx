@@ -1,22 +1,25 @@
 import { motion } from 'framer-motion';
 import { COMPANY_INFO } from '@/lib/constants/config';
+import { useReducedMotion } from '@/hooks';
 
 /* ============================================
    Hero Section Component (Organism) - UX/UI Optimized
    ============================================ */
 
 const Hero = () => {
+  const prefersReducedMotion = useReducedMotion();
+
   const scrollToContact = () => {
     const element = document.querySelector('#contact');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     }
   };
 
   const scrollToServices = () => {
     const element = document.querySelector('#services');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     }
   };
 
@@ -44,7 +47,7 @@ const Hero = () => {
         {/* Animated Gradient Orbs - More subtle */}
         <motion.div
           className="absolute top-1/4 -left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full filter blur-3xl"
-          animate={{
+          animate={prefersReducedMotion ? {} : {
             scale: [1, 1.2, 1],
             opacity: [0.1, 0.15, 0.1],
             x: [0, 50, 0],
@@ -57,7 +60,7 @@ const Hero = () => {
         />
         <motion.div
           className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-magenta-500/10 rounded-full filter blur-3xl"
-          animate={{
+          animate={prefersReducedMotion ? {} : {
             scale: [1.2, 1, 1.2],
             opacity: [0.15, 0.1, 0.15],
             x: [0, -50, 0],
@@ -71,44 +74,52 @@ const Hero = () => {
       </div>
 
       {/* Minimal Floating Particles - Reduced from 20 to 8 */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-cyan-400/40 rounded-full"
-            style={{
-              left: `${(i * 15) % 100}%`,
-              top: `${(i * 20) % 100}%`,
-            }}
-            animate={{
-              y: [0, -50, 0],
-              opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 3,
-              repeat: Infinity,
-              delay: i * 0.5,
-            }}
-          />
-        ))}
-      </div>
+      {!prefersReducedMotion && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-cyan-400/40 rounded-full"
+              style={{
+                left: `${(i * 15) % 100}%`,
+                top: `${(i * 20) % 100}%`,
+              }}
+              animate={{
+                y: [0, -50, 0],
+                opacity: [0.2, 0.5, 0.2],
+              }}
+              transition={{
+                duration: 4 + Math.random() * 3,
+                repeat: Infinity,
+                delay: i * 0.5,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4">
         <div className="max-w-5xl mx-auto text-center">
           
-          {/* Logo/Icon - Using brand icon */}
+          {/* Logo/Icon - Transparent version with glow effect */}
           <motion.div
-            className="inline-flex items-center justify-center mb-8"
-            initial={{ opacity: 0, scale: 0.8 }}
+            className="inline-flex items-center justify-center mb-8 relative"
+            initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
           >
+            {/* Glow effect background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-magenta-500/20 rounded-full blur-3xl"></div>
+
             <motion.img
-              src="/assets/images/pibelabs-icon-only.svg"
+              src="/assets/images/pibelabs-icon-transparent.svg"
               alt="PibeLabs"
-              className="w-24 h-24 md:w-32 md:h-32 drop-shadow-2xl"
-              animate={{
+              className="w-24 h-24 md:w-32 md:h-32 relative z-10"
+              style={{
+                filter: 'drop-shadow(0 0 20px rgba(0, 217, 255, 0.4))'
+              }}
+              animate={prefersReducedMotion ? {} : {
                 y: [0, -10, 0],
               }}
               transition={{
@@ -122,9 +133,9 @@ const Hero = () => {
           {/* Main Title - Improved with better copy */}
           <motion.h1
             className="font-orbitron font-black text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-6 leading-tight px-4"
-            initial={{ opacity: 0, y: 30 }}
+            initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.2 }}
           >
             <span className="inline-block bg-gradient-to-r from-cyan-400 via-cyan-300 to-magenta-400 bg-clip-text text-transparent drop-shadow-lg">
               {COMPANY_INFO.heroHeadline}
@@ -134,9 +145,9 @@ const Hero = () => {
           {/* Subtitle - Enhanced description */}
           <motion.p
             className="font-poppins text-lg md:text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto mb-10 leading-relaxed px-4"
-            initial={{ opacity: 0, y: 30 }}
+            initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.4 }}
           >
             {COMPANY_INFO.heroSubheadline}
           </motion.p>
@@ -144,16 +155,16 @@ const Hero = () => {
           {/* CTA Buttons - More prominent with better copy */}
           <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
+            initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.6 }}
           >
             {/* Primary CTA - Enhanced */}
             <motion.button
               onClick={scrollToContact}
               className="group relative px-10 py-5 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-white font-rajdhani font-bold text-xl rounded-xl shadow-[0_0_30px_rgba(0,217,255,0.6)] hover:shadow-[0_0_50px_rgba(0,217,255,0.9)] transition-all duration-300 min-w-[280px]"
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -3 }}
+              whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
             >
               <span className="relative z-10">Agenda consulta gratuita →</span>
               <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
@@ -163,8 +174,8 @@ const Hero = () => {
             <motion.button
               onClick={scrollToServices}
               className="group px-10 py-5 bg-transparent border-2 border-cyan-400 hover:border-cyan-300 text-cyan-400 hover:text-cyan-300 font-rajdhani font-bold text-xl rounded-xl hover:bg-cyan-400/10 transition-all duration-300 min-w-[280px]"
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -3 }}
+              whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
             >
               Ver casos de éxito
             </motion.button>
@@ -173,17 +184,17 @@ const Hero = () => {
           {/* Stats Counter - NEW */}
           <motion.div
             className="grid grid-cols-3 gap-8 max-w-2xl mx-auto mb-8"
-            initial={{ opacity: 0, y: 20 }}
+            initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.8 }}
           >
             {COMPANY_INFO.stats.map((stat, index) => (
-              <motion.div 
-                key={stat.label} 
+              <motion.div
+                key={stat.label}
                 className="text-center"
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.9 + index * 0.1 }}
+                transition={{ delay: prefersReducedMotion ? 0 : 0.9 + index * 0.1 }}
               >
                 <div className="text-3xl md:text-4xl font-orbitron font-bold text-cyan-neon mb-2">
                   {stat.value}
@@ -198,9 +209,9 @@ const Hero = () => {
           {/* Trust Indicators - Social Proof */}
           <motion.div
             className="mt-16 flex flex-wrap justify-center items-center gap-8 text-gray-400 text-sm"
-            initial={{ opacity: 0 }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 1, delay: prefersReducedMotion ? 0 : 1.2 }}
           >
             <div className="flex items-center gap-2">
               <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
@@ -225,13 +236,13 @@ const Hero = () => {
           {/* Scroll Indicator */}
           <motion.div
             className="absolute bottom-8 left-1/2 -translate-x-1/2"
-            initial={{ opacity: 0 }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
+            transition={{ delay: prefersReducedMotion ? 0 : 1.5 }}
           >
             <motion.div
               className="flex flex-col items-center gap-2 text-cyan-400 cursor-pointer"
-              animate={{ y: [0, 10, 0] }}
+              animate={prefersReducedMotion ? {} : { y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
               onClick={scrollToServices}
             >

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { SEO_CONFIG } from '@/lib/constants/seo';
+import { SEO_CONFIG } from '@/lib/constants/config';
 
 /* ============================================
    SEO Component (Atom)

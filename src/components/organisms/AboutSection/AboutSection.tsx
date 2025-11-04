@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
+import { Target, Eye, Diamond } from 'lucide-react';
 import { TEAM_MEMBERS, TESTIMONIALS } from '@/lib/constants/config';
 import type { TeamMember, Testimonial } from '@/types';
+import LazyImage from '@/components/atoms/LazyImage';
+import { useReducedMotion } from '@/hooks';
 
 /* ============================================
    About Section Component (Organism)
@@ -30,10 +33,10 @@ const TeamMemberCard = ({ member, index }: { member: TeamMember; index: number }
             transition={{ duration: 0.3 }}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-neon to-magenta-neon rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-opacity" />
-            <img
+            <LazyImage
               src={member.avatar}
               alt={member.name}
-              className="relative w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
+              className="relative w-32 h-32 rounded-full border-4 border-white shadow-lg"
             />
           </motion.div>
         </div>
@@ -147,7 +150,7 @@ const TestimonialCard = ({ testimonial, index }: { testimonial: Testimonial; ind
       {/* Author */}
       <div className="flex items-center gap-3">
         {testimonial.image && (
-          <img
+          <LazyImage
             src={testimonial.image}
             alt={testimonial.author}
             className="w-12 h-12 rounded-full"
@@ -167,22 +170,25 @@ const TestimonialCard = ({ testimonial, index }: { testimonial: Testimonial; ind
 };
 
 const AboutSection = () => {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section id="about" className="section bg-dark-primary py-20">
       <div className="container mx-auto px-4">
         {/* Company Info */}
         <motion.div
           className="text-center mb-20"
-          initial={{ opacity: 0, y: 30 }}
+          initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
         >
           <motion.span
             className="inline-block px-4 py-2 rounded-full bg-cyan-neon/10 text-cyan-neon font-rajdhani font-semibold text-sm mb-4"
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
           >
             Sobre Nosotros
           </motion.span>
@@ -191,39 +197,84 @@ const AboutSection = () => {
             Conoce al <span className="text-cyan-neon">Equipo</span> PibeLabs
           </h2>
 
-          <p className="font-poppins text-lg text-gray-300 max-w-3xl mx-auto mb-8">
-            Somos un equipo multidisciplinario de expertos apasionados por la tecnología 
+          <p className="font-poppins text-lg text-gray-300 max-w-3xl mx-auto mb-12">
+            Somos un equipo multidisciplinario de expertos apasionados por la tecnología
             y la innovación, con el objetivo de transformar ideas en realidad digital.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-8 text-left max-w-4xl mx-auto">
-            <div className="flex items-start gap-3">
-              <span className="text-3xl">🎯</span>
-              <div>
-                <h3 className="font-rajdhani font-bold text-white mb-1">Misión</h3>
-                <p className="font-poppins text-sm text-gray-200">
+          {/* Misión, Visión, Valores - Modernized */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Misión */}
+            <motion.div
+              className="group relative bg-gradient-to-br from-dark-secondary to-dark-primary border-2 border-cyan-neon/20 rounded-2xl p-6 hover:border-cyan-neon/60 transition-all duration-300 hover:shadow-glow-cyan"
+              initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: prefersReducedMotion ? 0 : 0.1, duration: prefersReducedMotion ? 0 : 0.5 }}
+            >
+              <div className="flex flex-col items-center text-center">
+                <motion.div
+                  className="w-16 h-16 rounded-full bg-cyan-neon/10 flex items-center justify-center mb-4 group-hover:bg-cyan-neon/20 transition-all"
+                  whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
+                >
+                  <Target className="w-8 h-8 text-cyan-neon" />
+                </motion.div>
+                <h3 className="font-orbitron font-bold text-xl text-white mb-3">Misión</h3>
+                <p className="font-poppins text-sm text-gray-300 leading-relaxed">
                   Crear soluciones tecnológicas que impulsen el éxito de nuestros clientes
                 </p>
               </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <span className="text-3xl">👁️</span>
-              <div>
-                <h3 className="font-rajdhani font-bold text-white mb-1">Visión</h3>
-                <p className="font-poppins text-sm text-gray-200">
+              {/* Decorative glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-neon/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />
+            </motion.div>
+
+            {/* Visión */}
+            <motion.div
+              className="group relative bg-gradient-to-br from-dark-secondary to-dark-primary border-2 border-magenta-neon/20 rounded-2xl p-6 hover:border-magenta-neon/60 transition-all duration-300 hover:shadow-glow-magenta"
+              initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: prefersReducedMotion ? 0 : 0.2, duration: prefersReducedMotion ? 0 : 0.5 }}
+            >
+              <div className="flex flex-col items-center text-center">
+                <motion.div
+                  className="w-16 h-16 rounded-full bg-magenta-neon/10 flex items-center justify-center mb-4 group-hover:bg-magenta-neon/20 transition-all"
+                  whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: -5 }}
+                >
+                  <Eye className="w-8 h-8 text-magenta-neon" />
+                </motion.div>
+                <h3 className="font-orbitron font-bold text-xl text-white mb-3">Visión</h3>
+                <p className="font-poppins text-sm text-gray-300 leading-relaxed">
                   Ser líderes en innovación tecnológica en América Latina
                 </p>
               </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <span className="text-3xl">💎</span>
-              <div>
-                <h3 className="font-rajdhani font-bold text-white mb-1">Valores</h3>
-                <p className="font-poppins text-sm text-gray-200">
+              {/* Decorative glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-magenta-neon/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />
+            </motion.div>
+
+            {/* Valores */}
+            <motion.div
+              className="group relative bg-gradient-to-br from-dark-secondary to-dark-primary border-2 border-cyan-neon/20 rounded-2xl p-6 hover:border-cyan-neon/60 transition-all duration-300 hover:shadow-glow-cyan"
+              initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: prefersReducedMotion ? 0 : 0.3, duration: prefersReducedMotion ? 0 : 0.5 }}
+            >
+              <div className="flex flex-col items-center text-center">
+                <motion.div
+                  className="w-16 h-16 rounded-full bg-cyan-neon/10 flex items-center justify-center mb-4 group-hover:bg-cyan-neon/20 transition-all"
+                  whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
+                >
+                  <Diamond className="w-8 h-8 text-cyan-neon" />
+                </motion.div>
+                <h3 className="font-orbitron font-bold text-xl text-white mb-3">Valores</h3>
+                <p className="font-poppins text-sm text-gray-300 leading-relaxed">
                   Excelencia, innovación, transparencia y compromiso
                 </p>
               </div>
-            </div>
+              {/* Decorative glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-neon/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />
+            </motion.div>
           </div>
         </motion.div>
 

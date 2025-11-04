@@ -1,22 +1,26 @@
 import { motion } from 'framer-motion';
 import { Quote, Linkedin } from 'lucide-react';
 import { TESTIMONIALS, CLIENT_LOGOS } from '@/lib/constants/config';
+import LazyImage from '@/components/atoms/LazyImage';
+import { useReducedMotion } from '@/hooks';
 
 /* ============================================
    Social Proof Section Component (Organism)
    ============================================ */
 
 const SocialProof = () => {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className="section-padding bg-dark-secondary">
       <div className="container mx-auto px-4">
         {/* Clients Logos */}
         <motion.div
           className="text-center mb-20"
-          initial={{ opacity: 0, y: 20 }}
+          initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
         >
           <h3 className="text-sm font-rajdhani text-gray-400 uppercase tracking-widest mb-10">
             Empresas que confían en nosotros
@@ -25,16 +29,16 @@ const SocialProof = () => {
             {CLIENT_LOGOS.map((client, index) => (
               <motion.div
                 key={client.name}
-                className="flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.8 }}
+                className="flex items-center justify-center h-12"
+                initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: prefersReducedMotion ? 0 : index * 0.1 }}
               >
-                <img
+                <LazyImage
                   src={client.logo}
                   alt={client.name}
-                  className="h-10 opacity-50 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer"
+                  className="h-10 w-auto opacity-50 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer"
                 />
               </motion.div>
             ))}
@@ -44,10 +48,10 @@ const SocialProof = () => {
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
+          initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
             Lo que dicen{' '}
@@ -65,10 +69,10 @@ const SocialProof = () => {
           {TESTIMONIALS.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.15, duration: 0.6 }}
+              transition={{ delay: prefersReducedMotion ? 0 : index * 0.15, duration: prefersReducedMotion ? 0 : 0.6 }}
               className="group relative bg-dark-primary border-2 border-gray-700 rounded-xl p-8 hover:border-cyan-neon transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,217,255,0.3)]"
             >
               {/* Quote Icon */}
@@ -97,10 +101,10 @@ const SocialProof = () => {
 
               {/* Author Info */}
               <div className="flex items-center gap-4 pt-4 border-t border-gray-700">
-                <img
+                <LazyImage
                   src={testimonial.image}
                   alt={testimonial.author}
-                  className="w-14 h-14 rounded-full border-2 border-cyan-neon/50"
+                  className="w-14 h-14 rounded-full border-2 border-cyan-neon/50 object-cover"
                 />
                 <div className="flex-1">
                   <div className="font-rajdhani font-bold text-white text-lg">
@@ -130,10 +134,10 @@ const SocialProof = () => {
         {/* CTA */}
         <motion.div
           className="text-center mt-16"
-          initial={{ opacity: 0, y: 20 }}
+          initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: prefersReducedMotion ? 0 : 0.5 }}
         >
           <p className="text-gray-300 font-poppins mb-6">
             ¿Quieres ser nuestro próximo caso de éxito?

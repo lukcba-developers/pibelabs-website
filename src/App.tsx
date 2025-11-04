@@ -24,7 +24,6 @@ const BlogSection = lazy(() => import('./components/organisms/BlogSection'));
 const ContactForm = lazy(() => import('./components/organisms/ContactForm'));
 const Footer = lazy(() => import('./components/organisms/Footer'));
 const WhatsAppWidget = lazy(() => import('./components/atoms/WhatsAppWidget'));
-const FloatingWhatsApp = lazy(() => import('./components/molecules/FloatingWhatsApp'));
 
 /* ============================================
    Main App Component with Code Splitting

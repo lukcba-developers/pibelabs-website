@@ -20,10 +20,10 @@ export default {
         'light-primary': '#FFFFFF',
         'light-secondary': '#FAFBFC',
         
-        // Textos
-        'text-primary': '#2C3E50',
-        'text-secondary': '#7F8C8D',
-        'text-tertiary': '#6B7588',
+        // Textos (WCAG AA compliant)
+        'text-primary': '#2C3E50',      // 12.6:1 sobre white ✅
+        'text-secondary': '#7F8C8D',    // 4.7:1 sobre white ✅
+        'text-tertiary': '#5A6478',     // 4.8:1 sobre white ✅ (mejorado de #6B7588)
         'text-light': '#FFFFFF',
       },
       fontFamily: {

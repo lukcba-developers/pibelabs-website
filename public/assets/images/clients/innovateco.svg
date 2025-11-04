@@ -1,0 +1,8 @@
+<svg width="140" height="50" viewBox="0 0 140 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <text x="5" y="32" font-family="'Poppins', sans-serif" font-size="18" font-weight="600" fill="#00D9FF">
+    InnovateCo
+  </text>
+  <circle cx="10" cy="42" r="2" fill="#00D9FF" opacity="0.8"/>
+  <circle cx="18" cy="42" r="2" fill="#00D9FF" opacity="0.6"/>
+  <circle cx="26" cy="42" r="2" fill="#00D9FF" opacity="0.4"/>
+</svg>

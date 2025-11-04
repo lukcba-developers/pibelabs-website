@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0099CC;stop-opacity:0.8" />
+    </linearGradient>
+    <linearGradient id="magentaGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF00FF;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#CC00CC;stop-opacity:0.7" />
+    </linearGradient>
+    <linearGradient id="holoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:0.6" />
+      <stop offset="50%" style="stop-color:#FF00FF;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#00D9FF;stop-opacity:0.6" />
+    </linearGradient>
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Fondo oscuro matching el diseño -->
+  <rect width="300" height="300" fill="#0a0e27"/>
+
+  <g transform="translate(150, 150)">
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#00D9FF" stroke-width="2.5" opacity="0.3" stroke-dasharray="6,6"/>
+    <circle cx="0" cy="0" r="110" fill="none" stroke="#FF00FF" stroke-width="2" opacity="0.2" stroke-dasharray="10,5"/>
+
+    <path d="M 0 -55 L 48 -27.5 L 48 27.5 L 0 55 L -48 27.5 L -48 -27.5 Z"
+          fill="#2C3E50" stroke="#00D9FF" stroke-width="4" filter="url(#neonGlow)"/>
+
+    <circle cx="0" cy="0" r="28" fill="url(#cyanGlow)" opacity="0.7" filter="url(#strongGlow)"/>
+    <circle cx="0" cy="0" r="18" fill="#00D9FF" opacity="0.9"/>
+    <circle cx="0" cy="0" r="10" fill="#FFFFFF" opacity="0.95"/>
+
+    <circle cx="60" cy="0" r="5" fill="#00D9FF" filter="url(#neonGlow)">
+      <animateTransform attributeName="transform" type="rotate"
+                        from="0 0 0" to="360 0 0" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="-60" cy="0" r="5" fill="#FF00FF" filter="url(#neonGlow)">
+      <animateTransform attributeName="transform" type="rotate"
+                        from="0 0 0" to="360 0 0" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="-60" r="4" fill="#00D9FF" opacity="0.8" filter="url(#neonGlow)">
+      <animateTransform attributeName="transform" type="rotate"
+                        from="0 0 0" to="360 0 0" dur="10s" repeatCount="indefinite"/>
+    </circle>
+
+    <g opacity="0.8">
+      <path d="M 80 -30 L 95 -22 L 95 -8 L 80 0 L 65 -8 L 65 -22 Z"
+            fill="none" stroke="#00D9FF" stroke-width="2.5" filter="url(#neonGlow)"/>
+      <path d="M 77 -18 L 83 -15 L 83 -9 L 77 -6 L 71 -9 L 71 -15 Z"
+            fill="#00D9FF" opacity="0.4"/>
+
+      <path d="M 80 30 L 95 38 L 95 52 L 80 60 L 65 52 L 65 38 Z"
+            fill="none" stroke="#FF00FF" stroke-width="2.5" filter="url(#neonGlow)"/>
+      <path d="M 77 42 L 83 45 L 83 51 L 77 54 L 71 51 L 71 45 Z"
+            fill="#FF00FF" opacity="0.4"/>
+
+      <path d="M -80 0 L -65 8 L -65 22 L -80 30 L -95 22 L -95 8 Z"
+            fill="none" stroke="#FF00FF" stroke-width="2.5" filter="url(#neonGlow)"/>
+      <path d="M -83 12 L -77 15 L -77 21 L -83 24 L -89 21 L -89 15 Z"
+            fill="#FF00FF" opacity="0.5"/>
+    </g>
+
+    <line x1="48" y1="0" x2="65" y2="-15" stroke="url(#holoGradient)" stroke-width="2.5" opacity="0.6"/>
+    <line x1="48" y1="15" x2="65" y2="45" stroke="url(#holoGradient)" stroke-width="2.5" opacity="0.6"/>
+    <line x1="-48" y1="15" x2="-65" y2="15" stroke="url(#holoGradient)" stroke-width="2.5" opacity="0.6"/>
+
+    <circle cx="48" cy="0" r="3" fill="#00D9FF" filter="url(#strongGlow)"/>
+    <circle cx="65" cy="-15" r="3" fill="#00D9FF" filter="url(#strongGlow)"/>
+    <circle cx="48" cy="15" r="3" fill="#FF00FF" filter="url(#strongGlow)"/>
+    <circle cx="65" cy="45" r="3" fill="#FF00FF" filter="url(#strongGlow)"/>
+    <circle cx="-48" cy="15" r="3" fill="#FF00FF" filter="url(#strongGlow)"/>
+    <circle cx="-65" cy="15" r="3" fill="#FF00FF" filter="url(#strongGlow)"/>
+  </g>
+</svg>

@@ -38,9 +38,12 @@ const Footer = () => {
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 flex items-center justify-center">
                 <img
-                  src="/assets/images/pibelabs-icon-only.svg"
+                  src="/assets/images/pibelabs-icon-transparent.svg"
                   alt="PibeLabs Logo"
                   className="w-full h-full"
+                  style={{
+                    filter: 'drop-shadow(0 0 10px rgba(0, 217, 255, 0.3))'
+                  }}
                 />
               </div>
               <div>
@@ -160,23 +163,24 @@ const Footer = () => {
             </p>
             <p className="font-poppins text-xs text-gray-500 text-center md:text-left">
               Fundado por{' '}
-              <a 
-                href={COMPANY_INFO.founders?.[0]?.linkedin} 
-                target="_blank" 
+              <a
+                href={COMPANY_INFO.founders?.[0]?.linkedin}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-cyan-neon hover:text-cyan-bright transition-colors"
               >
                 {COMPANY_INFO.founders?.[0]?.name}
               </a>
               {' y '}
-              <a 
-                href={COMPANY_INFO.founders?.[1]?.linkedin} 
-                target="_blank" 
+              <a
+                href={COMPANY_INFO.founders?.[1]?.linkedin}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-cyan-neon hover:text-cyan-bright transition-colors"
               >
                 {COMPANY_INFO.founders?.[1]?.name}
               </a>
+              {' en '}{COMPANY_INFO.location}
             </p>
           </div>
           <p className="font-poppins text-xs text-gray-500 text-center md:text-right">

@@ -13,7 +13,6 @@ interface WebVitalsMetric {
 export const reportWebVitals = (onPerfEntry?: (metric: WebVitalsMetric) => void) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
     // Dynamic import disabled - install web-vitals package to enable
-    // @ts-expect-error - web-vitals is an optional dependency
     // import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
     //   getCLS(onPerfEntry);
     //   getFID(onPerfEntry);
@@ -43,11 +42,5 @@ export const logWebVitals = (metric: WebVitalsMetric) => {
     });
   }
 };
-
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-  }
-}
 
 export default reportWebVitals;

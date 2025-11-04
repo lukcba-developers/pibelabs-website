@@ -125,6 +125,7 @@ export interface InputProps extends BaseComponentProps {
   label?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onFocus?: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 export interface CardProps extends BaseComponentProps {
@@ -163,6 +164,16 @@ export interface PortfolioProject {
   github?: string;
   featured?: boolean;
   year: number;
+  status?: 'production' | 'development' | 'completed';
+  features?: string[];
+  achievements?: string[];
+  techStack?: {
+    frontend?: string[];
+    backend?: string[];
+    database?: string[];
+    infrastructure?: string[];
+    tools?: string[];
+  };
 }
 
 export type PortfolioCategory = 'all' | 'web' | 'ia' | 'design' | 'cloud';

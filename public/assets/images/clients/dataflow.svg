@@ -1,0 +1,6 @@
+<svg width="140" height="50" viewBox="0 0 140 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <text x="5" y="32" font-family="'Rajdhani', sans-serif" font-size="20" font-weight="700" fill="#FF006A">
+    DataFlow
+  </text>
+  <path d="M5 40 L15 40 L20 45 L25 40 L35 40" stroke="#FF006A" stroke-width="2" fill="none" opacity="0.6"/>
+</svg>

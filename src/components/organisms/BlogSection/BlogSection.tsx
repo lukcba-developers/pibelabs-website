@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { BLOG_POSTS } from '@/lib/constants/config';
 import type { BlogPost } from '@/types';
+import LazyImage from '@/components/atoms/LazyImage';
 
 /* ============================================
    Blog Section Component (Organism)
@@ -27,13 +28,15 @@ const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       {/* Image */}
-      <div className="relative h-56 overflow-hidden bg-gray-200">
-        <motion.img
+      <motion.div
+        className="relative h-56 overflow-hidden bg-gray-200"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.4 }}
+      >
+        <LazyImage
           src={post.image}
           alt={post.title}
-          className="w-full h-full object-cover"
-          whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.4 }}
+          className="w-full h-full"
         />
 
         {/* Category Badge */}
@@ -47,7 +50,7 @@ const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => {
             Destacado
           </div>
         )}
-      </div>
+      </motion.div>
 
       {/* Content */}
       <div className="p-6">
@@ -94,7 +97,7 @@ const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => {
           {/* Author */}
           <div className="flex items-center gap-3">
             {post.author.avatar && (
-              <img
+              <LazyImage
                 src={post.author.avatar}
                 alt={post.author.name}
                 className="w-10 h-10 rounded-full"

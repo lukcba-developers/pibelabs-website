@@ -1,0 +1,126 @@
+# ============================================
+# PibeLabs - .htaccess para API de Contacto
+# Sube este archivo junto con contact.php
+# ============================================
+
+# Habilitar motor de reescritura
+RewriteEngine On
+
+# ============================================
+# FORZAR HTTPS (Seguridad)
+# ============================================
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ============================================
+# SEGURIDAD DE ARCHIVOS
+# ============================================
+
+# Bloquear acceso directo a archivos de log
+<FilesMatch "\.(log|json)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Proteger archivos sensibles
+<FilesMatch "^(config|settings|credentials)\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ============================================
+# HEADERS DE SEGURIDAD
+# ============================================
+
+<IfModule mod_headers.c>
+    # Prevenir clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Prevenir XSS
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Prevenir MIME sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Content Security Policy (ajustar según necesidad)
+    Header always set Content-Security-Policy "default-src 'self'"
+
+    # Eliminar información del servidor
+    Header unset Server
+    Header unset X-Powered-By
+</IfModule>
+
+# ============================================
+# RATE LIMITING (Prevenir Spam)
+# ============================================
+
+# Limitar tamaño de upload (prevenir DoS)
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 1M
+    php_value post_max_size 2M
+    php_value max_execution_time 30
+    php_value max_input_time 30
+</IfModule>
+
+# ============================================
+# BLOQUEAR BOTS MALICIOSOS
+# ============================================
+
+<IfModule mod_rewrite.c>
+    # Bloquear user agents maliciosos conocidos
+    RewriteCond %{HTTP_USER_AGENT} (bot|crawler|spider|scraper|curl|wget) [NC]
+    RewriteCond %{HTTP_USER_AGENT} !(googlebot|bingbot) [NC]
+    RewriteRule ^(.*)$ - [F,L]
+</IfModule>
+
+# ============================================
+# BLOQUEAR IPs SOSPECHOSAS (Opcional)
+# ============================================
+
+# Descomenta y agrega IPs que quieras bloquear
+# <Limit GET POST>
+#     Order Allow,Deny
+#     Allow from all
+#     Deny from 123.456.789.0
+# </Limit>
+
+# ============================================
+# OPTIMIZACIÓN
+# ============================================
+
+# Desabilitar listado de directorios
+Options -Indexes
+
+# Seguir enlaces simbólicos
+Options +FollowSymLinks
+
+# ============================================
+# MANEJO DE ERRORES
+# ============================================
+
+# Ocultar errores PHP en producción (mostrarlos en desarrollo)
+php_flag display_errors Off
+php_flag log_errors On
+php_value error_log /home/tu_usuario/public_html/error_log
+
+# Páginas de error personalizadas (opcional)
+# ErrorDocument 400 /error.html
+# ErrorDocument 403 /error.html
+# ErrorDocument 404 /error.html
+# ErrorDocument 500 /error.html
+
+# ============================================
+# CORS (Ya configurado en contact.php)
+# ============================================
+
+# Si necesitas configurar CORS a nivel de servidor:
+# <IfModule mod_headers.c>
+#     SetEnvIf Origin "^https?://(www\.)?(pibelabs\.com|localhost:3000)$" AccessControlAllowOrigin=$0
+#     Header always set Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
+#     Header always set Access-Control-Allow-Methods "POST, OPTIONS"
+#     Header always set Access-Control-Allow-Headers "Content-Type"
+# </IfModule>

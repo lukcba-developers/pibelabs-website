@@ -22,6 +22,7 @@ const Input = memo(
         className = '',
         onChange,
         onBlur,
+        onFocus,
       },
       ref
     ) => {
@@ -85,6 +86,7 @@ const Input = memo(
               className={`${combinedClassName} min-h-[120px] resize-y`}
               onChange={onChange}
               onBlur={onBlur}
+              onFocus={onFocus}
               aria-invalid={!!error}
               aria-describedby={error ? `${inputId}-error` : undefined}
               initial={{ opacity: 0, y: 10 }}
@@ -105,6 +107,7 @@ const Input = memo(
               className={combinedClassName}
               onChange={onChange}
               onBlur={onBlur}
+              onFocus={onFocus}
               aria-invalid={!!error}
               aria-describedby={error ? `${inputId}-error` : undefined}
               initial={{ opacity: 0, y: 10 }}

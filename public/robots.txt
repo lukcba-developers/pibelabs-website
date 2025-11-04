@@ -1,11 +1,18 @@
-# https://www.robotstxt.org/robotstxt.html
+# robots.txt for PibeLabs
+# https://pibelabs.com/robots.txt
+
 User-agent: *
 Allow: /
 
-# Sitemap
+# Crawl-delay for aggressive bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Sitemap location
 Sitemap: https://pibelabs.com/sitemap.xml
 
-# Block access to admin/sensitive paths (if any in the future)
-# User-agent: *
-# Disallow: /admin/
-# Disallow: /api/
+# Contact: contact@pibelabs.com
+# Last updated: 2025-11-01

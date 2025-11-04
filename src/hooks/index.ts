@@ -1,4 +1,15 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import {
+  openWhatsApp,
+  createGeneralContactMessage,
+  createServiceInquiryMessage,
+  createQuoteRequestMessage,
+  createPortfolioInquiryMessage,
+  createTeamInquiryMessage,
+  createContactFormMessage,
+  createBlogInquiryMessage,
+  createTechInquiryMessage
+} from '@/lib/utils/whatsapp';
 
 /* ============================================
    Custom Hooks Library
@@ -238,9 +249,10 @@ export function useWindowSize() {
 
 /**
  * useScrollPosition
- * Returns current scroll position
+ * Returns current scroll position (throttled for better performance)
+ * @param throttleMs - Throttle delay in milliseconds (default: 100ms)
  */
-export function useScrollPosition() {
+export function useScrollPosition(throttleMs: number = 100) {
   const [scrollPosition, setScrollPosition] = useState({
     x: 0,
     y: 0,
@@ -249,18 +261,41 @@ export function useScrollPosition() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrollPosition({
-        x: window.scrollX,
-        y: window.scrollY,
-      });
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrollPosition({
+            x: window.scrollX,
+            y: window.scrollY,
+          });
+          ticking = false;
+        });
+
+        ticking = true;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    // Throttle scroll events
+    let timeoutId: NodeJS.Timeout | null = null;
+    const throttledScroll = () => {
+      if (timeoutId === null) {
+        timeoutId = setTimeout(() => {
+          handleScroll();
+          timeoutId = null;
+        }, throttleMs);
+      }
+    };
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    handleScroll(); // Initial call
+
+    return () => {
+      window.removeEventListener('scroll', throttledScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [throttleMs]);
 
   return scrollPosition;
 }
@@ -405,22 +440,86 @@ export function useTimeout(callback: () => void, delay: number | null) {
 }
 
 /**
+ * useThrottle
+ * Throttles a value by a specified delay (limits update frequency)
+ * @param value - Value to throttle
+ * @param delay - Throttle delay in milliseconds (default: 200ms)
+ */
+export function useThrottle<T>(value: T, delay: number = 200): T {
+  const [throttledValue, setThrottledValue] = useState<T>(value);
+  const lastRan = useRef<number>(Date.now());
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (Date.now() - lastRan.current >= delay) {
+        setThrottledValue(value);
+        lastRan.current = Date.now();
+      }
+    }, delay - (Date.now() - lastRan.current));
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return throttledValue;
+}
+
+/**
+ * useThrottledCallback
+ * Returns a throttled version of a callback function
+ * @param callback - Function to throttle
+ * @param delay - Throttle delay in milliseconds (default: 200ms)
+ */
+export function useThrottledCallback<T extends (...args: unknown[]) => unknown>(
+  callback: T,
+  delay: number = 200
+): T {
+  const lastRan = useRef<number>(Date.now());
+  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  const throttledCallback = useCallback(
+    (...args: Parameters<T>) => {
+      const now = Date.now();
+
+      if (now - lastRan.current >= delay) {
+        callback(...args);
+        lastRan.current = now;
+      } else {
+        // Schedule for later if not enough time has passed
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+
+        timeoutRef.current = setTimeout(
+          () => {
+            callback(...args);
+            lastRan.current = Date.now();
+          },
+          delay - (now - lastRan.current)
+        );
+      }
+    },
+    [callback, delay]
+  ) as T;
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  return throttledCallback;
+}
+
+/**
  * useWhatsApp
  * Hook for WhatsApp integration with pre-configured messages
  */
 export function useWhatsApp() {
-  const {
-    openWhatsApp,
-    createGeneralContactMessage,
-    createServiceInquiryMessage,
-    createQuoteRequestMessage,
-    createPortfolioInquiryMessage,
-    createTeamInquiryMessage,
-    createContactFormMessage,
-    createBlogInquiryMessage,
-    createTechInquiryMessage
-  } = require('@/lib/utils/whatsapp');
-
   const sendMessage = useCallback((message: string) => {
     openWhatsApp(message);
   }, []);
@@ -481,4 +580,147 @@ export function useWhatsApp() {
     sendBlogInquiry,
     sendTechInquiry,
   };
+}
+
+/**
+ * useReducedMotion
+ * Detects if user prefers reduced motion for accessibility
+ */
+export function useReducedMotion(): boolean {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // Set initial value
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    // Create listener
+    const listener = (event: MediaQueryListEvent) => {
+      setPrefersReducedMotion(event.matches);
+    };
+
+    // Add listener
+    mediaQuery.addEventListener('change', listener);
+
+    return () => {
+      mediaQuery.removeEventListener('change', listener);
+    };
+  }, []);
+
+  return prefersReducedMotion;
+}
+
+/**
+ * useFocusTrap
+ * Traps keyboard focus within a container element for accessibility
+ * @param isActive - Whether the focus trap should be active
+ */
+export function useFocusTrap(isActive: boolean = true): React.RefObject<HTMLDivElement> {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isActive || !containerRef.current) return;
+
+    const container = containerRef.current;
+
+    // Get all focusable elements
+    const getFocusableElements = (): HTMLElement[] => {
+      const focusableSelectors = [
+        'a[href]',
+        'button:not([disabled])',
+        'textarea:not([disabled])',
+        'input:not([disabled])',
+        'select:not([disabled])',
+        '[tabindex]:not([tabindex="-1"])',
+      ].join(', ');
+
+      return Array.from(container.querySelectorAll(focusableSelectors));
+    };
+
+    // Focus first element when trap activates
+    const focusableElements = getFocusableElements();
+    if (focusableElements.length > 0 && focusableElements[0]) {
+      focusableElements[0].focus();
+    }
+
+    // Handle tab key navigation
+    const handleTabKey = (e: KeyboardEvent) => {
+      const focusableElements = getFocusableElements();
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (!firstElement || !lastElement) return;
+
+      // Shift + Tab
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      }
+      // Tab
+      else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Tab') {
+        handleTabKey(e);
+      }
+    };
+
+    container.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      container.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isActive]);
+
+  return containerRef;
+}
+
+/**
+ * useRateLimit
+ * Rate limiting hook to prevent spam/abuse
+ * @param limit - Number of attempts allowed
+ * @param windowMs - Time window in milliseconds
+ */
+export function useRateLimit(limit: number = 3, windowMs: number = 60000) {
+  const [attempts, setAttempts] = useLocalStorage<number[]>('rate_limit_attempts', []);
+
+  const checkRateLimit = useCallback((): { allowed: boolean; remaining: number; resetAt: Date } => {
+    const now = Date.now();
+    const windowStart = now - windowMs;
+
+    // Filter attempts within the time window
+    const recentAttempts = attempts.filter((timestamp) => timestamp > windowStart);
+
+    // Check if limit exceeded
+    const allowed = recentAttempts.length < limit;
+    const remaining = Math.max(0, limit - recentAttempts.length);
+
+    // Calculate reset time (oldest attempt + window)
+    const oldestAttempt = recentAttempts[0] || now;
+    const resetAt = new Date(oldestAttempt + windowMs);
+
+    return { allowed, remaining, resetAt };
+  }, [attempts, limit, windowMs]);
+
+  const recordAttempt = useCallback(() => {
+    const now = Date.now();
+    const windowStart = now - windowMs;
+
+    // Keep only recent attempts + new one
+    const recentAttempts = attempts.filter((timestamp) => timestamp > windowStart);
+    setAttempts([...recentAttempts, now]);
+  }, [attempts, setAttempts, windowMs]);
+
+  const reset = useCallback(() => {
+    setAttempts([]);
+  }, [setAttempts]);
+
+  return { checkRateLimit, recordAttempt, reset };
 }

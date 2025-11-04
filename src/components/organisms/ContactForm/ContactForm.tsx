@@ -7,6 +7,15 @@ import { SERVICES } from '@/lib/constants/config';
 import type { ContactFormData, ContactFormState } from '@/types';
 import Input from '@/components/atoms/Input';
 import Button from '@/components/atoms/Button';
+import { useRateLimit } from '@/hooks';
+import {
+  trackFormStart,
+  trackFormFieldComplete,
+  trackFormError,
+  trackFormSubmit,
+  trackFormSuccess,
+  trackFormFailure,
+} from '@/lib/analytics/googleAnalytics';
 
 /* ============================================
    Contact Form Component (Organism)
@@ -20,6 +29,11 @@ const ContactForm = () => {
   });
 
   const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null);
+  const [rateLimitError, setRateLimitError] = useState<string | null>(null);
+  const [formStarted, setFormStarted] = useState(false);
+
+  // Rate limiting: 3 submissions per minute
+  const { checkRateLimit, recordAttempt } = useRateLimit(3, 60000);
 
   const {
     register,
@@ -52,17 +66,54 @@ const ContactForm = () => {
     }
   }, [emailValue]);
 
+  // Track form start on first interaction
+  const handleFormStart = () => {
+    if (!formStarted) {
+      trackFormStart();
+      setFormStarted(true);
+    }
+  };
+
+  // Track field completion
+  const handleFieldBlur = (fieldName: string) => {
+    trackFormFieldComplete(fieldName);
+  };
+
   // Handle form submission
   const onSubmit = async (data: ContactFormData) => {
+    // Track form submit attempt
+    trackFormSubmit(data as unknown as Record<string, unknown>);
+
+    // Check rate limit before submitting
+    const { allowed, remaining, resetAt } = checkRateLimit();
+
+    if (!allowed) {
+      const minutesUntilReset = Math.ceil((resetAt.getTime() - Date.now()) / 60000);
+      const errorMsg = `Has alcanzado el límite de envíos. Intenta nuevamente en ${minutesUntilReset} minuto(s).`;
+      setRateLimitError(errorMsg);
+      trackFormFailure(errorMsg);
+      return;
+    }
+
     setFormState({ isSubmitting: true, isSuccess: false, isError: false });
     setEmailSuggestion(null);
+    setRateLimitError(null);
 
     try {
+      // Record this attempt
+      recordAttempt();
+
       // Simulate API call (replace with actual API endpoint)
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Mock successful response
-      console.log('Form submitted:', data);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Form submitted:', data);
+        console.log(`Rate limit remaining: ${remaining - 1}`);
+      }
+
+      // Track successful conversion 🎯
+      trackFormSuccess(data as unknown as Record<string, unknown>);
 
       setFormState({
         isSubmitting: false,
@@ -72,6 +123,7 @@ const ContactForm = () => {
 
       // Reset form after success
       reset();
+      setFormStarted(false);
 
       // Auto-hide success message after 5 seconds
       setTimeout(() => {
@@ -82,14 +134,30 @@ const ContactForm = () => {
         });
       }, 5000);
     } catch (error) {
+      const errorMsg = 'Hubo un error al enviar el mensaje. Por favor intenta nuevamente.';
+
+      // Track form failure
+      trackFormFailure(errorMsg);
+
       setFormState({
         isSubmitting: false,
         isSuccess: false,
         isError: true,
-        errorMessage: 'Hubo un error al enviar el mensaje. Por favor intenta nuevamente.',
+        errorMessage: errorMsg,
       });
     }
   };
+
+  // Track validation errors
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      Object.entries(errors).forEach(([fieldName, error]) => {
+        if (error?.message) {
+          trackFormError(fieldName, error.message);
+        }
+      });
+    }
+  }, [errors]);
 
   return (
     <section id="contact" className="section bg-dark-primary py-20">
@@ -153,6 +221,29 @@ const ContactForm = () => {
               )}
             </AnimatePresence>
 
+            {/* Rate Limit Error Message */}
+            <AnimatePresence>
+              {rateLimitError && (
+                <motion.div
+                  className="mb-8 p-6 bg-yellow-500/10 border-2 border-yellow-500 rounded-xl"
+                  initial={{ opacity: 0, scale: 0.8, y: -20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="flex items-start gap-4">
+                    <span className="text-4xl">⏱️</span>
+                    <div>
+                      <h3 className="font-rajdhani font-bold text-xl text-yellow-400 mb-2">
+                        Límite de Envíos Alcanzado
+                      </h3>
+                      <p className="font-poppins text-gray-300">{rateLimitError}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             {/* Error Message */}
             <AnimatePresence>
               {formState.isError && (
@@ -195,9 +286,11 @@ const ContactForm = () => {
                   placeholder="Ej: Juan Pérez"
                   required
                   error={errors.name?.message}
+                  onFocus={handleFormStart}
+                  onBlur={() => handleFieldBlur('name')}
                   className={`bg-dark-primary text-white border-2 transition-all duration-300 ${
-                    errors.name 
-                      ? 'border-red-500 animate-shake' 
+                    errors.name
+                      ? 'border-red-500 animate-shake'
                       : 'border-gray-600 focus:border-cyan-neon focus:ring-4 focus:ring-cyan-neon/30 focus:shadow-[0_0_20px_rgba(0,217,255,0.4)]'
                   }`}
                 />
@@ -224,12 +317,16 @@ const ContactForm = () => {
                   placeholder="tu@email.com"
                   required
                   error={errors.email?.message}
+                  onFocus={handleFormStart}
+                  onBlur={(e) => {
+                    checkEmailTypo(e.target.value);
+                    handleFieldBlur('email');
+                  }}
                   className={`bg-dark-primary text-white border-2 transition-all duration-300 ${
-                    errors.email 
-                      ? 'border-red-500 animate-shake' 
+                    errors.email
+                      ? 'border-red-500 animate-shake'
                       : 'border-gray-600 focus:border-cyan-neon focus:ring-4 focus:ring-cyan-neon/30 focus:shadow-[0_0_20px_rgba(0,217,255,0.4)]'
                   }`}
-                  onBlur={(e) => checkEmailTypo(e.target.value)}
                 />
 
                 {/* Email Suggestion */}
@@ -280,6 +377,8 @@ const ContactForm = () => {
                   {...register('service')}
                   className="w-full px-4 py-3 bg-dark-primary text-white border-2 border-gray-600 rounded-lg font-poppins focus:outline-none focus:border-cyan-neon focus:ring-2 focus:ring-cyan-neon transition-all"
                   required
+                  onFocus={handleFormStart}
+                  onBlur={() => handleFieldBlur('service')}
                 >
                   <option value="">Selecciona un servicio</option>
                   {SERVICES.map((service) => (
@@ -310,6 +409,8 @@ const ContactForm = () => {
                   placeholder="Cuéntanos sobre tu proyecto..."
                   required
                   error={errors.message?.message}
+                  onFocus={handleFormStart}
+                  onBlur={() => handleFieldBlur('message')}
                   className="bg-dark-primary text-white"
                 />
                 <p className="mt-2 text-xs text-gray-400 font-poppins">

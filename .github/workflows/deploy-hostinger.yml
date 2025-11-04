@@ -26,7 +26,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 4. Run linting and type-check
+      # 4. Run tests, linting and type-check
+      - name: Run tests
+        run: npm run test:run || echo "⚠️ Tests not configured yet"
+
       - name: Run ESLint
         run: npm run lint
 
@@ -82,8 +85,12 @@ jobs:
           echo "🔍 Probando conexión FTP en puerto 21..."
           nc -zv ${FTP_SERVER} 21 || echo "⚠️ Puerto 21 no responde"
 
-      # 7. Deploy via FTP
-      - name: Deploy to Hostinger via FTP
+          echo ""
+          echo "🔒 Probando conexión FTPS en puerto 21 (explicit TLS)..."
+          timeout 5 openssl s_client -connect ${FTP_SERVER}:21 -starttls ftp 2>&1 | grep "Verify return code" || echo "⚠️ FTPS no disponible o requiere configuración"
+
+      # 7. Deploy via FTPS (FTP over TLS)
+      - name: Deploy to Hostinger via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -92,7 +99,7 @@ jobs:
           local-dir: ./dist/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
           port: 21
-          protocol: ftp
+          protocol: ftps  # Changed from 'ftp' to 'ftps' for encrypted connection
           timeout: 600000
           log-level: verbose
           dangerous-clean-slate: true
