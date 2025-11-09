@@ -36,15 +36,8 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 flex items-center justify-center">
-                <img
-                  src="/assets/images/pibelabs-icon-transparent.svg"
-                  alt="PibeLabs Logo"
-                  className="w-full h-full"
-                  style={{
-                    filter: 'drop-shadow(0 0 10px rgba(0, 217, 255, 0.3))'
-                  }}
-                />
+              <div className="w-12 h-12 bg-gradient-to-br from-cyan-neon to-magenta-neon rounded-lg flex items-center justify-center">
+                <span className="text-2xl">🚀</span>
               </div>
               <div>
                 <h3 className="font-orbitron font-bold text-xl text-white">

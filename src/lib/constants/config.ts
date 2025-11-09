@@ -67,11 +67,6 @@ export const COMPANY_INFO = {
 
 export const NAV_LINKS: NavLink[] = [
   {
-    id: 'inicio',
-    label: 'Inicio',
-    href: '#hero',
-  },
-  {
     id: 'servicios',
     label: 'Servicios',
     href: '#services',
@@ -582,7 +577,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     name: 'Juan Cruz Ferri',
     role: 'Co-Founder & Product Lead',
     bio: 'Product Owner y Scrum Master especializado en metodologías ágiles, desarrollo de productos digitales y liderazgo técnico. Enfocado en transformar ideas en soluciones innovadoras.',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=JuanCruzFerri',
+    avatar: 'https://www.pngwing.com/pngs/1010/600/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png',
     social: {
       linkedin: 'https://www.linkedin.com/in/jcferri/',
       github: 'https://github.com/jcferri',

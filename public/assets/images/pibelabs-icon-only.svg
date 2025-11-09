@@ -29,7 +29,7 @@
     </filter>
   </defs>
   
-  <rect width="300" height="300" fill="#FFFFFF"/>
+  <rect width="300" height="300" fill="transparent"/>
   
   <g transform="translate(150, 150)">
     <circle cx="0" cy="0" r="100" fill="none" stroke="#00D9FF" stroke-width="2.5" opacity="0.3" stroke-dasharray="6,6"/>
