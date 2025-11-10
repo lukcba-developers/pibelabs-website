@@ -56,10 +56,18 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <img 
-              src="/assets/images/pibelabs-logo-futurista.svg" 
+            <img
+              src="/assets/images/pibelabs-logo-futurista.svg"
               alt="PibeLabs Logo"
-              className="h-10 md:h-12 w-auto transition-all duration-300 group-hover:scale-105"
+              className={`
+                h-10 md:h-12 w-auto transition-all duration-300
+                group-hover:scale-105
+                ${isScrolled
+                  ? 'drop-shadow-[0_0_8px_rgba(0,217,255,0.4)]'
+                  : 'drop-shadow-[0_0_12px_rgba(0,217,255,0.6)]'
+                }
+                group-hover:drop-shadow-[0_0_15px_rgba(0,217,255,0.8)]
+              `}
             />
           </motion.a>
 

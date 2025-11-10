@@ -16,8 +16,7 @@ const StatsSection = lazy(() => import('./components/organisms/StatsSection'));
 const ServicesGrid = lazy(() => import('./components/organisms/ServicesGrid'));
 const TrustBadges = lazy(() => import('./components/organisms/TrustBadges'));
 const PortfolioSection = lazy(() => import('./components/organisms/PortfolioSection'));
-const SocialProof = lazy(() => import('./components/organisms/SocialProof'));
-const TestimonialCarousel = lazy(() => import('./components/organisms/TestimonialCarousel'));
+const TestimonialsSection = lazy(() => import('./components/organisms/TestimonialsSection'));
 const AboutSection = lazy(() => import('./components/organisms/AboutSection'));
 const FAQSection = lazy(() => import('./components/organisms/FAQSection'));
 const BlogSection = lazy(() => import('./components/organisms/BlogSection'));
@@ -68,15 +67,18 @@ function App() {
           {/* Portfolio Section */}
           <PortfolioSection />
 
-          {/* Social Proof - NEW */}
-          <SocialProof />
-
-          {/* Testimonial Carousel - NEW */}
+          {/* Testimonials Section - UNIFIED (replaces SocialProof, TestimonialCarousel, and testimonials from AboutSection) */}
           <Suspense fallback={<Loader />}>
-            <TestimonialCarousel />
+            <TestimonialsSection
+              variant="grid"
+              showClientLogos={true}
+              showCTA={true}
+              bgStyle="dark"
+              maxItems={3}
+            />
           </Suspense>
 
-          {/* About Section (Team & Testimonials) */}
+          {/* About Section (Mission, Vision, Values & Team) */}
           <AboutSection />
 
           {/* FAQ Section - NEW */}

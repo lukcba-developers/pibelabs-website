@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Target, Eye, Diamond } from 'lucide-react';
-import { TEAM_MEMBERS, TESTIMONIALS } from '@/lib/constants/config';
-import type { TeamMember, Testimonial } from '@/types';
+import { TEAM_MEMBERS } from '@/lib/constants/config';
+import type { TeamMember } from '@/types';
 import LazyImage from '@/components/atoms/LazyImage';
 import { useReducedMotion } from '@/hooks';
 
@@ -125,50 +125,6 @@ const TeamMemberCard = ({ member, index }: { member: TeamMember; index: number }
   );
 };
 
-// Testimonial Card
-const TestimonialCard = ({ testimonial, index }: { testimonial: Testimonial; index: number }) => {
-  return (
-    <motion.div
-      className="bg-white rounded-2xl p-6 shadow-lg"
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      {/* Rating */}
-      <div className="flex gap-1 mb-4">
-        {[...Array(testimonial.rating)].map((_, i) => (
-          <span key={i} className="text-yellow-400 text-xl">⭐</span>
-        ))}
-      </div>
-
-      {/* Content */}
-      <p className="font-poppins text-text-secondary mb-6 italic">
-        "{testimonial.text}"
-      </p>
-
-      {/* Author */}
-      <div className="flex items-center gap-3">
-        {testimonial.image && (
-          <LazyImage
-            src={testimonial.image}
-            alt={testimonial.author}
-            className="w-12 h-12 rounded-full"
-          />
-        )}
-        <div>
-          <p className="font-rajdhani font-semibold text-gray-dark">
-            {testimonial.author}
-          </p>
-          <p className="font-poppins text-sm text-text-tertiary">
-            {testimonial.role} @ {testimonial.company}
-          </p>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
 const AboutSection = () => {
   const prefersReducedMotion = useReducedMotion();
 
@@ -279,7 +235,7 @@ const AboutSection = () => {
         </motion.div>
 
         {/* Team Grid */}
-        <div className="mb-20">
+        <div>
           <motion.h3
             className="font-orbitron font-bold text-3xl text-white text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
@@ -291,23 +247,6 @@ const AboutSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {TEAM_MEMBERS.map((member, index) => (
               <TeamMemberCard key={member.id} member={member} index={index} />
-            ))}
-          </div>
-        </div>
-
-        {/* Testimonials */}
-        <div>
-          <motion.h3
-            className="font-orbitron font-bold text-3xl text-white text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Lo que Dicen Nuestros Clientes
-          </motion.h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {TESTIMONIALS.map((testimonial, index) => (
-              <TestimonialCard key={testimonial.id} testimonial={testimonial} index={index} />
             ))}
           </div>
         </div>
