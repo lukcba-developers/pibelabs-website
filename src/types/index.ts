@@ -143,6 +143,7 @@ export interface Stat {
   id: string;
   value: string | number;
   label: string;
+  description?: string;
   suffix?: string;
   prefix?: string;
   icon?: string;

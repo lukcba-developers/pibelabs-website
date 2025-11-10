@@ -23,6 +23,7 @@ const BlogSection = lazy(() => import('./components/organisms/BlogSection'));
 const ContactForm = lazy(() => import('./components/organisms/ContactForm'));
 const Footer = lazy(() => import('./components/organisms/Footer'));
 const WhatsAppWidget = lazy(() => import('./components/atoms/WhatsAppWidget'));
+const StickyCTA = lazy(() => import('./components/atoms/StickyCTA'));
 
 /* ============================================
    Main App Component with Code Splitting
@@ -99,9 +100,19 @@ function App() {
 
       {/* Floating WhatsApp Button */}
       <Suspense fallback={null}>
-        <WhatsAppWidget 
+        <WhatsAppWidget
           phoneNumber="5491112345678"
           message="¡Hola! Me gustaría obtener más información sobre sus servicios."
+        />
+      </Suspense>
+
+      {/* Sticky CTA for Mobile (improves conversion) */}
+      <Suspense fallback={null}>
+        <StickyCTA
+          text="¿Listo para empezar tu proyecto?"
+          ctaText="Agenda consulta gratis"
+          scrollThreshold={500}
+          showOnMobileOnly={true}
         />
       </Suspense>
 

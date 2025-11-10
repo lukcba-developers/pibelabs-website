@@ -88,6 +88,13 @@ const StatCard = ({ stat, index }: { stat: Stat; index: number }) => {
           {stat.label}
         </p>
 
+        {/* Description (context) */}
+        {stat.description && (
+          <p className="relative font-poppins text-sm text-gray-400 mt-1 italic">
+            {stat.description}
+          </p>
+        )}
+
         {/* Decorative corner */}
         <motion.div
           className="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-br from-cyan-neon to-magenta-neon rounded-full blur-2xl opacity-20"

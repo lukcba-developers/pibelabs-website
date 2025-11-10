@@ -178,7 +178,7 @@ const BlogSection = () => {
           ))}
         </div>
 
-        {/* Bottom CTA */}
+        {/* Bottom CTA - Simplified (Newsletter moved to Footer) */}
         <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -187,30 +187,17 @@ const BlogSection = () => {
           transition={{ delay: 0.4 }}
         >
           <p className="font-poppins text-text-secondary mb-6">
-            ¿Quieres mantenerte al día con nuestras publicaciones?
+            Explora más contenido sobre tecnología y desarrollo
           </p>
-          
-          {/* Newsletter Signup (Mock) */}
-          <div className="max-w-md mx-auto">
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Tu email"
-                className="flex-1 px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-cyan-neon focus:outline-none font-poppins"
-                aria-label="Email para newsletter"
-              />
-              <motion.button
-                className="px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-neon to-magenta-neon text-white font-rajdhani font-semibold hover:shadow-glow-cyan transition-all"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Suscribirse
-              </motion.button>
-            </div>
-            <p className="mt-2 text-xs text-text-tertiary font-poppins">
-              Recibe las últimas novedades directamente en tu inbox. Sin spam.
-            </p>
-          </div>
+
+          <motion.a
+            href="#contact"
+            className="inline-block px-8 py-3 rounded-lg bg-gradient-to-r from-cyan-neon to-magenta-neon text-white font-rajdhani font-semibold hover:shadow-glow-cyan transition-all"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Hablemos de tu proyecto →
+          </motion.a>
         </motion.div>
       </div>
 
