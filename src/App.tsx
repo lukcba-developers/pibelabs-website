@@ -24,6 +24,7 @@ const ContactForm = lazy(() => import('./components/organisms/ContactForm'));
 const Footer = lazy(() => import('./components/organisms/Footer'));
 const WhatsAppWidget = lazy(() => import('./components/atoms/WhatsAppWidget'));
 const StickyCTA = lazy(() => import('./components/atoms/StickyCTA'));
+const ScrollProgress = lazy(() => import('./components/atoms/ScrollProgress'));
 
 /* ============================================
    Main App Component with Code Splitting
@@ -49,6 +50,15 @@ function App() {
 
       {/* Header with navigation - Always loaded */}
       <Header />
+
+      {/* Scroll Progress Indicator */}
+      <Suspense fallback={null}>
+        <ScrollProgress
+          color="from-cyan-500 to-magenta-500"
+          height={3}
+          showPercentage={false}
+        />
+      </Suspense>
 
       {/* Main content - Lazy loaded with suspense */}
       <Suspense fallback={<Loader message="Cargando experiencia futurista..." />}>

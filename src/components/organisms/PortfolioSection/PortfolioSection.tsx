@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PORTFOLIO_PROJECTS } from '@/lib/constants/config';
 import type { PortfolioProject, PortfolioCategory } from '@/types';
 import LazyImage from '@/components/atoms/LazyImage';
 import { useReducedMotion } from '@/hooks';
 import PortfolioModal from '@/components/organisms/PortfolioModal/PortfolioModal';
+import { sendEvent, trackPortfolioView } from '@/lib/analytics/googleAnalytics';
 
 /* ============================================
    Portfolio Section Component (Organism)
@@ -137,13 +138,54 @@ const PortfolioSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
+  // Deep linking: Read category from URL hash on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.hash.split('?')[1] || '');
+    const category = params.get('category') as PortfolioCategory;
+
+    if (category && CATEGORIES.find(c => c.id === category)) {
+      setActiveCategory(category);
+    }
+  }, []);
+
+  // Update URL when category changes (deep linking)
+  useEffect(() => {
+    const baseHash = '#portfolio';
+    const newHash = activeCategory === 'all'
+      ? baseHash
+      : `${baseHash}?category=${activeCategory}`;
+
+    if (window.location.hash !== newHash) {
+      window.history.replaceState(null, '', newHash);
+    }
+  }, [activeCategory]);
+
   const filteredProjects = activeCategory === 'all'
     ? PORTFOLIO_PROJECTS
     : PORTFOLIO_PROJECTS.filter(project => project.category === activeCategory);
 
+  // Count projects by category
+  const getCategoryCount = (categoryId: PortfolioCategory): number => {
+    if (categoryId === 'all') return PORTFOLIO_PROJECTS.length;
+    return PORTFOLIO_PROJECTS.filter(p => p.category === categoryId).length;
+  };
+
   const handleProjectClick = (project: PortfolioProject) => {
     setSelectedProject(project);
     setIsModalOpen(true);
+
+    // Track portfolio project view
+    trackPortfolioView(project.id, project.title);
+  };
+
+  const handleCategoryChange = (categoryId: PortfolioCategory) => {
+    setActiveCategory(categoryId);
+
+    // Track filter change
+    sendEvent('portfolio_filter_change', {
+      category: categoryId,
+      projects_count: getCategoryCount(categoryId),
+    });
   };
 
   const handleCloseModal = () => {
@@ -181,31 +223,57 @@ const PortfolioSection = () => {
           </p>
         </motion.div>
 
-        {/* Category Filter */}
+        {/* Category Filter - Enhanced Tabs with Counter */}
         <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-3 mb-12"
           initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: prefersReducedMotion ? 0 : 0.2 }}
         >
-          {CATEGORIES.map((category) => (
-            <motion.button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`
-                px-6 py-3 rounded-xl font-rajdhani font-semibold transition-all
-                ${activeCategory === category.id
-                  ? 'bg-gradient-to-r from-cyan-neon to-magenta-neon text-white shadow-glow-cyan'
-                  : 'bg-white text-gray-dark hover:bg-gray-100'
-                }
-              `}
-              whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
-              whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
-            >
-              {category.label}
-            </motion.button>
-          ))}
+          {CATEGORIES.map((category) => {
+            const count = getCategoryCount(category.id);
+            const isActive = activeCategory === category.id;
+
+            return (
+              <motion.button
+                key={category.id}
+                onClick={() => handleCategoryChange(category.id)}
+                className={`
+                  relative px-6 py-3 rounded-xl font-rajdhani font-semibold transition-all
+                  ${isActive
+                    ? 'bg-gradient-to-r from-cyan-neon to-magenta-neon text-white shadow-glow-cyan'
+                    : 'bg-white text-gray-dark hover:bg-gray-100 border-2 border-transparent hover:border-cyan-neon/20'
+                  }
+                `}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -2 }}
+                whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
+                layout
+              >
+                <span className="flex items-center gap-2">
+                  {category.label}
+                  <span className={`
+                    text-xs px-2 py-0.5 rounded-full font-bold
+                    ${isActive
+                      ? 'bg-white/20 text-white'
+                      : 'bg-cyan-neon/10 text-cyan-neon'
+                    }
+                  `}>
+                    {count}
+                  </span>
+                </span>
+
+                {/* Active indicator */}
+                {isActive && (
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-1 bg-white/50 rounded-full"
+                    layoutId="activeTab"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </motion.button>
+            );
+          })}
         </motion.div>
 
         {/* Projects Grid */}
