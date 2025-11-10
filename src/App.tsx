@@ -6,6 +6,7 @@ import ErrorBoundary from './components/atoms/ErrorBoundary';
 import SEO from './components/atoms/SEO';
 import { initGA } from '@/lib/analytics';
 import { reportWebVitals, logWebVitals } from '@/lib/performance/webVitals';
+import { useScrollDepth } from '@/hooks';
 
 // Eager load Header (always visible)
 import Header from './components/organisms/Header';
@@ -31,10 +32,14 @@ const ScrollProgress = lazy(() => import('./components/atoms/ScrollProgress'));
    ============================================ */
 
 function App() {
+  // Initialize Google Analytics
   useEffect(() => {
     initGA();
     reportWebVitals(logWebVitals);
   }, []);
+
+  // Track scroll depth for engagement analytics (Sprint 5)
+  useScrollDepth([25, 50, 75, 100]);
 
   return (
     <ErrorBoundary>

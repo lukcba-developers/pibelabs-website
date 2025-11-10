@@ -724,3 +724,6 @@ export function useRateLimit(limit: number = 3, windowMs: number = 60000) {
 
   return { checkRateLimit, recordAttempt, reset };
 }
+
+// Export useScrollDepth from separate file (Sprint 5)
+export { useScrollDepth } from './useScrollDepth';
