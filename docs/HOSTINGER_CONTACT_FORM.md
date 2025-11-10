@@ -19,12 +19,12 @@ Esta es la opción más simple y común en Hostinger. Usa PHP nativo con la func
 
 #### Paso 1: Crear el Script PHP
 
-Crea el archivo `api/contact.php` en tu directorio `public_html`:
+Crea el archivo `server/contact.php` en tu directorio `public_html` (o el directorio que sirva tu backend):
 
 ```php
 <?php
-// api/contact.php
-header('Access-Control-Allow-Origin: *');
+// server/contact.php
+header('Access-Control-Allow-Origin: *'); // En producción, reemplaza * con tu dominio: https://www.pibelabs.com
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
@@ -188,55 +188,45 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 #### Paso 3: Actualizar el Frontend
 
-Edita `src/components/organisms/ContactForm/ContactForm.tsx`:
+Para que el frontend se comunique con el backend, es crucial usar variables de entorno para no hardcodear la URL.
 
-```typescript
-// En la función onSubmit, línea 77-89, reemplaza por:
+1.  **Asegúrate de que tu archivo `.env` contenga la variable para el endpoint:**
 
-try {
-  recordAttempt();
+    ```env
+    VITE_CONTACT_FORM_ENDPOINT="https://pibelabs.com/server/contact.php"
+    ```
 
-  const response = await fetch('https://tudominio.com/api/contact.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
+2.  **Usa esta variable en tu componente `ContactForm.tsx`:**
 
-  const result = await response.json();
+    ```typescript
+    // src/components/organisms/ContactForm/ContactForm.tsx
 
-  if (!response.ok) {
-    throw new Error(result.error || 'Error al enviar el mensaje');
-  }
+    // Obtiene la URL desde las variables de entorno de Vite
+    const contactFormEndpoint = import.meta.env.VITE_CONTACT_FORM_ENDPOINT;
 
-  console.log('Form submitted successfully:', result);
-  console.log(`Rate limit remaining: ${remaining - 1}`);
+    // Dentro de la función onSubmit
+    try {
+      const response = await fetch(contactFormEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-  setFormState({
-    isSubmitting: false,
-    isSuccess: true,
-    isError: false,
-  });
+      const result = await response.json();
 
-  reset();
+      if (!response.ok) {
+        throw new Error(result.error || 'Error al enviar el mensaje');
+      }
 
-  setTimeout(() => {
-    setFormState({
-      isSubmitting: false,
-      isSuccess: false,
-      isError: false,
-    });
-  }, 5000);
-} catch (error) {
-  setFormState({
-    isSubmitting: false,
-    isSuccess: false,
-    isError: true,
-    errorMessage: error instanceof Error ? error.message : 'Error al enviar el mensaje',
-  });
-}
-```
+      // ... resto de la lógica de éxito ...
+
+    } catch (error) {
+      // ... manejo de errores ...
+    }
+    ```
+
 
 ---
 
