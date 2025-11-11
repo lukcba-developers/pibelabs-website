@@ -240,6 +240,7 @@ export interface Testimonial {
   image: string;
   linkedin: string;
   rating: number;
+  videoUrl?: string; // Optional video testimonial URL (YouTube, Vimeo, or direct) - Sprint 6
 }
 
 // ============================================
