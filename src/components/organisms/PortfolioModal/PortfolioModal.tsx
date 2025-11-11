@@ -1,6 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink, Check } from "lucide-react";
+import {
+  X,
+  ExternalLink,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import type { PortfolioProject } from "@/types";
 import { useFocusTrap, useReducedMotion } from "@/hooks";
 import LazyImage from "@/components/atoms/LazyImage";
@@ -14,27 +20,56 @@ interface PortfolioModalProps {
 const PortfolioModal = ({ project, isOpen, onClose }: PortfolioModalProps) => {
   const modalRef = useFocusTrap(isOpen);
   const prefersReducedMotion = useReducedMotion();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Handle Escape key
+  // Prepare image gallery (use gallery if available, otherwise use single image)
+  const images = project?.gallery || (project?.image ? [project.image] : []);
+  const hasMultipleImages = images.length > 1;
+
+  // Reset carousel when project changes
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [project?.id]);
+
+  // Carousel navigation functions
+  const goToPrevious = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  }, [images.length]);
+
+  const goToNext = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  }, [images.length]);
+
+  const goToImage = useCallback((index: number) => {
+    setCurrentImageIndex(index);
+  }, []);
+
+  // Handle keyboard navigation (Escape, Arrow Left, Arrow Right)
   useEffect(() => {
     if (!isOpen) return;
 
-    const handleEscape = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
+      } else if (hasMultipleImages && e.key === "ArrowLeft") {
+        e.preventDefault();
+        goToPrevious();
+      } else if (hasMultipleImages && e.key === "ArrowRight") {
+        e.preventDefault();
+        goToNext();
       }
     };
 
-    document.addEventListener("keydown", handleEscape);
+    document.addEventListener("keydown", handleKeyDown);
 
     // Prevent body scroll when modal is open
     document.body.style.overflow = "hidden";
 
     return () => {
-      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, hasMultipleImages, goToPrevious, goToNext]);
 
   if (!project) return null;
 
@@ -79,12 +114,93 @@ const PortfolioModal = ({ project, isOpen, onClose }: PortfolioModalProps) => {
             </button>
 
             <div className="h-full overflow-y-auto p-8 md:p-12">
-              {/* Image */}
-              <LazyImage
-                src={project.image}
-                alt={project.title}
-                className="w-full h-64 md:h-96 object-cover rounded-xl mb-8"
-              />
+              {/* Image Carousel - Sprint 6 Enhancement */}
+              <div className="relative mb-8 group">
+                {/* Carousel Container */}
+                <div className="relative h-64 md:h-96 rounded-xl overflow-hidden">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={currentImageIndex}
+                      initial={
+                        prefersReducedMotion ? {} : { opacity: 0, x: 100 }
+                      }
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={prefersReducedMotion ? {} : { opacity: 0, x: -100 }}
+                      transition={{ duration: 0.3 }}
+                      drag={hasMultipleImages ? "x" : false}
+                      dragConstraints={{ left: 0, right: 0 }}
+                      dragElastic={0.2}
+                      onDragEnd={(_, info) => {
+                        if (hasMultipleImages) {
+                          const swipeThreshold = 50;
+                          if (info.offset.x > swipeThreshold) {
+                            goToPrevious();
+                          } else if (info.offset.x < -swipeThreshold) {
+                            goToNext();
+                          }
+                        }
+                      }}
+                      className="absolute inset-0"
+                    >
+                      <LazyImage
+                        src={images[currentImageIndex] ?? project.image}
+                        alt={`${project.title} - Imagen ${currentImageIndex + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Navigation Arrows - Only show if multiple images */}
+                  {hasMultipleImages && (
+                    <>
+                      {/* Previous Button */}
+                      <button
+                        onClick={goToPrevious}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/60 hover:bg-black/80
+                                 rounded-full text-white opacity-0 group-hover:opacity-100 transition-all
+                                 hover:scale-110 focus:opacity-100"
+                        aria-label="Imagen anterior"
+                      >
+                        <ChevronLeft size={24} />
+                      </button>
+
+                      {/* Next Button */}
+                      <button
+                        onClick={goToNext}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/60 hover:bg-black/80
+                                 rounded-full text-white opacity-0 group-hover:opacity-100 transition-all
+                                 hover:scale-110 focus:opacity-100"
+                        aria-label="Siguiente imagen"
+                      >
+                        <ChevronRight size={24} />
+                      </button>
+
+                      {/* Image Counter */}
+                      <div className="absolute top-4 right-4 px-3 py-1 bg-black/70 rounded-full text-white text-sm font-rajdhani">
+                        {currentImageIndex + 1} / {images.length}
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Dot Indicators - Only show if multiple images */}
+                {hasMultipleImages && (
+                  <div className="flex justify-center gap-2 mt-4">
+                    {images.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => goToImage(index)}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          index === currentImageIndex
+                            ? "bg-cyan-neon w-8"
+                            : "bg-gray-500 hover:bg-gray-400"
+                        }`}
+                        aria-label={`Ir a imagen ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
 
               {/* Header */}
               <div className="mb-8">

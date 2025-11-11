@@ -165,6 +165,7 @@ export interface PortfolioProject {
   title: string;
   description: string;
   image: string;
+  gallery?: string[]; // Optional image gallery for carousel (Sprint 6)
   category: string;
   tags: string[];
   link?: string;
