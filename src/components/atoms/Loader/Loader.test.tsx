@@ -25,7 +25,7 @@ describe("Loader Component", () => {
 
   it("has proper accessibility attributes", () => {
     render(<Loader message="Loading content" />);
-    const loaderContainer = screen.getByText("Loading content").closest("div");
-    expect(loaderContainer).toHaveClass("text-cyan-400");
+    const message = screen.getByText("Loading content");
+    expect(message).toHaveClass("text-cyan-400");
   });
 });
