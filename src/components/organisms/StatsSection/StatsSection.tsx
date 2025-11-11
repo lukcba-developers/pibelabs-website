@@ -1,26 +1,21 @@
-import { useEffect, useRef } from 'react';
-import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
-import { STATS } from '@/lib/constants/config';
-import type { Stat } from '@/types';
+import { useEffect, useRef } from "react";
+import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { STATS } from "@/lib/constants/config";
+import type { Stat } from "@/types";
 
 /* ============================================
    Stats Section Component (Organism)
    ============================================ */
 
 // Animated Counter Component
-const AnimatedCounter = ({ 
-  value
-}: { 
-  value: number; 
-  duration?: number;
-}) => {
+const AnimatedCounter = ({ value }: { value: number; duration?: number }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const motionValue = useMotionValue(0);
   const springValue = useSpring(motionValue, {
     damping: 60,
     stiffness: 100,
   });
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   useEffect(() => {
     if (isInView) {
@@ -29,7 +24,7 @@ const AnimatedCounter = ({
   }, [motionValue, isInView, value]);
 
   useEffect(() => {
-    const unsubscribe = springValue.on('change', (latest) => {
+    const unsubscribe = springValue.on("change", (latest) => {
       if (ref.current) {
         ref.current.textContent = Math.floor(latest).toLocaleString();
       }
@@ -43,21 +38,19 @@ const AnimatedCounter = ({
 
 // Stat Card Component
 const StatCard = ({ stat, index }: { stat: Stat; index: number }) => {
-  const isNumeric = typeof stat.value === 'number';
+  const isNumeric = typeof stat.value === "number";
 
   return (
     <motion.div
       className="relative group"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
         {/* Background gradient on hover */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-cyan-neon/5 to-magenta-neon/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        />
+        <motion.div className="absolute inset-0 bg-gradient-to-br from-cyan-neon/5 to-magenta-neon/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {/* Icon */}
         {stat.icon && (
@@ -105,7 +98,7 @@ const StatCard = ({ stat, index }: { stat: Stat; index: number }) => {
           transition={{
             duration: 4,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
         />
       </div>
@@ -125,7 +118,7 @@ const StatsSection = () => {
               linear-gradient(to right, rgba(0, 217, 255, 0.3) 1px, transparent 1px),
               linear-gradient(to bottom, rgba(0, 217, 255, 0.3) 1px, transparent 1px)
             `,
-            backgroundSize: '40px 40px',
+            backgroundSize: "40px 40px",
           }}
         />
       </div>
@@ -149,11 +142,13 @@ const StatsSection = () => {
           </motion.span>
 
           <h2 className="font-orbitron font-bold text-4xl md:text-5xl text-gray-dark mb-4">
-            Resultados que <span className="text-magenta-neon">Hablan por Sí Solos</span>
+            Resultados que{" "}
+            <span className="text-magenta-neon">Hablan por Sí Solos</span>
           </h2>
 
           <p className="font-poppins text-lg text-text-secondary max-w-3xl mx-auto">
-            Números que reflejan nuestro compromiso con la excelencia y la innovación tecnológica.
+            Números que reflejan nuestro compromiso con la excelencia y la
+            innovación tecnológica.
           </p>
         </motion.div>
 
@@ -173,8 +168,11 @@ const StatsSection = () => {
           transition={{ delay: 0.6 }}
         >
           <p className="font-poppins text-text-secondary">
-            Cada número representa horas de dedicación, innovación y{' '}
-            <span className="text-magenta-neon font-semibold">compromiso con nuestros clientes</span>.
+            Cada número representa horas de dedicación, innovación y{" "}
+            <span className="text-magenta-neon font-semibold">
+              compromiso con nuestros clientes
+            </span>
+            .
           </p>
         </motion.div>
       </div>
@@ -189,7 +187,7 @@ const StatsSection = () => {
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         }}
       />
       <motion.div
@@ -201,7 +199,7 @@ const StatsSection = () => {
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         }}
       />
     </section>

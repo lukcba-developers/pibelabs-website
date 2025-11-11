@@ -1,28 +1,28 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
-import { analytics } from '@/lib/analytics';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MessageCircle } from "lucide-react";
+import { analytics } from "@/lib/analytics";
 
 interface WhatsAppWidgetProps {
   phoneNumber: string;
   message?: string;
-  position?: 'left' | 'right';
+  position?: "left" | "right";
 }
 
 const WhatsAppWidget = ({
-  phoneNumber = '5491112345678',
-  message = '¡Hola! Me gustaría obtener más información sobre sus servicios.',
-  position = 'right',
+  phoneNumber = "5491112345678",
+  message = "¡Hola! Me gustaría obtener más información sobre sus servicios.",
+  position = "right",
 }: WhatsAppWidgetProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    analytics.clickCTA('WhatsApp Chat');
-    window.open(url, '_blank', 'noopener,noreferrer');
+    analytics.clickCTA("WhatsApp Chat");
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  const positionClasses = position === 'left' ? 'left-6' : 'right-6';
+  const positionClasses = position === "left" ? "left-6" : "right-6";
 
   return (
     <>
@@ -39,7 +39,7 @@ const WhatsAppWidget = ({
         aria-label="Chat on WhatsApp"
       >
         <MessageCircle className="text-white" size={28} />
-        
+
         <motion.span
           className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full"
           animate={{ scale: [1, 1.2, 1] }}

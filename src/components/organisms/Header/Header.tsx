@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { NAV_LINKS } from '@/lib/constants/config';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { NAV_LINKS } from "@/lib/constants/config";
 
 /* ============================================
    Header Component (Organism)
@@ -16,15 +16,15 @@ const Header = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Smooth scroll to section
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
       setIsMobileMenuOpen(false);
     }
   };
@@ -34,9 +34,10 @@ const Header = () => {
       className={`
         fixed top-0 left-0 right-0 z-[100]
         transition-all duration-300
-        ${isScrolled 
-          ? 'bg-dark-primary/95 backdrop-blur-lg shadow-lg border-b border-cyan-neon/20' 
-          : 'bg-transparent'
+        ${
+          isScrolled
+            ? "bg-dark-primary/95 backdrop-blur-lg shadow-lg border-b border-cyan-neon/20"
+            : "bg-transparent"
         }
       `}
       initial={{ y: -100 }}
@@ -51,7 +52,7 @@ const Header = () => {
             className="flex items-center gap-3 group"
             onClick={(e) => {
               e.preventDefault();
-              scrollToSection('#hero');
+              scrollToSection("#hero");
             }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -62,9 +63,10 @@ const Header = () => {
               className={`
                 h-10 md:h-12 w-auto transition-all duration-300
                 group-hover:scale-105
-                ${isScrolled
-                  ? 'drop-shadow-[0_0_8px_rgba(0,217,255,0.4)]'
-                  : 'drop-shadow-[0_0_12px_rgba(0,217,255,0.6)]'
+                ${
+                  isScrolled
+                    ? "drop-shadow-[0_0_8px_rgba(0,217,255,0.4)]"
+                    : "drop-shadow-[0_0_12px_rgba(0,217,255,0.6)]"
                 }
                 group-hover:drop-shadow-[0_0_15px_rgba(0,217,255,0.8)]
               `}
@@ -109,7 +111,7 @@ const Header = () => {
               "
               onClick={(e) => {
                 e.preventDefault();
-                scrollToSection('#contact');
+                scrollToSection("#contact");
               }}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -132,8 +134,8 @@ const Header = () => {
               className="absolute top-1/2 left-1/2 w-6"
               animate={{
                 rotate: isMobileMenuOpen ? 45 : 0,
-                x: '-50%',
-                y: isMobileMenuOpen ? '-50%' : 'calc(-50% - 6px)',
+                x: "-50%",
+                y: isMobileMenuOpen ? "-50%" : "calc(-50% - 6px)",
               }}
             >
               <div className="h-0.5 bg-white"></div>
@@ -142,8 +144,8 @@ const Header = () => {
               className="absolute top-1/2 left-1/2 w-6"
               animate={{
                 opacity: isMobileMenuOpen ? 0 : 1,
-                x: '-50%',
-                y: '-50%',
+                x: "-50%",
+                y: "-50%",
               }}
             >
               <div className="h-0.5 bg-white"></div>
@@ -152,8 +154,8 @@ const Header = () => {
               className="absolute top-1/2 left-1/2 w-6"
               animate={{
                 rotate: isMobileMenuOpen ? -45 : 0,
-                x: '-50%',
-                y: isMobileMenuOpen ? '-50%' : 'calc(-50% + 6px)',
+                x: "-50%",
+                y: isMobileMenuOpen ? "-50%" : "calc(-50% + 6px)",
               }}
             >
               <div className="h-0.5 bg-white"></div>
@@ -167,7 +169,7 @@ const Header = () => {
             <motion.div
               className="md:hidden mt-4 py-4 bg-dark-secondary/95 backdrop-blur-lg rounded-lg"
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
+              animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
@@ -195,7 +197,7 @@ const Header = () => {
                   "
                   onClick={(e) => {
                     e.preventDefault();
-                    scrollToSection('#contact');
+                    scrollToSection("#contact");
                   }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

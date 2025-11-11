@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUp } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUp } from "lucide-react";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,14 +16,14 @@ const ScrollToTop = () => {
       setIsVisible(scrolled > 300);
     };
 
-    window.addEventListener('scroll', toggleVisibility, { passive: true });
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility, { passive: true });
+    return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
@@ -62,7 +62,10 @@ const ScrollToTop = () => {
               className="transition-all duration-300"
             />
           </svg>
-          <ArrowUp className="text-white z-10 group-hover:animate-bounce" size={24} />
+          <ArrowUp
+            className="text-white z-10 group-hover:animate-bounce"
+            size={24}
+          />
         </motion.button>
       )}
     </AnimatePresence>

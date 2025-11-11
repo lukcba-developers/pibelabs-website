@@ -1,2 +1,2 @@
-export { default } from './TestimonialsSection';
-export type { TestimonialsSectionProps } from './TestimonialsSection';
+export { default } from "./TestimonialsSection";
+export type { TestimonialsSectionProps } from "./TestimonialsSection";

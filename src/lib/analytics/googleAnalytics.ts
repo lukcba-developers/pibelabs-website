@@ -41,7 +41,7 @@ export interface GAConversion {
  * Verifica si Google Analytics está cargado y disponible
  */
 export const isGAAvailable = (): boolean => {
-  return typeof window !== 'undefined' && typeof window.gtag === 'function';
+  return typeof window !== "undefined" && typeof window.gtag === "function";
 };
 
 /**
@@ -63,16 +63,16 @@ export const initGA = (measurementId?: string): void => {
   const id = measurementId || getGAMeasurementId();
 
   if (!id) {
-    console.warn('Google Analytics Measurement ID not configured');
+    console.warn("Google Analytics Measurement ID not configured");
     return;
   }
 
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return; // No ejecutar en SSR
   }
 
   // Crear script tag para GA4
-  const script = document.createElement('script');
+  const script = document.createElement("script");
   script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
   script.async = true;
   document.head.appendChild(script);
@@ -84,13 +84,13 @@ export const initGA = (measurementId?: string): void => {
     window.dataLayer.push(arguments);
   };
 
-  window.gtag('js', new Date());
-  window.gtag('config', id, {
+  window.gtag("js", new Date());
+  window.gtag("config", id, {
     send_page_view: true,
-    cookie_flags: 'SameSite=None;Secure', // Para cumplir con GDPR
+    cookie_flags: "SameSite=None;Secure", // Para cumplir con GDPR
   });
 
-  console.log('Google Analytics initialized:', id);
+  console.log("Google Analytics initialized:", id);
 };
 
 // ============================================
@@ -102,7 +102,7 @@ export const initGA = (measurementId?: string): void => {
  */
 export const sendPageView = (data: Partial<GAPageView> = {}): void => {
   if (!isGAAvailable()) {
-    console.warn('Google Analytics not available');
+    console.warn("Google Analytics not available");
     return;
   }
 
@@ -113,10 +113,10 @@ export const sendPageView = (data: Partial<GAPageView> = {}): void => {
     ...data,
   };
 
-  window.gtag('event', 'page_view', pageData);
+  window.gtag("event", "page_view", pageData);
 
   if (import.meta.env.DEV) {
-    console.log('GA Page View:', pageData);
+    console.log("GA Page View:", pageData);
   }
 };
 
@@ -127,23 +127,32 @@ export const sendPageView = (data: Partial<GAPageView> = {}): void => {
 /**
  * Envía un evento personalizado a Google Analytics
  */
-export const sendEvent = (eventName: string, eventParams: Record<string, unknown> = {}): void => {
+export const sendEvent = (
+  eventName: string,
+  eventParams: Record<string, unknown> = {},
+): void => {
   if (!isGAAvailable()) {
-    console.warn('Google Analytics not available');
+    console.warn("Google Analytics not available");
     return;
   }
 
-  window.gtag('event', eventName, eventParams);
+  window.gtag("event", eventName, eventParams);
 
   if (import.meta.env.DEV) {
-    console.log('GA Event:', eventName, eventParams);
+    console.log("GA Event:", eventName, eventParams);
   }
 };
 
 /**
  * Envía un evento con estructura clásica (category, action, label)
  */
-export const sendGAEvent = ({ action, category, label, value, ...rest }: GAEvent): void => {
+export const sendGAEvent = ({
+  action,
+  category,
+  label,
+  value,
+  ...rest
+}: GAEvent): void => {
   const eventParams = {
     event_category: category,
     event_label: label,
@@ -161,8 +170,8 @@ export const sendGAEvent = ({ action, category, label, value, ...rest }: GAEvent
 /**
  * Trackea cuando un usuario empieza a llenar el formulario
  */
-export const trackFormStart = (formName: string = 'contact_form'): void => {
-  sendEvent('form_start', {
+export const trackFormStart = (formName: string = "contact_form"): void => {
+  sendEvent("form_start", {
     form_name: formName,
     timestamp: new Date().toISOString(),
   });
@@ -171,8 +180,11 @@ export const trackFormStart = (formName: string = 'contact_form'): void => {
 /**
  * Trackea cuando un usuario completa un campo del formulario
  */
-export const trackFormFieldComplete = (fieldName: string, formName: string = 'contact_form'): void => {
-  sendEvent('form_field_complete', {
+export const trackFormFieldComplete = (
+  fieldName: string,
+  formName: string = "contact_form",
+): void => {
+  sendEvent("form_field_complete", {
     form_name: formName,
     field_name: fieldName,
   });
@@ -184,9 +196,9 @@ export const trackFormFieldComplete = (fieldName: string, formName: string = 'co
 export const trackFormError = (
   fieldName: string,
   errorMessage: string,
-  formName: string = 'contact_form'
+  formName: string = "contact_form",
 ): void => {
-  sendEvent('form_error', {
+  sendEvent("form_error", {
     form_name: formName,
     field_name: fieldName,
     error_message: errorMessage,
@@ -198,11 +210,11 @@ export const trackFormError = (
  */
 export const trackFormSubmit = (
   formData: Record<string, unknown>,
-  formName: string = 'contact_form'
+  formName: string = "contact_form",
 ): void => {
-  sendEvent('form_submit', {
+  sendEvent("form_submit", {
     form_name: formName,
-    service: formData.service || 'unknown',
+    service: formData.service || "unknown",
     timestamp: new Date().toISOString(),
   });
 };
@@ -212,26 +224,26 @@ export const trackFormSubmit = (
  */
 export const trackFormSuccess = (
   formData: Record<string, unknown>,
-  formName: string = 'contact_form'
+  formName: string = "contact_form",
 ): void => {
   // Evento de conversión principal
-  sendEvent('generate_lead', {
-    currency: 'USD',
+  sendEvent("generate_lead", {
+    currency: "USD",
     value: 100, // Valor estimado del lead (ajustar según tu negocio)
     form_name: formName,
-    service: formData.service || 'unknown',
-    lead_source: 'website',
+    service: formData.service || "unknown",
+    lead_source: "website",
   });
 
   // Evento personalizado adicional
-  sendEvent('form_submission_success', {
+  sendEvent("form_submission_success", {
     form_name: formName,
     service: formData.service,
     timestamp: new Date().toISOString(),
   });
 
   if (import.meta.env.DEV) {
-    console.log('✅ Lead conversion tracked:', formData);
+    console.log("✅ Lead conversion tracked:", formData);
   }
 };
 
@@ -240,9 +252,9 @@ export const trackFormSuccess = (
  */
 export const trackFormFailure = (
   errorMessage: string,
-  formName: string = 'contact_form'
+  formName: string = "contact_form",
 ): void => {
-  sendEvent('form_submission_failure', {
+  sendEvent("form_submission_failure", {
     form_name: formName,
     error_message: errorMessage,
     timestamp: new Date().toISOString(),
@@ -256,8 +268,11 @@ export const trackFormFailure = (
 /**
  * Trackea clics en botones o enlaces importantes
  */
-export const trackButtonClick = (buttonName: string, buttonLocation: string): void => {
-  sendEvent('button_click', {
+export const trackButtonClick = (
+  buttonName: string,
+  buttonLocation: string,
+): void => {
+  sendEvent("button_click", {
     button_name: buttonName,
     button_location: buttonLocation,
   });
@@ -267,8 +282,8 @@ export const trackButtonClick = (buttonName: string, buttonLocation: string): vo
  * Trackea clics en enlaces externos
  */
 export const trackExternalLink = (url: string, linkText: string): void => {
-  sendEvent('click', {
-    event_category: 'outbound',
+  sendEvent("click", {
+    event_category: "outbound",
     event_label: linkText,
     link_url: url,
   });
@@ -278,7 +293,7 @@ export const trackExternalLink = (url: string, linkText: string): void => {
  * Trackea clics en CTAs (Call to Action)
  */
 export const trackCTAClick = (ctaName: string, ctaLocation: string): void => {
-  sendEvent('cta_click', {
+  sendEvent("cta_click", {
     cta_name: ctaName,
     cta_location: ctaLocation,
   });
@@ -288,8 +303,8 @@ export const trackCTAClick = (ctaName: string, ctaLocation: string): void => {
  * Trackea scroll depth (qué tan abajo llega el usuario)
  */
 export const trackScrollDepth = (percentage: number): void => {
-  sendEvent('scroll', {
-    event_category: 'engagement',
+  sendEvent("scroll", {
+    event_category: "engagement",
     event_label: `${percentage}%`,
     value: percentage,
   });
@@ -303,7 +318,7 @@ export const trackScrollDepth = (percentage: number): void => {
  * Trackea navegación entre secciones (para SPAs)
  */
 export const trackSectionView = (sectionName: string): void => {
-  sendEvent('section_view', {
+  sendEvent("section_view", {
     section_name: sectionName,
   });
 };
@@ -312,8 +327,8 @@ export const trackSectionView = (sectionName: string): void => {
  * Trackea tiempo en la página
  */
 export const trackTimeOnPage = (seconds: number, pageName: string): void => {
-  sendEvent('time_on_page', {
-    event_category: 'engagement',
+  sendEvent("time_on_page", {
+    event_category: "engagement",
     event_label: pageName,
     value: seconds,
   });
@@ -326,11 +341,14 @@ export const trackTimeOnPage = (seconds: number, pageName: string): void => {
 /**
  * Trackea visualización de un proyecto del portafolio
  */
-export const trackPortfolioView = (projectId: string, projectName: string): void => {
-  sendEvent('view_item', {
+export const trackPortfolioView = (
+  projectId: string,
+  projectName: string,
+): void => {
+  sendEvent("view_item", {
     item_id: projectId,
     item_name: projectName,
-    item_category: 'portfolio',
+    item_category: "portfolio",
   });
 };
 
@@ -338,10 +356,10 @@ export const trackPortfolioView = (projectId: string, projectName: string): void
  * Trackea lectura de un post del blog
  */
 export const trackBlogPostView = (postId: string, postTitle: string): void => {
-  sendEvent('view_item', {
+  sendEvent("view_item", {
     item_id: postId,
     item_name: postTitle,
-    item_category: 'blog',
+    item_category: "blog",
   });
 };
 
@@ -352,9 +370,9 @@ export const trackBlogPostView = (postId: string, postTitle: string): void => {
 /**
  * Trackea clic en botón de WhatsApp
  */
-export const trackWhatsAppClick = (location: string = 'unknown'): void => {
-  sendEvent('contact_whatsapp', {
-    contact_method: 'whatsapp',
+export const trackWhatsAppClick = (location: string = "unknown"): void => {
+  sendEvent("contact_whatsapp", {
+    contact_method: "whatsapp",
     location: location,
   });
 };
@@ -362,9 +380,9 @@ export const trackWhatsAppClick = (location: string = 'unknown'): void => {
 /**
  * Trackea clic en email
  */
-export const trackEmailClick = (location: string = 'unknown'): void => {
-  sendEvent('contact_email', {
-    contact_method: 'email',
+export const trackEmailClick = (location: string = "unknown"): void => {
+  sendEvent("contact_email", {
+    contact_method: "email",
     location: location,
   });
 };
@@ -376,12 +394,14 @@ export const trackEmailClick = (location: string = 'unknown'): void => {
 /**
  * Establece propiedades del usuario
  */
-export const setUserProperties = (properties: Record<string, unknown>): void => {
+export const setUserProperties = (
+  properties: Record<string, unknown>,
+): void => {
   if (!isGAAvailable()) {
     return;
   }
 
-  window.gtag('set', 'user_properties', properties);
+  window.gtag("set", "user_properties", properties);
 };
 
 /**
@@ -392,7 +412,7 @@ export const setUserId = (userId: string): void => {
     return;
   }
 
-  window.gtag('config', getGAMeasurementId() || '', {
+  window.gtag("config", getGAMeasurementId() || "", {
     user_id: userId,
   });
 };

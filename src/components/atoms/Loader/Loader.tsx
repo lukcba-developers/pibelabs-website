@@ -1,11 +1,11 @@
-import { FC } from 'react';
-import { motion } from 'framer-motion';
+import { FC } from "react";
+import { motion } from "framer-motion";
 
 interface LoaderProps {
   message?: string;
 }
 
-export const Loader: FC<LoaderProps> = ({ message = 'Cargando...' }) => {
+export const Loader: FC<LoaderProps> = ({ message = "Cargando..." }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a0e27]/95 backdrop-blur-sm">
       <div className="flex flex-col items-center gap-6">
@@ -21,7 +21,7 @@ export const Loader: FC<LoaderProps> = ({ message = 'Cargando...' }) => {
             className="w-24 h-24 md:w-32 md:h-32"
           />
         </motion.div>
-        
+
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

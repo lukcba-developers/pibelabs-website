@@ -35,12 +35,20 @@ const DEFAULT_RETRYABLE_STATUS_CODES = [
  */
 function calculateDelay(
   attempt: number,
-  options: Required<Pick<RetryOptions, 'initialDelay' | 'maxDelay' | 'backoffFactor' | 'useJitter'>>
+  options: Required<
+    Pick<
+      RetryOptions,
+      "initialDelay" | "maxDelay" | "backoffFactor" | "useJitter"
+    >
+  >,
 ): number {
   const { initialDelay, maxDelay, backoffFactor, useJitter } = options;
 
   // Exponential backoff: delay = initialDelay * (backoffFactor ^ attempt)
-  let delay = Math.min(initialDelay * Math.pow(backoffFactor, attempt), maxDelay);
+  let delay = Math.min(
+    initialDelay * Math.pow(backoffFactor, attempt),
+    maxDelay,
+  );
 
   // Add jitter to prevent thundering herd problem
   if (useJitter) {
@@ -55,20 +63,23 @@ function calculateDelay(
 /**
  * Determines if error is retryable based on status code
  */
-function isRetryableError(error: unknown, retryableStatusCodes: number[]): boolean {
+function isRetryableError(
+  error: unknown,
+  retryableStatusCodes: number[],
+): boolean {
   // Network errors (no response)
-  if (error instanceof TypeError && error.message.includes('fetch')) {
+  if (error instanceof TypeError && error.message.includes("fetch")) {
     return true;
   }
 
   // HTTP errors with retryable status codes
-  if (error && typeof error === 'object' && 'status' in error) {
+  if (error && typeof error === "object" && "status" in error) {
     const status = (error as { status: number }).status;
     return retryableStatusCodes.includes(status);
   }
 
   // Timeout errors
-  if (error instanceof Error && error.name === 'AbortError') {
+  if (error instanceof Error && error.name === "AbortError") {
     return true;
   }
 
@@ -79,7 +90,7 @@ function isRetryableError(error: unknown, retryableStatusCodes: number[]): boole
  * Delays execution for specified milliseconds
  */
 function delay(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**
@@ -95,7 +106,7 @@ function delay(ms: number): Promise<void> {
  */
 export async function retryFetch<T>(
   fn: () => Promise<T>,
-  options: RetryOptions = {}
+  options: RetryOptions = {},
 ): Promise<T> {
   const {
     maxRetries = 3,
@@ -139,7 +150,7 @@ export async function retryFetch<T>(
       if (import.meta.env.DEV) {
         console.warn(
           `[Retry] Attempt ${attempt + 1}/${maxRetries} failed, retrying in ${delayMs}ms...`,
-          error
+          error,
         );
       }
 
@@ -173,7 +184,7 @@ export function createRetryableFetch(options: RetryOptions = {}) {
  */
 export function createRetryableOperation<T>(
   fn: () => Promise<T>,
-  options: RetryOptions = {}
+  options: RetryOptions = {},
 ): () => Promise<T> {
   return () => retryFetch(fn, options);
 }

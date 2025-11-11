@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Home, ArrowLeft } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Home, ArrowLeft } from "lucide-react";
 
 const NotFound = () => {
   return (

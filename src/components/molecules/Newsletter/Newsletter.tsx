@@ -1,24 +1,24 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, ArrowRight } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, ArrowRight } from "lucide-react";
+import toast from "react-hot-toast";
 
 const Newsletter = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email) {
-      toast.error('Por favor ingresa tu email');
+      toast.error("Por favor ingresa tu email");
       return;
     }
 
     setIsLoading(true);
     setTimeout(() => {
-      toast.success('¡Gracias por suscribirte! 🎉');
-      setEmail('');
+      toast.success("¡Gracias por suscribirte! 🎉");
+      setEmail("");
       setIsLoading(false);
     }, 1500);
   };
@@ -58,7 +58,7 @@ const Newsletter = () => {
           className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-rajdhani font-bold rounded-lg shadow-[0_0_20px_rgba(0,217,255,0.4)] transition-all flex items-center gap-2"
           whileHover={{ scale: 1.05 }}
         >
-          {isLoading ? 'Enviando...' : 'Suscribirme'}
+          {isLoading ? "Enviando..." : "Suscribirme"}
           <ArrowRight size={18} />
         </motion.button>
       </form>

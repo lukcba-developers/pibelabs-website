@@ -1,7 +1,15 @@
-import { motion } from 'framer-motion';
-import { Share2, Linkedin, Twitter, Facebook, Mail, Link2, Check } from 'lucide-react';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
+import { motion } from "framer-motion";
+import {
+  Share2,
+  Linkedin,
+  Twitter,
+  Facebook,
+  Mail,
+  Link2,
+  Check,
+} from "lucide-react";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 interface ShareButtonsProps {
   url?: string;
@@ -10,11 +18,11 @@ interface ShareButtonsProps {
   className?: string;
 }
 
-const ShareButtons = ({ 
+const ShareButtons = ({
   url = window.location.href,
-  title = 'PibeLabs - Innovation Studio',
-  description = 'Transformamos ideas en productos digitales exitosos',
-  className = ''
+  title = "PibeLabs - Innovation Studio",
+  description = "Transformamos ideas en productos digitales exitosos",
+  className = "",
 }: ShareButtonsProps) => {
   const [copied, setCopied] = useState(false);
 
@@ -22,25 +30,45 @@ const ShareButtons = ({
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-    email: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(description + ' ' + url)}`,
+    email: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(description + " " + url)}`,
   };
 
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
-      toast.success('¡Link copiado!');
+      toast.success("¡Link copiado!");
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error('Error al copiar');
+      toast.error("Error al copiar");
     }
   };
 
   const shareButtons = [
-    { name: 'LinkedIn', icon: Linkedin, href: shareLinks.linkedin, color: 'hover:bg-[#0077b5]' },
-    { name: 'Twitter', icon: Twitter, href: shareLinks.twitter, color: 'hover:bg-[#1da1f2]' },
-    { name: 'Facebook', icon: Facebook, href: shareLinks.facebook, color: 'hover:bg-[#1877f2]' },
-    { name: 'Email', icon: Mail, href: shareLinks.email, color: 'hover:bg-cyan-600' },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      href: shareLinks.linkedin,
+      color: "hover:bg-[#0077b5]",
+    },
+    {
+      name: "Twitter",
+      icon: Twitter,
+      href: shareLinks.twitter,
+      color: "hover:bg-[#1da1f2]",
+    },
+    {
+      name: "Facebook",
+      icon: Facebook,
+      href: shareLinks.facebook,
+      color: "hover:bg-[#1877f2]",
+    },
+    {
+      name: "Email",
+      icon: Mail,
+      href: shareLinks.email,
+      color: "hover:bg-cyan-600",
+    },
   ];
 
   return (

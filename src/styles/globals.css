@@ -8,33 +8,33 @@
 
 :root {
   /* Colors */
-  --cyan-neon: #00D9FF;
-  --cyan-bright: #00F0FF;
-  --magenta-neon: #FF00FF;
-  --magenta-bright: #FF10FF;
-  --gray-dark: #2C3E50;
-  
+  --cyan-neon: #00d9ff;
+  --cyan-bright: #00f0ff;
+  --magenta-neon: #ff00ff;
+  --magenta-bright: #ff10ff;
+  --gray-dark: #2c3e50;
+
   --dark-primary: #0a0e27;
   --dark-secondary: #1a1f3a;
-  --light-primary: #FFFFFF;
-  --light-secondary: #FAFBFC;
-  
-  --text-primary: #2C3E50;
-  --text-secondary: #7F8C8D;
-  --text-tertiary: #6B7588;
-  --text-light: #FFFFFF;
-  
+  --light-primary: #ffffff;
+  --light-secondary: #fafbfc;
+
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-tertiary: #6b7588;
+  --text-light: #ffffff;
+
   /* Spacing (8pt grid) */
   --spacing-unit: 8px;
-  
+
   /* Animation durations */
   --duration-fast: 200ms;
   --duration-normal: 300ms;
   --duration-slow: 500ms;
-  
+
   /* Transitions */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   /* Z-index layers */
   --z-background: -1;
   --z-content: 1;
@@ -60,7 +60,12 @@ html {
 }
 
 body {
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:
+    "Poppins",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   color: var(--text-primary);
   background-color: var(--light-primary);
   line-height: 1.6;
@@ -71,8 +76,13 @@ body {
    Typography
    ============================================ */
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Orbitron', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Orbitron", sans-serif;
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 1rem;
@@ -94,7 +104,7 @@ h3 {
 
 p {
   margin-bottom: 1rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 /* ============================================
@@ -131,14 +141,14 @@ p {
 }
 
 .glow-text-cyan {
-  text-shadow: 
+  text-shadow:
     0 0 10px rgba(0, 217, 255, 0.8),
     0 0 20px rgba(0, 217, 255, 0.6),
     0 0 30px rgba(0, 217, 255, 0.4);
 }
 
 .glow-text-magenta {
-  text-shadow: 
+  text-shadow:
     0 0 10px rgba(255, 0, 255, 0.8),
     0 0 20px rgba(255, 0, 255, 0.6),
     0 0 30px rgba(255, 0, 255, 0.4);
@@ -146,11 +156,19 @@ p {
 
 /* Gradient backgrounds */
 .bg-gradient-cyber {
-  background: linear-gradient(135deg, var(--cyan-neon) 0%, var(--magenta-neon) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--cyan-neon) 0%,
+    var(--magenta-neon) 100%
+  );
 }
 
 .bg-gradient-dark {
-  background: linear-gradient(180deg, var(--dark-primary) 0%, var(--dark-secondary) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--dark-primary) 0%,
+    var(--dark-secondary) 100%
+  );
 }
 
 /* ============================================
@@ -178,7 +196,8 @@ p {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -187,7 +206,8 @@ p {
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
     filter: brightness(1);
   }
@@ -258,7 +278,7 @@ p {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   html {
     scroll-behavior: auto;
   }
@@ -272,7 +292,7 @@ p {
   .container {
     padding: 0 1rem;
   }
-  
+
   .section {
     padding: 3rem 0;
   }
@@ -292,9 +312,23 @@ p {
 
 /* Shake animation for form errors */
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
-  20%, 40%, 60%, 80% { transform: translateX(4px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-4px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(4px);
+  }
 }
 
 .animate-shake {
@@ -303,10 +337,11 @@ p {
 
 /* Pulse animation for CTAs */
 @keyframes pulse-glow {
-  0%, 100% { 
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
   }
-  50% { 
+  50% {
     box-shadow: 0 0 40px rgba(0, 217, 255, 0.8);
   }
 }

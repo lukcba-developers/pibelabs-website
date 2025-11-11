@@ -6,19 +6,24 @@
  * Report Web Vitals (optional - requires web-vitals package)
  */
 export const reportWebVitals = (onPerfEntry?: (metric: unknown) => void) => {
-  if (onPerfEntry && typeof onPerfEntry === 'function') {
+  if (onPerfEntry && typeof onPerfEntry === "function") {
     // Optional: Install web-vitals package for detailed metrics
     // npm install web-vitals
-    console.log('Web Vitals tracking available - install web-vitals package for full support');
+    console.log(
+      "Web Vitals tracking available - install web-vitals package for full support",
+    );
   }
 };
 
 /**
  * Prefetch resource
  */
-export const prefetchResource = (url: string, as: 'script' | 'style' | 'image' | 'font') => {
-  const link = document.createElement('link');
-  link.rel = 'prefetch';
+export const prefetchResource = (
+  url: string,
+  as: "script" | "style" | "image" | "font",
+) => {
+  const link = document.createElement("link");
+  link.rel = "prefetch";
   link.as = as;
   link.href = url;
   document.head.appendChild(link);
@@ -27,9 +32,12 @@ export const prefetchResource = (url: string, as: 'script' | 'style' | 'image' |
 /**
  * Preload resource
  */
-export const preloadResource = (url: string, as: 'script' | 'style' | 'image' | 'font') => {
-  const link = document.createElement('link');
-  link.rel = 'preload';
+export const preloadResource = (
+  url: string,
+  as: "script" | "style" | "image" | "font",
+) => {
+  const link = document.createElement("link");
+  link.rel = "preload";
   link.as = as;
   link.href = url;
   document.head.appendChild(link);
@@ -46,7 +54,7 @@ export const lazyLoadImage = (imgElement: HTMLImageElement) => {
         const src = img.dataset.src;
         if (src) {
           img.src = src;
-          img.removeAttribute('data-src');
+          img.removeAttribute("data-src");
         }
         observer.unobserve(img);
       }
@@ -60,10 +68,12 @@ export const lazyLoadImage = (imgElement: HTMLImageElement) => {
  * Get performance metrics
  */
 export const getPerformanceMetrics = () => {
-  if (typeof window === 'undefined' || !window.performance) return null;
+  if (typeof window === "undefined" || !window.performance) return null;
 
-  const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-  
+  const navigation = performance.getEntriesByType(
+    "navigation",
+  )[0] as PerformanceNavigationTiming;
+
   if (!navigation) return null;
 
   return {
@@ -72,7 +82,9 @@ export const getPerformanceMetrics = () => {
     ttfb: navigation.responseStart - navigation.requestStart,
     download: navigation.responseEnd - navigation.responseStart,
     domParsing: navigation.domInteractive - navigation.responseEnd,
-    domContentLoaded: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
+    domContentLoaded:
+      navigation.domContentLoadedEventEnd -
+      navigation.domContentLoadedEventStart,
     pageLoad: navigation.loadEventEnd - navigation.loadEventStart,
     totalTime: navigation.loadEventEnd - navigation.fetchStart,
   };

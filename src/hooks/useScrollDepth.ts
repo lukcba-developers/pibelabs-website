@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { trackScrollDepth } from '@/lib/analytics/googleAnalytics';
+import { useEffect, useRef } from "react";
+import { trackScrollDepth } from "@/lib/analytics/googleAnalytics";
 
 /**
  * useScrollDepth Hook - Sprint 5
@@ -18,7 +18,7 @@ import { trackScrollDepth } from '@/lib/analytics/googleAnalytics';
  */
 export const useScrollDepth = (
   thresholds: number[] = [25, 50, 75, 100],
-  enabled: boolean = true
+  enabled: boolean = true,
 ): void => {
   const trackedThresholds = useRef<Set<number>>(new Set());
 
@@ -31,11 +31,11 @@ export const useScrollDepth = (
       const documentHeight = document.documentElement.scrollHeight;
       const scrollTop = window.scrollY;
       const scrollPercentage = Math.round(
-        ((scrollTop + windowHeight) / documentHeight) * 100
+        ((scrollTop + windowHeight) / documentHeight) * 100,
       );
 
       // Check each threshold
-      thresholds.forEach(threshold => {
+      thresholds.forEach((threshold) => {
         if (
           scrollPercentage >= threshold &&
           !trackedThresholds.current.has(threshold)
@@ -66,14 +66,14 @@ export const useScrollDepth = (
     };
 
     // Add event listener
-    window.addEventListener('scroll', throttledScroll, { passive: true });
+    window.addEventListener("scroll", throttledScroll, { passive: true });
 
     // Check initial scroll position
     handleScroll();
 
     // Cleanup
     return () => {
-      window.removeEventListener('scroll', throttledScroll);
+      window.removeEventListener("scroll", throttledScroll);
     };
   }, [thresholds, enabled]);
 };

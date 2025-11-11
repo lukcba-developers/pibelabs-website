@@ -1,1 +1,1 @@
-export { default } from './FloatingWhatsApp';
+export { default } from "./FloatingWhatsApp";

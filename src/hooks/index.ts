@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from "react";
 import {
   openWhatsApp,
   createGeneralContactMessage,
@@ -8,8 +8,8 @@ import {
   createTeamInquiryMessage,
   createContactFormMessage,
   createBlogInquiryMessage,
-  createTechInquiryMessage
-} from '@/lib/utils/whatsapp';
+  createTechInquiryMessage,
+} from "@/lib/utils/whatsapp";
 
 /* ============================================
    Custom Hooks Library
@@ -41,11 +41,11 @@ export function useDebounce<T>(value: T, delay: number = 500): T {
  */
 export function useLocalStorage<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: T | ((val: T) => T)) => void, () => void] {
   // Get from local storage then parse stored json or return initialValue
   const readValue = useCallback((): T => {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return initialValue;
     }
 
@@ -66,26 +66,27 @@ export function useLocalStorage<T>(
     (value: T | ((val: T) => T)) => {
       try {
         // Allow value to be a function so we have same API as useState
-        const valueToStore = value instanceof Function ? value(storedValue) : value;
-        
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
+
         // Save state
         setStoredValue(valueToStore);
-        
+
         // Save to local storage
-        if (typeof window !== 'undefined') {
+        if (typeof window !== "undefined") {
           window.localStorage.setItem(key, JSON.stringify(valueToStore));
         }
       } catch (error) {
         console.warn(`Error setting localStorage key "${key}":`, error);
       }
     },
-    [key, storedValue]
+    [key, storedValue],
   );
 
   // Remove from localStorage
   const removeValue = useCallback(() => {
     try {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         window.localStorage.removeItem(key);
       }
       setStoredValue(initialValue);
@@ -105,10 +106,10 @@ export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState<boolean>(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const media = window.matchMedia(query);
-    
+
     // Set initial value
     setMatches(media.matches);
 
@@ -118,10 +119,10 @@ export function useMediaQuery(query: string): boolean {
     };
 
     // Add listener
-    media.addEventListener('change', listener);
+    media.addEventListener("change", listener);
 
     return () => {
-      media.removeEventListener('change', listener);
+      media.removeEventListener("change", listener);
     };
   }, [query]);
 
@@ -134,7 +135,7 @@ export function useMediaQuery(query: string): boolean {
  */
 export function useOnScreen(
   ref: React.RefObject<HTMLElement>,
-  rootMargin: string = '0px'
+  rootMargin: string = "0px",
 ): boolean {
   const [isIntersecting, setIntersecting] = useState<boolean>(false);
 
@@ -147,7 +148,7 @@ export function useOnScreen(
           setIntersecting(entry.isIntersecting);
         }
       },
-      { rootMargin }
+      { rootMargin },
     );
 
     observer.observe(ref.current);
@@ -165,7 +166,7 @@ export function useOnScreen(
  * Detects clicks outside of element
  */
 export function useClickOutside<T extends HTMLElement = HTMLElement>(
-  callback: () => void
+  callback: () => void,
 ): React.RefObject<T> {
   const ref = useRef<T>(null);
 
@@ -176,10 +177,10 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
       }
     };
 
-    document.addEventListener('mousedown', handleClick);
+    document.addEventListener("mousedown", handleClick);
 
     return () => {
-      document.removeEventListener('mousedown', handleClick);
+      document.removeEventListener("mousedown", handleClick);
     };
   }, [callback]);
 
@@ -206,12 +207,12 @@ export function useKeyPress(targetKey: string): boolean {
       }
     };
 
-    window.addEventListener('keydown', downHandler);
-    window.addEventListener('keyup', upHandler);
+    window.addEventListener("keydown", downHandler);
+    window.addEventListener("keyup", upHandler);
 
     return () => {
-      window.removeEventListener('keydown', downHandler);
-      window.removeEventListener('keyup', upHandler);
+      window.removeEventListener("keydown", downHandler);
+      window.removeEventListener("keyup", upHandler);
     };
   }, [targetKey]);
 
@@ -224,12 +225,12 @@ export function useKeyPress(targetKey: string): boolean {
  */
 export function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
-    width: typeof window !== 'undefined' ? window.innerWidth : 0,
-    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+    width: typeof window !== "undefined" ? window.innerWidth : 0,
+    height: typeof window !== "undefined" ? window.innerHeight : 0,
   });
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const handleResize = () => {
       setWindowSize({
@@ -238,10 +239,10 @@ export function useWindowSize() {
       });
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize();
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return windowSize;
@@ -259,7 +260,7 @@ export function useScrollPosition(throttleMs: number = 100) {
   });
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     let ticking = false;
 
@@ -288,11 +289,11 @@ export function useScrollPosition(throttleMs: number = 100) {
       }
     };
 
-    window.addEventListener('scroll', throttledScroll, { passive: true });
+    window.addEventListener("scroll", throttledScroll, { passive: true });
     handleScroll(); // Initial call
 
     return () => {
-      window.removeEventListener('scroll', throttledScroll);
+      window.removeEventListener("scroll", throttledScroll);
       if (timeoutId) clearTimeout(timeoutId);
     };
   }, [throttleMs]);
@@ -319,7 +320,7 @@ export function usePrevious<T>(value: T): T | undefined {
  * Boolean state toggle hook
  */
 export function useToggle(
-  initialValue: boolean = false
+  initialValue: boolean = false,
 ): [boolean, () => void, (value: boolean) => void] {
   const [value, setValue] = useState<boolean>(initialValue);
 
@@ -340,25 +341,27 @@ export function useToggle(
  */
 export function useAsync<T>(
   asyncFunction: () => Promise<T>,
-  immediate: boolean = true
+  immediate: boolean = true,
 ) {
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [value, setValue] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
   const execute = useCallback(() => {
-    setStatus('loading');
+    setStatus("loading");
     setValue(null);
     setError(null);
 
     return asyncFunction()
       .then((response: T) => {
         setValue(response);
-        setStatus('success');
+        setStatus("success");
       })
       .catch((error: Error) => {
         setError(error);
-        setStatus('error');
+        setStatus("error");
       });
   }, [asyncFunction]);
 
@@ -377,13 +380,13 @@ export function useAsync<T>(
  */
 export function useCopyToClipboard(): [
   string | null,
-  (text: string) => Promise<void>
+  (text: string) => Promise<void>,
 ] {
   const [copiedText, setCopiedText] = useState<string | null>(null);
 
   const copy = async (text: string) => {
     if (!navigator?.clipboard) {
-      console.warn('Clipboard not supported');
+      console.warn("Clipboard not supported");
       return;
     }
 
@@ -391,7 +394,7 @@ export function useCopyToClipboard(): [
       await navigator.clipboard.writeText(text);
       setCopiedText(text);
     } catch (error) {
-      console.warn('Copy failed', error);
+      console.warn("Copy failed", error);
       setCopiedText(null);
     }
   };
@@ -450,12 +453,15 @@ export function useThrottle<T>(value: T, delay: number = 200): T {
   const lastRan = useRef<number>(Date.now());
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      if (Date.now() - lastRan.current >= delay) {
-        setThrottledValue(value);
-        lastRan.current = Date.now();
-      }
-    }, delay - (Date.now() - lastRan.current));
+    const handler = setTimeout(
+      () => {
+        if (Date.now() - lastRan.current >= delay) {
+          setThrottledValue(value);
+          lastRan.current = Date.now();
+        }
+      },
+      delay - (Date.now() - lastRan.current),
+    );
 
     return () => {
       clearTimeout(handler);
@@ -473,7 +479,7 @@ export function useThrottle<T>(value: T, delay: number = 200): T {
  */
 export function useThrottledCallback<T extends (...args: unknown[]) => unknown>(
   callback: T,
-  delay: number = 200
+  delay: number = 200,
 ): T {
   const lastRan = useRef<number>(Date.now());
   const timeoutRef = useRef<NodeJS.Timeout>();
@@ -496,11 +502,11 @@ export function useThrottledCallback<T extends (...args: unknown[]) => unknown>(
             callback(...args);
             lastRan.current = Date.now();
           },
-          delay - (now - lastRan.current)
+          delay - (now - lastRan.current),
         );
       }
     },
-    [callback, delay]
+    [callback, delay],
   ) as T;
 
   // Cleanup on unmount
@@ -534,10 +540,13 @@ export function useWhatsApp() {
     openWhatsApp(message);
   }, []);
 
-  const sendQuoteRequest = useCallback((serviceName?: string, projectDetails?: string) => {
-    const message = createQuoteRequestMessage(serviceName, projectDetails);
-    openWhatsApp(message);
-  }, []);
+  const sendQuoteRequest = useCallback(
+    (serviceName?: string, projectDetails?: string) => {
+      const message = createQuoteRequestMessage(serviceName, projectDetails);
+      openWhatsApp(message);
+    },
+    [],
+  );
 
   const sendPortfolioInquiry = useCallback((projectName: string) => {
     const message = createPortfolioInquiryMessage(projectName);
@@ -549,15 +558,18 @@ export function useWhatsApp() {
     openWhatsApp(message);
   }, []);
 
-  const sendContactFormMessage = useCallback((formData: {
-    name: string;
-    email: string;
-    service?: string;
-    message: string;
-  }) => {
-    const message = createContactFormMessage(formData);
-    openWhatsApp(message);
-  }, []);
+  const sendContactFormMessage = useCallback(
+    (formData: {
+      name: string;
+      email: string;
+      service?: string;
+      message: string;
+    }) => {
+      const message = createContactFormMessage(formData);
+      openWhatsApp(message);
+    },
+    [],
+  );
 
   const sendBlogInquiry = useCallback((blogTitle: string) => {
     const message = createBlogInquiryMessage(blogTitle);
@@ -587,12 +599,13 @@ export function useWhatsApp() {
  * Detects if user prefers reduced motion for accessibility
  */
 export function useReducedMotion(): boolean {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] =
+    useState<boolean>(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     // Set initial value
     setPrefersReducedMotion(mediaQuery.matches);
@@ -603,10 +616,10 @@ export function useReducedMotion(): boolean {
     };
 
     // Add listener
-    mediaQuery.addEventListener('change', listener);
+    mediaQuery.addEventListener("change", listener);
 
     return () => {
-      mediaQuery.removeEventListener('change', listener);
+      mediaQuery.removeEventListener("change", listener);
     };
   }, []);
 
@@ -618,7 +631,9 @@ export function useReducedMotion(): boolean {
  * Traps keyboard focus within a container element for accessibility
  * @param isActive - Whether the focus trap should be active
  */
-export function useFocusTrap(isActive: boolean = true): React.RefObject<HTMLDivElement> {
+export function useFocusTrap(
+  isActive: boolean = true,
+): React.RefObject<HTMLDivElement> {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -629,13 +644,13 @@ export function useFocusTrap(isActive: boolean = true): React.RefObject<HTMLDivE
     // Get all focusable elements
     const getFocusableElements = (): HTMLElement[] => {
       const focusableSelectors = [
-        'a[href]',
-        'button:not([disabled])',
-        'textarea:not([disabled])',
-        'input:not([disabled])',
-        'select:not([disabled])',
+        "a[href]",
+        "button:not([disabled])",
+        "textarea:not([disabled])",
+        "input:not([disabled])",
+        "select:not([disabled])",
         '[tabindex]:not([tabindex="-1"])',
-      ].join(', ');
+      ].join(", ");
 
       return Array.from(container.querySelectorAll(focusableSelectors));
     };
@@ -667,15 +682,15 @@ export function useFocusTrap(isActive: boolean = true): React.RefObject<HTMLDivE
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Tab') {
+      if (e.key === "Tab") {
         handleTabKey(e);
       }
     };
 
-    container.addEventListener('keydown', handleKeyDown);
+    container.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      container.removeEventListener('keydown', handleKeyDown);
+      container.removeEventListener("keydown", handleKeyDown);
     };
   }, [isActive]);
 
@@ -689,14 +704,23 @@ export function useFocusTrap(isActive: boolean = true): React.RefObject<HTMLDivE
  * @param windowMs - Time window in milliseconds
  */
 export function useRateLimit(limit: number = 3, windowMs: number = 60000) {
-  const [attempts, setAttempts] = useLocalStorage<number[]>('rate_limit_attempts', []);
+  const [attempts, setAttempts] = useLocalStorage<number[]>(
+    "rate_limit_attempts",
+    [],
+  );
 
-  const checkRateLimit = useCallback((): { allowed: boolean; remaining: number; resetAt: Date } => {
+  const checkRateLimit = useCallback((): {
+    allowed: boolean;
+    remaining: number;
+    resetAt: Date;
+  } => {
     const now = Date.now();
     const windowStart = now - windowMs;
 
     // Filter attempts within the time window
-    const recentAttempts = attempts.filter((timestamp) => timestamp > windowStart);
+    const recentAttempts = attempts.filter(
+      (timestamp) => timestamp > windowStart,
+    );
 
     // Check if limit exceeded
     const allowed = recentAttempts.length < limit;
@@ -714,7 +738,9 @@ export function useRateLimit(limit: number = 3, windowMs: number = 60000) {
     const windowStart = now - windowMs;
 
     // Keep only recent attempts + new one
-    const recentAttempts = attempts.filter((timestamp) => timestamp > windowStart);
+    const recentAttempts = attempts.filter(
+      (timestamp) => timestamp > windowStart,
+    );
     setAttempts([...recentAttempts, now]);
   }, [attempts, setAttempts, windowMs]);
 
@@ -726,4 +752,4 @@ export function useRateLimit(limit: number = 3, windowMs: number = 60000) {
 }
 
 // Export useScrollDepth from separate file (Sprint 5)
-export { useScrollDepth } from './useScrollDepth';
+export { useScrollDepth } from "./useScrollDepth";

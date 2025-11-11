@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion, useSpring, useTransform } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { motion, useSpring, useTransform } from "framer-motion";
 
 /* ============================================
    Scroll Progress Indicator
@@ -13,7 +13,7 @@ interface ScrollProgressProps {
 }
 
 const ScrollProgress = ({
-  color = 'from-cyan-500 to-magenta-500',
+  color = "from-cyan-500 to-magenta-500",
   height = 3,
   showPercentage = false,
 }: ScrollProgressProps) => {
@@ -40,10 +40,10 @@ const ScrollProgress = ({
       setScrollProgress(Math.min(Math.max(progress, 0), 100));
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     handleScroll(); // Initial calculation
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -57,7 +57,7 @@ const ScrollProgress = ({
           className={`h-full bg-gradient-to-r ${color} shadow-[0_0_10px_rgba(0,217,255,0.6)]`}
           style={{
             scaleX,
-            transformOrigin: '0%',
+            transformOrigin: "0%",
           }}
         />
       </motion.div>

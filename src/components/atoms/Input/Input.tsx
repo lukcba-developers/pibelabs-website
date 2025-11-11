@@ -1,6 +1,6 @@
-import { memo, forwardRef } from 'react';
-import { motion } from 'framer-motion';
-import type { InputProps } from '@/types';
+import { memo, forwardRef } from "react";
+import { motion } from "framer-motion";
+import type { InputProps } from "@/types";
 
 /* ============================================
    Input Component (Atom)
@@ -10,7 +10,7 @@ const Input = memo(
   forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
     (
       {
-        type = 'text',
+        type = "text",
         name,
         placeholder,
         value,
@@ -19,14 +19,14 @@ const Input = memo(
         required = false,
         error,
         label,
-        className = '',
+        className = "",
         onChange,
         onBlur,
         onFocus,
       },
-      ref
+      ref,
     ) => {
-      const isTextarea = type === 'textarea';
+      const isTextarea = type === "textarea";
 
       // Base styles
       const baseStyles = `
@@ -57,7 +57,9 @@ const Input = memo(
         ${baseStyles}
         ${stateStyles}
         ${className}
-      `.trim().replace(/\s+/g, ' ');
+      `
+        .trim()
+        .replace(/\s+/g, " ");
 
       const inputId = `input-${name}`;
 
@@ -121,7 +123,7 @@ const Input = memo(
               id={`${inputId}-error`}
               className="mt-2 text-sm text-red-500 font-poppins"
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
+              animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
               role="alert"
@@ -131,10 +133,10 @@ const Input = memo(
           )}
         </div>
       );
-    }
-  )
+    },
+  ),
 );
 
-Input.displayName = 'Input';
+Input.displayName = "Input";
 
 export default Input;

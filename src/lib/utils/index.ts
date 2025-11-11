@@ -7,11 +7,11 @@
  */
 export function formatCurrency(
   amount: number,
-  currency: string = 'USD',
-  locale: string = 'en-US'
+  currency: string = "USD",
+  locale: string = "en-US",
 ): string {
   return new Intl.NumberFormat(locale, {
-    style: 'currency',
+    style: "currency",
     currency,
   }).format(amount);
 }
@@ -21,62 +21,71 @@ export function formatCurrency(
  */
 export function formatDate(
   date: string | Date,
-  locale: string = 'es-AR',
-  options?: Intl.DateTimeFormatOptions
+  locale: string = "es-AR",
+  options?: Intl.DateTimeFormatOptions,
 ): string {
-  const dateObj = typeof date === 'string' ? new Date(date) : date;
-  
+  const dateObj = typeof date === "string" ? new Date(date) : date;
+
   const defaultOptions: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   };
 
-  return new Intl.DateTimeFormat(locale, options || defaultOptions).format(dateObj);
+  return new Intl.DateTimeFormat(locale, options || defaultOptions).format(
+    dateObj,
+  );
 }
 
 /**
  * Format relative time (e.g., "2 days ago")
  */
-export function formatRelativeTime(date: string | Date, locale: string = 'es-AR'): string {
-  const dateObj = typeof date === 'string' ? new Date(date) : date;
+export function formatRelativeTime(
+  date: string | Date,
+  locale: string = "es-AR",
+): string {
+  const dateObj = typeof date === "string" ? new Date(date) : date;
   const now = new Date();
   const diffInSeconds = Math.floor((now.getTime() - dateObj.getTime()) / 1000);
 
-  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
+  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
 
   if (diffInSeconds < 60) {
-    return rtf.format(-diffInSeconds, 'second');
+    return rtf.format(-diffInSeconds, "second");
   }
 
   const diffInMinutes = Math.floor(diffInSeconds / 60);
   if (diffInMinutes < 60) {
-    return rtf.format(-diffInMinutes, 'minute');
+    return rtf.format(-diffInMinutes, "minute");
   }
 
   const diffInHours = Math.floor(diffInMinutes / 60);
   if (diffInHours < 24) {
-    return rtf.format(-diffInHours, 'hour');
+    return rtf.format(-diffInHours, "hour");
   }
 
   const diffInDays = Math.floor(diffInHours / 24);
   if (diffInDays < 30) {
-    return rtf.format(-diffInDays, 'day');
+    return rtf.format(-diffInDays, "day");
   }
 
   const diffInMonths = Math.floor(diffInDays / 30);
   if (diffInMonths < 12) {
-    return rtf.format(-diffInMonths, 'month');
+    return rtf.format(-diffInMonths, "month");
   }
 
   const diffInYears = Math.floor(diffInMonths / 12);
-  return rtf.format(-diffInYears, 'year');
+  return rtf.format(-diffInYears, "year");
 }
 
 /**
  * Truncate text
  */
-export function truncate(text: string, maxLength: number = 100, suffix: string = '...'): string {
+export function truncate(
+  text: string,
+  maxLength: number = 100,
+  suffix: string = "...",
+): string {
   if (text.length <= maxLength) return text;
   return text.slice(0, maxLength - suffix.length) + suffix;
 }
@@ -87,18 +96,18 @@ export function truncate(text: string, maxLength: number = 100, suffix: string =
 export function slugify(text: string): string {
   return text
     .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '') // Remove accents
-    .replace(/[^\w\s-]/g, '') // Remove special characters
-    .replace(/\s+/g, '-') // Replace spaces with -
-    .replace(/--+/g, '-') // Replace multiple - with single -
-    .replace(/^-+|-+$/g, ''); // Remove leading/trailing -
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // Remove accents
+    .replace(/[^\w\s-]/g, "") // Remove special characters
+    .replace(/\s+/g, "-") // Replace spaces with -
+    .replace(/--+/g, "-") // Replace multiple - with single -
+    .replace(/^-+|-+$/g, ""); // Remove leading/trailing -
 }
 
 /**
  * Generate random ID
  */
-export function generateId(prefix: string = 'id'): string {
+export function generateId(prefix: string = "id"): string {
   const timestamp = Date.now().toString(36);
   const randomStr = Math.random().toString(36).substring(2, 9);
   return `${prefix}-${timestamp}-${randomStr}`;
@@ -124,7 +133,7 @@ export function randomInt(min: number, max: number): number {
 export function randomItem<T>(array: T[]): T {
   const item = array[randomInt(0, array.length - 1)];
   if (item === undefined) {
-    throw new Error('Array is empty');
+    throw new Error("Array is empty");
   }
   return item;
 }
@@ -150,14 +159,17 @@ export function shuffle<T>(array: T[]): T[] {
  * Group array items by key
  */
 export function groupBy<T>(array: T[], key: keyof T): Record<string, T[]> {
-  return array.reduce((result, item) => {
-    const groupKey = String(item[key]);
-    if (!result[groupKey]) {
-      result[groupKey] = [];
-    }
-    result[groupKey].push(item);
-    return result;
-  }, {} as Record<string, T[]>);
+  return array.reduce(
+    (result, item) => {
+      const groupKey = String(item[key]);
+      if (!result[groupKey]) {
+        result[groupKey] = [];
+      }
+      result[groupKey].push(item);
+      return result;
+    },
+    {} as Record<string, T[]>,
+  );
 }
 
 /**
@@ -173,7 +185,7 @@ export function unique<T>(array: T[]): T[] {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | null = null;
 
@@ -196,7 +208,7 @@ export function debounce<T extends (...args: any[]) => any>(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function throttle<T extends (...args: any[]) => any>(
   func: T,
-  limit: number
+  limit: number,
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
 
@@ -213,7 +225,7 @@ export function throttle<T extends (...args: any[]) => any>(
  * Deep clone object
  */
 export function deepClone<T>(obj: T): T {
-  if (obj === null || typeof obj !== 'object') return obj;
+  if (obj === null || typeof obj !== "object") return obj;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (obj instanceof Date) return new Date(obj.getTime()) as any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -236,8 +248,8 @@ export function deepClone<T>(obj: T): T {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isEmpty(obj: any): boolean {
   if (obj === null || obj === undefined) return true;
-  if (typeof obj === 'string' || Array.isArray(obj)) return obj.length === 0;
-  if (typeof obj === 'object') return Object.keys(obj).length === 0;
+  if (typeof obj === "string" || Array.isArray(obj)) return obj.length === 0;
+  if (typeof obj === "object") return Object.keys(obj).length === 0;
   return false;
 }
 
@@ -254,7 +266,7 @@ export function sleep(ms: number): Promise<void> {
 export async function retry<T>(
   fn: () => Promise<T>,
   maxAttempts: number = 3,
-  delay: number = 1000
+  delay: number = 1000,
 ): Promise<T> {
   let lastError: Error | null = null;
 
@@ -278,11 +290,11 @@ export async function retry<T>(
 export function parseQueryString(queryString: string): Record<string, string> {
   const params = new URLSearchParams(queryString);
   const result: Record<string, string> = {};
-  
+
   params.forEach((value, key) => {
     result[key] = value;
   });
-  
+
   return result;
 }
 
@@ -292,15 +304,15 @@ export function parseQueryString(queryString: string): Record<string, string> {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function buildQueryString(params: Record<string, any>): string {
   const searchParams = new URLSearchParams();
-  
+
   Object.entries(params).forEach(([key, value]) => {
     if (value !== null && value !== undefined) {
       searchParams.append(key, String(value));
     }
   });
-  
+
   const queryString = searchParams.toString();
-  return queryString ? `?${queryString}` : '';
+  return queryString ? `?${queryString}` : "";
 }
 
 /**
@@ -316,22 +328,22 @@ export function capitalize(text: string): string {
 export function toTitleCase(text: string): string {
   return text
     .toLowerCase()
-    .split(' ')
+    .split(" ")
     .map((word) => capitalize(word))
-    .join(' ');
+    .join(" ");
 }
 
 /**
  * Format file size
  */
 export function formatFileSize(bytes: number): string {
-  if (bytes === 0) return '0 Bytes';
+  if (bytes === 0) return "0 Bytes";
 
   const k = 1024;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-  return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
 }
 
 /**
@@ -359,10 +371,10 @@ export function isValidUrl(url: string): boolean {
  */
 export function getInitials(name: string, maxChars: number = 2): string {
   return name
-    .split(' ')
+    .split(" ")
     .map((word) => word.charAt(0).toUpperCase())
     .slice(0, maxChars)
-    .join('');
+    .join("");
 }
 
 /**
@@ -383,7 +395,7 @@ export function stringToColor(str: string): string {
  */
 export function calculateReadingTime(
   text: string,
-  wordsPerMinute: number = 200
+  wordsPerMinute: number = 200,
 ): number {
   const words = text.trim().split(/\s+/).length;
   return Math.ceil(words / wordsPerMinute);
@@ -392,10 +404,7 @@ export function calculateReadingTime(
 /**
  * Format number with separators
  */
-export function formatNumber(
-  num: number,
-  locale: string = 'es-AR'
-): string {
+export function formatNumber(num: number, locale: string = "es-AR"): string {
   return new Intl.NumberFormat(locale).format(num);
 }
 
@@ -412,7 +421,7 @@ export function percentage(value: number, total: number): number {
  */
 export function downloadBlob(blob: Blob, filename: string): void {
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url;
   a.download = filename;
   document.body.appendChild(a);
@@ -429,7 +438,7 @@ export async function copyToClipboard(text: string): Promise<boolean> {
     await navigator.clipboard.writeText(text);
     return true;
   } catch (error) {
-    console.error('Failed to copy:', error);
+    console.error("Failed to copy:", error);
     return false;
   }
 }
@@ -439,15 +448,15 @@ export async function copyToClipboard(text: string): Promise<boolean> {
  */
 export function getContrastColor(hexColor: string): string {
   // Remove # if present
-  const hex = hexColor.replace('#', '');
-  
+  const hex = hexColor.replace("#", "");
+
   // Convert to RGB
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
   const b = parseInt(hex.substring(4, 6), 16);
-  
+
   // Calculate luminance
   const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  
-  return luminance > 0.5 ? '#000000' : '#FFFFFF';
+
+  return luminance > 0.5 ? "#000000" : "#FFFFFF";
 }

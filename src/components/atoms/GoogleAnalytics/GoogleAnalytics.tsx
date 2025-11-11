@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { initGA, sendPageView } from '@/lib/analytics/googleAnalytics';
+import { useEffect } from "react";
+import { initGA, sendPageView } from "@/lib/analytics/googleAnalytics";
 
 /* ============================================
    Google Analytics Component (Atom)
@@ -37,10 +37,10 @@ const GoogleAnalytics = ({
       };
 
       // Escuchar cambios en el hash (para navegación con #)
-      window.addEventListener('hashchange', handleRouteChange);
+      window.addEventListener("hashchange", handleRouteChange);
 
       return () => {
-        window.removeEventListener('hashchange', handleRouteChange);
+        window.removeEventListener("hashchange", handleRouteChange);
       };
     }
 

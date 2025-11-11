@@ -6,13 +6,13 @@
 // Service Types
 // ============================================
 
-export type ServiceType = 
-  | 'web' 
-  | 'ia' 
-  | 'design' 
-  | 'cloud' 
-  | 'security' 
-  | 'consulting';
+export type ServiceType =
+  | "web"
+  | "ia"
+  | "design"
+  | "cloud"
+  | "security"
+  | "consulting";
 
 export interface Service {
   id: ServiceType;
@@ -20,7 +20,7 @@ export interface Service {
   description: string;
   icon: string;
   features: string[];
-  color: 'cyan' | 'magenta';
+  color: "cyan" | "magenta";
 }
 
 // ============================================
@@ -72,7 +72,7 @@ export interface APIResponse<T> {
 
 export interface ContactAPIResponse {
   id: string;
-  status: 'pending' | 'contacted' | 'qualified' | 'converted' | 'rejected';
+  status: "pending" | "contacted" | "qualified" | "converted" | "rejected";
   createdAt: string;
 }
 
@@ -85,7 +85,7 @@ export interface AnimationConfig {
   delay?: number;
   ease?: string | number[];
   repeat?: number;
-  repeatType?: 'loop' | 'reverse' | 'mirror';
+  repeatType?: "loop" | "reverse" | "mirror";
 }
 
 export interface ScrollAnimationConfig extends AnimationConfig {
@@ -104,17 +104,17 @@ export interface BaseComponentProps {
 }
 
 export interface ButtonProps extends BaseComponentProps {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "primary" | "secondary" | "outline" | "ghost";
+  size?: "sm" | "md" | "lg";
   disabled?: boolean;
   loading?: boolean;
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   ariaLabel?: string;
 }
 
 export interface InputProps extends BaseComponentProps {
-  type?: 'text' | 'email' | 'tel' | 'number' | 'password' | 'textarea';
+  type?: "text" | "email" | "tel" | "number" | "password" | "textarea";
   name: string;
   placeholder?: string;
   value?: string;
@@ -123,13 +123,19 @@ export interface InputProps extends BaseComponentProps {
   required?: boolean;
   error?: string;
   label?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  onFocus?: (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onChange?: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
+  onBlur?: (
+    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
+  onFocus?: (
+    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
 }
 
 export interface CardProps extends BaseComponentProps {
-  variant?: 'default' | 'glass' | 'gradient';
+  variant?: "default" | "glass" | "gradient";
   hoverable?: boolean;
   clickable?: boolean;
   onClick?: () => void;
@@ -165,7 +171,7 @@ export interface PortfolioProject {
   github?: string;
   featured?: boolean;
   year: number;
-  status?: 'production' | 'development' | 'completed';
+  status?: "production" | "development" | "completed";
   features?: string[];
   achievements?: string[];
   techStack?: {
@@ -177,7 +183,7 @@ export interface PortfolioProject {
   };
 }
 
-export type PortfolioCategory = 'all' | 'web' | 'ia' | 'design' | 'cloud';
+export type PortfolioCategory = "all" | "web" | "ia" | "design" | "cloud";
 
 // ============================================
 // Blog Types
@@ -288,15 +294,15 @@ export type Optional<T> = T | undefined;
 // ============================================
 
 export type FormSubmitHandler = (
-  event: React.FormEvent<HTMLFormElement>
+  event: React.FormEvent<HTMLFormElement>,
 ) => void | Promise<void>;
 
 export type ClickHandler = (
-  event: React.MouseEvent<HTMLElement>
+  event: React.MouseEvent<HTMLElement>,
 ) => void | Promise<void>;
 
 export type ChangeHandler = (
-  event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
 ) => void;
 
 // ============================================
@@ -309,7 +315,7 @@ export interface ValidationResult {
 }
 
 export type ValidationRule = {
-  type: 'required' | 'email' | 'minLength' | 'maxLength' | 'pattern' | 'custom';
+  type: "required" | "email" | "minLength" | "maxLength" | "pattern" | "custom";
   value?: string | number | RegExp;
   message: string;
   validator?: (value: string) => boolean;
@@ -320,8 +326,8 @@ export type ValidationRule = {
 // ============================================
 
 export interface WebVitalsMetric {
-  name: 'FCP' | 'LCP' | 'FID' | 'CLS' | 'TTFB';
+  name: "FCP" | "LCP" | "FID" | "CLS" | "TTFB";
   value: number;
   id: string;
-  rating: 'good' | 'needs-improvement' | 'poor';
+  rating: "good" | "needs-improvement" | "poor";
 }

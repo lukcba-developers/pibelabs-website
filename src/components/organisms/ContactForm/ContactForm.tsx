@@ -1,13 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { motion, AnimatePresence } from 'framer-motion';
-import { contactFormSchema, suggestEmailDomain } from '@/lib/validation/schemas';
-import { SERVICES } from '@/lib/constants/config';
-import type { ContactFormData, ContactFormState } from '@/types';
-import Input from '@/components/atoms/Input';
-import Button from '@/components/atoms/Button';
-import { useRateLimit } from '@/hooks';
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  contactFormSchema,
+  suggestEmailDomain,
+} from "@/lib/validation/schemas";
+import { SERVICES } from "@/lib/constants/config";
+import type { ContactFormData, ContactFormState } from "@/types";
+import Input from "@/components/atoms/Input";
+import Button from "@/components/atoms/Button";
+import { useRateLimit } from "@/hooks";
 import {
   trackFormStart,
   trackFormFieldComplete,
@@ -15,7 +18,7 @@ import {
   trackFormSubmit,
   trackFormSuccess,
   trackFormFailure,
-} from '@/lib/analytics/googleAnalytics';
+} from "@/lib/analytics/googleAnalytics";
 
 /* ============================================
    Contact Form Component (Organism)
@@ -43,22 +46,22 @@ const ContactForm = () => {
     watch,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
-    mode: 'onBlur',
+    mode: "onBlur",
   });
 
   // Watch email field for suggestions
-  const emailValue = watch('email');
-  
+  const emailValue = watch("email");
+
   // Check for email typos
   const checkEmailTypo = (email: string) => {
-    if (email && email.includes('@')) {
+    if (email && email.includes("@")) {
       const suggestion = suggestEmailDomain(email);
       setEmailSuggestion(suggestion);
     } else {
       setEmailSuggestion(null);
     }
   };
-  
+
   // Use emailValue to check for typos
   useEffect(() => {
     if (emailValue) {
@@ -88,7 +91,9 @@ const ContactForm = () => {
     const { allowed, remaining, resetAt } = checkRateLimit();
 
     if (!allowed) {
-      const minutesUntilReset = Math.ceil((resetAt.getTime() - Date.now()) / 60000);
+      const minutesUntilReset = Math.ceil(
+        (resetAt.getTime() - Date.now()) / 60000,
+      );
       const errorMsg = `Has alcanzado el límite de envíos. Intenta nuevamente en ${minutesUntilReset} minuto(s).`;
       setRateLimitError(errorMsg);
       trackFormFailure(errorMsg);
@@ -107,8 +112,8 @@ const ContactForm = () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Mock successful response
-      if (process.env.NODE_ENV === 'development') {
-        console.log('Form submitted:', data);
+      if (process.env.NODE_ENV === "development") {
+        console.log("Form submitted:", data);
         console.log(`Rate limit remaining: ${remaining - 1}`);
       }
 
@@ -134,7 +139,8 @@ const ContactForm = () => {
         });
       }, 5000);
     } catch (error) {
-      const errorMsg = 'Hubo un error al enviar el mensaje. Por favor intenta nuevamente.';
+      const errorMsg =
+        "Hubo un error al enviar el mensaje. Por favor intenta nuevamente.";
 
       // Track form failure
       trackFormFailure(errorMsg);
@@ -184,7 +190,8 @@ const ContactForm = () => {
           </h2>
 
           <p className="font-poppins text-lg text-gray-300 max-w-2xl mx-auto">
-            Cuéntanos sobre tu proyecto y descubre cómo podemos ayudarte a alcanzar tus objetivos.
+            Cuéntanos sobre tu proyecto y descubre cómo podemos ayudarte a
+            alcanzar tus objetivos.
           </p>
         </motion.div>
 
@@ -213,7 +220,8 @@ const ContactForm = () => {
                         ¡Mensaje Enviado!
                       </h3>
                       <p className="font-poppins text-gray-300">
-                        Gracias por contactarnos. Nuestro equipo revisará tu mensaje y te responderá en menos de 24 horas.
+                        Gracias por contactarnos. Nuestro equipo revisará tu
+                        mensaje y te responderá en menos de 24 horas.
                       </p>
                     </div>
                   </div>
@@ -237,7 +245,9 @@ const ContactForm = () => {
                       <h3 className="font-rajdhani font-bold text-xl text-yellow-400 mb-2">
                         Límite de Envíos Alcanzado
                       </h3>
-                      <p className="font-poppins text-gray-300">{rateLimitError}</p>
+                      <p className="font-poppins text-gray-300">
+                        {rateLimitError}
+                      </p>
                     </div>
                   </div>
                 </motion.div>
@@ -279,7 +289,7 @@ const ContactForm = () => {
                 transition={{ delay: 0.1 }}
               >
                 <Input
-                  {...register('name')}
+                  {...register("name")}
                   type="text"
                   name="name"
                   label="Nombre Completo"
@@ -287,11 +297,11 @@ const ContactForm = () => {
                   required
                   error={errors.name?.message}
                   onFocus={handleFormStart}
-                  onBlur={() => handleFieldBlur('name')}
+                  onBlur={() => handleFieldBlur("name")}
                   className={`bg-dark-primary text-white border-2 transition-all duration-300 ${
                     errors.name
-                      ? 'border-red-500 animate-shake'
-                      : 'border-gray-600 focus:border-cyan-neon focus:ring-4 focus:ring-cyan-neon/30 focus:shadow-[0_0_20px_rgba(0,217,255,0.4)]'
+                      ? "border-red-500 animate-shake"
+                      : "border-gray-600 focus:border-cyan-neon focus:ring-4 focus:ring-cyan-neon/30 focus:shadow-[0_0_20px_rgba(0,217,255,0.4)]"
                   }`}
                 />
               </motion.div>
@@ -303,7 +313,10 @@ const ContactForm = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                <label htmlFor="email" className="block mb-2 font-rajdhani font-medium text-white">
+                <label
+                  htmlFor="email"
+                  className="block mb-2 font-rajdhani font-medium text-white"
+                >
                   Email
                   <span className="text-cyan-neon ml-1">*</span>
                   <span className="text-xs text-gray-400 font-normal ml-2">
@@ -311,7 +324,7 @@ const ContactForm = () => {
                   </span>
                 </label>
                 <Input
-                  {...register('email')}
+                  {...register("email")}
                   type="email"
                   name="email"
                   placeholder="tu@email.com"
@@ -320,12 +333,12 @@ const ContactForm = () => {
                   onFocus={handleFormStart}
                   onBlur={(e) => {
                     checkEmailTypo(e.target.value);
-                    handleFieldBlur('email');
+                    handleFieldBlur("email");
                   }}
                   className={`bg-dark-primary text-white border-2 transition-all duration-300 ${
                     errors.email
-                      ? 'border-red-500 animate-shake'
-                      : 'border-gray-600 focus:border-cyan-neon focus:ring-4 focus:ring-cyan-neon/30 focus:shadow-[0_0_20px_rgba(0,217,255,0.4)]'
+                      ? "border-red-500 animate-shake"
+                      : "border-gray-600 focus:border-cyan-neon focus:ring-4 focus:ring-cyan-neon/30 focus:shadow-[0_0_20px_rgba(0,217,255,0.4)]"
                   }`}
                 />
 
@@ -335,11 +348,11 @@ const ContactForm = () => {
                     <motion.div
                       className="mt-2 p-3 bg-cyan-neon/10 border border-cyan-neon/30 rounded-lg"
                       initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
+                      animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                     >
                       <p className="font-poppins text-sm text-cyan-neon">
-                        ¿Quisiste decir{' '}
+                        ¿Quisiste decir{" "}
                         <button
                           type="button"
                           className="underline font-semibold hover:text-cyan-bright"
@@ -365,7 +378,10 @@ const ContactForm = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               >
-                <label htmlFor="service-select" className="block mb-2 font-rajdhani font-medium text-white">
+                <label
+                  htmlFor="service-select"
+                  className="block mb-2 font-rajdhani font-medium text-white"
+                >
                   Servicio de Interés
                   <span className="text-magenta-neon ml-1">*</span>
                   <span className="text-xs text-gray-400 font-normal ml-2">
@@ -374,11 +390,11 @@ const ContactForm = () => {
                 </label>
                 <select
                   id="service-select"
-                  {...register('service')}
+                  {...register("service")}
                   className="w-full px-4 py-3 bg-dark-primary text-white border-2 border-gray-600 rounded-lg font-poppins focus:outline-none focus:border-cyan-neon focus:ring-2 focus:ring-cyan-neon transition-all"
                   required
                   onFocus={handleFormStart}
-                  onBlur={() => handleFieldBlur('service')}
+                  onBlur={() => handleFieldBlur("service")}
                 >
                   <option value="">Selecciona un servicio</option>
                   {SERVICES.map((service) => (
@@ -402,7 +418,7 @@ const ContactForm = () => {
                 transition={{ delay: 0.4 }}
               >
                 <Input
-                  {...register('message')}
+                  {...register("message")}
                   type="textarea"
                   name="message"
                   label="Mensaje"
@@ -410,7 +426,7 @@ const ContactForm = () => {
                   required
                   error={errors.message?.message}
                   onFocus={handleFormStart}
-                  onBlur={() => handleFieldBlur('message')}
+                  onBlur={() => handleFieldBlur("message")}
                   className="bg-dark-primary text-white"
                 />
                 <p className="mt-2 text-xs text-gray-400 font-poppins">
@@ -435,7 +451,7 @@ const ContactForm = () => {
                   className="w-full"
                   ariaLabel="Enviar formulario de contacto"
                 >
-                  {formState.isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
+                  {formState.isSubmitting ? "Enviando..." : "Enviar Mensaje"}
                 </Button>
               </motion.div>
 
@@ -447,8 +463,8 @@ const ContactForm = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.6 }}
               >
-                Al enviar este formulario, aceptas nuestra política de privacidad.
-                Nunca compartiremos tu información con terceros.
+                Al enviar este formulario, aceptas nuestra política de
+                privacidad. Nunca compartiremos tu información con terceros.
               </motion.p>
             </form>
           </motion.div>

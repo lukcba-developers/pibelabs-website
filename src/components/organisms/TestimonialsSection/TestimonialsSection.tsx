@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Quote, Linkedin, ChevronLeft, ChevronRight } from 'lucide-react';
-import { TESTIMONIALS, CLIENT_LOGOS } from '@/lib/constants/config';
-import LazyImage from '@/components/atoms/LazyImage';
-import { useReducedMotion } from '@/hooks';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Quote, Linkedin, ChevronLeft, ChevronRight } from "lucide-react";
+import { TESTIMONIALS, CLIENT_LOGOS } from "@/lib/constants/config";
+import LazyImage from "@/components/atoms/LazyImage";
+import { useReducedMotion } from "@/hooks";
 
 /* ============================================
    Unified Testimonials Section Component
@@ -17,18 +17,18 @@ import { useReducedMotion } from '@/hooks';
    ============================================ */
 
 export interface TestimonialsSectionProps {
-  variant?: 'carousel' | 'grid' | 'highlight';
+  variant?: "carousel" | "grid" | "highlight";
   showClientLogos?: boolean;
   showCTA?: boolean;
-  bgStyle?: 'dark' | 'light';
+  bgStyle?: "dark" | "light";
   maxItems?: number;
 }
 
 const TestimonialsSection = ({
-  variant = 'grid',
+  variant = "grid",
   showClientLogos = false,
   showCTA = true,
-  bgStyle = 'dark',
+  bgStyle = "dark",
   maxItems = 3,
 }: TestimonialsSectionProps) => {
   const prefersReducedMotion = useReducedMotion();
@@ -40,7 +40,7 @@ const TestimonialsSection = ({
 
   // Auto-play for carousel
   useEffect(() => {
-    if (variant === 'carousel') {
+    if (variant === "carousel") {
       const timer = setInterval(() => {
         setDirection(1);
         setCurrentIndex((prev) => (prev + 1) % displayTestimonials.length);
@@ -79,7 +79,7 @@ const TestimonialsSection = ({
   // Render based on variant
   const renderTestimonials = () => {
     switch (variant) {
-      case 'carousel':
+      case "carousel":
         return (
           <div className="max-w-5xl mx-auto relative px-4">
             <div className="relative h-[400px] flex items-center">
@@ -92,7 +92,7 @@ const TestimonialsSection = ({
                   animate="center"
                   exit="exit"
                   transition={{
-                    x: { type: 'spring', stiffness: 300, damping: 30 },
+                    x: { type: "spring", stiffness: 300, damping: 30 },
                     opacity: { duration: 0.2 },
                   }}
                   className="absolute w-full"
@@ -100,9 +100,9 @@ const TestimonialsSection = ({
                   <div
                     className={`
                       ${
-                        bgStyle === 'dark'
-                          ? 'bg-gradient-to-br from-dark-secondary to-dark-primary border-cyan-neon/30'
-                          : 'bg-white border-gray-200'
+                        bgStyle === "dark"
+                          ? "bg-gradient-to-br from-dark-secondary to-dark-primary border-cyan-neon/30"
+                          : "bg-white border-gray-200"
                       }
                       border-2 rounded-2xl p-8 md:p-12 shadow-2xl
                     `}
@@ -112,45 +112,51 @@ const TestimonialsSection = ({
                     <p
                       className={`
                         text-xl md:text-2xl font-poppins leading-relaxed mb-8
-                        ${bgStyle === 'dark' ? 'text-gray-200' : 'text-gray-700'}
+                        ${bgStyle === "dark" ? "text-gray-200" : "text-gray-700"}
                       `}
                     >
-                      "{displayTestimonials[currentIndex]?.text || ''}"
+                      "{displayTestimonials[currentIndex]?.text || ""}"
                     </p>
 
                     <div className="flex items-center gap-4">
                       <LazyImage
-                        src={displayTestimonials[currentIndex]?.image || ''}
-                        alt={displayTestimonials[currentIndex]?.author || 'Client'}
+                        src={displayTestimonials[currentIndex]?.image || ""}
+                        alt={
+                          displayTestimonials[currentIndex]?.author || "Client"
+                        }
                         className="w-16 h-16 rounded-full border-2 border-cyan-neon object-cover"
                       />
-                          <div className="flex-1">
+                      <div className="flex-1">
                         <h4
                           className={`
                             font-rajdhani font-bold text-lg
-                            ${bgStyle === 'dark' ? 'text-white' : 'text-gray-900'}
+                            ${bgStyle === "dark" ? "text-white" : "text-gray-900"}
                           `}
                         >
-                          {displayTestimonials[currentIndex]?.author || ''}
+                          {displayTestimonials[currentIndex]?.author || ""}
                         </h4>
                         <p className="text-cyan-neon font-poppins">
-                          {displayTestimonials[currentIndex]?.role || ''}
+                          {displayTestimonials[currentIndex]?.role || ""}
                         </p>
                         <p
                           className={`text-sm ${
-                            bgStyle === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                            bgStyle === "dark"
+                              ? "text-gray-400"
+                              : "text-gray-600"
                           }`}
                         >
-                          {displayTestimonials[currentIndex]?.company || ''}
+                          {displayTestimonials[currentIndex]?.company || ""}
                         </p>
                       </div>
                       {displayTestimonials[currentIndex]?.linkedin && (
                         <a
-                          href={displayTestimonials[currentIndex]?.linkedin || '#'}
+                          href={
+                            displayTestimonials[currentIndex]?.linkedin || "#"
+                          }
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-cyan-400 hover:text-cyan-300 transition-colors"
-                          aria-label={`LinkedIn de ${displayTestimonials[currentIndex]?.author || 'Client'}`}
+                          aria-label={`LinkedIn de ${displayTestimonials[currentIndex]?.author || "Client"}`}
                         >
                           <Linkedin size={24} />
                         </a>
@@ -189,8 +195,8 @@ const TestimonialsSection = ({
                   }}
                   className={`h-3 rounded-full transition-all ${
                     index === currentIndex
-                      ? 'bg-cyan-neon w-8'
-                      : 'bg-cyan-neon/30 hover:bg-cyan-neon/50 w-3'
+                      ? "bg-cyan-neon w-8"
+                      : "bg-cyan-neon/30 hover:bg-cyan-neon/50 w-3"
                   }`}
                   aria-label={`Ir al testimonio ${index + 1}`}
                 />
@@ -199,13 +205,15 @@ const TestimonialsSection = ({
           </div>
         );
 
-      case 'highlight':
+      case "highlight":
         // Single highlighted testimonial
         return (
           <div className="max-w-4xl mx-auto">
             <motion.div
               initial={
-                prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                prefersReducedMotion
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 0, y: 30 }
               }
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -213,9 +221,9 @@ const TestimonialsSection = ({
               className={`
                 group relative border-2 rounded-2xl p-8 md:p-12 shadow-2xl
                 ${
-                  bgStyle === 'dark'
-                    ? 'bg-gradient-to-br from-dark-secondary to-dark-primary border-cyan-neon/30 hover:border-cyan-neon/60 hover:shadow-glow-cyan'
-                    : 'bg-white border-gray-200 hover:border-cyan-neon/40'
+                  bgStyle === "dark"
+                    ? "bg-gradient-to-br from-dark-secondary to-dark-primary border-cyan-neon/30 hover:border-cyan-neon/60 hover:shadow-glow-cyan"
+                    : "bg-white border-gray-200 hover:border-cyan-neon/40"
                 }
                 transition-all duration-300
               `}
@@ -225,45 +233,45 @@ const TestimonialsSection = ({
               <p
                 className={`
                   text-2xl md:text-3xl font-poppins leading-relaxed mb-8 italic
-                  ${bgStyle === 'dark' ? 'text-gray-100' : 'text-gray-800'}
+                  ${bgStyle === "dark" ? "text-gray-100" : "text-gray-800"}
                 `}
               >
-                "{displayTestimonials[0]?.text || ''}"
+                "{displayTestimonials[0]?.text || ""}"
               </p>
 
               <div className="flex items-center gap-4">
                 <LazyImage
-                  src={displayTestimonials[0]?.image || ''}
-                  alt={displayTestimonials[0]?.author || 'Client'}
+                  src={displayTestimonials[0]?.image || ""}
+                  alt={displayTestimonials[0]?.author || "Client"}
                   className="w-20 h-20 rounded-full border-4 border-cyan-neon/50 object-cover"
                 />
                 <div className="flex-1">
                   <h4
                     className={`
                       font-orbitron font-bold text-2xl
-                      ${bgStyle === 'dark' ? 'text-white' : 'text-gray-900'}
+                      ${bgStyle === "dark" ? "text-white" : "text-gray-900"}
                     `}
                   >
-                    {displayTestimonials[0]?.author || ''}
+                    {displayTestimonials[0]?.author || ""}
                   </h4>
                   <p className="text-cyan-neon font-rajdhani text-lg font-semibold">
-                    {displayTestimonials[0]?.role || ''}
+                    {displayTestimonials[0]?.role || ""}
                   </p>
                   <p
                     className={`${
-                      bgStyle === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                      bgStyle === "dark" ? "text-gray-400" : "text-gray-600"
                     }`}
                   >
-                    {displayTestimonials[0]?.company || ''}
+                    {displayTestimonials[0]?.company || ""}
                   </p>
                 </div>
                 {displayTestimonials[0]?.linkedin && (
                   <a
-                    href={displayTestimonials[0]?.linkedin || '#'}
+                    href={displayTestimonials[0]?.linkedin || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-cyan-400 hover:text-cyan-300 transition-colors"
-                    aria-label={`LinkedIn de ${displayTestimonials[0]?.author || 'Client'}`}
+                    aria-label={`LinkedIn de ${displayTestimonials[0]?.author || "Client"}`}
                   >
                     <Linkedin size={28} />
                   </a>
@@ -273,16 +281,20 @@ const TestimonialsSection = ({
           </div>
         );
 
-      case 'grid':
+      case "grid":
       default:
         // Grid layout (original SocialProof style)
         return (
-          <div className={`grid md:grid-cols-2 lg:grid-cols-${Math.min(maxItems, 3)} gap-8`}>
+          <div
+            className={`grid md:grid-cols-2 lg:grid-cols-${Math.min(maxItems, 3)} gap-8`}
+          >
             {displayTestimonials.map((testimonial, index) => (
               <motion.div
                 key={testimonial.id}
                 initial={
-                  prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  prefersReducedMotion
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: 30 }
                 }
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -293,9 +305,9 @@ const TestimonialsSection = ({
                 className={`
                   group relative border-2 rounded-xl p-8 transition-all duration-300
                   ${
-                    bgStyle === 'dark'
-                      ? 'bg-dark-primary border-gray-700 hover:border-cyan-neon hover:shadow-[0_0_30px_rgba(0,217,255,0.3)]'
-                      : 'bg-white border-gray-200 hover:border-cyan-neon/40 hover:shadow-xl'
+                    bgStyle === "dark"
+                      ? "bg-dark-primary border-gray-700 hover:border-cyan-neon hover:shadow-[0_0_30px_rgba(0,217,255,0.3)]"
+                      : "bg-white border-gray-200 hover:border-cyan-neon/40 hover:shadow-xl"
                   }
                 `}
               >
@@ -322,7 +334,7 @@ const TestimonialsSection = ({
                 <blockquote
                   className={`
                     font-poppins text-base leading-relaxed mb-6 relative z-10
-                    ${bgStyle === 'dark' ? 'text-gray-200' : 'text-gray-700'}
+                    ${bgStyle === "dark" ? "text-gray-200" : "text-gray-700"}
                   `}
                 >
                   "{testimonial.text}"
@@ -339,14 +351,14 @@ const TestimonialsSection = ({
                     <div
                       className={`
                         font-rajdhani font-bold text-lg
-                        ${bgStyle === 'dark' ? 'text-white' : 'text-gray-900'}
+                        ${bgStyle === "dark" ? "text-white" : "text-gray-900"}
                       `}
                     >
                       {testimonial.author}
                     </div>
                     <div
                       className={`text-sm ${
-                        bgStyle === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                        bgStyle === "dark" ? "text-gray-400" : "text-gray-600"
                       }`}
                     >
                       {testimonial.role}
@@ -377,7 +389,7 @@ const TestimonialsSection = ({
   return (
     <section
       className={`py-20 ${
-        bgStyle === 'dark' ? 'bg-dark-secondary' : 'bg-gray-50'
+        bgStyle === "dark" ? "bg-dark-secondary" : "bg-gray-50"
       } overflow-hidden`}
     >
       <div className="container mx-auto px-4">
@@ -386,7 +398,9 @@ const TestimonialsSection = ({
           <motion.div
             className="text-center mb-20"
             initial={
-              prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+              prefersReducedMotion
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: 20 }
             }
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -423,7 +437,9 @@ const TestimonialsSection = ({
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
-          initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          initial={
+            prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+          }
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
@@ -431,7 +447,9 @@ const TestimonialsSection = ({
           <motion.span
             className="inline-block px-4 py-2 rounded-full bg-magenta-neon/10 text-magenta-neon font-rajdhani font-semibold text-sm mb-4"
             initial={
-              prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
+              prefersReducedMotion
+                ? { opacity: 1, scale: 1 }
+                : { opacity: 0, scale: 0.8 }
             }
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -443,10 +461,10 @@ const TestimonialsSection = ({
           <h2
             className={`
               text-4xl md:text-5xl font-orbitron font-bold mb-4
-              ${bgStyle === 'dark' ? 'text-white' : 'text-gray-900'}
+              ${bgStyle === "dark" ? "text-white" : "text-gray-900"}
             `}
           >
-            Lo que dicen{' '}
+            Lo que dicen{" "}
             <span className="bg-gradient-to-r from-cyan-400 to-magenta-400 bg-clip-text text-transparent">
               nuestros clientes
             </span>
@@ -454,7 +472,7 @@ const TestimonialsSection = ({
           <p
             className={`
               font-poppins text-lg max-w-2xl mx-auto
-              ${bgStyle === 'dark' ? 'text-gray-200' : 'text-gray-600'}
+              ${bgStyle === "dark" ? "text-gray-200" : "text-gray-600"}
             `}
           >
             Testimonios reales de empresas que confiaron en PibeLabs
@@ -469,7 +487,9 @@ const TestimonialsSection = ({
           <motion.div
             className="text-center mt-16"
             initial={
-              prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+              prefersReducedMotion
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: 20 }
             }
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -478,7 +498,7 @@ const TestimonialsSection = ({
             <p
               className={`
                 font-poppins mb-6
-                ${bgStyle === 'dark' ? 'text-gray-300' : 'text-gray-700'}
+                ${bgStyle === "dark" ? "text-gray-300" : "text-gray-700"}
               `}
             >
               ¿Quieres ser nuestro próximo caso de éxito?

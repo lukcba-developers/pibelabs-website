@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, Minus } from "lucide-react";
 
 interface FAQItem {
   question: string;
@@ -9,28 +9,34 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: '¿Cuánto tiempo toma desarrollar un proyecto?',
-    answer: 'El tiempo de desarrollo varía según la complejidad del proyecto. Un MVP típico puede tomar de 4 a 8 semanas, mientras que proyectos más complejos pueden requerir 3-6 meses. Trabajamos con metodologías ágiles para entregas incrementales.',
+    question: "¿Cuánto tiempo toma desarrollar un proyecto?",
+    answer:
+      "El tiempo de desarrollo varía según la complejidad del proyecto. Un MVP típico puede tomar de 4 a 8 semanas, mientras que proyectos más complejos pueden requerir 3-6 meses. Trabajamos con metodologías ágiles para entregas incrementales.",
   },
   {
-    question: '¿Qué tecnologías utilizan?',
-    answer: 'Utilizamos tecnologías modernas y probadas: React, TypeScript, Node.js, Python, AWS, y más. Seleccionamos el stack tecnológico según las necesidades específicas de cada proyecto.',
+    question: "¿Qué tecnologías utilizan?",
+    answer:
+      "Utilizamos tecnologías modernas y probadas: React, TypeScript, Node.js, Python, AWS, y más. Seleccionamos el stack tecnológico según las necesidades específicas de cada proyecto.",
   },
   {
-    question: '¿Ofrecen soporte post-lanzamiento?',
-    answer: 'Sí, ofrecemos planes de mantenimiento y soporte continuo. Incluyen actualizaciones, corrección de bugs, monitoreo de performance, y mejoras incrementales según tus necesidades.',
+    question: "¿Ofrecen soporte post-lanzamiento?",
+    answer:
+      "Sí, ofrecemos planes de mantenimiento y soporte continuo. Incluyen actualizaciones, corrección de bugs, monitoreo de performance, y mejoras incrementales según tus necesidades.",
   },
   {
-    question: '¿Trabajan con startups?',
-    answer: 'Absolutamente. Tenemos experiencia ayudando a startups a construir sus MVPs y escalar sus productos. Ofrecemos modelos de pricing flexibles adaptados a las necesidades de startups.',
+    question: "¿Trabajan con startups?",
+    answer:
+      "Absolutamente. Tenemos experiencia ayudando a startups a construir sus MVPs y escalar sus productos. Ofrecemos modelos de pricing flexibles adaptados a las necesidades de startups.",
   },
   {
-    question: '¿Cómo es el proceso de trabajo?',
-    answer: 'Seguimos metodología Agile con sprints de 2 semanas. Incluye reuniones de planificación, dailies, demos, y retrospectivas. Mantenemos comunicación constante y transparencia total del progreso.',
+    question: "¿Cómo es el proceso de trabajo?",
+    answer:
+      "Seguimos metodología Agile con sprints de 2 semanas. Incluye reuniones de planificación, dailies, demos, y retrospectivas. Mantenemos comunicación constante y transparencia total del progreso.",
   },
   {
-    question: '¿Qué diferencia a PibeLabs?',
-    answer: 'Nos enfocamos en resultados medibles, no solo en entregar código. Combinamos expertise técnico con visión de negocio, y trabajamos como parte de tu equipo. Además, garantizamos calidad enterprise con código limpio y bien documentado.',
+    question: "¿Qué diferencia a PibeLabs?",
+    answer:
+      "Nos enfocamos en resultados medibles, no solo en entregar código. Combinamos expertise técnico con visión de negocio, y trabajamos como parte de tu equipo. Además, garantizamos calidad enterprise con código limpio y bien documentado.",
   },
 ];
 
@@ -59,7 +65,8 @@ const FAQSection = () => {
             Preguntas Frecuentes
           </h2>
           <p className="text-xl text-gray-400 font-poppins max-w-2xl mx-auto">
-            Encuentra respuestas a las preguntas más comunes sobre nuestros servicios
+            Encuentra respuestas a las preguntas más comunes sobre nuestros
+            servicios
           </p>
         </motion.div>
 
@@ -93,7 +100,7 @@ const FAQSection = () => {
                 {activeIndex === index && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
+                    animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"

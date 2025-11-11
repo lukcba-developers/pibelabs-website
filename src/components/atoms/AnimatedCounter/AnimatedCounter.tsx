@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { useInView } from 'framer-motion';
+import { useEffect, useRef, useState } from "react";
+import { useInView } from "framer-motion";
 
 interface AnimatedCounterProps {
   end: number;
@@ -14,9 +14,9 @@ const AnimatedCounter = ({
   end,
   start = 0,
   duration = 2000,
-  suffix = '',
-  prefix = '',
-  className = '',
+  suffix = "",
+  prefix = "",
+  className = "",
 }: AnimatedCounterProps) => {
   const [count, setCount] = useState(start);
   const ref = useRef(null);
@@ -27,13 +27,13 @@ const AnimatedCounter = ({
     if (isInView && !hasAnimated) {
       setHasAnimated(true);
       let startTime: number | null = null;
-      
+
       const animateCount = (timestamp: number) => {
         if (!startTime) startTime = timestamp;
         const progress = Math.min((timestamp - startTime) / duration, 1);
         const easeOut = 1 - Math.pow(1 - progress, 4);
         const currentCount = start + (end - start) * easeOut;
-        
+
         setCount(currentCount);
 
         if (progress < 1) {
@@ -49,7 +49,9 @@ const AnimatedCounter = ({
 
   return (
     <span ref={ref} className={className}>
-      {prefix}{Math.floor(count)}{suffix}
+      {prefix}
+      {Math.floor(count)}
+      {suffix}
     </span>
   );
 };

@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { SEO_CONFIG } from '@/lib/constants/config';
+import { useEffect } from "react";
+import { SEO_CONFIG } from "@/lib/constants/config";
 
 /* ============================================
    Enhanced SEO Component (Atom) - Sprint 5
@@ -34,74 +34,92 @@ const SEO = ({
 }: SEOProps) => {
   const pageTitle = title ? `${title} | PibeLabs` : SEO_CONFIG.title;
   const metaKeywords = keywords
-    ? [...SEO_CONFIG.keywords, ...keywords].join(', ')
-    : SEO_CONFIG.keywords.join(', ');
+    ? [...SEO_CONFIG.keywords, ...keywords].join(", ")
+    : SEO_CONFIG.keywords.join(", ");
 
   useEffect(() => {
     // Update document title
     document.title = pageTitle;
 
     // Helper to update meta tags
-    const updateMetaTag = (name: string, content: string, attribute = 'name') => {
+    const updateMetaTag = (
+      name: string,
+      content: string,
+      attribute = "name",
+    ) => {
       let element = document.querySelector(`meta[${attribute}="${name}"]`);
       if (!element) {
-        element = document.createElement('meta');
+        element = document.createElement("meta");
         element.setAttribute(attribute, name);
         document.head.appendChild(element);
       }
-      element.setAttribute('content', content);
+      element.setAttribute("content", content);
     };
 
     // ============================================
     // BASIC META TAGS
     // ============================================
-    updateMetaTag('description', description);
-    updateMetaTag('keywords', metaKeywords);
-    updateMetaTag('author', SEO_CONFIG.author);
-    updateMetaTag('robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
-    updateMetaTag('googlebot', 'index, follow');
+    updateMetaTag("description", description);
+    updateMetaTag("keywords", metaKeywords);
+    updateMetaTag("author", SEO_CONFIG.author);
+    updateMetaTag(
+      "robots",
+      "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    );
+    updateMetaTag("googlebot", "index, follow");
 
     // Language and region
-    updateMetaTag('language', 'es-AR');
-    updateMetaTag('geo.region', 'AR-X');
-    updateMetaTag('geo.placename', 'Despeñaderos, Córdoba');
+    updateMetaTag("language", "es-AR");
+    updateMetaTag("geo.region", "AR-X");
+    updateMetaTag("geo.placename", "Despeñaderos, Córdoba");
 
     // Mobile optimization
-    updateMetaTag('viewport', 'width=device-width, initial-scale=1, maximum-scale=5');
-    updateMetaTag('theme-color', '#0a0e27');
-    updateMetaTag('color-scheme', 'light dark');
+    updateMetaTag(
+      "viewport",
+      "width=device-width, initial-scale=1, maximum-scale=5",
+    );
+    updateMetaTag("theme-color", "#0a0e27");
+    updateMetaTag("color-scheme", "light dark");
 
     // ============================================
     // OPEN GRAPH (Facebook, LinkedIn)
     // ============================================
-    updateMetaTag('og:title', pageTitle, 'property');
-    updateMetaTag('og:description', description, 'property');
-    updateMetaTag('og:image', image, 'property');
-    updateMetaTag('og:image:alt', `${pageTitle} - PibeLabs`, 'property');
-    updateMetaTag('og:image:width', '1200', 'property');
-    updateMetaTag('og:image:height', '630', 'property');
-    updateMetaTag('og:url', url, 'property');
-    updateMetaTag('og:type', type, 'property');
-    updateMetaTag('og:locale', SEO_CONFIG.ogLocale, 'property');
-    updateMetaTag('og:site_name', 'PibeLabs', 'property');
+    updateMetaTag("og:title", pageTitle, "property");
+    updateMetaTag("og:description", description, "property");
+    updateMetaTag("og:image", image, "property");
+    updateMetaTag("og:image:alt", `${pageTitle} - PibeLabs`, "property");
+    updateMetaTag("og:image:width", "1200", "property");
+    updateMetaTag("og:image:height", "630", "property");
+    updateMetaTag("og:url", url, "property");
+    updateMetaTag("og:type", type, "property");
+    updateMetaTag("og:locale", SEO_CONFIG.ogLocale, "property");
+    updateMetaTag("og:site_name", "PibeLabs", "property");
 
     // Article-specific OG tags
-    if (article && type === 'article') {
+    if (article && type === "article") {
       if (article.publishedTime) {
-        updateMetaTag('article:published_time', article.publishedTime, 'property');
+        updateMetaTag(
+          "article:published_time",
+          article.publishedTime,
+          "property",
+        );
       }
       if (article.modifiedTime) {
-        updateMetaTag('article:modified_time', article.modifiedTime, 'property');
+        updateMetaTag(
+          "article:modified_time",
+          article.modifiedTime,
+          "property",
+        );
       }
       if (article.author) {
-        updateMetaTag('article:author', article.author, 'property');
+        updateMetaTag("article:author", article.author, "property");
       }
       if (article.section) {
-        updateMetaTag('article:section', article.section, 'property');
+        updateMetaTag("article:section", article.section, "property");
       }
       if (article.tags) {
-        article.tags.forEach(tag => {
-          updateMetaTag('article:tag', tag, 'property');
+        article.tags.forEach((tag) => {
+          updateMetaTag("article:tag", tag, "property");
         });
       }
     }
@@ -109,134 +127,134 @@ const SEO = ({
     // ============================================
     // TWITTER CARD
     // ============================================
-    updateMetaTag('twitter:card', 'summary_large_image');
-    updateMetaTag('twitter:site', SEO_CONFIG.twitterHandle);
-    updateMetaTag('twitter:creator', SEO_CONFIG.twitterHandle);
-    updateMetaTag('twitter:title', pageTitle);
-    updateMetaTag('twitter:description', description);
-    updateMetaTag('twitter:image', image);
-    updateMetaTag('twitter:image:alt', `${pageTitle} - PibeLabs`);
+    updateMetaTag("twitter:card", "summary_large_image");
+    updateMetaTag("twitter:site", SEO_CONFIG.twitterHandle);
+    updateMetaTag("twitter:creator", SEO_CONFIG.twitterHandle);
+    updateMetaTag("twitter:title", pageTitle);
+    updateMetaTag("twitter:description", description);
+    updateMetaTag("twitter:image", image);
+    updateMetaTag("twitter:image:alt", `${pageTitle} - PibeLabs`);
 
     // ============================================
     // CANONICAL URL
     // ============================================
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', url);
+    canonical.setAttribute("href", url);
 
     // ============================================
     // JSON-LD STRUCTURED DATA
     // ============================================
 
     // Organization Schema
-    let orgSchema = document.querySelector('#org-schema');
+    let orgSchema = document.querySelector("#org-schema");
     if (!orgSchema) {
-      orgSchema = document.createElement('script');
-      orgSchema.setAttribute('type', 'application/ld+json');
-      orgSchema.setAttribute('id', 'org-schema');
+      orgSchema = document.createElement("script");
+      orgSchema.setAttribute("type", "application/ld+json");
+      orgSchema.setAttribute("id", "org-schema");
       document.head.appendChild(orgSchema);
     }
     orgSchema.textContent = JSON.stringify(SEO_CONFIG.organization);
 
     // WebSite Schema
-    let websiteSchema = document.querySelector('#website-schema');
+    let websiteSchema = document.querySelector("#website-schema");
     if (!websiteSchema) {
-      websiteSchema = document.createElement('script');
-      websiteSchema.setAttribute('type', 'application/ld+json');
-      websiteSchema.setAttribute('id', 'website-schema');
+      websiteSchema = document.createElement("script");
+      websiteSchema.setAttribute("type", "application/ld+json");
+      websiteSchema.setAttribute("id", "website-schema");
       document.head.appendChild(websiteSchema);
     }
     websiteSchema.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: 'PibeLabs',
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "PibeLabs",
       url: SEO_CONFIG.siteUrl,
       description: description,
-      inLanguage: 'es-AR',
+      inLanguage: "es-AR",
       potentialAction: {
-        '@type': 'SearchAction',
+        "@type": "SearchAction",
         target: `${SEO_CONFIG.siteUrl}/?s={search_term_string}`,
-        'query-input': 'required name=search_term_string'
-      }
+        "query-input": "required name=search_term_string",
+      },
     });
 
     // LocalBusiness Schema
-    let businessSchema = document.querySelector('#business-schema');
+    let businessSchema = document.querySelector("#business-schema");
     if (!businessSchema) {
-      businessSchema = document.createElement('script');
-      businessSchema.setAttribute('type', 'application/ld+json');
-      businessSchema.setAttribute('id', 'business-schema');
+      businessSchema = document.createElement("script");
+      businessSchema.setAttribute("type", "application/ld+json");
+      businessSchema.setAttribute("id", "business-schema");
       document.head.appendChild(businessSchema);
     }
     businessSchema.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'ProfessionalService',
-      name: 'PibeLabs',
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      name: "PibeLabs",
       image: image,
-      '@id': SEO_CONFIG.siteUrl,
+      "@id": SEO_CONFIG.siteUrl,
       url: SEO_CONFIG.siteUrl,
-      telephone: '+54 351 3088400',
-      priceRange: '$$',
+      telephone: "+54 351 3088400",
+      priceRange: "$$",
       address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Despeñaderos',
-        addressLocality: 'Córdoba',
-        addressRegion: 'Córdoba',
-        postalCode: '5721',
-        addressCountry: 'AR'
+        "@type": "PostalAddress",
+        streetAddress: "Despeñaderos",
+        addressLocality: "Córdoba",
+        addressRegion: "Córdoba",
+        postalCode: "5721",
+        addressCountry: "AR",
       },
       geo: {
-        '@type': 'GeoCoordinates',
+        "@type": "GeoCoordinates",
         latitude: -31.8167,
-        longitude: -64.2833
+        longitude: -64.2833,
       },
       openingHoursSpecification: {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '09:00',
-        closes: '18:00'
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "18:00",
       },
       sameAs: [
-        'https://linkedin.com/company/pibelabs',
-        'https://github.com/pibelabs'
+        "https://linkedin.com/company/pibelabs",
+        "https://github.com/pibelabs",
       ],
       aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '5.0',
-        reviewCount: '15'
-      }
+        "@type": "AggregateRating",
+        ratingValue: "5.0",
+        reviewCount: "15",
+      },
     });
 
     // BreadcrumbList Schema (if applicable)
     if (title) {
-      let breadcrumbSchema = document.querySelector('#breadcrumb-schema');
+      let breadcrumbSchema = document.querySelector("#breadcrumb-schema");
       if (!breadcrumbSchema) {
-        breadcrumbSchema = document.createElement('script');
-        breadcrumbSchema.setAttribute('type', 'application/ld+json');
-        breadcrumbSchema.setAttribute('id', 'breadcrumb-schema');
+        breadcrumbSchema = document.createElement("script");
+        breadcrumbSchema.setAttribute("type", "application/ld+json");
+        breadcrumbSchema.setAttribute("id", "breadcrumb-schema");
         document.head.appendChild(breadcrumbSchema);
       }
       breadcrumbSchema.textContent = JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
         itemListElement: [
           {
-            '@type': 'ListItem',
+            "@type": "ListItem",
             position: 1,
-            name: 'Home',
-            item: SEO_CONFIG.siteUrl
+            name: "Home",
+            item: SEO_CONFIG.siteUrl,
           },
           {
-            '@type': 'ListItem',
+            "@type": "ListItem",
             position: 2,
             name: title,
-            item: url
-          }
-        ]
+            item: url,
+          },
+        ],
       });
     }
 
@@ -247,18 +265,17 @@ const SEO = ({
     // DNS Prefetch for external resources
     const addDnsPrefetch = (href: string) => {
       if (!document.querySelector(`link[rel="dns-prefetch"][href="${href}"]`)) {
-        const link = document.createElement('link');
-        link.rel = 'dns-prefetch';
+        const link = document.createElement("link");
+        link.rel = "dns-prefetch";
         link.href = href;
         document.head.appendChild(link);
       }
     };
 
-    addDnsPrefetch('https://www.googletagmanager.com');
-    addDnsPrefetch('https://www.google-analytics.com');
-    addDnsPrefetch('https://fonts.googleapis.com');
-    addDnsPrefetch('https://fonts.gstatic.com');
-
+    addDnsPrefetch("https://www.googletagmanager.com");
+    addDnsPrefetch("https://www.google-analytics.com");
+    addDnsPrefetch("https://fonts.googleapis.com");
+    addDnsPrefetch("https://fonts.gstatic.com");
   }, [title, pageTitle, description, metaKeywords, image, url, type, article]);
 
   return null;

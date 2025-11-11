@@ -1,5 +1,5 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
-import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
+import { Component, ErrorInfo, ReactNode } from "react";
+import { AlertTriangle, RefreshCw, Home } from "lucide-react";
 
 /* ============================================
    Error Boundary Component (Atom)
@@ -37,7 +37,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     // Log error to console in development
     if (import.meta.env.DEV) {
-      console.error('ErrorBoundary caught an error:', error, errorInfo);
+      console.error("ErrorBoundary caught an error:", error, errorInfo);
     }
 
     // Call custom error handler if provided
@@ -61,7 +61,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   };
 
   handleGoHome = (): void => {
-    window.location.href = '/';
+    window.location.href = "/";
   };
 
   render(): ReactNode {
@@ -87,7 +87,9 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
             {/* Description */}
             <p className="font-poppins text-lg text-gray-300 mb-8">
-              Lo sentimos, hemos encontrado un error inesperado. No te preocupes, nuestro equipo ha sido notificado y está trabajando en ello.
+              Lo sentimos, hemos encontrado un error inesperado. No te
+              preocupes, nuestro equipo ha sido notificado y está trabajando en
+              ello.
             </p>
 
             {/* Error Details (only in development) */}
@@ -130,7 +132,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
             {/* Support Info */}
             <p className="font-poppins text-sm text-gray-400 mt-8">
-              Si el problema persiste, contáctanos en{' '}
+              Si el problema persiste, contáctanos en{" "}
               <a
                 href="mailto:contact@pibelabs.com"
                 className="text-cyan-neon hover:underline"

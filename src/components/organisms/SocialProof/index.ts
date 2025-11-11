@@ -1,1 +1,1 @@
-export { default } from './SocialProof';
+export { default } from "./SocialProof";

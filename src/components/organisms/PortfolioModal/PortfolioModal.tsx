@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Check } from 'lucide-react';
-import type { PortfolioProject } from '@/types';
-import { useFocusTrap, useReducedMotion } from '@/hooks';
-import LazyImage from '@/components/atoms/LazyImage';
+import { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, ExternalLink, Check } from "lucide-react";
+import type { PortfolioProject } from "@/types";
+import { useFocusTrap, useReducedMotion } from "@/hooks";
+import LazyImage from "@/components/atoms/LazyImage";
 
 interface PortfolioModalProps {
   project: PortfolioProject | null;
@@ -20,19 +20,19 @@ const PortfolioModal = ({ project, isOpen, onClose }: PortfolioModalProps) => {
     if (!isOpen) return;
 
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         onClose();
       }
     };
 
-    document.addEventListener('keydown', handleEscape);
+    document.addEventListener("keydown", handleEscape);
 
     // Prevent body scroll when modal is open
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
     };
   }, [isOpen, onClose]);
 
@@ -59,7 +59,11 @@ const PortfolioModal = ({ project, isOpen, onClose }: PortfolioModalProps) => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
-            initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            initial={
+              prefersReducedMotion
+                ? { opacity: 1, scale: 1 }
+                : { opacity: 0, scale: 0.9 }
+            }
             animate={{ opacity: 1, scale: 1 }}
             exit={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.3 }}
@@ -85,18 +89,27 @@ const PortfolioModal = ({ project, isOpen, onClose }: PortfolioModalProps) => {
               {/* Header */}
               <div className="mb-8">
                 <div className="flex items-center gap-4 mb-4">
-                  <h2 id="modal-title" className="text-3xl md:text-4xl font-orbitron font-bold text-white">
+                  <h2
+                    id="modal-title"
+                    className="text-3xl md:text-4xl font-orbitron font-bold text-white"
+                  >
                     {project.title}
                   </h2>
                   {project.status && (
-                    <span className={`px-3 py-1 text-white text-sm font-rajdhani font-semibold rounded-full ${
-                      project.status === 'production' ? 'bg-green-500' :
-                      project.status === 'development' ? 'bg-yellow-500' :
-                      'bg-blue-500'
-                    }`}>
-                      {project.status === 'production' ? '✓ En Producción' :
-                       project.status === 'development' ? '🔧 En Desarrollo' :
-                       'Completado'}
+                    <span
+                      className={`px-3 py-1 text-white text-sm font-rajdhani font-semibold rounded-full ${
+                        project.status === "production"
+                          ? "bg-green-500"
+                          : project.status === "development"
+                            ? "bg-yellow-500"
+                            : "bg-blue-500"
+                      }`}
+                    >
+                      {project.status === "production"
+                        ? "✓ En Producción"
+                        : project.status === "development"
+                          ? "🔧 En Desarrollo"
+                          : "Completado"}
                     </span>
                   )}
                 </div>
@@ -129,7 +142,9 @@ const PortfolioModal = ({ project, isOpen, onClose }: PortfolioModalProps) => {
                         className="flex items-start gap-3 p-3 bg-white/5 rounded-lg border border-white/10"
                       >
                         <Check className="w-5 h-5 text-cyan-neon flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300 font-poppins">{feature}</span>
+                        <span className="text-gray-300 font-poppins">
+                          {feature}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -144,85 +159,102 @@ const PortfolioModal = ({ project, isOpen, onClose }: PortfolioModalProps) => {
                     Stack Tecnológico
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {project.techStack.frontend && project.techStack.frontend.length > 0 && (
-                      <div>
-                        <h4 className="text-cyan-bright font-rajdhani font-semibold mb-2">Frontend</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {project.techStack.frontend.map((tech, index) => (
-                            <span
-                              key={index}
-                              className="px-3 py-1 bg-cyan-neon/10 border border-cyan-neon/30 rounded text-cyan-bright font-poppins text-sm"
-                            >
-                              {tech}
-                            </span>
-                          ))}
+                    {project.techStack.frontend &&
+                      project.techStack.frontend.length > 0 && (
+                        <div>
+                          <h4 className="text-cyan-bright font-rajdhani font-semibold mb-2">
+                            Frontend
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {project.techStack.frontend.map((tech, index) => (
+                              <span
+                                key={index}
+                                className="px-3 py-1 bg-cyan-neon/10 border border-cyan-neon/30 rounded text-cyan-bright font-poppins text-sm"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
 
-                    {project.techStack.backend && project.techStack.backend.length > 0 && (
-                      <div>
-                        <h4 className="text-magenta-bright font-rajdhani font-semibold mb-2">Backend</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {project.techStack.backend.map((tech, index) => (
-                            <span
-                              key={index}
-                              className="px-3 py-1 bg-magenta-neon/10 border border-magenta-neon/30 rounded text-magenta-bright font-poppins text-sm"
-                            >
-                              {tech}
-                            </span>
-                          ))}
+                    {project.techStack.backend &&
+                      project.techStack.backend.length > 0 && (
+                        <div>
+                          <h4 className="text-magenta-bright font-rajdhani font-semibold mb-2">
+                            Backend
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {project.techStack.backend.map((tech, index) => (
+                              <span
+                                key={index}
+                                className="px-3 py-1 bg-magenta-neon/10 border border-magenta-neon/30 rounded text-magenta-bright font-poppins text-sm"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
 
-                    {project.techStack.database && project.techStack.database.length > 0 && (
-                      <div>
-                        <h4 className="text-cyan-bright font-rajdhani font-semibold mb-2">Base de Datos</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {project.techStack.database.map((tech, index) => (
-                            <span
-                              key={index}
-                              className="px-3 py-1 bg-cyan-neon/10 border border-cyan-neon/30 rounded text-cyan-bright font-poppins text-sm"
-                            >
-                              {tech}
-                            </span>
-                          ))}
+                    {project.techStack.database &&
+                      project.techStack.database.length > 0 && (
+                        <div>
+                          <h4 className="text-cyan-bright font-rajdhani font-semibold mb-2">
+                            Base de Datos
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {project.techStack.database.map((tech, index) => (
+                              <span
+                                key={index}
+                                className="px-3 py-1 bg-cyan-neon/10 border border-cyan-neon/30 rounded text-cyan-bright font-poppins text-sm"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
 
-                    {project.techStack.infrastructure && project.techStack.infrastructure.length > 0 && (
-                      <div>
-                        <h4 className="text-magenta-bright font-rajdhani font-semibold mb-2">Infraestructura</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {project.techStack.infrastructure.map((tech, index) => (
-                            <span
-                              key={index}
-                              className="px-3 py-1 bg-magenta-neon/10 border border-magenta-neon/30 rounded text-magenta-bright font-poppins text-sm"
-                            >
-                              {tech}
-                            </span>
-                          ))}
+                    {project.techStack.infrastructure &&
+                      project.techStack.infrastructure.length > 0 && (
+                        <div>
+                          <h4 className="text-magenta-bright font-rajdhani font-semibold mb-2">
+                            Infraestructura
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {project.techStack.infrastructure.map(
+                              (tech, index) => (
+                                <span
+                                  key={index}
+                                  className="px-3 py-1 bg-magenta-neon/10 border border-magenta-neon/30 rounded text-magenta-bright font-poppins text-sm"
+                                >
+                                  {tech}
+                                </span>
+                              ),
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
 
-                    {project.techStack.tools && project.techStack.tools.length > 0 && (
-                      <div className="md:col-span-2">
-                        <h4 className="text-cyan-bright font-rajdhani font-semibold mb-2">Herramientas & DevOps</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {project.techStack.tools.map((tech, index) => (
-                            <span
-                              key={index}
-                              className="px-3 py-1 bg-white/5 border border-white/20 rounded text-gray-300 font-poppins text-sm"
-                            >
-                              {tech}
-                            </span>
-                          ))}
+                    {project.techStack.tools &&
+                      project.techStack.tools.length > 0 && (
+                        <div className="md:col-span-2">
+                          <h4 className="text-cyan-bright font-rajdhani font-semibold mb-2">
+                            Herramientas & DevOps
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {project.techStack.tools.map((tech, index) => (
+                              <span
+                                key={index}
+                                className="px-3 py-1 bg-white/5 border border-white/20 rounded text-gray-300 font-poppins text-sm"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
                   </div>
                 </div>
               )}
@@ -241,7 +273,9 @@ const PortfolioModal = ({ project, isOpen, onClose }: PortfolioModalProps) => {
                         className="flex items-start gap-3 p-3 bg-gradient-to-r from-cyan-neon/10 to-magenta-neon/10 rounded-lg border border-cyan-neon/20"
                       >
                         <span className="text-cyan-neon text-2xl">•</span>
-                        <span className="text-gray-300 font-poppins">{achievement}</span>
+                        <span className="text-gray-300 font-poppins">
+                          {achievement}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -250,7 +284,9 @@ const PortfolioModal = ({ project, isOpen, onClose }: PortfolioModalProps) => {
 
               {/* Tags */}
               <div className="mb-8">
-                <h3 className="text-xl font-orbitron font-bold text-white mb-4">Tecnologías Utilizadas</h3>
+                <h3 className="text-xl font-orbitron font-bold text-white mb-4">
+                  Tecnologías Utilizadas
+                </h3>
                 <div className="flex flex-wrap gap-3">
                   {project.tags.map((tag) => (
                     <span

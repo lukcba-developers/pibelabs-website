@@ -1,4 +1,4 @@
-import { COMPANY_INFO } from '@/lib/constants/config';
+import { COMPANY_INFO } from "@/lib/constants/config";
 
 /* ============================================
    WhatsApp Utilities
@@ -15,7 +15,7 @@ import { COMPANY_INFO } from '@/lib/constants/config';
  */
 export const createWhatsAppLink = (
   message: string,
-  phoneNumber: string = COMPANY_INFO.whatsapp
+  phoneNumber: string = COMPANY_INFO.whatsapp,
 ): string => {
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
@@ -26,12 +26,9 @@ export const createWhatsAppLink = (
  * @param message - Mensaje a enviar
  * @param phoneNumber - Número de teléfono (opcional)
  */
-export const openWhatsApp = (
-  message: string,
-  phoneNumber?: string
-): void => {
+export const openWhatsApp = (message: string, phoneNumber?: string): void => {
   const link = createWhatsAppLink(message, phoneNumber);
-  window.open(link, '_blank', 'noopener,noreferrer');
+  window.open(link, "_blank", "noopener,noreferrer");
 };
 
 /**
@@ -59,9 +56,9 @@ export const createServiceInquiryMessage = (serviceName: string): string => {
  */
 export const createQuoteRequestMessage = (
   serviceName?: string,
-  projectDetails?: string
+  projectDetails?: string,
 ): string => {
-  let message = `¡Hola! Me gustaría solicitar una cotización${serviceName ? ` para el servicio de *${serviceName}*` : ''}.`;
+  let message = `¡Hola! Me gustaría solicitar una cotización${serviceName ? ` para el servicio de *${serviceName}*` : ""}.`;
 
   if (projectDetails) {
     message += `\n\n*Detalles del proyecto:*\n${projectDetails}`;
@@ -140,7 +137,7 @@ export const createTechInquiryMessage = (technology: string): string => {
  */
 export const isValidWhatsAppNumber = (phoneNumber: string): boolean => {
   // Remover todos los caracteres no numéricos
-  const cleanNumber = phoneNumber.replace(/\D/g, '');
+  const cleanNumber = phoneNumber.replace(/\D/g, "");
   // Un número válido debe tener entre 10 y 15 dígitos
   return cleanNumber.length >= 10 && cleanNumber.length <= 15;
 };
@@ -151,5 +148,5 @@ export const isValidWhatsAppNumber = (phoneNumber: string): boolean => {
  * @returns Número formateado
  */
 export const formatWhatsAppNumber = (phoneNumber: string): string => {
-  return phoneNumber.replace(/\D/g, '');
+  return phoneNumber.replace(/\D/g, "");
 };

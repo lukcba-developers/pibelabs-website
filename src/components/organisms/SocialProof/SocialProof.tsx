@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion';
-import { Quote, Linkedin } from 'lucide-react';
-import { TESTIMONIALS, CLIENT_LOGOS } from '@/lib/constants/config';
-import LazyImage from '@/components/atoms/LazyImage';
-import { useReducedMotion } from '@/hooks';
+import { motion } from "framer-motion";
+import { Quote, Linkedin } from "lucide-react";
+import { TESTIMONIALS, CLIENT_LOGOS } from "@/lib/constants/config";
+import LazyImage from "@/components/atoms/LazyImage";
+import { useReducedMotion } from "@/hooks";
 
 /* ============================================
    Social Proof Section Component (Organism)
@@ -17,7 +17,9 @@ const SocialProof = () => {
         {/* Clients Logos */}
         <motion.div
           className="text-center mb-20"
-          initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          initial={
+            prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+          }
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
@@ -30,7 +32,11 @@ const SocialProof = () => {
               <motion.div
                 key={client.name}
                 className="flex items-center justify-center h-12"
-                initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                initial={
+                  prefersReducedMotion
+                    ? { opacity: 1, scale: 1 }
+                    : { opacity: 0, scale: 0.8 }
+                }
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: prefersReducedMotion ? 0 : index * 0.1 }}
@@ -48,13 +54,15 @@ const SocialProof = () => {
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
-          initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          initial={
+            prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+          }
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
-            Lo que dicen{' '}
+            Lo que dicen{" "}
             <span className="bg-gradient-to-r from-cyan-400 to-magenta-400 bg-clip-text text-transparent">
               nuestros clientes
             </span>
@@ -69,10 +77,17 @@ const SocialProof = () => {
           {TESTIMONIALS.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
-              initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              initial={
+                prefersReducedMotion
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 0, y: 30 }
+              }
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: prefersReducedMotion ? 0 : index * 0.15, duration: prefersReducedMotion ? 0 : 0.6 }}
+              transition={{
+                delay: prefersReducedMotion ? 0 : index * 0.15,
+                duration: prefersReducedMotion ? 0 : 0.6,
+              }}
               className="group relative bg-dark-primary border-2 border-gray-700 rounded-xl p-8 hover:border-cyan-neon transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,217,255,0.3)]"
             >
               {/* Quote Icon */}
@@ -134,7 +149,9 @@ const SocialProof = () => {
         {/* CTA */}
         <motion.div
           className="text-center mt-16"
-          initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          initial={
+            prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+          }
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: prefersReducedMotion ? 0 : 0.5 }}

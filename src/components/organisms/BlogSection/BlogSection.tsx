@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
-import { BLOG_POSTS } from '@/lib/constants/config';
-import type { BlogPost } from '@/types';
-import LazyImage from '@/components/atoms/LazyImage';
+import { motion } from "framer-motion";
+import { BLOG_POSTS } from "@/lib/constants/config";
+import type { BlogPost } from "@/types";
+import LazyImage from "@/components/atoms/LazyImage";
 
 /* ============================================
    Blog Section Component (Organism)
@@ -10,10 +10,10 @@ import LazyImage from '@/components/atoms/LazyImage';
 // Format date
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
-  return date.toLocaleDateString('es-AR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  return date.toLocaleDateString("es-AR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 };
 
@@ -24,7 +24,7 @@ const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => {
       className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       {/* Image */}
@@ -57,14 +57,34 @@ const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => {
         {/* Meta Info */}
         <div className="flex items-center gap-4 mb-3 text-sm text-text-tertiary">
           <div className="flex items-center gap-2">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
             </svg>
             <time className="font-poppins">{formatDate(post.publishedAt)}</time>
           </div>
           <div className="flex items-center gap-2">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
             <span className="font-poppins">{post.readTime} min lectura</span>
           </div>
@@ -137,9 +157,10 @@ const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => {
 
 const BlogSection = () => {
   // Get only featured posts or first 3
-  const displayPosts = BLOG_POSTS.filter(post => post.featured).length > 0
-    ? BLOG_POSTS.filter(post => post.featured)
-    : BLOG_POSTS.slice(0, 3);
+  const displayPosts =
+    BLOG_POSTS.filter((post) => post.featured).length > 0
+      ? BLOG_POSTS.filter((post) => post.featured)
+      : BLOG_POSTS.slice(0, 3);
 
   return (
     <section id="blog" className="section bg-white py-20">
@@ -166,8 +187,8 @@ const BlogSection = () => {
           </h2>
 
           <p className="font-poppins text-lg text-text-secondary max-w-3xl mx-auto">
-            Mantente actualizado con las últimas tendencias, tutoriales y novedades 
-            del mundo tecnológico.
+            Mantente actualizado con las últimas tendencias, tutoriales y
+            novedades del mundo tecnológico.
           </p>
         </motion.div>
 
@@ -211,7 +232,7 @@ const BlogSection = () => {
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         }}
       />
     </section>

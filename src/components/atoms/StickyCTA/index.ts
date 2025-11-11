@@ -1,1 +1,1 @@
-export { default } from './StickyCTA';
+export { default } from "./StickyCTA";

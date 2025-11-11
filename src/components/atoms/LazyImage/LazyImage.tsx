@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 /* ============================================
    Lazy Image Component (Atom)
@@ -17,7 +17,7 @@ interface LazyImageProps {
 const LazyImage = ({
   src,
   alt,
-  className = '',
+  className = "",
   placeholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%231a1a2e" width="400" height="300"/%3E%3C/svg%3E',
   width,
   height,
@@ -36,7 +36,7 @@ const LazyImage = ({
           observer.disconnect();
         }
       },
-      { rootMargin: '50px' }
+      { rootMargin: "50px" },
     );
 
     observer.observe(imgRef.current);
@@ -67,7 +67,7 @@ const LazyImage = ({
           width={width}
           height={height}
           className={`w-full h-full object-cover transition-opacity duration-500 ${
-            isLoaded ? 'opacity-100' : 'opacity-0 absolute inset-0'
+            isLoaded ? "opacity-100" : "opacity-0 absolute inset-0"
           }`}
           onLoad={() => setIsLoaded(true)}
           loading="lazy"

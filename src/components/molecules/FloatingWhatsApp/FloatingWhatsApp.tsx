@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useMediaQuery, useWhatsApp } from '@/hooks';
-import { BREAKPOINTS } from '@/lib/constants/config';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useMediaQuery, useWhatsApp } from "@/hooks";
+import { BREAKPOINTS } from "@/lib/constants/config";
 
 /* ============================================
    FloatingWhatsApp Component (Molecule)
@@ -45,7 +45,7 @@ const FloatingWhatsApp = () => {
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 100 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
           {/* Tooltip */}
           <AnimatePresence>
@@ -79,8 +79,8 @@ const FloatingWhatsApp = () => {
               flex items-center gap-3
               ${
                 isMobile
-                  ? 'w-16 h-16 rounded-full justify-center'
-                  : 'px-6 py-3 rounded-full hover:-translate-y-1'
+                  ? "w-16 h-16 rounded-full justify-center"
+                  : "px-6 py-3 rounded-full hover:-translate-y-1"
               }
             `}
             whileHover={{ scale: 1.05 }}
@@ -89,7 +89,7 @@ const FloatingWhatsApp = () => {
           >
             {/* Icono de WhatsApp */}
             <svg
-              className={isMobile ? 'w-8 h-8' : 'w-6 h-6'}
+              className={isMobile ? "w-8 h-8" : "w-6 h-6"}
               fill="currentColor"
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
@@ -98,9 +98,7 @@ const FloatingWhatsApp = () => {
             </svg>
 
             {/* Texto solo en desktop */}
-            {!isMobile && (
-              <span className="text-base">¡Escribinos!</span>
-            )}
+            {!isMobile && <span className="text-base">¡Escribinos!</span>}
           </motion.button>
 
           {/* Pulse animation para llamar la atención */}
@@ -115,7 +113,7 @@ const FloatingWhatsApp = () => {
               transition={{
                 duration: 2,
                 repeat: Infinity,
-                ease: 'easeInOut',
+                ease: "easeInOut",
               }}
               style={{ zIndex: -1 }}
             />

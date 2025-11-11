@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 
 /* ============================================
    Sticky CTA Component
@@ -16,8 +16,8 @@ interface StickyCTAProps {
 }
 
 const StickyCTA = ({
-  text = '¿Listo para empezar tu proyecto?',
-  ctaText = 'Agenda consulta gratis',
+  text = "¿Listo para empezar tu proyecto?",
+  ctaText = "Agenda consulta gratis",
   onAction,
   scrollThreshold = 300,
   showOnMobileOnly = true,
@@ -31,10 +31,10 @@ const StickyCTA = ({
       setIsVisible(scrolled && !isDismissed);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     handleScroll(); // Check initial state
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [scrollThreshold, isDismissed]);
 
   const handleAction = () => {
@@ -42,9 +42,9 @@ const StickyCTA = ({
       onAction();
     } else {
       // Default action: scroll to contact
-      const element = document.querySelector('#contact');
+      const element = document.querySelector("#contact");
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     }
   };
@@ -61,10 +61,10 @@ const StickyCTA = ({
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className={`
             fixed bottom-0 left-0 right-0 z-[90]
-            ${showOnMobileOnly ? 'md:hidden' : ''}
+            ${showOnMobileOnly ? "md:hidden" : ""}
           `}
         >
           {/* Main CTA Bar */}

@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
-import { NAV_LINKS, COMPANY_INFO } from '@/lib/constants/config';
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
+import { NAV_LINKS, COMPANY_INFO } from "@/lib/constants/config";
 
 /* ============================================
    Mobile Menu Component (Organism)
@@ -17,7 +17,7 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
     setTimeout(() => {
       const element = document.querySelector(href);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     }, 300);
   };
@@ -37,10 +37,10 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
 
           {/* Menu Panel */}
           <motion.div
-            initial={{ x: '100%' }}
+            initial={{ x: "100%" }}
             animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-gradient-to-br from-dark-secondary via-[#1a1f3a] to-dark-secondary border-l-2 border-cyan-neon shadow-[-20px_0_60px_rgba(0,217,255,0.3)] z-50 overflow-y-auto"
           >
             <button
@@ -76,7 +76,7 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
               </nav>
 
               <button
-                onClick={() => scrollToSection('#contact')}
+                onClick={() => scrollToSection("#contact")}
                 className="w-full px-8 py-5 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-rajdhani font-bold text-xl rounded-xl shadow-[0_0_30px_rgba(0,217,255,0.6)] transition-all"
               >
                 Comenzar Proyecto →

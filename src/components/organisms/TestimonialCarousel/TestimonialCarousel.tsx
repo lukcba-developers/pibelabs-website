@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 interface Testimonial {
   id: number;
@@ -15,29 +15,29 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: 'María González',
-    role: 'CEO',
-    company: 'TechStartup',
-    image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Maria',
-    text: 'PibeLabs transformó nuestra visión en un producto increíble. Su expertise técnico y compromiso superaron nuestras expectativas.',
+    name: "María González",
+    role: "CEO",
+    company: "TechStartup",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria",
+    text: "PibeLabs transformó nuestra visión en un producto increíble. Su expertise técnico y compromiso superaron nuestras expectativas.",
     rating: 5,
   },
   {
     id: 2,
-    name: 'Carlos Rodríguez',
-    role: 'CTO',
-    company: 'InnovateCorp',
-    image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos',
-    text: 'Profesionalismo de primera clase. Cumplieron con todos los deadlines y la calidad del código es excepcional.',
+    name: "Carlos Rodríguez",
+    role: "CTO",
+    company: "InnovateCorp",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos",
+    text: "Profesionalismo de primera clase. Cumplieron con todos los deadlines y la calidad del código es excepcional.",
     rating: 5,
   },
   {
     id: 3,
-    name: 'Ana Martínez',
-    role: 'Product Manager',
-    company: 'DigitalSolutions',
-    image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ana',
-    text: 'La mejor decisión fue trabajar con PibeLabs. Su enfoque ágil y comunicación constante hicieron todo el proceso muy fluido.',
+    name: "Ana Martínez",
+    role: "Product Manager",
+    company: "DigitalSolutions",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ana",
+    text: "La mejor decisión fue trabajar con PibeLabs. Su enfoque ágil y comunicación constante hicieron todo el proceso muy fluido.",
     rating: 5,
   },
 ];
@@ -105,14 +105,14 @@ const TestimonialCarousel = () => {
                 animate="center"
                 exit="exit"
                 transition={{
-                  x: { type: 'spring', stiffness: 300, damping: 30 },
+                  x: { type: "spring", stiffness: 300, damping: 30 },
                   opacity: { duration: 0.2 },
                 }}
                 className="absolute w-full"
               >
                 <div className="bg-gradient-to-br from-dark-secondary to-dark-primary border-2 border-cyan-neon/30 rounded-2xl p-8 md:p-12">
                   <Quote className="text-cyan-neon mb-6" size={48} />
-                  
+
                   <p className="text-xl md:text-2xl text-gray-300 font-poppins leading-relaxed mb-8">
                     "{testimonials[current]?.text}"
                   </p>
@@ -128,7 +128,8 @@ const TestimonialCarousel = () => {
                         {testimonials[current]?.name}
                       </h4>
                       <p className="text-cyan-neon font-poppins">
-                        {testimonials[current]?.role} at {testimonials[current]?.company}
+                        {testimonials[current]?.role} at{" "}
+                        {testimonials[current]?.company}
                       </p>
                     </div>
                   </div>
@@ -163,8 +164,8 @@ const TestimonialCarousel = () => {
                 }}
                 className={`w-3 h-3 rounded-full transition-all ${
                   index === current
-                    ? 'bg-cyan-neon w-8'
-                    : 'bg-cyan-neon/30 hover:bg-cyan-neon/50'
+                    ? "bg-cyan-neon w-8"
+                    : "bg-cyan-neon/30 hover:bg-cyan-neon/50"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
