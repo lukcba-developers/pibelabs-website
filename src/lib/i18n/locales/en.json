@@ -1,0 +1,162 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "hero": {
+    "headline": "We transform ideas into scalable digital products",
+    "subheadline": "From MVP to enterprise: agile development with international quality standards. Modern stack, senior team, measurable results.",
+    "cta": "Start project",
+    "ctaSecondary": "View portfolio"
+  },
+  "company": {
+    "name": "PibeLabs",
+    "tagline": "Next-Gen Innovation Studio",
+    "description": "Technology innovation studio founded by Lucas Benavidez and Juan Cruz Ferri, specialized in web development, artificial intelligence, UX/UI design and cloud solutions."
+  },
+  "stats": {
+    "projects": "Successful projects",
+    "retention": "Client retention",
+    "mvp": "MVP to production"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "End-to-end technology solutions",
+    "webDev": {
+      "title": "Web Development",
+      "description": "Modern web applications with React, Next.js, Node.js and scalable architectures",
+      "features": [
+        "SPA/SSR with React/Next.js",
+        "RESTful and GraphQL APIs",
+        "Microservices architecture",
+        "CI/CD and DevOps"
+      ]
+    },
+    "ai": {
+      "title": "Artificial Intelligence",
+      "description": "Custom ML/AI solutions with advanced models and robust data pipelines",
+      "features": [
+        "Predictive models",
+        "NLP and text analysis",
+        "Computer Vision",
+        "OpenAI/Anthropic integration"
+      ]
+    },
+    "uiux": {
+      "title": "UX/UI Design",
+      "description": "User-centered interfaces with design systems, research and advanced prototyping",
+      "features": [
+        "Design Systems",
+        "Interactive prototyping",
+        "User Research",
+        "Usability Testing"
+      ]
+    },
+    "cloud": {
+      "title": "Cloud & DevOps",
+      "description": "Modern infrastructure with AWS, Docker containerization and automated pipelines",
+      "features": [
+        "AWS/GCP/Azure",
+        "Docker/Kubernetes",
+        "Terraform/IaC",
+        "24/7 Monitoring"
+      ]
+    }
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Success stories and featured projects",
+    "viewProject": "View project",
+    "categories": {
+      "all": "All",
+      "web": "Web",
+      "mobile": "Mobile",
+      "ai": "AI",
+      "design": "Design"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Senior team with international track record",
+    "description": "PibeLabs was born from the shared vision of Lucas Benavidez and Juan Cruz Ferri: combining technical excellence with product mindset. With experience in Y2C startups, international consultancies and Fortune 500 companies, we understand both code and business.",
+    "values": {
+      "quality": {
+        "title": "Non-negotiable quality",
+        "description": "Code reviews, automated testing, complete documentation"
+      },
+      "agile": {
+        "title": "Real agility",
+        "description": "2-week sprints, frequent demos, continuous feedback"
+      },
+      "transparency": {
+        "title": "Total transparency",
+        "description": "Access to repos, real-time metrics, direct communication"
+      }
+    },
+    "team": {
+      "title": "Team",
+      "founders": "Founders"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Technical insights and trends",
+    "readMore": "Read more",
+    "readTime": "min read"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Ready to start your project?",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "service": "Service of interest",
+      "servicePlaceholder": "Select a service",
+      "submit": "Send message",
+      "submitting": "Sending...",
+      "success": "Message sent! We'll contact you soon.",
+      "error": "Error sending. Please try again."
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "nameMin": "Name must be at least 2 characters",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email",
+      "emailDisposable": "Temporary emails are not allowed",
+      "messageRequired": "Message is required",
+      "messageMin": "Message must be at least 10 characters",
+      "messageMax": "Message cannot exceed 1000 characters",
+      "serviceRequired": "Please select a service"
+    },
+    "info": {
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location",
+      "whatsapp": "WhatsApp"
+    }
+  },
+  "footer": {
+    "tagline": "Technology innovation that scales",
+    "rights": "All rights reserved",
+    "links": {
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "about": "About",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "social": "Follow us"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "contactUs": "Contact us",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  }
+}

@@ -1,14 +1,25 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { NAV_LINKS } from "@/lib/constants/config";
+import { useTranslation } from "react-i18next";
+import { LanguageSelector } from "@/components/atoms/LanguageSelector";
 
 /* ============================================
    Header Component (Organism)
    ============================================ */
 
 const Header = () => {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const NAV_LINKS = [
+    { id: "inicio", label: t("nav.home"), href: "#hero" },
+    { id: "servicios", label: t("nav.services"), href: "#services" },
+    { id: "portfolio", label: t("nav.portfolio"), href: "#portfolio" },
+    { id: "nosotros", label: t("nav.about"), href: "#about" },
+    { id: "blog", label: t("nav.blog"), href: "#blog" },
+    { id: "contacto", label: t("nav.contact"), href: "#contact" },
+  ];
 
   // Handle scroll effect
   useEffect(() => {
@@ -74,7 +85,7 @@ const Header = () => {
           </motion.a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {NAV_LINKS.map((link, index) => (
               <motion.a
                 key={link.id}
@@ -99,6 +110,9 @@ const Header = () => {
               </motion.a>
             ))}
 
+            {/* Language Selector */}
+            <LanguageSelector />
+
             {/* CTA Button */}
             <motion.a
               href="#contact"
@@ -119,7 +133,7 @@ const Header = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Iniciar Proyecto
+              {t("hero.cta")}
             </motion.a>
           </div>
 
@@ -188,6 +202,12 @@ const Header = () => {
                     {link.label}
                   </motion.a>
                 ))}
+
+                {/* Language Selector Mobile */}
+                <div className="py-2">
+                  <LanguageSelector />
+                </div>
+
                 <motion.a
                   href="#contact"
                   className="
@@ -202,7 +222,7 @@ const Header = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Iniciar Proyecto
+                  {t("hero.cta")}
                 </motion.a>
               </div>
             </motion.div>

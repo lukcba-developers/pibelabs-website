@@ -98,7 +98,9 @@ describe("NewsletterPopup", () => {
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([false, vi.fn()]);
 
-    render(<NewsletterPopup delay={0} exitIntent={false} />);
+    render(<NewsletterPopup delay={100} exitIntent={false} />);
+
+    vi.advanceTimersByTime(100);
 
     await waitFor(() => {
       expect(
@@ -115,17 +117,21 @@ describe("NewsletterPopup", () => {
       .mockReturnValueOnce([false, vi.fn()]);
 
     const user = userEvent.setup({ delay: null });
-    render(<NewsletterPopup delay={0} exitIntent={false} />);
+    render(<NewsletterPopup delay={100} exitIntent={false} />);
 
-    await waitFor(async () => {
-      const emailInput = screen.getByPlaceholderText(/tu@email.com/i);
-      await user.type(emailInput, "invalid-email");
+    vi.advanceTimersByTime(100);
 
-      const submitButton = screen.getByRole("button", {
-        name: /Quiero suscribirme/i,
-      });
-      await user.click(submitButton);
+    await waitFor(() => {
+      expect(screen.getByPlaceholderText(/tu@email.com/i)).toBeInTheDocument();
     });
+
+    const emailInput = screen.getByPlaceholderText(/tu@email.com/i);
+    await user.type(emailInput, "invalid-email");
+
+    const submitButton = screen.getByRole("button", {
+      name: /Quiero suscribirme/i,
+    });
+    await user.click(submitButton);
 
     await waitFor(() => {
       expect(screen.getByText(/Email inválido/i)).toBeInTheDocument();
@@ -138,7 +144,9 @@ describe("NewsletterPopup", () => {
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([false, vi.fn()]);
 
-    render(<NewsletterPopup delay={0} exitIntent={false} />);
+    render(<NewsletterPopup delay={100} exitIntent={false} />);
+
+    vi.advanceTimersByTime(100);
 
     await waitFor(() => {
       expect(
@@ -161,14 +169,22 @@ describe("NewsletterPopup", () => {
       .mockReturnValueOnce([null, mockSetDismissed])
       .mockReturnValueOnce([false, vi.fn()]);
 
-    render(<NewsletterPopup delay={0} exitIntent={false} />);
+    render(<NewsletterPopup delay={100} exitIntent={false} />);
+
+    vi.advanceTimersByTime(100);
 
     await waitFor(() => {
-      const closeButton = screen.getByRole("button", {
-        name: /Cerrar modal/i,
-      });
-      fireEvent.click(closeButton);
+      expect(
+        screen.getByRole("button", {
+          name: /Cerrar modal/i,
+        }),
+      ).toBeInTheDocument();
     });
+
+    const closeButton = screen.getByRole("button", {
+      name: /Cerrar modal/i,
+    });
+    fireEvent.click(closeButton);
 
     expect(mockSetDismissed).toHaveBeenCalled();
   });
@@ -182,17 +198,21 @@ describe("NewsletterPopup", () => {
       .mockReturnValueOnce([false, mockSetSubscribed]);
 
     const user = userEvent.setup({ delay: null });
-    render(<NewsletterPopup delay={0} exitIntent={false} />);
+    render(<NewsletterPopup delay={100} exitIntent={false} />);
 
-    await waitFor(async () => {
-      const emailInput = screen.getByPlaceholderText(/tu@email.com/i);
-      await user.type(emailInput, "test@example.com");
+    vi.advanceTimersByTime(100);
 
-      const submitButton = screen.getByRole("button", {
-        name: /Quiero suscribirme/i,
-      });
-      await user.click(submitButton);
+    await waitFor(() => {
+      expect(screen.getByPlaceholderText(/tu@email.com/i)).toBeInTheDocument();
     });
+
+    const emailInput = screen.getByPlaceholderText(/tu@email.com/i);
+    await user.type(emailInput, "test@example.com");
+
+    const submitButton = screen.getByRole("button", {
+      name: /Quiero suscribirme/i,
+    });
+    await user.click(submitButton);
 
     // Should show loading state
     await waitFor(() => {
@@ -225,7 +245,9 @@ describe("NewsletterPopup", () => {
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([false, vi.fn()]);
 
-    render(<NewsletterPopup delay={0} exitIntent={false} />);
+    render(<NewsletterPopup delay={100} exitIntent={false} />);
+
+    vi.advanceTimersByTime(100);
 
     await waitFor(() => {
       expect(
@@ -241,26 +263,27 @@ describe("NewsletterPopup", () => {
       .mockReturnValueOnce([false, vi.fn()]);
 
     const user = userEvent.setup({ delay: null });
-    render(<NewsletterPopup delay={0} exitIntent={false} />);
+    render(<NewsletterPopup delay={100} exitIntent={false} />);
 
-    await waitFor(async () => {
-      const emailInput = screen.getByPlaceholderText(/tu@email.com/i);
-      await user.type(emailInput, "test@example.com");
+    vi.advanceTimersByTime(100);
 
-      const submitButton = screen.getByRole("button", {
-        name: /Quiero suscribirme/i,
-      });
-      await user.click(submitButton);
+    await waitFor(() => {
+      expect(screen.getByPlaceholderText(/tu@email.com/i)).toBeInTheDocument();
     });
+
+    const emailInput = screen.getByPlaceholderText(/tu@email.com/i);
+    await user.type(emailInput, "test@example.com");
+
+    const submitButton = screen.getByRole("button", {
+      name: /Quiero suscribirme/i,
+    });
+    await user.click(submitButton);
 
     // Wait for API call simulation (1500ms)
     vi.advanceTimersByTime(1500);
 
-    await waitFor(
-      () => {
-        expect(screen.getByText(/¡Suscripción Exitosa!/i)).toBeInTheDocument();
-      },
-      { timeout: 3000 },
-    );
+    await waitFor(() => {
+      expect(screen.getByText(/¡Suscripción Exitosa!/i)).toBeInTheDocument();
+    });
   });
 });

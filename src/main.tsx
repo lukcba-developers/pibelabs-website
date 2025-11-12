@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "./lib/i18n";
 
 // Auto-hosted Google Fonts for better performance
 import "@fontsource/orbitron/400.css";

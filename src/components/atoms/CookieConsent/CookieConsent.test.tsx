@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import CookieConsent from "./CookieConsent";
+import type { CookiePreferences } from "./CookieConsent";
 
 // Mock framer-motion to avoid animation issues in tests
 vi.mock("framer-motion", () => ({
@@ -14,36 +15,50 @@ vi.mock("framer-motion", () => ({
   AnimatePresence: ({ children }: any) => <>{children}</>,
 }));
 
-// Mock hooks
-vi.mock("@/hooks", () => ({
-  useLocalStorage: vi.fn((key: string, initialValue: any) => {
-    const [value, setValue] = vi.fn().mockReturnValue([initialValue, vi.fn()]);
-    return [value, setValue];
-  }),
-  useReducedMotion: vi.fn(() => false),
-}));
-
 // Mock analytics
 vi.mock("@/lib/analytics/googleAnalytics", () => ({
   sendEvent: vi.fn(),
 }));
 
+// Mock hooks with default implementation
+const mockUseLocalStorage = vi.fn();
+const mockUseReducedMotion = vi.fn(() => false);
+
+vi.mock("@/hooks", () => ({
+  useLocalStorage: (...args: any[]) => mockUseLocalStorage(...args),
+  useReducedMotion: () => mockUseReducedMotion(),
+}));
+
 describe("CookieConsent", () => {
+  const defaultPreferences: CookiePreferences = {
+    necessary: true,
+    analytics: false,
+    marketing: false,
+    functional: false,
+  };
+
   beforeEach(() => {
-    // Clear localStorage before each test
-    localStorage.clear();
     vi.clearAllMocks();
+    vi.useFakeTimers();
+    // Default mock implementation
+    mockUseLocalStorage.mockReturnValue([null, vi.fn()]);
   });
 
   afterEach(() => {
-    vi.restoreAllMocks();
+    vi.runOnlyPendingTimers();
+    vi.useRealTimers();
   });
 
   it("renders cookie consent banner", async () => {
     const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage).mockReturnValue([null, vi.fn()]);
+    vi.mocked(useLocalStorage)
+      .mockReturnValueOnce([null, vi.fn()])
+      .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent />);
+
+    // Fast-forward past the 1000ms delay
+    vi.advanceTimersByTime(1000);
 
     await waitFor(() => {
       expect(screen.getByText(/Cookies & Privacidad/i)).toBeInTheDocument();
@@ -52,9 +67,12 @@ describe("CookieConsent", () => {
 
   it("shows default message", async () => {
     const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage).mockReturnValue([null, vi.fn()]);
+    vi.mocked(useLocalStorage)
+      .mockReturnValueOnce([null, vi.fn()])
+      .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent />);
+    vi.advanceTimersByTime(1000);
 
     await waitFor(() => {
       expect(screen.getByText(/Utilizamos cookies/i)).toBeInTheDocument();
@@ -63,10 +81,13 @@ describe("CookieConsent", () => {
 
   it("shows custom message when provided", async () => {
     const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage).mockReturnValue([null, vi.fn()]);
+    vi.mocked(useLocalStorage)
+      .mockReturnValueOnce([null, vi.fn()])
+      .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     const customMessage = "Custom cookie message";
     render(<CookieConsent message={customMessage} />);
+    vi.advanceTimersByTime(1000);
 
     await waitFor(() => {
       expect(screen.getByText(customMessage)).toBeInTheDocument();
@@ -75,9 +96,12 @@ describe("CookieConsent", () => {
 
   it("renders all three action buttons", async () => {
     const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage).mockReturnValue([null, vi.fn()]);
+    vi.mocked(useLocalStorage)
+      .mockReturnValueOnce([null, vi.fn()])
+      .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent />);
+    vi.advanceTimersByTime(1000);
 
     await waitFor(() => {
       expect(
@@ -99,18 +123,11 @@ describe("CookieConsent", () => {
 
     vi.mocked(useLocalStorage)
       .mockReturnValueOnce([null, mockSetConsent])
-      .mockReturnValueOnce([
-        {
-          necessary: true,
-          analytics: false,
-          marketing: false,
-          functional: false,
-        },
-        mockSetPreferences,
-      ]);
+      .mockReturnValueOnce([defaultPreferences, mockSetPreferences]);
 
     const onAccept = vi.fn();
     render(<CookieConsent onAccept={onAccept} />);
+    vi.advanceTimersByTime(1000);
 
     await waitFor(() => {
       const acceptButton = screen.getByRole("button", {
@@ -129,18 +146,11 @@ describe("CookieConsent", () => {
 
     vi.mocked(useLocalStorage)
       .mockReturnValueOnce([null, mockSetConsent])
-      .mockReturnValueOnce([
-        {
-          necessary: true,
-          analytics: false,
-          marketing: false,
-          functional: false,
-        },
-        mockSetPreferences,
-      ]);
+      .mockReturnValueOnce([defaultPreferences, mockSetPreferences]);
 
     const onReject = vi.fn();
     render(<CookieConsent onReject={onReject} />);
+    vi.advanceTimersByTime(1000);
 
     await waitFor(() => {
       const rejectButton = screen.getByRole("button", { name: /Rechazar/i });
@@ -154,17 +164,10 @@ describe("CookieConsent", () => {
     const { useLocalStorage } = await import("@/hooks");
     vi.mocked(useLocalStorage)
       .mockReturnValueOnce([null, vi.fn()])
-      .mockReturnValueOnce([
-        {
-          necessary: true,
-          analytics: false,
-          marketing: false,
-          functional: false,
-        },
-        vi.fn(),
-      ]);
+      .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent />);
+    vi.advanceTimersByTime(1000);
 
     await waitFor(() => {
       const customizeButton = screen.getByRole("button", {
@@ -180,9 +183,12 @@ describe("CookieConsent", () => {
 
   it("hides customize button when showCustomize is false", async () => {
     const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage).mockReturnValue([null, vi.fn()]);
+    vi.mocked(useLocalStorage)
+      .mockReturnValueOnce([null, vi.fn()])
+      .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent showCustomize={false} />);
+    vi.advanceTimersByTime(1000);
 
     await waitFor(() => {
       expect(
@@ -193,7 +199,9 @@ describe("CookieConsent", () => {
 
   it("does not render when consent is already given", async () => {
     const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage).mockReturnValue(["accepted", vi.fn()]);
+    vi.mocked(useLocalStorage)
+      .mockReturnValueOnce(["accepted", vi.fn()])
+      .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     const { container } = render(<CookieConsent />);
 
@@ -202,9 +210,12 @@ describe("CookieConsent", () => {
 
   it("renders privacy policy link", async () => {
     const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage).mockReturnValue([null, vi.fn()]);
+    vi.mocked(useLocalStorage)
+      .mockReturnValueOnce([null, vi.fn()])
+      .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent />);
+    vi.advanceTimersByTime(1000);
 
     await waitFor(() => {
       const policyLink = screen.getByRole("link", {
@@ -221,17 +232,10 @@ describe("CookieConsent", () => {
 
     vi.mocked(useLocalStorage)
       .mockReturnValueOnce([null, vi.fn()])
-      .mockReturnValueOnce([
-        {
-          necessary: true,
-          analytics: false,
-          marketing: false,
-          functional: false,
-        },
-        vi.fn(),
-      ]);
+      .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent />);
+    vi.advanceTimersByTime(1000);
 
     await waitFor(() => {
       const acceptButton = screen.getByRole("button", {
