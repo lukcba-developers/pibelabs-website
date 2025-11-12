@@ -205,7 +205,7 @@ const Header = () => {
 
                 {/* Language Selector Mobile */}
                 <div className="py-2">
-                  <LanguageSelector />
+                  <LanguageSelector variant="compact" />
                 </div>
 
                 <motion.a
