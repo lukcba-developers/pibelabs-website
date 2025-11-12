@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { Globe } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import * as Tooltip from "@radix-ui/react-tooltip";
 import type { SupportedLanguage } from "@/lib/i18n";
 
 /* ============================================
@@ -25,7 +26,7 @@ interface LanguageSelectorProps {
 export const LanguageSelector = ({
   variant = "default",
 }: LanguageSelectorProps) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -101,36 +102,50 @@ export const LanguageSelector = ({
   }
 
   return (
-    <div className="relative" ref={dropdownRef}>
-      <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-dark-secondary/50 border border-white/10 hover:border-cyan-neon/30 transition-all text-white"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        aria-label="Select language"
-        aria-expanded={isOpen}
-      >
-        <Globe className="w-4 h-4 text-cyan-neon" />
-        <span className="text-sm font-medium">{currentLanguage.flag}</span>
-        <span className="text-sm font-medium hidden sm:inline">
-          {currentLanguage.nativeName}
-        </span>
-        <motion.svg
-          className="w-4 h-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </motion.svg>
-      </motion.button>
+    <Tooltip.Provider delayDuration={300}>
+      <div className="relative" ref={dropdownRef}>
+        <Tooltip.Root>
+          <Tooltip.Trigger asChild>
+            <motion.button
+              onClick={() => setIsOpen(!isOpen)}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-dark-secondary/50 border border-white/10 hover:border-cyan-neon/30 transition-all text-white"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              aria-label="Select language"
+              aria-expanded={isOpen}
+            >
+              <Globe className="w-4 h-4 text-cyan-neon" />
+              <span className="text-sm font-medium">{currentLanguage.flag}</span>
+              <span className="text-sm font-medium hidden sm:inline">
+                {currentLanguage.nativeName}
+              </span>
+              <motion.svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </motion.svg>
+            </motion.button>
+          </Tooltip.Trigger>
+          <Tooltip.Portal>
+            <Tooltip.Content
+              className="px-3 py-2 bg-dark-secondary/95 text-white text-sm rounded-lg shadow-xl border border-cyan-neon/20 backdrop-blur-sm z-50"
+              sideOffset={5}
+            >
+              {t("common.changeLanguage")}
+              <Tooltip.Arrow className="fill-dark-secondary" />
+            </Tooltip.Content>
+          </Tooltip.Portal>
+        </Tooltip.Root>
 
       <AnimatePresence>
         {isOpen && (
@@ -188,6 +203,7 @@ export const LanguageSelector = ({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+      </div>
+    </Tooltip.Provider>
   );
 };

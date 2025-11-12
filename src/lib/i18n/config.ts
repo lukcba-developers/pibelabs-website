@@ -23,6 +23,28 @@ export const languageFlags: Record<SupportedLanguage, string> = {
   en: "🇺🇸",
 };
 
+// Intelligent browser language detection with fallback mapping
+const detectBrowserLanguage = (): SupportedLanguage => {
+  if (typeof navigator === "undefined") return defaultLanguage;
+
+  const browserLang = navigator.language.split("-")[0].toLowerCase();
+
+  // Map related languages to supported ones
+  const languageMap: Record<string, SupportedLanguage> = {
+    es: "es",
+    en: "en",
+    pt: "es", // Portuguese → Spanish (closer culturally)
+    fr: "en", // French → English
+    de: "en", // German → English
+    it: "es", // Italian → Spanish (closer culturally)
+    ca: "es", // Catalan → Spanish
+    gl: "es", // Galician → Spanish
+    eu: "es", // Basque → Spanish
+  };
+
+  return languageMap[browserLang] || defaultLanguage;
+};
+
 const resources = {
   es: { translation: es },
   en: { translation: en },
@@ -47,13 +69,29 @@ i18n
       formatSeparator: ",",
     },
 
-    // Detection options
+    // Detection options with intelligent fallback
     detection: {
       order: ["localStorage", "navigator", "htmlTag", "path", "subdomain"],
       caches: ["localStorage"],
       lookupLocalStorage: "pibelabs-language",
       lookupFromPathIndex: 0,
       checkWhitelist: true,
+      // Custom converter for intelligent language detection
+      convertDetectedLanguage: (lng: string) => {
+        const detected = lng.split("-")[0].toLowerCase();
+        const languageMap: Record<string, SupportedLanguage> = {
+          es: "es",
+          en: "en",
+          pt: "es",
+          fr: "en",
+          de: "en",
+          it: "es",
+          ca: "es",
+          gl: "es",
+          eu: "es",
+        };
+        return languageMap[detected] || defaultLanguage;
+      },
     },
 
     // React options

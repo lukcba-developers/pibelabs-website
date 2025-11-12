@@ -50,8 +50,7 @@ describe("CookieConsent", () => {
   });
 
   it("renders cookie consent banner", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
@@ -66,8 +65,7 @@ describe("CookieConsent", () => {
   });
 
   it("shows default message", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
@@ -80,8 +78,7 @@ describe("CookieConsent", () => {
   });
 
   it("shows custom message when provided", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
@@ -95,8 +92,7 @@ describe("CookieConsent", () => {
   });
 
   it("renders all three action buttons", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
@@ -117,11 +113,10 @@ describe("CookieConsent", () => {
   });
 
   it("calls onAccept when Accept All is clicked", async () => {
-    const { useLocalStorage } = await import("@/hooks");
     const mockSetConsent = vi.fn();
     const mockSetPreferences = vi.fn();
 
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, mockSetConsent])
       .mockReturnValueOnce([defaultPreferences, mockSetPreferences]);
 
@@ -140,11 +135,10 @@ describe("CookieConsent", () => {
   });
 
   it("calls onReject when Reject is clicked", async () => {
-    const { useLocalStorage } = await import("@/hooks");
     const mockSetConsent = vi.fn();
     const mockSetPreferences = vi.fn();
 
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, mockSetConsent])
       .mockReturnValueOnce([defaultPreferences, mockSetPreferences]);
 
@@ -161,8 +155,7 @@ describe("CookieConsent", () => {
   });
 
   it("opens customize modal when Personalizar is clicked", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
@@ -182,8 +175,7 @@ describe("CookieConsent", () => {
   });
 
   it("hides customize button when showCustomize is false", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
@@ -197,9 +189,8 @@ describe("CookieConsent", () => {
     });
   });
 
-  it("does not render when consent is already given", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+  it("does not render when consent is already given", () => {
+    mockUseLocalStorage
       .mockReturnValueOnce(["accepted", vi.fn()])
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
@@ -209,8 +200,7 @@ describe("CookieConsent", () => {
   });
 
   it("renders privacy policy link", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
@@ -227,10 +217,9 @@ describe("CookieConsent", () => {
   });
 
   it("tracks analytics event when accepting all cookies", async () => {
-    const { useLocalStorage } = await import("@/hooks");
     const { sendEvent } = await import("@/lib/analytics/googleAnalytics");
 
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 

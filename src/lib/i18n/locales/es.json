@@ -202,6 +202,8 @@
     "contactUs": "Contáctanos",
     "loading": "Cargando...",
     "error": "Error",
-    "success": "Éxito"
+    "success": "Éxito",
+    "changeLanguage": "Cambiar idioma",
+    "currentLanguage": "Idioma actual: {{language}}"
   }
 }

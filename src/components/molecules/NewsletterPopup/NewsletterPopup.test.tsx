@@ -15,35 +15,35 @@ vi.mock("framer-motion", () => ({
   AnimatePresence: ({ children }: any) => <>{children}</>,
 }));
 
-// Mock hooks
-vi.mock("@/hooks", () => ({
-  useLocalStorage: vi.fn((key: string, initialValue: any) => [
-    initialValue,
-    vi.fn(),
-  ]),
-  useReducedMotion: vi.fn(() => false),
-}));
-
 // Mock analytics
 vi.mock("@/lib/analytics/googleAnalytics", () => ({
   sendEvent: vi.fn(),
 }));
 
+// Mock hooks with default implementation
+const mockUseLocalStorage = vi.fn();
+const mockUseReducedMotion = vi.fn(() => false);
+
+vi.mock("@/hooks", () => ({
+  useLocalStorage: (...args: any[]) => mockUseLocalStorage(...args),
+  useReducedMotion: () => mockUseReducedMotion(),
+}));
+
 describe("NewsletterPopup", () => {
   beforeEach(() => {
-    localStorage.clear();
     vi.clearAllMocks();
     vi.useFakeTimers();
+    // Default mock implementation
+    mockUseLocalStorage.mockReturnValue([null, vi.fn()]);
   });
 
   afterEach(() => {
-    vi.restoreAllMocks();
+    vi.runOnlyPendingTimers();
     vi.useRealTimers();
   });
 
   it("shows popup after delay", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()]) // lastDismissed
       .mockReturnValueOnce([false, vi.fn()]); // hasSubscribed
 
@@ -64,9 +64,8 @@ describe("NewsletterPopup", () => {
     });
   });
 
-  it("does not show if user already subscribed", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+  it("does not show if user already subscribed", () => {
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([true, vi.fn()]); // hasSubscribed = true
 
@@ -77,11 +76,10 @@ describe("NewsletterPopup", () => {
     expect(container.firstChild).toBeNull();
   });
 
-  it("does not show if dismissed recently", async () => {
-    const { useLocalStorage } = await import("@/hooks");
+  it("does not show if dismissed recently", () => {
     const oneDayAgo = Date.now() - 1000 * 60 * 60 * 24; // 1 day ago
 
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([oneDayAgo, vi.fn()]) // lastDismissed
       .mockReturnValueOnce([false, vi.fn()]);
 
@@ -93,8 +91,7 @@ describe("NewsletterPopup", () => {
   });
 
   it("renders form with email and name inputs", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([false, vi.fn()]);
 
@@ -111,8 +108,7 @@ describe("NewsletterPopup", () => {
   });
 
   it("validates email format", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([false, vi.fn()]);
 
@@ -139,8 +135,7 @@ describe("NewsletterPopup", () => {
   });
 
   it("displays benefits list", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([false, vi.fn()]);
 
@@ -162,10 +157,9 @@ describe("NewsletterPopup", () => {
   });
 
   it("closes popup when close button is clicked", async () => {
-    const { useLocalStorage } = await import("@/hooks");
     const mockSetDismissed = vi.fn();
 
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, mockSetDismissed])
       .mockReturnValueOnce([false, vi.fn()]);
 
@@ -190,10 +184,9 @@ describe("NewsletterPopup", () => {
   });
 
   it("submits form with valid data", async () => {
-    const { useLocalStorage } = await import("@/hooks");
     const mockSetSubscribed = vi.fn();
 
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([false, mockSetSubscribed]);
 
@@ -221,10 +214,9 @@ describe("NewsletterPopup", () => {
   });
 
   it("tracks analytics event when popup is shown", async () => {
-    const { useLocalStorage } = await import("@/hooks");
     const { sendEvent } = await import("@/lib/analytics/googleAnalytics");
 
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([false, vi.fn()]);
 
@@ -240,8 +232,7 @@ describe("NewsletterPopup", () => {
   });
 
   it("displays privacy note", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([false, vi.fn()]);
 
@@ -257,8 +248,7 @@ describe("NewsletterPopup", () => {
   });
 
   it("shows success message after subscription", async () => {
-    const { useLocalStorage } = await import("@/hooks");
-    vi.mocked(useLocalStorage)
+    mockUseLocalStorage
       .mockReturnValueOnce([null, vi.fn()])
       .mockReturnValueOnce([false, vi.fn()]);
 

@@ -202,6 +202,8 @@
     "contactUs": "Contact us",
     "loading": "Loading...",
     "error": "Error",
-    "success": "Success"
+    "success": "Success",
+    "changeLanguage": "Change language",
+    "currentLanguage": "Current language: {{language}}"
   }
 }

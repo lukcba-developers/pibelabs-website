@@ -6,6 +6,7 @@ import ScrollToTop from "./components/atoms/ScrollToTop";
 import ErrorBoundary from "./components/atoms/ErrorBoundary";
 import SEO from "./components/atoms/SEO";
 import { LanguageHead } from "./components/SEO";
+import { LanguageTransition } from "./components/atoms/LanguageTransition";
 import { initGA } from "@/lib/analytics";
 import { reportWebVitals, logWebVitals } from "@/lib/performance/webVitals";
 import { useScrollDepth } from "@/hooks";
@@ -81,7 +82,8 @@ function App() {
         <Suspense
           fallback={<Loader message="Cargando experiencia futurista..." />}
         >
-          <main id="main-content">
+          <LanguageTransition>
+            <main id="main-content">
             {/* Hero Section */}
             <Hero />
 
@@ -125,6 +127,7 @@ function App() {
 
           {/* Footer */}
           <Footer />
+          </LanguageTransition>
         </Suspense>
 
         {/* Floating WhatsApp Button */}
