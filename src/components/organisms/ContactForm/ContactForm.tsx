@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   contactFormSchema,
   suggestEmailDomain,
@@ -25,6 +26,7 @@ import {
    ============================================ */
 
 const ContactForm = () => {
+  const { t } = useTranslation();
   const [formState, setFormState] = useState<ContactFormState>({
     isSubmitting: false,
     isSuccess: false,
@@ -182,16 +184,16 @@ const ContactForm = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            Contacto
+            {t("contact.title")}
           </motion.span>
 
           <h2 className="font-orbitron font-bold text-4xl md:text-5xl text-white mb-4">
-            ¿Listo para <span className="text-magenta-neon">Innovar</span>?
+            {t("contact.subtitle")}
           </h2>
 
           <p className="font-poppins text-lg text-gray-300 max-w-2xl mx-auto">
-            Cuéntanos sobre tu proyecto y descubre cómo podemos ayudarte a
-            alcanzar tus objetivos.
+            {t("contact.form.description" as any) ||
+              "Cuéntanos sobre tu proyecto y descubre cómo podemos ayudarte a alcanzar tus objetivos."}
           </p>
         </motion.div>
 
@@ -217,11 +219,11 @@ const ContactForm = () => {
                     <span className="text-4xl">✅</span>
                     <div>
                       <h3 className="font-rajdhani font-bold text-xl text-green-400 mb-2">
-                        ¡Mensaje Enviado!
+                        {t("contact.form.success")}
                       </h3>
                       <p className="font-poppins text-gray-300">
-                        Gracias por contactarnos. Nuestro equipo revisará tu
-                        mensaje y te responderá en menos de 24 horas.
+                        {t("contact.form.successMessage" as any) ||
+                          "Gracias por contactarnos. Nuestro equipo revisará tu mensaje y te responderá en menos de 24 horas."}
                       </p>
                     </div>
                   </div>
@@ -292,8 +294,10 @@ const ContactForm = () => {
                   {...register("name")}
                   type="text"
                   name="name"
-                  label="Nombre Completo"
-                  placeholder="Ej: Juan Pérez"
+                  label={t("contact.form.name")}
+                  placeholder={
+                    t("contact.form.namePlaceholder" as any) || "Ej: Juan Pérez"
+                  }
                   required
                   error={errors.name?.message}
                   onFocus={handleFormStart}
@@ -317,17 +321,20 @@ const ContactForm = () => {
                   htmlFor="email"
                   className="block mb-2 font-rajdhani font-medium text-white"
                 >
-                  Email
+                  {t("contact.form.email")}
                   <span className="text-cyan-neon ml-1">*</span>
                   <span className="text-xs text-gray-400 font-normal ml-2">
-                    (Nunca spam, prometido 🤝)
+                    {t("contact.form.emailNote" as any) ||
+                      "(Nunca spam, prometido 🤝)"}
                   </span>
                 </label>
                 <Input
                   {...register("email")}
                   type="email"
                   name="email"
-                  placeholder="tu@email.com"
+                  placeholder={
+                    t("contact.form.emailPlaceholder" as any) || "tu@email.com"
+                  }
                   required
                   error={errors.email?.message}
                   onFocus={handleFormStart}
@@ -382,10 +389,11 @@ const ContactForm = () => {
                   htmlFor="service-select"
                   className="block mb-2 font-rajdhani font-medium text-white"
                 >
-                  Servicio de Interés
+                  {t("contact.form.service")}
                   <span className="text-magenta-neon ml-1">*</span>
                   <span className="text-xs text-gray-400 font-normal ml-2">
-                    (Elige el que mejor se ajuste)
+                    {t("contact.form.serviceNote" as any) ||
+                      "(Elige el que mejor se ajuste)"}
                   </span>
                 </label>
                 <select
@@ -396,12 +404,18 @@ const ContactForm = () => {
                   onFocus={handleFormStart}
                   onBlur={() => handleFieldBlur("service")}
                 >
-                  <option value="">Selecciona un servicio</option>
-                  {SERVICES.map((service) => (
-                    <option key={service.id} value={service.id}>
-                      {service.icon} {service.title}
-                    </option>
-                  ))}
+                  <option value="">
+                    {t("contact.form.servicePlaceholder")}
+                  </option>
+                  {SERVICES.map((service) => {
+                    const serviceKey = service.id;
+                    const translationKey = `services.${serviceKey}.title`;
+                    return (
+                      <option key={service.id} value={service.id}>
+                        {t(translationKey as any)}
+                      </option>
+                    );
+                  })}
                 </select>
                 {errors.service && (
                   <p className="mt-2 text-sm text-red-500 font-poppins">
@@ -421,8 +435,11 @@ const ContactForm = () => {
                   {...register("message")}
                   type="textarea"
                   name="message"
-                  label="Mensaje"
-                  placeholder="Cuéntanos sobre tu proyecto..."
+                  label={t("contact.form.message")}
+                  placeholder={
+                    t("contact.form.messagePlaceholder" as any) ||
+                    "Cuéntanos sobre tu proyecto..."
+                  }
                   required
                   error={errors.message?.message}
                   onFocus={handleFormStart}
@@ -430,7 +447,8 @@ const ContactForm = () => {
                   className="bg-dark-primary text-white"
                 />
                 <p className="mt-2 text-xs text-gray-400 font-poppins">
-                  Mínimo 10 caracteres, máximo 500 caracteres
+                  {t("contact.form.messageHint" as any) ||
+                    "Mínimo 10 caracteres, máximo 500 caracteres"}
                 </p>
               </motion.div>
 
@@ -449,9 +467,11 @@ const ContactForm = () => {
                   loading={formState.isSubmitting}
                   disabled={formState.isSubmitting}
                   className="w-full"
-                  ariaLabel="Enviar formulario de contacto"
+                  ariaLabel={t("contact.form.submit")}
                 >
-                  {formState.isSubmitting ? "Enviando..." : "Enviar Mensaje"}
+                  {formState.isSubmitting
+                    ? t("contact.form.submitting")
+                    : t("contact.form.submit")}
                 </Button>
               </motion.div>
 
@@ -463,8 +483,8 @@ const ContactForm = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.6 }}
               >
-                Al enviar este formulario, aceptas nuestra política de
-                privacidad. Nunca compartiremos tu información con terceros.
+                {t("contact.form.privacyNote" as any) ||
+                  "Al enviar este formulario, aceptas nuestra política de privacidad. Nunca compartiremos tu información con terceros."}
               </motion.p>
             </form>
           </motion.div>
