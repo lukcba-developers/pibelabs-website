@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { SERVICES } from "@/lib/constants/config";
 import type { Service } from "@/types";
 
@@ -120,6 +121,21 @@ const ServiceCard = memo(
 ServiceCard.displayName = "ServiceCard";
 
 const ServicesGrid = memo(() => {
+  const { t } = useTranslation();
+
+  // Map service IDs to translation keys
+  const getServiceTranslations = (serviceId: string) => {
+    const keyMap: Record<string, string> = {
+      web: "services.web",
+      ia: "services.ia",
+      design: "services.design",
+      cloud: "services.cloud",
+      security: "services.security",
+      consulting: "services.consulting",
+    };
+    return keyMap[serviceId] || serviceId;
+  };
+
   return (
     <section id="services" className="section-padding bg-light-secondary">
       <div className="container mx-auto px-4">
@@ -137,25 +153,39 @@ const ServicesGrid = memo(() => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            Nuestros Servicios
+            {t("services.badge")}
           </motion.span>
 
           <h2 className="font-orbitron font-bold text-4xl md:text-5xl text-gray-dark mb-4">
-            Soluciones <span className="text-cyan-neon">Tecnológicas</span>{" "}
-            Integrales
+            {t("services.title")}{" "}
+            <span className="text-cyan-neon">{t("services.subtitle")}</span>
           </h2>
 
           <p className="font-poppins text-lg text-text-secondary max-w-3xl mx-auto">
-            Transformamos tus ideas en productos digitales excepcionales con
-            tecnología de vanguardia y un enfoque centrado en resultados.
+            {t("services.description")}
           </p>
         </motion.div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {SERVICES.map((service, index) => (
-            <ServiceCard key={service.id} service={service} index={index} />
-          ))}
+          {SERVICES.map((service, index) => {
+            const translationKey = getServiceTranslations(service.id);
+            const translatedService = {
+              ...service,
+              title: t(`${translationKey}.title`),
+              description: t(`${translationKey}.description`),
+              features: t(`${translationKey}.features`, {
+                returnObjects: true,
+              }) as string[],
+            };
+            return (
+              <ServiceCard
+                key={service.id}
+                service={translatedService}
+                index={index}
+              />
+            );
+          })}
         </div>
 
         {/* Bottom CTA */}
@@ -167,8 +197,7 @@ const ServicesGrid = memo(() => {
           transition={{ delay: 0.8 }}
         >
           <p className="font-poppins text-text-secondary mb-6">
-            ¿No encuentras lo que necesitas? Trabajamos con soluciones
-            personalizadas.
+            {t("services.cta")}
           </p>
           <motion.button
             className="px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-neon to-magenta-neon text-white font-rajdhani font-semibold text-lg hover:shadow-glow-cyan transition-all"
@@ -179,7 +208,7 @@ const ServicesGrid = memo(() => {
               if (element) element.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            Consultar por Proyecto Custom
+            {t("services.ctaButton")}
           </motion.button>
         </motion.div>
       </div>

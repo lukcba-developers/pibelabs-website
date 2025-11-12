@@ -25,45 +25,69 @@
   },
   "services": {
     "title": "Servicios",
-    "subtitle": "Soluciones tecnológicas end-to-end",
-    "webDev": {
+    "subtitle": "Soluciones Tecnológicas Integrales",
+    "description": "Transformamos tus ideas en productos digitales excepcionales con tecnología de vanguardia y un enfoque centrado en resultados.",
+    "badge": "Nuestros Servicios",
+    "cta": "¿No encuentras lo que necesitas? Trabajamos con soluciones personalizadas.",
+    "ctaButton": "Hablemos de tu proyecto",
+    "web": {
       "title": "Desarrollo Web",
-      "description": "Aplicaciones web modernas con React, Next.js, Node.js y arquitecturas escalables",
+      "description": "Aplicaciones web modernas, rápidas y escalables con las últimas tecnologías.",
       "features": [
-        "SPA/SSR con React/Next.js",
-        "APIs RESTful y GraphQL",
-        "Arquitectura microservicios",
-        "CI/CD y DevOps"
+        "React, Next.js, Vue",
+        "TypeScript & Node.js",
+        "API RESTful & GraphQL",
+        "Progressive Web Apps"
       ]
     },
-    "ai": {
+    "ia": {
       "title": "Inteligencia Artificial",
-      "description": "Soluciones de ML/AI personalizadas con modelos avanzados y pipelines de datos robustos",
+      "description": "Soluciones de IA y Machine Learning para automatizar y optimizar procesos.",
       "features": [
-        "Modelos predictivos",
-        "NLP y análisis de texto",
-        "Computer Vision",
-        "Integración OpenAI/Anthropic"
+        "Machine Learning",
+        "NLP & Computer Vision",
+        "Chatbots & Asistentes",
+        "Análisis Predictivo"
       ]
     },
-    "uiux": {
+    "design": {
       "title": "Diseño UX/UI",
-      "description": "Interfaces centradas en el usuario con diseño de sistemas, research y prototipado avanzado",
+      "description": "Interfaces intuitivas y atractivas centradas en la experiencia del usuario.",
       "features": [
+        "Research & Testing",
+        "Wireframes & Prototipos",
         "Design Systems",
-        "Prototipado interactivo",
-        "User Research",
-        "Usability Testing"
+        "Branding & Identidad"
       ]
     },
     "cloud": {
       "title": "Cloud & DevOps",
-      "description": "Infraestructura moderna con AWS, containerización Docker y pipelines automatizados",
+      "description": "Infraestructura cloud escalable, segura y optimizada para tu negocio.",
       "features": [
-        "AWS/GCP/Azure",
-        "Docker/Kubernetes",
-        "Terraform/IaC",
-        "Monitoreo 24/7"
+        "AWS, GCP, Azure",
+        "CI/CD Pipelines",
+        "Kubernetes & Docker",
+        "Monitoring & Logging"
+      ]
+    },
+    "security": {
+      "title": "Ciberseguridad",
+      "description": "Protección integral contra amenazas y auditorías de seguridad.",
+      "features": [
+        "Pentesting & Auditorías",
+        "OWASP Top 10",
+        "Encriptación & Auth",
+        "Compliance & GDPR"
+      ]
+    },
+    "consulting": {
+      "title": "Consultoría Tech",
+      "description": "Asesoramiento estratégico para transformar tu negocio con tecnología.",
+      "features": [
+        "Arquitectura de Software",
+        "Tech Stack Selection",
+        "Code Review & Refactor",
+        "Capacitación de Equipos"
       ]
     }
   },
