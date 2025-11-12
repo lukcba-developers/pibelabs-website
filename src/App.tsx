@@ -55,6 +55,9 @@ function App() {
   // Sync language with URL query params
   useLanguageUrl();
 
+  // Detect system language changes (disabled by default - uncomment to enable)
+  // useSystemLanguage({ enabled: true, showPrompt: true });
+
   return (
     <HelmetProvider>
       <ErrorBoundary>

@@ -756,3 +756,6 @@ export { useScrollDepth } from "./useScrollDepth";
 
 // Export useLanguageUrl for i18n URL sync
 export { useLanguageUrl } from "./useLanguageUrl";
+
+// Export useSystemLanguage for system language detection
+export { useSystemLanguage } from "./useSystemLanguage";
