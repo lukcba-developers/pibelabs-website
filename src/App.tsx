@@ -1,9 +1,11 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
+import { HelmetProvider } from "react-helmet-async";
 import { Loader } from "./components/atoms/Loader";
 import ScrollToTop from "./components/atoms/ScrollToTop";
 import ErrorBoundary from "./components/atoms/ErrorBoundary";
 import SEO from "./components/atoms/SEO";
+import { LanguageHead } from "./components/SEO";
 import { initGA } from "@/lib/analytics";
 import { reportWebVitals, logWebVitals } from "@/lib/performance/webVitals";
 import { useScrollDepth } from "@/hooks";
@@ -50,9 +52,11 @@ function App() {
   useScrollDepth([25, 50, 75, 100]);
 
   return (
-    <ErrorBoundary>
-      <SEO />
-      <div className="App">
+    <HelmetProvider>
+      <ErrorBoundary>
+        <SEO />
+        <LanguageHead />
+        <div className="App">
         {/* Skip to main content for accessibility */}
         <a
           href="#main-content"
@@ -184,7 +188,8 @@ function App() {
           />
         </Suspense>
       </div>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </HelmetProvider>
   );
 }
 

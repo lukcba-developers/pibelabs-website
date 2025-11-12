@@ -27,15 +27,24 @@ export const LanguageSelector = ({
 }: LanguageSelectorProps) => {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const currentLanguage =
     languages.find((lang) => lang.code === i18n.language) || languages[0];
 
-  const handleLanguageChange = (lang: SupportedLanguage) => {
-    i18n.changeLanguage(lang);
+  const handleLanguageChange = async (lang: SupportedLanguage) => {
+    setIsLoading(true);
+
+    // Change language
+    await i18n.changeLanguage(lang);
     document.documentElement.lang = lang;
-    setIsOpen(false);
+
+    // Micro-delay for visual feedback
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsOpen(false);
+    }, 200);
   };
 
   // Close dropdown when clicking outside
@@ -60,20 +69,31 @@ export const LanguageSelector = ({
           <motion.button
             key={lang.code}
             onClick={() => handleLanguageChange(lang.code)}
+            disabled={isLoading}
             className={`
-              px-3 py-1.5 rounded-lg text-sm font-medium transition-all
+              relative px-3 py-1.5 rounded-lg text-sm font-medium transition-all
               ${
                 i18n.language === lang.code
                   ? "bg-cyan-neon/20 text-cyan-neon border border-cyan-neon/30"
                   : "bg-dark-secondary/50 text-white/60 border border-white/10 hover:text-white hover:border-white/20"
               }
+              ${isLoading ? "opacity-50 cursor-not-allowed" : ""}
             `}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={!isLoading ? { scale: 1.05 } : {}}
+            whileTap={!isLoading ? { scale: 0.95 } : {}}
             aria-label={`Change language to ${lang.label}`}
           >
             <span className="mr-1.5">{lang.flag}</span>
             {lang.label}
+            {isLoading && i18n.language !== lang.code && (
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center bg-dark-secondary/80 rounded-lg"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <div className="w-4 h-4 border-2 border-cyan-neon border-t-transparent rounded-full animate-spin" />
+              </motion.div>
+            )}
           </motion.button>
         ))}
       </div>
@@ -125,15 +145,17 @@ export const LanguageSelector = ({
               <motion.button
                 key={lang.code}
                 onClick={() => handleLanguageChange(lang.code)}
+                disabled={isLoading}
                 className={`
-                  w-full flex items-center gap-3 px-4 py-3 text-left transition-colors
+                  relative w-full flex items-center gap-3 px-4 py-3 text-left transition-colors
                   ${
                     i18n.language === lang.code
                       ? "bg-cyan-neon/10 text-cyan-neon"
                       : "text-white hover:bg-white/5"
                   }
+                  ${isLoading ? "opacity-50 cursor-not-allowed" : ""}
                 `}
-                whileHover={{ x: 4 }}
+                whileHover={!isLoading ? { x: 4 } : {}}
                 aria-label={`Change language to ${lang.label}`}
               >
                 <span className="text-xl">{lang.flag}</span>
@@ -141,21 +163,25 @@ export const LanguageSelector = ({
                   <span className="font-medium text-sm">{lang.nativeName}</span>
                   <span className="text-xs text-gray-400">{lang.label}</span>
                 </div>
-                {i18n.language === lang.code && (
-                  <motion.svg
-                    className="w-4 h-4 ml-auto text-cyan-neon"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </motion.svg>
+                {isLoading && i18n.language !== lang.code ? (
+                  <div className="w-4 h-4 ml-auto border-2 border-cyan-neon border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  i18n.language === lang.code && (
+                    <motion.svg
+                      className="w-4 h-4 ml-auto text-cyan-neon"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </motion.svg>
+                  )
                 )}
               </motion.button>
             ))}

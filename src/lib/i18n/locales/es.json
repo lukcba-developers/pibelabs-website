@@ -169,14 +169,14 @@
     },
     "validation": {
       "nameRequired": "El nombre es requerido",
-      "nameMin": "El nombre debe tener al menos 2 caracteres",
-      "emailRequired": "El email es requerido",
-      "emailInvalid": "Email inválido",
-      "emailDisposable": "No se permiten emails temporales",
-      "messageRequired": "El mensaje es requerido",
-      "messageMin": "El mensaje debe tener al menos 10 caracteres",
-      "messageMax": "El mensaje no puede exceder 1000 caracteres",
-      "serviceRequired": "Selecciona un servicio"
+      "minLength": "Mínimo {{count}} caracteres",
+      "maxLength": "Máximo {{count}} caracteres",
+      "invalidEmail": "Email inválido",
+      "invalidFormat": "Formato inválido",
+      "invalidService": "Selecciona un servicio válido",
+      "disposableEmail": "No se permiten emails temporales o desechables",
+      "spamDetected": "El mensaje contiene contenido no permitido",
+      "required": "Este campo es requerido"
     },
     "info": {
       "email": "Email",
