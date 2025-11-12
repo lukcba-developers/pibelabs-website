@@ -1,0 +1,17 @@
+{
+  "learnMore": "Conocer más",
+  "contactUs": "Contáctanos",
+  "loading": "Cargando...",
+  "error": "Error",
+  "success": "Éxito",
+  "changeLanguage": "Cambiar idioma",
+  "currentLanguage": "Idioma actual: {{language}}",
+  "project": "proyecto",
+  "project_other": "proyectos",
+  "year": "año",
+  "year_other": "años",
+  "client": "cliente",
+  "client_other": "clientes",
+  "member": "miembro",
+  "member_other": "miembros"
+}

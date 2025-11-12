@@ -8,17 +8,17 @@ import { LanguageSelector } from "@/components/atoms/LanguageSelector";
    ============================================ */
 
 const Header = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["navigation", "hero"]);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const NAV_LINKS = [
-    { id: "inicio", label: t("nav.home"), href: "#hero" },
-    { id: "servicios", label: t("nav.services"), href: "#services" },
-    { id: "portfolio", label: t("nav.portfolio"), href: "#portfolio" },
-    { id: "nosotros", label: t("nav.about"), href: "#about" },
-    { id: "blog", label: t("nav.blog"), href: "#blog" },
-    { id: "contacto", label: t("nav.contact"), href: "#contact" },
+    { id: "inicio", label: t("home", { ns: "navigation" }), href: "#hero" },
+    { id: "servicios", label: t("services", { ns: "navigation" }), href: "#services" },
+    { id: "portfolio", label: t("portfolio", { ns: "navigation" }), href: "#portfolio" },
+    { id: "nosotros", label: t("about", { ns: "navigation" }), href: "#about" },
+    { id: "blog", label: t("blog", { ns: "navigation" }), href: "#blog" },
+    { id: "contacto", label: t("contact", { ns: "navigation" }), href: "#contact" },
   ];
 
   // Handle scroll effect
@@ -133,7 +133,7 @@ const Header = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {t("hero.cta")}
+              {t("cta", { ns: "hero" })}
             </motion.a>
           </div>
 
@@ -222,7 +222,7 @@ const Header = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  {t("hero.cta")}
+                  {t("cta", { ns: "hero" })}
                 </motion.a>
               </div>
             </motion.div>

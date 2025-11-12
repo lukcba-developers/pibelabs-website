@@ -2,8 +2,32 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
-import es from "./locales/es.json";
-import en from "./locales/en.json";
+// Import all namespaces
+import esCommon from "./locales/es/common.json";
+import esNavigation from "./locales/es/navigation.json";
+import esHero from "./locales/es/hero.json";
+import esCompany from "./locales/es/company.json";
+import esStats from "./locales/es/stats.json";
+import esServices from "./locales/es/services.json";
+import esPortfolio from "./locales/es/portfolio.json";
+import esAbout from "./locales/es/about.json";
+import esBlog from "./locales/es/blog.json";
+import esContact from "./locales/es/contact.json";
+import esFooter from "./locales/es/footer.json";
+import esValidation from "./locales/es/validation.json";
+
+import enCommon from "./locales/en/common.json";
+import enNavigation from "./locales/en/navigation.json";
+import enHero from "./locales/en/hero.json";
+import enCompany from "./locales/en/company.json";
+import enStats from "./locales/en/stats.json";
+import enServices from "./locales/en/services.json";
+import enPortfolio from "./locales/en/portfolio.json";
+import enAbout from "./locales/en/about.json";
+import enBlog from "./locales/en/blog.json";
+import enContact from "./locales/en/contact.json";
+import enFooter from "./locales/en/footer.json";
+import enValidation from "./locales/en/validation.json";
 
 /* ============================================
    i18n Configuration - Enhanced
@@ -46,8 +70,34 @@ const detectBrowserLanguage = (): SupportedLanguage => {
 };
 
 const resources = {
-  es: { translation: es },
-  en: { translation: en },
+  es: {
+    common: esCommon,
+    navigation: esNavigation,
+    hero: esHero,
+    company: esCompany,
+    stats: esStats,
+    services: esServices,
+    portfolio: esPortfolio,
+    about: esAbout,
+    blog: esBlog,
+    contact: esContact,
+    footer: esFooter,
+    validation: esValidation,
+  },
+  en: {
+    common: enCommon,
+    navigation: enNavigation,
+    hero: enHero,
+    company: enCompany,
+    stats: enStats,
+    services: enServices,
+    portfolio: enPortfolio,
+    about: enAbout,
+    blog: enBlog,
+    contact: enContact,
+    footer: enFooter,
+    validation: enValidation,
+  },
 };
 
 // Initialize i18n
@@ -56,7 +106,22 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    defaultNS: "translation",
+    defaultNS: "common",
+    ns: [
+      "common",
+      "navigation",
+      "hero",
+      "company",
+      "stats",
+      "services",
+      "portfolio",
+      "about",
+      "blog",
+      "contact",
+      "footer",
+      "validation",
+    ],
+    fallbackNS: "common",
     fallbackLng: defaultLanguage,
     supportedLngs: supportedLanguages,
 
@@ -76,7 +141,6 @@ i18n
       lookupQuerystring: "lang",
       lookupLocalStorage: "pibelabs-language",
       lookupFromPathIndex: 0,
-      checkWhitelist: true,
       // Custom converter for intelligent language detection
       convertDetectedLanguage: (lng: string) => {
         const detected = lng.split("-")[0].toLowerCase();

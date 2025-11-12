@@ -6,11 +6,12 @@ export {
   languageFlags,
 } from "./config";
 export type { SupportedLanguage } from "./config";
-export type { TranslationResource, TranslationPath } from "./types";
 export {
   useTypedTranslation,
   useTranslationSection,
+  useNamespace,
 } from "./useTypedTranslation";
+export type { Namespace } from "./useTypedTranslation";
 export {
   formatDate,
   formatRelativeDate,

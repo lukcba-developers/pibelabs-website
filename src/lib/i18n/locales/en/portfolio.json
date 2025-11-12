@@ -1,0 +1,21 @@
+{
+  "badge": "Our Work",
+  "title": "Project",
+  "subtitle": "Portfolio",
+  "description": "Explore some of our most outstanding projects and discover how we transform ideas into exceptional digital solutions.",
+  "viewProject": "View project",
+  "viewDetails": "View Details",
+  "categories": {
+    "all": "All",
+    "web": "Web",
+    "mobile": "Mobile",
+    "ai": "AI",
+    "design": "Design",
+    "cloud": "Cloud"
+  },
+  "status": {
+    "production": "✓ Production",
+    "development": "🔧 In Development",
+    "completed": "Completed"
+  }
+}

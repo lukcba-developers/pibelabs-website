@@ -11,16 +11,16 @@ import { FORM_CONFIG } from "@/lib/constants/config";
 // ============================================
 
 const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
-  const t = i18n.t;
+  const t = (key: string, options?: object) => i18n.t(key, { ns: "validation", ...options });
 
   switch (issue.code) {
     case z.ZodIssueCode.too_small:
       if (issue.type === "string") {
         if (issue.minimum === 1) {
-          return { message: t("contact.validation.nameRequired") };
+          return { message: t("required") };
         }
         return {
-          message: t("contact.validation.minLength", {
+          message: t("too_small", {
             count: Number(issue.minimum),
           }),
         };
@@ -30,7 +30,7 @@ const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
     case z.ZodIssueCode.too_big:
       if (issue.type === "string") {
         return {
-          message: t("contact.validation.maxLength", {
+          message: t("too_big", {
             count: Number(issue.maximum),
           }),
         };
@@ -39,15 +39,15 @@ const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
 
     case z.ZodIssueCode.invalid_string:
       if (issue.validation === "email") {
-        return { message: t("contact.validation.invalidEmail") };
+        return { message: t("invalid_email") };
       }
       if (issue.validation === "regex") {
-        return { message: t("contact.validation.invalidFormat") };
+        return { message: t("custom") };
       }
       break;
 
     case z.ZodIssueCode.invalid_enum_value:
-      return { message: t("contact.validation.invalidService") };
+      return { message: t("invalid_enum_value") };
 
     default:
       break;

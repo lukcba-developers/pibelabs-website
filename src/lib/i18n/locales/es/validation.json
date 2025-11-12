@@ -1,0 +1,11 @@
+{
+  "invalid_type": "Tipo de dato inválido",
+  "invalid_string": "Cadena de texto inválida",
+  "too_small": "Debe tener al menos {{count}} caracteres",
+  "too_big": "Debe tener máximo {{count}} caracteres",
+  "invalid_email": "Email inválido",
+  "required": "Este campo es requerido",
+  "custom": "Error de validación",
+  "invalid_enum_value": "Valor no permitido",
+  "unrecognized_keys": "Campos no reconocidos"
+}

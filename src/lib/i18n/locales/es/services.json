@@ -1,0 +1,68 @@
+{
+  "title": "Servicios",
+  "subtitle": "Soluciones Tecnológicas Integrales",
+  "description": "Transformamos tus ideas en productos digitales excepcionales con tecnología de vanguardia y un enfoque centrado en resultados.",
+  "badge": "Nuestros Servicios",
+  "cta": "¿No encuentras lo que necesitas? Trabajamos con soluciones personalizadas.",
+  "ctaButton": "Hablemos de tu proyecto",
+  "web": {
+    "title": "Desarrollo Web",
+    "description": "Aplicaciones web modernas, rápidas y escalables con las últimas tecnologías.",
+    "features": [
+      "React, Next.js, Vue",
+      "TypeScript & Node.js",
+      "API RESTful & GraphQL",
+      "Progressive Web Apps"
+    ]
+  },
+  "ia": {
+    "title": "Inteligencia Artificial",
+    "description": "Soluciones de IA y Machine Learning para automatizar y optimizar procesos.",
+    "features": [
+      "Machine Learning",
+      "NLP & Computer Vision",
+      "Chatbots & Asistentes",
+      "Análisis Predictivo"
+    ]
+  },
+  "design": {
+    "title": "Diseño UX/UI",
+    "description": "Interfaces intuitivas y atractivas centradas en la experiencia del usuario.",
+    "features": [
+      "Research & Testing",
+      "Wireframes & Prototipos",
+      "Design Systems",
+      "Branding & Identidad"
+    ]
+  },
+  "cloud": {
+    "title": "Cloud & DevOps",
+    "description": "Infraestructura cloud escalable, segura y optimizada para tu negocio.",
+    "features": [
+      "AWS, GCP, Azure",
+      "CI/CD Pipelines",
+      "Kubernetes & Docker",
+      "Monitoring & Logging"
+    ]
+  },
+  "security": {
+    "title": "Ciberseguridad",
+    "description": "Protección integral contra amenazas y auditorías de seguridad.",
+    "features": [
+      "Pentesting & Auditorías",
+      "OWASP Top 10",
+      "Encriptación & Auth",
+      "Compliance & GDPR"
+    ]
+  },
+  "consulting": {
+    "title": "Consultoría Tech",
+    "description": "Asesoramiento estratégico para transformar tu negocio con tecnología.",
+    "features": [
+      "Arquitectura de Software",
+      "Tech Stack Selection",
+      "Code Review & Refactor",
+      "Capacitación de Equipos"
+    ]
+  }
+}
