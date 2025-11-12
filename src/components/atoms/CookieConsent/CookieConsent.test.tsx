@@ -1,5 +1,11 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import CookieConsent from "./CookieConsent";
 import type { CookiePreferences } from "./CookieConsent";
@@ -57,7 +63,9 @@ describe("CookieConsent", () => {
     render(<CookieConsent />);
 
     // Fast-forward past the 1000ms delay
-    vi.advanceTimersByTime(1000);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
 
     await waitFor(() => {
       expect(screen.getByText(/Cookies & Privacidad/i)).toBeInTheDocument();
@@ -70,7 +78,9 @@ describe("CookieConsent", () => {
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent />);
-    vi.advanceTimersByTime(1000);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
 
     await waitFor(() => {
       expect(screen.getByText(/Utilizamos cookies/i)).toBeInTheDocument();
@@ -84,7 +94,9 @@ describe("CookieConsent", () => {
 
     const customMessage = "Custom cookie message";
     render(<CookieConsent message={customMessage} />);
-    vi.advanceTimersByTime(1000);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
 
     await waitFor(() => {
       expect(screen.getByText(customMessage)).toBeInTheDocument();
@@ -97,7 +109,9 @@ describe("CookieConsent", () => {
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent />);
-    vi.advanceTimersByTime(1000);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
 
     await waitFor(() => {
       expect(
@@ -122,7 +136,9 @@ describe("CookieConsent", () => {
 
     const onAccept = vi.fn();
     render(<CookieConsent onAccept={onAccept} />);
-    vi.advanceTimersByTime(1000);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
 
     await waitFor(() => {
       const acceptButton = screen.getByRole("button", {
@@ -144,7 +160,9 @@ describe("CookieConsent", () => {
 
     const onReject = vi.fn();
     render(<CookieConsent onReject={onReject} />);
-    vi.advanceTimersByTime(1000);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
 
     await waitFor(() => {
       const rejectButton = screen.getByRole("button", { name: /Rechazar/i });
@@ -160,7 +178,9 @@ describe("CookieConsent", () => {
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent />);
-    vi.advanceTimersByTime(1000);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
 
     await waitFor(() => {
       const customizeButton = screen.getByRole("button", {
@@ -180,7 +200,9 @@ describe("CookieConsent", () => {
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent showCustomize={false} />);
-    vi.advanceTimersByTime(1000);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
 
     await waitFor(() => {
       expect(
@@ -205,7 +227,9 @@ describe("CookieConsent", () => {
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent />);
-    vi.advanceTimersByTime(1000);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
 
     await waitFor(() => {
       const policyLink = screen.getByRole("link", {
@@ -224,7 +248,9 @@ describe("CookieConsent", () => {
       .mockReturnValueOnce([defaultPreferences, vi.fn()]);
 
     render(<CookieConsent />);
-    vi.advanceTimersByTime(1000);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
 
     await waitFor(() => {
       const acceptButton = screen.getByRole("button", {

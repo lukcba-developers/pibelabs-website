@@ -1,5 +1,11 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import NewsletterPopup from "./NewsletterPopup";
@@ -55,7 +61,9 @@ describe("NewsletterPopup", () => {
     ).not.toBeInTheDocument();
 
     // Fast-forward time
-    vi.advanceTimersByTime(1000);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
 
     await waitFor(() => {
       expect(
@@ -71,7 +79,9 @@ describe("NewsletterPopup", () => {
 
     const { container } = render(<NewsletterPopup />);
 
-    vi.advanceTimersByTime(10000);
+    act(() => {
+      vi.advanceTimersByTime(10000);
+    });
 
     expect(container.firstChild).toBeNull();
   });
@@ -85,7 +95,9 @@ describe("NewsletterPopup", () => {
 
     const { container } = render(<NewsletterPopup dismissDays={7} />);
 
-    vi.advanceTimersByTime(10000);
+    act(() => {
+      vi.advanceTimersByTime(10000);
+    });
 
     expect(container.firstChild).toBeNull();
   });
@@ -97,7 +109,9 @@ describe("NewsletterPopup", () => {
 
     render(<NewsletterPopup delay={100} exitIntent={false} />);
 
-    vi.advanceTimersByTime(100);
+    act(() => {
+      vi.advanceTimersByTime(100);
+    });
 
     await waitFor(() => {
       expect(
@@ -115,7 +129,9 @@ describe("NewsletterPopup", () => {
     const user = userEvent.setup({ delay: null });
     render(<NewsletterPopup delay={100} exitIntent={false} />);
 
-    vi.advanceTimersByTime(100);
+    act(() => {
+      vi.advanceTimersByTime(100);
+    });
 
     await waitFor(() => {
       expect(screen.getByPlaceholderText(/tu@email.com/i)).toBeInTheDocument();
@@ -141,7 +157,9 @@ describe("NewsletterPopup", () => {
 
     render(<NewsletterPopup delay={100} exitIntent={false} />);
 
-    vi.advanceTimersByTime(100);
+    act(() => {
+      vi.advanceTimersByTime(100);
+    });
 
     await waitFor(() => {
       expect(
@@ -165,7 +183,9 @@ describe("NewsletterPopup", () => {
 
     render(<NewsletterPopup delay={100} exitIntent={false} />);
 
-    vi.advanceTimersByTime(100);
+    act(() => {
+      vi.advanceTimersByTime(100);
+    });
 
     await waitFor(() => {
       expect(
@@ -193,7 +213,9 @@ describe("NewsletterPopup", () => {
     const user = userEvent.setup({ delay: null });
     render(<NewsletterPopup delay={100} exitIntent={false} />);
 
-    vi.advanceTimersByTime(100);
+    act(() => {
+      vi.advanceTimersByTime(100);
+    });
 
     await waitFor(() => {
       expect(screen.getByPlaceholderText(/tu@email.com/i)).toBeInTheDocument();
@@ -222,7 +244,9 @@ describe("NewsletterPopup", () => {
 
     render(<NewsletterPopup delay={1000} exitIntent={false} />);
 
-    vi.advanceTimersByTime(1000);
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
 
     await waitFor(() => {
       expect(sendEvent).toHaveBeenCalledWith("newsletter_popup_shown", {
@@ -238,7 +262,9 @@ describe("NewsletterPopup", () => {
 
     render(<NewsletterPopup delay={100} exitIntent={false} />);
 
-    vi.advanceTimersByTime(100);
+    act(() => {
+      vi.advanceTimersByTime(100);
+    });
 
     await waitFor(() => {
       expect(
@@ -255,7 +281,9 @@ describe("NewsletterPopup", () => {
     const user = userEvent.setup({ delay: null });
     render(<NewsletterPopup delay={100} exitIntent={false} />);
 
-    vi.advanceTimersByTime(100);
+    act(() => {
+      vi.advanceTimersByTime(100);
+    });
 
     await waitFor(() => {
       expect(screen.getByPlaceholderText(/tu@email.com/i)).toBeInTheDocument();
@@ -270,7 +298,9 @@ describe("NewsletterPopup", () => {
     await user.click(submitButton);
 
     // Wait for API call simulation (1500ms)
-    vi.advanceTimersByTime(1500);
+    act(() => {
+      vi.advanceTimersByTime(1500);
+    });
 
     await waitFor(() => {
       expect(screen.getByText(/¡Suscripción Exitosa!/i)).toBeInTheDocument();
