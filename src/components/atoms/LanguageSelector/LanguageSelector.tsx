@@ -84,7 +84,18 @@ export const LanguageSelector = ({
             whileTap={!isLoading ? { scale: 0.95 } : {}}
             aria-label={`Change language to ${lang.label}`}
           >
-            <span className="mr-1.5">{lang.flag}</span>
+            <motion.span
+              className="mr-1.5 inline-block"
+              animate={{
+                scale: i18n.language === lang.code ? [1, 1.2, 1] : 1,
+              }}
+              transition={{
+                duration: 0.3,
+                ease: "easeInOut",
+              }}
+            >
+              {lang.flag}
+            </motion.span>
             {lang.label}
             {isLoading && i18n.language !== lang.code && (
               <motion.div
@@ -115,7 +126,15 @@ export const LanguageSelector = ({
               aria-expanded={isOpen}
             >
               <Globe className="w-4 h-4 text-cyan-neon" />
-              <span className="text-sm font-medium">{currentLanguage.flag}</span>
+              <motion.span
+                className="text-sm font-medium inline-block"
+                key={currentLanguage.code}
+                initial={{ scale: 1 }}
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 0.3 }}
+              >
+                {currentLanguage.flag}
+              </motion.span>
               <span className="text-sm font-medium hidden sm:inline">
                 {currentLanguage.nativeName}
               </span>
@@ -173,7 +192,18 @@ export const LanguageSelector = ({
                 whileHover={!isLoading ? { x: 4 } : {}}
                 aria-label={`Change language to ${lang.label}`}
               >
-                <span className="text-xl">{lang.flag}</span>
+                <motion.span
+                  className="text-xl inline-block"
+                  animate={{
+                    scale: i18n.language === lang.code ? [1, 1.2, 1] : 1,
+                  }}
+                  transition={{
+                    duration: 0.3,
+                    ease: "easeInOut",
+                  }}
+                >
+                  {lang.flag}
+                </motion.span>
                 <div className="flex flex-col">
                   <span className="font-medium text-sm">{lang.nativeName}</span>
                   <span className="text-xs text-gray-400">{lang.label}</span>

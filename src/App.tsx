@@ -9,7 +9,7 @@ import { LanguageHead } from "./components/SEO";
 import { LanguageTransition } from "./components/atoms/LanguageTransition";
 import { initGA } from "@/lib/analytics";
 import { reportWebVitals, logWebVitals } from "@/lib/performance/webVitals";
-import { useScrollDepth } from "@/hooks";
+import { useScrollDepth, useLanguageUrl } from "@/hooks";
 
 // Eager load Header (always visible)
 import Header from "./components/organisms/Header";
@@ -51,6 +51,9 @@ function App() {
 
   // Track scroll depth for engagement analytics (Sprint 5)
   useScrollDepth([25, 50, 75, 100]);
+
+  // Sync language with URL query params
+  useLanguageUrl();
 
   return (
     <HelmetProvider>

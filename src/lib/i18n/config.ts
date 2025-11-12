@@ -71,8 +71,9 @@ i18n
 
     // Detection options with intelligent fallback
     detection: {
-      order: ["localStorage", "navigator", "htmlTag", "path", "subdomain"],
+      order: ["querystring", "localStorage", "navigator", "htmlTag"],
       caches: ["localStorage"],
+      lookupQuerystring: "lang",
       lookupLocalStorage: "pibelabs-language",
       lookupFromPathIndex: 0,
       checkWhitelist: true,
