@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { BLOG_POSTS } from "@/lib/constants/config";
 import type { BlogPost } from "@/types";
 import LazyImage from "@/components/atoms/LazyImage";
@@ -18,7 +19,19 @@ const formatDate = (dateString: string): string => {
 };
 
 // Blog Post Card
-const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => {
+const BlogPostCard = ({
+  post,
+  index,
+  readMoreText,
+  readTimeText,
+  featuredText,
+}: {
+  post: BlogPost;
+  index: number;
+  readMoreText: string;
+  readTimeText: string;
+  featuredText: string;
+}) => {
   return (
     <motion.article
       className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
@@ -47,7 +60,7 @@ const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => {
         {/* Featured Badge */}
         {post.featured && (
           <div className="absolute top-4 right-4 px-3 py-1 bg-magenta-neon text-white text-xs font-rajdhani font-semibold rounded-full">
-            Destacado
+            {featuredText}
           </div>
         )}
       </motion.div>
@@ -86,7 +99,9 @@ const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => {
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <span className="font-poppins">{post.readTime} min lectura</span>
+            <span className="font-poppins">
+              {post.readTime} {readTimeText}
+            </span>
           </div>
         </div>
 
@@ -139,9 +154,9 @@ const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => {
           <motion.button
             className="flex items-center gap-2 text-cyan-neon font-rajdhani font-semibold text-sm group/link"
             whileHover={{ x: 5 }}
-            aria-label={`Leer más sobre ${post.title}`}
+            aria-label={`${readMoreText} ${post.title}`}
           >
-            <span>Leer más</span>
+            <span>{readMoreText}</span>
             <motion.span
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
@@ -156,6 +171,8 @@ const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => {
 };
 
 const BlogSection = () => {
+  const { t } = useTranslation();
+
   // Get only featured posts or first 3
   const displayPosts =
     BLOG_POSTS.filter((post) => post.featured).length > 0
@@ -179,23 +196,31 @@ const BlogSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            Nuestro Blog
+            {t("blog.badge" as any) || "Nuestro Blog"}
           </motion.span>
 
           <h2 className="font-orbitron font-bold text-4xl md:text-5xl text-gray-dark mb-4">
-            Últimas <span className="text-magenta-neon">Publicaciones</span>
+            {t("blog.title")}{" "}
+            <span className="text-magenta-neon">{t("blog.subtitle")}</span>
           </h2>
 
           <p className="font-poppins text-lg text-text-secondary max-w-3xl mx-auto">
-            Mantente actualizado con las últimas tendencias, tutoriales y
-            novedades del mundo tecnológico.
+            {t("blog.description" as any) ||
+              "Mantente actualizado con las últimas tendencias, tutoriales y novedades del mundo tecnológico."}
           </p>
         </motion.div>
 
         {/* Blog Posts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {displayPosts.map((post, index) => (
-            <BlogPostCard key={post.id} post={post} index={index} />
+            <BlogPostCard
+              key={post.id}
+              post={post}
+              index={index}
+              readMoreText={t("blog.readMore")}
+              readTimeText={t("blog.readTime")}
+              featuredText={t("blog.featured" as any) || "Destacado"}
+            />
           ))}
         </div>
 

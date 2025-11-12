@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { PORTFOLIO_PROJECTS } from "@/lib/constants/config";
 import type { PortfolioProject, PortfolioCategory } from "@/types";
 import LazyImage from "@/components/atoms/LazyImage";
@@ -11,23 +12,23 @@ import { sendEvent, trackPortfolioView } from "@/lib/analytics/googleAnalytics";
    Portfolio Section Component (Organism)
    ============================================ */
 
-const CATEGORIES: { id: PortfolioCategory; label: string }[] = [
-  { id: "all", label: "Todos" },
-  { id: "web", label: "Web" },
-  { id: "ia", label: "IA" },
-  { id: "design", label: "Diseño" },
-  { id: "cloud", label: "Cloud" },
-];
-
 // Project Card
 const ProjectCard = ({
   project,
   prefersReducedMotion,
   onClick,
+  viewDetailsText,
+  statusTexts,
 }: {
   project: PortfolioProject;
   prefersReducedMotion: boolean;
   onClick: () => void;
+  viewDetailsText: string;
+  statusTexts: {
+    production: string;
+    development: string;
+    completed: string;
+  };
 }) => {
   return (
     <motion.div
@@ -76,7 +77,7 @@ const ProjectCard = ({
             </svg>
           </motion.div>
           <div className="text-white font-rajdhani font-semibold text-lg">
-            Ver Detalles
+            {viewDetailsText}
           </div>
         </motion.div>
 
@@ -92,10 +93,10 @@ const ProjectCard = ({
             }`}
           >
             {project.status === "production"
-              ? "✓ Producción"
+              ? statusTexts.production
               : project.status === "development"
-                ? "🔧 En Desarrollo"
-                : "Completado"}
+                ? statusTexts.development
+                : statusTexts.completed}
           </div>
         )}
 
@@ -151,12 +152,22 @@ const ProjectCard = ({
 };
 
 const PortfolioSection = () => {
+  const { t } = useTranslation();
   const [activeCategory, setActiveCategory] =
     useState<PortfolioCategory>("all");
   const [selectedProject, setSelectedProject] =
     useState<PortfolioProject | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+
+  // Dynamic categories with translations
+  const CATEGORIES: { id: PortfolioCategory; label: string }[] = [
+    { id: "all", label: t("portfolio.categories.all") },
+    { id: "web", label: t("portfolio.categories.web") },
+    { id: "ia", label: t("portfolio.categories.ai") },
+    { id: "design", label: t("portfolio.categories.design") },
+    { id: "cloud", label: t("portfolio.categories.cloud") },
+  ];
 
   // Deep linking: Read category from URL hash on mount
   useEffect(() => {
@@ -242,16 +253,17 @@ const PortfolioSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            Nuestro Trabajo
+            {t("portfolio.badge" as any) || "Nuestro Trabajo"}
           </motion.span>
 
           <h2 className="font-orbitron font-bold text-4xl md:text-5xl text-gray-dark mb-4">
-            Portfolio de <span className="text-cyan-neon">Proyectos</span>
+            {t("portfolio.title")}{" "}
+            <span className="text-cyan-neon">{t("portfolio.subtitle")}</span>
           </h2>
 
           <p className="font-poppins text-lg text-text-secondary max-w-3xl mx-auto">
-            Explora algunos de nuestros proyectos más destacados y descubre cómo
-            transformamos ideas en soluciones digitales excepcionales.
+            {t("portfolio.description" as any) ||
+              "Explora algunos de nuestros proyectos más destacados y descubre cómo transformamos ideas en soluciones digitales excepcionales."}
           </p>
         </motion.div>
 
@@ -326,6 +338,12 @@ const PortfolioSection = () => {
                 project={project}
                 prefersReducedMotion={prefersReducedMotion}
                 onClick={() => handleProjectClick(project)}
+                viewDetailsText={t("portfolio.viewDetails")}
+                statusTexts={{
+                  production: t("portfolio.status.production"),
+                  development: t("portfolio.status.development"),
+                  completed: t("portfolio.status.completed"),
+                }}
               />
             ))}
           </AnimatePresence>
@@ -339,7 +357,8 @@ const PortfolioSection = () => {
             animate={{ opacity: 1 }}
           >
             <p className="font-poppins text-text-secondary">
-              No hay proyectos en esta categoría.
+              {t("portfolio.emptyState" as any) ||
+                "No hay proyectos en esta categoría."}
             </p>
           </motion.div>
         )}

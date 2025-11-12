@@ -92,15 +92,24 @@
     }
   },
   "portfolio": {
-    "title": "Portfolio",
-    "subtitle": "Success stories and featured projects",
+    "badge": "Our Work",
+    "title": "Project",
+    "subtitle": "Portfolio",
+    "description": "Explore some of our most outstanding projects and discover how we transform ideas into exceptional digital solutions.",
     "viewProject": "View project",
+    "viewDetails": "View Details",
     "categories": {
       "all": "All",
       "web": "Web",
       "mobile": "Mobile",
       "ai": "AI",
-      "design": "Design"
+      "design": "Design",
+      "cloud": "Cloud"
+    },
+    "status": {
+      "production": "✓ Production",
+      "development": "🔧 In Development",
+      "completed": "Completed"
     }
   },
   "about": {
@@ -127,10 +136,13 @@
     }
   },
   "blog": {
-    "title": "Blog",
-    "subtitle": "Technical insights and trends",
+    "badge": "Our Blog",
+    "title": "Latest",
+    "subtitle": "Posts",
+    "description": "Stay updated with the latest trends, tutorials and news from the tech world.",
     "readMore": "Read more",
-    "readTime": "min read"
+    "readTime": "min read",
+    "featured": "Featured"
   },
   "contact": {
     "title": "Contact",
