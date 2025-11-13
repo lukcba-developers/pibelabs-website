@@ -8,6 +8,7 @@ import ErrorBoundary from "./components/atoms/ErrorBoundary";
 import SEO from "./components/atoms/SEO";
 import { LanguageHead } from "./components/SEO";
 import { LanguageTransition } from "./components/atoms/LanguageTransition";
+import { LanguageLoadingOverlay } from "./components/atoms/LanguageLoadingOverlay";
 import { initGA } from "@/lib/analytics";
 import { reportWebVitals, logWebVitals } from "@/lib/performance/webVitals";
 import { useScrollDepth, useLanguageUrl } from "@/hooks";
@@ -197,6 +198,9 @@ function App() {
               dismissDays={7}
             />
           </Suspense>
+
+          {/* Language Loading Overlay */}
+          <LanguageLoadingOverlay />
         </div>
       </ErrorBoundary>
     </HelmetProvider>

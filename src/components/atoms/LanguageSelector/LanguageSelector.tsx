@@ -35,17 +35,28 @@ export const LanguageSelector = ({
     languages.find((lang) => lang.code === i18n.language) || languages[0]!;
 
   const handleLanguageChange = async (lang: SupportedLanguage) => {
+    if (lang === i18n.language) {
+      setIsOpen(false);
+      return;
+    }
+
     setIsLoading(true);
+    setIsOpen(false);
+
+    // Small delay to show loading state
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
     // Change language
     await i18n.changeLanguage(lang);
     document.documentElement.lang = lang;
 
-    // Micro-delay for visual feedback
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsOpen(false);
-    }, 200);
+    // Persist language preference
+    localStorage.setItem("preferredLanguage", lang);
+
+    // Wait for translation to complete
+    await new Promise((resolve) => setTimeout(resolve, 150));
+
+    setIsLoading(false);
   };
 
   // Close dropdown when clicking outside

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect, ReactNode } from "react";
 
@@ -12,16 +12,19 @@ interface LanguageTransitionProps {
 
 export const LanguageTransition = ({ children }: LanguageTransitionProps) => {
   const { i18n } = useTranslation();
-  const [isChanging, setIsChanging] = useState(false);
+  const [currentLang, setCurrentLang] = useState(i18n.language);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    const handleLanguageChange = () => {
-      setIsChanging(true);
-
-      // Reset after animation completes
-      setTimeout(() => {
-        setIsChanging(false);
-      }, 300);
+    const handleLanguageChange = (lng: string) => {
+      if (lng !== currentLang) {
+        setIsTransitioning(true);
+        // Wait for fade out
+        setTimeout(() => {
+          setCurrentLang(lng);
+          setIsTransitioning(false);
+        }, 150);
+      }
     };
 
     i18n.on("languageChanged", handleLanguageChange);
@@ -29,21 +32,26 @@ export const LanguageTransition = ({ children }: LanguageTransitionProps) => {
     return () => {
       i18n.off("languageChanged", handleLanguageChange);
     };
-  }, [i18n]);
+  }, [i18n, currentLang]);
 
   return (
-    <motion.div
-      animate={{
-        opacity: isChanging ? 0.7 : 1,
-        scale: isChanging ? 0.98 : 1,
-      }}
-      transition={{
-        duration: 0.2,
-        ease: "easeInOut",
-      }}
-    >
-      {children}
-    </motion.div>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={currentLang}
+        initial={{ opacity: 0, y: 5 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -5 }}
+        transition={{
+          duration: 0.2,
+          ease: [0.25, 0.1, 0.25, 1],
+        }}
+        style={{
+          willChange: isTransitioning ? "opacity, transform" : "auto",
+        }}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
