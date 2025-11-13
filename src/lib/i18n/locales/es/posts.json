@@ -28,5 +28,10 @@
     "title": "UX Research: Cómo Entender Realmente a tus Usuarios",
     "excerpt": "Métodos y técnicas prácticas para realizar investigación de usuarios efectiva y aplicar los aprendizajes.",
     "category": "Diseño"
+  },
+  "cloud-security": {
+    "title": "Seguridad en la Nube: Guía Completa 2024",
+    "excerpt": "Todo lo que necesitas saber sobre seguridad cloud, desde configuración básica hasta estrategias avanzadas.",
+    "category": "Ciberseguridad"
   }
 }

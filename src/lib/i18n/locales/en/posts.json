@@ -28,5 +28,10 @@
     "title": "UX Research: How to Really Understand Your Users",
     "excerpt": "Practical methods and techniques to conduct effective user research and apply learnings.",
     "category": "Design"
+  },
+  "cloud-security": {
+    "title": "Cloud Security: Complete Guide 2024",
+    "excerpt": "Everything you need to know about cloud security, from basic setup to advanced strategies.",
+    "category": "Cybersecurity"
   }
 }

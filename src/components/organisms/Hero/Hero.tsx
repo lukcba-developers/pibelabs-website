@@ -7,7 +7,7 @@ import { useReducedMotion } from "@/hooks";
    ============================================ */
 
 const Hero = () => {
-  const { t } = useTranslation("hero");
+  const { t } = useTranslation(["hero", "stats"]);
   const prefersReducedMotion = useReducedMotion();
 
   const scrollToContact = () => {

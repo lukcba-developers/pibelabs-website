@@ -10,8 +10,16 @@ import type { Service } from "@/types";
 
 const ServiceCard = memo(
   ({ service, index }: { service: Service; index: number }) => {
-    const { t } = useTranslation("common");
+    const { t } = useTranslation(["services", "common"]);
     const isEven = index % 2 === 0;
+
+    // Get translated service data
+    const translatedTitle = t(`services.${service.id}.title`);
+    const translatedDescription = t(`services.${service.id}.description`);
+    const featuresData = t(`services.${service.id}.features`, {
+      returnObjects: true,
+    });
+    const translatedFeatures = Array.isArray(featuresData) ? featuresData : [];
 
     return (
       <motion.div
@@ -42,7 +50,7 @@ const ServiceCard = memo(
           >
             <img
               src={service.icon}
-              alt={`${service.title} icon`}
+              alt={`${translatedTitle} icon`}
               className="w-10 h-10"
             />
           </motion.div>
@@ -66,31 +74,34 @@ const ServiceCard = memo(
 
         {/* Title */}
         <h3 className="relative font-orbitron font-bold text-2xl text-gray-dark mb-4 group-hover:text-cyan-neon transition-colors">
-          {service.title}
+          {translatedTitle}
         </h3>
 
         {/* Description */}
         <p className="relative font-poppins text-text-secondary mb-6 leading-relaxed">
-          {service.description}
+          {translatedDescription}
         </p>
 
         {/* Features */}
         <ul className="relative space-y-2 mb-6">
-          {service.features.map((feature, i) => (
-            <motion.li
-              key={i}
-              className="flex items-center gap-2 font-poppins text-sm text-text-tertiary"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 + i * 0.1 }}
-            >
-              <span className={isEven ? "text-cyan-neon" : "text-magenta-neon"}>
-                ✓
-              </span>
-              <span>{feature}</span>
-            </motion.li>
-          ))}
+          {Array.isArray(translatedFeatures) &&
+            translatedFeatures.map((feature, i) => (
+              <motion.li
+                key={i}
+                className="flex items-center gap-2 font-poppins text-sm text-text-tertiary"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + i * 0.1 }}
+              >
+                <span
+                  className={isEven ? "text-cyan-neon" : "text-magenta-neon"}
+                >
+                  ✓
+                </span>
+                <span>{feature}</span>
+              </motion.li>
+            ))}
         </ul>
 
         {/* Learn More Link */}
@@ -98,7 +109,7 @@ const ServiceCard = memo(
           className="relative inline-flex items-center gap-2 font-rajdhani font-semibold text-cyan-neon cursor-pointer group/link"
           whileHover={{ x: 5 }}
         >
-          <span>{t("common.learnMore")}</span>
+          <span>{t("learnMore")}</span>
           <motion.span
             animate={{ x: [0, 5, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}

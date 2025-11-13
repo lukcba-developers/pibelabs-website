@@ -26,7 +26,7 @@ import {
    ============================================ */
 
 const ContactForm = () => {
-  const { t } = useTranslation("contact");
+  const { t } = useTranslation(["contact", "services"]);
   const [formState, setFormState] = useState<ContactFormState>({
     isSubmitting: false,
     isSuccess: false,

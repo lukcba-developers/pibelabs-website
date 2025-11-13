@@ -160,7 +160,7 @@ export const LanguageSelector = ({
               className="px-3 py-2 bg-dark-secondary/95 text-white text-sm rounded-lg shadow-xl border border-cyan-neon/20 backdrop-blur-sm z-50"
               sideOffset={5}
             >
-              {t("common.changeLanguage")}
+              {t("changeLanguage")}
               <Tooltip.Arrow className="fill-dark-secondary" />
             </Tooltip.Content>
           </Tooltip.Portal>

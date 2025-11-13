@@ -204,15 +204,25 @@ const PortfolioSection = () => {
         returnObjects: true,
         defaultValue: project.features,
       });
-      if (
-        Array.isArray(featuresTranslation) &&
-        featuresTranslation.length > 0
-      ) {
-        const validFeatures = featuresTranslation.filter(
-          (item): item is string => typeof item === "string",
-        );
-        if (validFeatures.length > 0) {
-          features = validFeatures;
+
+      // Handle both array and object formats
+      if (featuresTranslation) {
+        if (Array.isArray(featuresTranslation)) {
+          const validFeatures = featuresTranslation.filter(
+            (item): item is string => typeof item === "string",
+          );
+          if (validFeatures.length > 0) {
+            features = validFeatures;
+          }
+        } else if (typeof featuresTranslation === "object") {
+          // Convert object with numeric keys to array
+          const featuresArray = Object.values(featuresTranslation);
+          const validFeatures = featuresArray.filter(
+            (item): item is string => typeof item === "string",
+          );
+          if (validFeatures.length > 0) {
+            features = validFeatures;
+          }
         }
       }
     } catch (error) {
@@ -226,15 +236,25 @@ const PortfolioSection = () => {
         returnObjects: true,
         defaultValue: project.achievements,
       });
-      if (
-        Array.isArray(achievementsTranslation) &&
-        achievementsTranslation.length > 0
-      ) {
-        const validAchievements = achievementsTranslation.filter(
-          (item): item is string => typeof item === "string",
-        );
-        if (validAchievements.length > 0) {
-          achievements = validAchievements;
+
+      // Handle both array and object formats
+      if (achievementsTranslation) {
+        if (Array.isArray(achievementsTranslation)) {
+          const validAchievements = achievementsTranslation.filter(
+            (item): item is string => typeof item === "string",
+          );
+          if (validAchievements.length > 0) {
+            achievements = validAchievements;
+          }
+        } else if (typeof achievementsTranslation === "object") {
+          // Convert object with numeric keys to array
+          const achievementsArray = Object.values(achievementsTranslation);
+          const validAchievements = achievementsArray.filter(
+            (item): item is string => typeof item === "string",
+          );
+          if (validAchievements.length > 0) {
+            achievements = validAchievements;
+          }
         }
       }
     } catch (error) {

@@ -8,7 +8,7 @@ import Newsletter from "@/components/molecules/Newsletter";
    ============================================ */
 
 const Footer = () => {
-  const { t } = useTranslation("footer");
+  const { t } = useTranslation(["footer", "company", "contact"]);
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [

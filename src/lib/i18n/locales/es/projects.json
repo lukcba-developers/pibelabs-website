@@ -46,5 +46,125 @@
       "Dashboards personalizados en Grafana para cada microservicio",
       "Sistema de logs centralizado con observabilidad completa"
     ]
+  },
+  "aura-stock": {
+    "title": "Aura Stock - Gestión Inteligente de Inventario",
+    "description": "Plataforma completa de gestión de inventario con machine learning para optimización de stock y predicción de demanda. Sistema multi-tenant con RBAC granular, backend FastAPI con arquitectura hexagonal, ML pipelines automatizados, Celery para tasks asíncronas, PostgreSQL con TimescaleDB para series temporales, y Stripe para pagos internacionales.",
+    "features": [
+      "ML model para predicción de demanda con 92% de accuracy",
+      "Sistema de alertas inteligente basado en reglas de negocio",
+      "Multi-tenant con aislamiento por schema PostgreSQL",
+      "RBAC granular con roles dinámicos y permisos composables",
+      "API RESTful + GraphQL para máxima flexibilidad",
+      "Background jobs con Celery + Redis para tasks pesadas",
+      "TimescaleDB para análisis de series temporales de ventas",
+      "Integración con proveedores vía API (webhook + polling)",
+      "Sistema de notificaciones multi-canal (email, Slack, SMS)",
+      "Stripe Connect para pagos multi-tenant con comisiones"
+    ],
+    "achievements": [
+      "87% de reducción en stockouts con predicciones ML",
+      "API rate: 2000 req/s con p95 latency < 100ms",
+      "5 pipelines ML en producción con retraining automático",
+      "Arquitectura hexagonal testable: 93% coverage backend",
+      "Sistema de auditoría completo con event sourcing",
+      "Disaster recovery: RTO < 1h, RPO < 15min"
+    ]
+  },
+  "aura-delivery": {
+    "title": "Aura Delivery - Plataforma de Logística Last-Mile",
+    "description": "Ecosistema completo para delivery last-mile con tracking GPS en tiempo real, optimización de rutas con algoritmos avanzados, sistema de mensajería con Firebase, arquitectura serverless en AWS Lambda, integración con múltiples couriers, sistema de pagos con MercadoPago + Stripe, y API Gateway con autenticación multi-factor.",
+    "features": [
+      "Tracking GPS real-time con geofencing y notificaciones automáticas",
+      "Optimización de rutas con algoritmos de TSP y clustering K-means",
+      "Sistema de mensajería push con Firebase Cloud Messaging",
+      "Arquitectura serverless en AWS Lambda con auto-scaling",
+      "Panel de administración React con mapas interactivos (Mapbox)",
+      "Integración con couriers (Rappi, Uber Direct, Loggi, Glovo)",
+      "Sistema de pagos dual: MercadoPago (LATAM) + Stripe (internacional)",
+      "API Gateway con rate limiting por cliente y autenticación MFA",
+      "Sistema de scoring para drivers basado en métricas de desempeño",
+      "Dashboard de analytics con métricas operacionales en tiempo real"
+    ],
+    "achievements": [
+      "35% reducción en tiempo promedio de entrega con optimización ML",
+      "Sistema de tracking con actualización cada 30s sin degradación",
+      "Arquitectura serverless que reduce costos en 60% vs tradicional",
+      "99.95% uptime en 6 meses con multi-region failover",
+      "Integración con 5 couriers con rate limiting inteligente",
+      "Sistema de notificaciones con 98% de delivery rate"
+    ]
+  },
+  "ecommerce-ai": {
+    "title": "E-commerce con IA - Recomendaciones Personalizadas",
+    "description": "Plataforma de e-commerce con sistema de recomendaciones basado en IA utilizando collaborative filtering y content-based filtering. Incluye Next.js 14 con App Router, Supabase para backend, sistema de búsqueda semántica con embeddings, carrito persistente con optimistic UI, y sistema de pagos internacional.",
+    "features": [
+      "Sistema de recomendaciones híbrido (collaborative + content-based)",
+      "Búsqueda semántica con embeddings y vector similarity",
+      "Next.js 14 con App Router, Server Components y Streaming",
+      "Supabase (PostgreSQL + Auth + Storage + Edge Functions)",
+      "Carrito persistente con optimistic updates y conflict resolution",
+      "Stripe Checkout + Webhooks para pagos y fulfillment",
+      "Sistema de reviews con sentiment analysis",
+      "Image optimization automática con Next.js Image + Cloudflare",
+      "Edge caching con Vercel Edge Network",
+      "Analytics de conversión con custom events de comportamiento"
+    ],
+    "achievements": [
+      "28% aumento en conversión con recomendaciones personalizadas",
+      "Búsqueda semántica con 91% de relevancia vs 74% keyword-based",
+      "First Contentful Paint < 1s con Server Components + Streaming",
+      "Edge caching reduce latencia global en 65%",
+      "Sistema de reviews procesa 10k reviews/día con NLP",
+      "Tasa de abandono de carrito reducida del 72% al 54%"
+    ]
+  },
+  "chatbot-nlp": {
+    "title": "Chatbot Inteligente - Soporte Automatizado",
+    "description": "Chatbot empresarial con NLP avanzado usando spaCy, transformers de Hugging Face y RASA para intent recognition. Incluye integración multi-canal (web, WhatsApp, Slack), analytics de conversaciones, sistema de escalamiento automático a humanos, y pipeline de fine-tuning de modelos.",
+    "features": [
+      "NLP pipeline con spaCy + Transformers + RASA",
+      "Intent recognition con BERT fine-tuned en dominio específico",
+      "Multi-canal: Widget web, WhatsApp Business API, Slack",
+      "Sistema de fallback con escalamiento automático a agentes",
+      "Knowledge base con semantic search y RAG (Retrieval-Augmented Generation)",
+      "Fine-tuning pipeline con feedback loop de agentes humanos",
+      "A/B testing de respuestas para optimización continua",
+      "Dashboard de analytics con métricas de satisfacción y resolución",
+      "Sistema de entrenamiento con active learning",
+      "API de webhooks para integraciones custom"
+    ],
+    "achievements": [
+      "84% de consultas resueltas sin intervención humana",
+      "Intent recognition accuracy: 92% con modelo fine-tuned",
+      "Tiempo promedio de respuesta: 1.8s vs 8min con agentes",
+      "Reducción de costos operativos del 67% en soporte",
+      "Sistema de feedback loop mejora modelo en 3% cada mes",
+      "Multi-canal con 10k mensajes/día procesados"
+    ]
+  },
+  "design-system": {
+    "title": "Design System Empresarial - Componentes Reutilizables",
+    "description": "Sistema de diseño completo con más de 60 componentes React + TypeScript, documentación interactiva con Storybook, tokens de diseño con theming, accesibilidad AAA, testing automatizado con Chromatic, y npm package publicado. Incluye Figma design kit sincronizado y pipeline CI/CD para releases.",
+    "features": [
+      "60+ componentes React con TypeScript y PropTypes completos",
+      "Design tokens con theming system (light/dark + custom themes)",
+      "Documentación interactiva con Storybook + Addon A11y",
+      "Accesibilidad WCAG AAA con testing automatizado",
+      "Visual regression testing con Chromatic en cada PR",
+      "npm package publicado con semantic versioning automático",
+      "Figma design kit con auto-sync vía Figma API",
+      "Tree-shaking automático para optimizar bundle size",
+      "Unit tests con Jest + React Testing Library (95% coverage)",
+      "CI/CD pipeline con releases automáticos y changelog"
+    ],
+    "achievements": [
+      "60+ componentes con 95% test coverage y 100% TS typed",
+      "Reducción de 40% en tiempo de desarrollo de features",
+      "Zero accessibility issues en auditoría WCAG AAA",
+      "Bundle size optimizado: componentes tree-shakeable",
+      "Documentación viva con 180+ stories en Storybook",
+      "Adoptado por 8 equipos internos en 3 meses"
+    ]
   }
 }
