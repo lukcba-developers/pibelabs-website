@@ -19,10 +19,8 @@ export const LanguageHead = ({
   image = "/og-image.jpg",
 }: LanguageHeadProps = {}) => {
   const { i18n } = useTranslation();
-  const currentUrl =
-    typeof window !== "undefined" ? window.location.href : "";
-  const baseUrl =
-    typeof window !== "undefined" ? window.location.origin : "";
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+  const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
 
   // Get language-specific content
   const locale = i18n.language === "es" ? "es_ES" : "en_US";

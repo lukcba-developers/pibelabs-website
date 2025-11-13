@@ -11,7 +11,8 @@ import { FORM_CONFIG } from "@/lib/constants/config";
 // ============================================
 
 const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
-  const t = (key: string, options?: object) => i18n.t(key, { ns: "validation", ...options });
+  const t = (key: string, options?: object) =>
+    i18n.t(key, { ns: "validation", ...options });
 
   switch (issue.code) {
     case z.ZodIssueCode.too_small:

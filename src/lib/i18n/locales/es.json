@@ -215,5 +215,180 @@
     "client_other": "clientes",
     "member": "miembro",
     "member_other": "miembros"
+  },
+  "projects": {
+    "tercer-tiempo-fc": {
+      "title": "Tercer Tiempo FC",
+      "description": "Plataforma completa de gestión deportiva para clubes de fútbol amateur, con sistema de reservas, pagos online y gestión de torneos.",
+      "features": {
+        "0": "Sistema de reservas de canchas en tiempo real",
+        "1": "Gestión integral de torneos y ligas",
+        "2": "Pagos online con Mercado Pago",
+        "3": "App móvil nativa para jugadores",
+        "4": "Dashboard administrativo avanzado",
+        "5": "Sistema de notificaciones automáticas",
+        "6": "Gestión de equipos y jugadores",
+        "7": "Estadísticas y métricas en tiempo real",
+        "8": "Sistema de puntos y rankings",
+        "9": "Integración con redes sociales"
+      },
+      "achievements": {
+        "0": "Más de 500 clubes registrados",
+        "1": "10,000+ reservas mensuales",
+        "2": "95% de satisfacción de usuarios",
+        "3": "Reducción del 40% en costos operativos",
+        "4": "Sistema escalable a nivel nacional",
+        "5": "Integración completa con sistemas de pago"
+      }
+    },
+    "clubpulse": {
+      "title": "ClubPulse",
+      "description": "Sistema de gestión integral para gimnasios y centros deportivos con control de acceso, pagos y seguimiento de miembros.",
+      "features": {
+        "0": "Control de acceso con código QR",
+        "1": "Gestión de membresías y pagos",
+        "2": "Seguimiento de asistencia",
+        "3": "App móvil para socios",
+        "4": "Dashboard de métricas en tiempo real",
+        "5": "Sistema de reservas de clases",
+        "6": "Notificaciones push automáticas",
+        "7": "Integración con wearables",
+        "8": "Gestión de entrenadores",
+        "9": "Sistema de feedback y reviews"
+      },
+      "achievements": {
+        "0": "Implementado en 50+ gimnasios",
+        "1": "20,000 usuarios activos",
+        "2": "98% de uptime del sistema",
+        "3": "Reducción del 60% en tareas administrativas",
+        "4": "Aumento del 35% en retención de socios",
+        "5": "Integración completa con sistemas de facturación"
+      }
+    },
+    "aura-stock": {
+      "title": "Aura Stock",
+      "description": "Sistema inteligente de gestión de inventarios con IA para predección de demanda y optimización de stock.",
+      "features": {
+        "0": "Predicción de demanda con Machine Learning",
+        "1": "Alertas automáticas de reposición",
+        "2": "Gestión multi-almacén",
+        "3": "Código de barras y QR",
+        "4": "Dashboard con analytics avanzados",
+        "5": "Integración con e-commerce",
+        "6": "Reportes personalizables",
+        "7": "Control de caducidad",
+        "8": "Gestión de proveedores",
+        "9": "API REST completa"
+      },
+      "achievements": {
+        "0": "Reducción del 30% en costos de inventario",
+        "1": "95% de precisión en predicciones",
+        "2": "Implementado en 100+ comercios",
+        "3": "Ahorro promedio de 15 horas/semana",
+        "4": "ROI positivo en 3 meses",
+        "5": "Integración con principales ERPs"
+      }
+    },
+    "aura-delivery": {
+      "title": "Aura Delivery",
+      "description": "Plataforma de delivery con tracking en tiempo real, optimización de rutas con IA y gestión completa de pedidos.",
+      "features": {
+        "0": "Tracking GPS en tiempo real",
+        "1": "Optimización de rutas con IA",
+        "2": "App para delivery y clientes",
+        "3": "Sistema de calificaciones",
+        "4": "Panel de control para comercios",
+        "5": "Gestión de flotas",
+        "6": "Notificaciones en tiempo real",
+        "7": "Múltiples métodos de pago",
+        "8": "Sistema de promociones",
+        "9": "Analytics y reportes"
+      },
+      "achievements": {
+        "0": "5,000+ deliveries diarios",
+        "1": "Reducción del 25% en tiempos de entrega",
+        "2": "92% de satisfacción del cliente",
+        "3": "Implementado en 3 ciudades",
+        "4": "30% de ahorro en costos operativos",
+        "5": "Integración con principales plataformas"
+      }
+    },
+    "ecommerce-ai": {
+      "title": "E-commerce IA",
+      "description": "Plataforma de e-commerce con recomendaciones personalizadas mediante inteligencia artificial y análisis predictivo.",
+      "features": [
+        "Sistema de recomendaciones con IA",
+        "Chatbot de atención 24/7",
+        "Predicción de abandono de carrito",
+        "Personalización de experiencia",
+        "Analytics avanzados",
+        "Optimización de conversión",
+        "A/B Testing automatizado",
+        "Gestión de campañas",
+        "Múltiples pasarelas de pago",
+        "Sistema de reviews inteligente"
+      ],
+      "achievements": [
+        "Aumento del 40% en conversión",
+        "Reducción del 50% en abandono de carrito",
+        "15,000+ productos gestionados",
+        "100,000+ transacciones mensuales",
+        "Tiempo de carga menor a 2 segundos",
+        "Integración con principales marketplaces"
+      ]
+    },
+    "chatbot-nlp": {
+      "title": "Chatbot NLP",
+      "description": "Asistente virtual inteligente con procesamiento de lenguaje natural para atención al cliente automatizada.",
+      "features": [
+        "NLP avanzado en español",
+        "Integración multicanal",
+        "Aprendizaje continuo",
+        "Escalamiento automático",
+        "Dashboard de métricas",
+        "Respuestas contextuales",
+        "Integración con CRM",
+        "Análisis de sentimientos",
+        "Transferencia a humanos",
+        "Soporte multiidioma"
+      ],
+      "achievements": [
+        "10,000+ conversaciones diarias",
+        "85% de resolución automática",
+        "Reducción del 70% en tiempo de respuesta",
+        "92% de satisfacción del usuario",
+        "Disponibilidad 24/7",
+        "ROI positivo en 2 meses"
+      ]
+    },
+    "design-system": {
+      "title": "Design System",
+      "description": "Sistema de diseño escalable con componentes reutilizables, documentación interactiva y tokens de diseño.",
+      "features": [
+        "Librería de componentes React",
+        "Tokens de diseño",
+        "Documentación interactiva",
+        "Temas personalizables",
+        "Accesibilidad WCAG 2.1",
+        "Design tokens en código",
+        "Storybook integrado",
+        "Testing automatizado",
+        "Versionado semántico",
+        "Figma a código"
+      ],
+      "achievements": [
+        "100+ componentes desarrollados",
+        "Adoptado por 5 equipos",
+        "Reducción del 60% en tiempo de desarrollo",
+        "AA de accesibilidad",
+        "Documentación completa",
+        "Integración CI/CD"
+      ]
+    }
+  },
+  "cloud-security": {
+    "title": "Seguridad en la Nube",
+    "excerpt": "Mejores prácticas para proteger tus aplicaciones cloud y datos sensibles en 2024.",
+    "category": "Seguridad"
   }
 }

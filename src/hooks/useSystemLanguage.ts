@@ -12,9 +12,7 @@ interface UseSystemLanguageOptions {
   showPrompt?: boolean;
 }
 
-export const useSystemLanguage = (
-  options: UseSystemLanguageOptions = {},
-) => {
+export const useSystemLanguage = (options: UseSystemLanguageOptions = {}) => {
   const { enabled = true, showPrompt = true } = options;
   const { i18n, t } = useTranslation();
 
@@ -26,7 +24,10 @@ export const useSystemLanguage = (
       const systemLang = navigator.language.split("-")[0] as SupportedLanguage;
 
       // Check if it's different from current
-      if (systemLang !== i18n.language && (systemLang === "es" || systemLang === "en")) {
+      if (
+        systemLang !== i18n.language &&
+        (systemLang === "es" || systemLang === "en")
+      ) {
         if (showPrompt) {
           // Show a native prompt
           const languageNames = {

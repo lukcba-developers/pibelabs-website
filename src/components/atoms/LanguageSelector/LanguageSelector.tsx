@@ -26,7 +26,7 @@ interface LanguageSelectorProps {
 export const LanguageSelector = ({
   variant = "default",
 }: LanguageSelectorProps) => {
-  const { i18n, t } = useTranslation();
+  const { i18n, t } = useTranslation("common");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);

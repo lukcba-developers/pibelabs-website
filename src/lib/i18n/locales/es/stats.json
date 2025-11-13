@@ -11,19 +11,23 @@
   "items": {
     "projects": {
       "label": "Proyectos Completados",
-      "description": "Desde 2020 hasta hoy"
+      "description": "Desde 2020 hasta hoy",
+      "value": "50+"
     },
     "clients": {
       "label": "Clientes Satisfechos",
-      "description": "En 15 países"
+      "description": "En 15 países",
+      "value": "30+"
     },
     "experience": {
       "label": "Años de Experiencia",
-      "description": "Innovación constante"
+      "description": "Innovación constante",
+      "value": "5+"
     },
     "satisfaction": {
       "label": "Satisfacción del Cliente",
-      "description": "Basado en 200+ reviews"
+      "description": "Basado en 200+ reviews",
+      "value": "98%"
     }
   }
 }

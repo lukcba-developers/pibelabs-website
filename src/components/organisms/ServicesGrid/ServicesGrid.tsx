@@ -109,7 +109,7 @@ const ServiceCard = memo(
           className="relative inline-flex items-center gap-2 font-rajdhani font-semibold text-cyan-neon cursor-pointer group/link"
           whileHover={{ x: 5 }}
         >
-          <span>{t("learnMore")}</span>
+          <span>{t("common:learnMore")}</span>
           <motion.span
             animate={{ x: [0, 5, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}

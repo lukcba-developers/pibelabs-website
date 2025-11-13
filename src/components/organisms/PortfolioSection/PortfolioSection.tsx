@@ -152,7 +152,7 @@ const ProjectCard = ({
 };
 
 const PortfolioSection = () => {
-  const { t } = useTranslation("portfolio");
+  const { t } = useTranslation(["portfolio", "projects"]);
   const [activeCategory, setActiveCategory] =
     useState<PortfolioCategory>("all");
   const [selectedProject, setSelectedProject] =
@@ -200,7 +200,7 @@ const PortfolioSection = () => {
     // Get translated features
     let features: string[] = project.features || [];
     try {
-      const featuresTranslation = t(`projects.${project.id}.features`, {
+      const featuresTranslation = t(`projects:${project.id}.features`, {
         returnObjects: true,
         defaultValue: project.features,
       });
@@ -232,7 +232,7 @@ const PortfolioSection = () => {
     // Get translated achievements
     let achievements: string[] = project.achievements || [];
     try {
-      const achievementsTranslation = t(`projects.${project.id}.achievements`, {
+      const achievementsTranslation = t(`projects:${project.id}.achievements`, {
         returnObjects: true,
         defaultValue: project.achievements,
       });
@@ -263,8 +263,8 @@ const PortfolioSection = () => {
 
     const translated = {
       ...project,
-      title: t(`projects.${project.id}.title`, { defaultValue: project.title }),
-      description: t(`projects.${project.id}.description`, {
+      title: t(`projects:${project.id}.title`, { defaultValue: project.title }),
+      description: t(`projects:${project.id}.description`, {
         defaultValue: project.description,
       }),
       features,

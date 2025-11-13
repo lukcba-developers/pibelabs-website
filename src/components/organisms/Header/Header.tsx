@@ -14,11 +14,23 @@ const Header = () => {
 
   const NAV_LINKS = [
     { id: "inicio", label: t("home", { ns: "navigation" }), href: "#hero" },
-    { id: "servicios", label: t("services", { ns: "navigation" }), href: "#services" },
-    { id: "portfolio", label: t("portfolio", { ns: "navigation" }), href: "#portfolio" },
+    {
+      id: "servicios",
+      label: t("services", { ns: "navigation" }),
+      href: "#services",
+    },
+    {
+      id: "portfolio",
+      label: t("portfolio", { ns: "navigation" }),
+      href: "#portfolio",
+    },
     { id: "nosotros", label: t("about", { ns: "navigation" }), href: "#about" },
     { id: "blog", label: t("blog", { ns: "navigation" }), href: "#blog" },
-    { id: "contacto", label: t("contact", { ns: "navigation" }), href: "#contact" },
+    {
+      id: "contacto",
+      label: t("contact", { ns: "navigation" }),
+      href: "#contact",
+    },
   ];
 
   // Handle scroll effect

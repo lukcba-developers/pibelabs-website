@@ -10,9 +10,7 @@ interface LanguageTransitionProps {
   children: ReactNode;
 }
 
-export const LanguageTransition = ({
-  children,
-}: LanguageTransitionProps) => {
+export const LanguageTransition = ({ children }: LanguageTransitionProps) => {
   const { i18n } = useTranslation();
   const [isChanging, setIsChanging] = useState(false);
 
