@@ -1,5 +1,26 @@
 {
-  "projects": "Successful projects",
-  "retention": "Client retention",
-  "mvp": "MVP to production"
+  "badge": "Our Impact",
+  "title": "Results that",
+  "titleHighlight": "Speak for Themselves",
+  "subtitle": "Numbers that reflect our commitment to excellence and technological innovation.",
+  "bottomText": "Each number represents hours of dedication, innovation and",
+  "bottomHighlight": "commitment to our clients",
+  "items": {
+    "projects": {
+      "label": "Projects Completed",
+      "description": "Since 2020 to date"
+    },
+    "clients": {
+      "label": "Satisfied Clients",
+      "description": "In 15 countries"
+    },
+    "experience": {
+      "label": "Years of Experience",
+      "description": "Constant innovation"
+    },
+    "satisfaction": {
+      "label": "Client Satisfaction",
+      "description": "Based on 200+ reviews"
+    }
+  }
 }

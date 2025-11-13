@@ -171,13 +171,22 @@ const BlogPostCard = ({
 };
 
 const BlogSection = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("blog");
+  const { t: tPosts } = useTranslation("posts");
+
+  // Translate posts
+  const translatedPosts = BLOG_POSTS.map((post) => ({
+    ...post,
+    title: tPosts(`${post.id}.title`, { defaultValue: post.title }),
+    excerpt: tPosts(`${post.id}.excerpt`, { defaultValue: post.excerpt }),
+    category: tPosts(`${post.id}.category`, { defaultValue: post.category }),
+  }));
 
   // Get only featured posts or first 3
   const displayPosts =
-    BLOG_POSTS.filter((post) => post.featured).length > 0
-      ? BLOG_POSTS.filter((post) => post.featured)
-      : BLOG_POSTS.slice(0, 3);
+    translatedPosts.filter((post) => post.featured).length > 0
+      ? translatedPosts.filter((post) => post.featured)
+      : translatedPosts.slice(0, 3);
 
   return (
     <section id="blog" className="section bg-white py-20">
@@ -196,17 +205,16 @@ const BlogSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            {t("blog.badge" as any) || "Nuestro Blog"}
+            {t("badge")}
           </motion.span>
 
           <h2 className="font-orbitron font-bold text-4xl md:text-5xl text-gray-dark mb-4">
-            {t("blog.title")}{" "}
-            <span className="text-magenta-neon">{t("blog.subtitle")}</span>
+            {t("title")}{" "}
+            <span className="text-magenta-neon">{t("subtitle")}</span>
           </h2>
 
           <p className="font-poppins text-lg text-text-secondary max-w-3xl mx-auto">
-            {t("blog.description" as any) ||
-              "Mantente actualizado con las últimas tendencias, tutoriales y novedades del mundo tecnológico."}
+            {t("description")}
           </p>
         </motion.div>
 
@@ -217,9 +225,9 @@ const BlogSection = () => {
               key={post.id}
               post={post}
               index={index}
-              readMoreText={t("blog.readMore")}
-              readTimeText={t("blog.readTime")}
-              featuredText={t("blog.featured" as any) || "Destacado"}
+              readMoreText={t("readMore")}
+              readTimeText={t("readTime")}
+              featuredText={t("featured")}
             />
           ))}
         </div>

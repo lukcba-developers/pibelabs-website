@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { analytics } from "@/lib/analytics";
 
 interface WhatsAppWidgetProps {
@@ -11,13 +12,15 @@ interface WhatsAppWidgetProps {
 
 const WhatsAppWidget = ({
   phoneNumber = "5491112345678",
-  message = "¡Hola! Me gustaría obtener más información sobre sus servicios.",
+  message,
   position = "right",
 }: WhatsAppWidgetProps) => {
+  const { t } = useTranslation("common");
+  const whatsappMessage = message || t("whatsappDefaultMessage");
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
     analytics.clickCTA("WhatsApp Chat");
     window.open(url, "_blank", "noopener,noreferrer");
   };
@@ -36,7 +39,7 @@ const WhatsAppWidget = ({
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1 }}
-        aria-label="Chat on WhatsApp"
+        aria-label={t("chatOnWhatsApp")}
       >
         <MessageCircle className="text-white" size={28} />
 
@@ -61,10 +64,10 @@ const WhatsAppWidget = ({
               </div>
               <div className="flex-1">
                 <h4 className="font-rajdhani font-bold text-gray-900 mb-1">
-                  ¿Necesitas ayuda?
+                  {t("whatsappTooltip")}
                 </h4>
                 <p className="text-sm text-gray-600 font-poppins">
-                  Chatea con nosotros en WhatsApp
+                  {t("whatsappSubtitle")}
                 </p>
               </div>
             </div>

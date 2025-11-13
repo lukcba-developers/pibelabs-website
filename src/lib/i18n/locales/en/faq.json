@@ -1,0 +1,32 @@
+{
+  "title": "Frequently Asked Questions",
+  "subtitle": "Find answers to the most common questions about our services",
+  "items": [
+    {
+      "question": "How long does it take to develop a project?",
+      "answer": "Development time varies depending on project complexity. A typical MVP can take 4 to 8 weeks, while more complex projects may require 3-6 months. We work with agile methodologies for incremental deliveries."
+    },
+    {
+      "question": "What technologies do you use?",
+      "answer": "We use modern and proven technologies: React, TypeScript, Node.js, Python, AWS, and more. We select the technology stack according to the specific needs of each project."
+    },
+    {
+      "question": "Do you offer post-launch support?",
+      "answer": "Yes, we offer continuous maintenance and support plans. They include updates, bug fixes, performance monitoring, and incremental improvements according to your needs."
+    },
+    {
+      "question": "Do you work with startups?",
+      "answer": "Absolutely. We have experience helping startups build their MVPs and scale their products. We offer flexible pricing models adapted to startup needs."
+    },
+    {
+      "question": "What is your work process?",
+      "answer": "We follow Agile methodology with 2-week sprints. It includes planning meetings, dailies, demos, and retrospectives. We maintain constant communication and total progress transparency."
+    },
+    {
+      "question": "What makes PibeLabs different?",
+      "answer": "We focus on measurable results, not just delivering code. We combine technical expertise with business vision, and we work as part of your team. Plus, we guarantee enterprise quality with clean and well-documented code."
+    }
+  ],
+  "notFound": "Can't find what you're looking for?",
+  "contactCta": "Contact us"
+}

@@ -130,3 +130,20 @@ interface ValueItem {
   title: string;
   description: string;
 }
+
+export type Namespace =
+  | "common"
+  | "navigation"
+  | "hero"
+  | "company"
+  | "stats"
+  | "services"
+  | "portfolio"
+  | "about"
+  | "blog"
+  | "contact"
+  | "footer"
+  | "validation"
+  | "newsletter"
+  | "faq"
+  | "cookies";

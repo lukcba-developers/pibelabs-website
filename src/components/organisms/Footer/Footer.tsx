@@ -8,15 +8,15 @@ import Newsletter from "@/components/molecules/Newsletter";
    ============================================ */
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("footer");
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
-    { label: t("footer.links.services"), href: "#services" },
-    { label: t("footer.links.portfolio"), href: "#portfolio" },
-    { label: t("footer.links.about"), href: "#about" },
-    { label: t("footer.links.blog"), href: "#blog" },
-    { label: t("footer.links.contact"), href: "#contact" },
+    { label: t("links.services"), href: "#services" },
+    { label: t("links.portfolio"), href: "#portfolio" },
+    { label: t("links.about"), href: "#about" },
+    { label: t("links.blog"), href: "#blog" },
+    { label: t("links.contact"), href: "#contact" },
   ];
 
   const scrollToSection = (href: string) => {
@@ -121,7 +121,7 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <h4 className="font-rajdhani font-bold text-white text-lg mb-4">
-                {t("footer.links.services")}
+                {t("links.services")}
               </h4>
               <ul className="space-y-2">
                 {footerLinks.map((link) => (

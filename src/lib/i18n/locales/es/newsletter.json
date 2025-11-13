@@ -1,0 +1,33 @@
+{
+  "title": "Newsletter Tech",
+  "subtitle": "Suscríbete a nuestro Newsletter",
+  "description": "Recibe tips, recursos y novedades sobre desarrollo y tecnología",
+  "placeholder": "tu@email.com",
+  "button": "Suscribirme",
+  "buttonLoading": "Enviando...",
+  "success": "¡Gracias por suscribirte! 🎉",
+  "disclaimer": "📬 Sin spam. Cancela cuando quieras.",
+  "benefits": {
+    "articles": "Artículos exclusivos sobre desarrollo",
+    "offers": "Ofertas y descuentos especiales",
+    "resources": "Recursos y herramientas gratis"
+  },
+  "form": {
+    "namePlaceholder": "Tu nombre (opcional)",
+    "emailPlaceholder": "tu@email.com",
+    "submit": "¡Quiero suscribirme!",
+    "submitting": "Suscribiendo...",
+    "success": "¡Suscripción Exitosa!",
+    "successMessage": "Revisa tu email para confirmar tu suscripción.",
+    "error": "Error al suscribir. Intenta nuevamente."
+  },
+  "validation": {
+    "invalidEmail": "Email inválido",
+    "emailRequired": "Por favor ingresa tu email",
+    "nameMinLength": "Nombre debe tener al menos {{count}} caracteres",
+    "required": "Este campo es requerido"
+  },
+  "privacy": "No compartimos tu información. Puedes darte de baja en cualquier momento.",
+  "closeButton": "Cerrar",
+  "notFound": "¿No encuentras lo que buscas?"
+}

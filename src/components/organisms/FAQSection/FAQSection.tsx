@@ -1,47 +1,18 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface FAQItem {
   question: string;
   answer: string;
 }
 
-const faqs: FAQItem[] = [
-  {
-    question: "¿Cuánto tiempo toma desarrollar un proyecto?",
-    answer:
-      "El tiempo de desarrollo varía según la complejidad del proyecto. Un MVP típico puede tomar de 4 a 8 semanas, mientras que proyectos más complejos pueden requerir 3-6 meses. Trabajamos con metodologías ágiles para entregas incrementales.",
-  },
-  {
-    question: "¿Qué tecnologías utilizan?",
-    answer:
-      "Utilizamos tecnologías modernas y probadas: React, TypeScript, Node.js, Python, AWS, y más. Seleccionamos el stack tecnológico según las necesidades específicas de cada proyecto.",
-  },
-  {
-    question: "¿Ofrecen soporte post-lanzamiento?",
-    answer:
-      "Sí, ofrecemos planes de mantenimiento y soporte continuo. Incluyen actualizaciones, corrección de bugs, monitoreo de performance, y mejoras incrementales según tus necesidades.",
-  },
-  {
-    question: "¿Trabajan con startups?",
-    answer:
-      "Absolutamente. Tenemos experiencia ayudando a startups a construir sus MVPs y escalar sus productos. Ofrecemos modelos de pricing flexibles adaptados a las necesidades de startups.",
-  },
-  {
-    question: "¿Cómo es el proceso de trabajo?",
-    answer:
-      "Seguimos metodología Agile con sprints de 2 semanas. Incluye reuniones de planificación, dailies, demos, y retrospectivas. Mantenemos comunicación constante y transparencia total del progreso.",
-  },
-  {
-    question: "¿Qué diferencia a PibeLabs?",
-    answer:
-      "Nos enfocamos en resultados medibles, no solo en entregar código. Combinamos expertise técnico con visión de negocio, y trabajamos como parte de tu equipo. Además, garantizamos calidad enterprise con código limpio y bien documentado.",
-  },
-];
-
 const FAQSection = () => {
+  const { t } = useTranslation("faq");
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
+
+  const faqs: FAQItem[] = t("items", { returnObjects: true }) as FAQItem[];
 
   const toggleFAQ = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -62,11 +33,10 @@ const FAQSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
-            Preguntas Frecuentes
+            {t("title")}
           </h2>
           <p className="text-xl text-gray-400 font-poppins max-w-2xl mx-auto">
-            Encuentra respuestas a las preguntas más comunes sobre nuestros
-            servicios
+            {t("subtitle")}
           </p>
         </motion.div>
 
@@ -121,14 +91,12 @@ const FAQSection = () => {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <p className="text-gray-400 font-poppins mb-4">
-            ¿No encuentras lo que buscas?
-          </p>
+          <p className="text-gray-400 font-poppins mb-4">{t("notFound")}</p>
           <a
             href="#contact"
             className="inline-block px-8 py-3 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-white font-rajdhani font-bold rounded-xl transition-all"
           >
-            Contáctanos
+            {t("contactCta")}
           </a>
         </motion.div>
       </div>

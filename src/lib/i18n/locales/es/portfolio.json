@@ -17,5 +17,8 @@
     "production": "✓ Producción",
     "development": "🔧 En Desarrollo",
     "completed": "Completado"
-  }
+  },
+  "emptyState": "No hay proyectos en esta categoría.",
+  "cta": "¿Te gustaría ser parte de nuestra próxima historia de éxito?",
+  "ctaButton": "Iniciar Tu Proyecto"
 }

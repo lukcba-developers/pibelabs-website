@@ -7,7 +7,7 @@ import { useReducedMotion } from "@/hooks";
    ============================================ */
 
 const Hero = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("hero");
   const prefersReducedMotion = useReducedMotion();
 
   const scrollToContact = () => {
@@ -166,7 +166,7 @@ const Hero = () => {
             }}
           >
             <span className="inline-block bg-gradient-to-r from-cyan-400 via-cyan-300 to-magenta-400 bg-clip-text text-transparent drop-shadow-lg">
-              {t("hero.headline")}
+              {t("headline")}
             </span>
           </motion.h1>
 
@@ -184,7 +184,7 @@ const Hero = () => {
               delay: prefersReducedMotion ? 0 : 0.4,
             }}
           >
-            {t("hero.subheadline")}
+            {t("subheadline")}
           </motion.p>
 
           {/* CTA Buttons - More prominent with better copy */}
@@ -208,7 +208,7 @@ const Hero = () => {
               whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -3 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
             >
-              <span className="relative z-10">{t("hero.cta")} →</span>
+              <span className="relative z-10">{t("cta")} →</span>
               <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
             </motion.button>
 
@@ -219,7 +219,7 @@ const Hero = () => {
               whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -3 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
             >
-              {t("hero.ctaSecondary")}
+              {t("ctaSecondary")}
             </motion.button>
           </motion.div>
 

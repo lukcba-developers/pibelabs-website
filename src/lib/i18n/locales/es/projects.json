@@ -1,0 +1,50 @@
+{
+  "tercer-tiempo-fc": {
+    "title": "Tercer Tiempo FC - Sitio Web Oficial",
+    "description": "SPA completa para club amateur de fútbol con funnel de conversión optimizado para sponsors locales. Incluye sistema de gestión de contenido con JSON, integración Instagram Basic Display API, Google Analytics 4 con 18 eventos predefinidos, Google AdSense, WhatsApp Business API con mensajes pre-cargados, y arquitectura component-driven con custom hooks.",
+    "features": [
+      "Funnel de conversión optimizado para captación de sponsors locales",
+      "Sistema de gestión de contenido dinámico con archivos JSON",
+      "Integración completa con Instagram Basic Display API",
+      "Google Analytics 4 con 18 eventos de negocio predefinidos",
+      "Monetización con Google AdSense en páginas estratégicas",
+      "WhatsApp Business API con mensajes contextuales pre-cargados",
+      "Arquitectura Atomic Design (Atoms, Molecules, Organisms)",
+      "9 custom hooks reutilizables para lógica de negocio",
+      "Lazy loading de imágenes y code splitting automático",
+      "Sistema de SEO optimizado con meta tags dinámicos"
+    ],
+    "achievements": [
+      "51 tests unitarios y de integración con 95% de cobertura",
+      "Lighthouse Score: 95+ en Performance y Accessibility",
+      "Tiempo de carga < 2s en 3G con optimizaciones avanzadas",
+      "Bundle size optimizado: ~89kB gzipped",
+      "CI/CD automático con GitHub Actions + Husky pre-commit",
+      "Deploy automático a Hostinger vía FTP en cada push"
+    ]
+  },
+  "clubpulse": {
+    "title": "ClubPulse - Gestión Deportiva Multi-Tenant",
+    "description": "Ecosistema completo de microservicios para gestión de clubs deportivos con arquitectura event-driven. 11 microservicios independientes en Go con frontend React TypeScript, modo dual de bases de datos optimizado para Railway, WebSocket para tiempo real, Redis cache distribuido, Prometheus + Grafana para observabilidad, y sistema completo de notificaciones.",
+    "features": [
+      "11 microservicios independientes en Go (Auth, User, Calendar, Championship, Membership, Facilities, Notification, Payments, Booking, Super-Admin, BFF)",
+      "Arquitectura event-driven con comunicación inter-servicios",
+      "Modo dual de bases de datos: single DB para producción (78% ahorro de costos) o multi-DB para desarrollo",
+      "Frontend React TypeScript con arquitectura modular escalable",
+      "WebSocket para comunicación en tiempo real entre clientes",
+      "Redis para cache distribuido y gestión de sesiones",
+      "Circuit breakers para resiliencia ante fallos de servicios",
+      "Sistema completo de notificaciones con SendGrid (Email, SMS)",
+      "Integración con pasarelas de pago (Stripe, Mercado Pago)",
+      "API Gateway (BFF) con rate limiting y autenticación centralizada"
+    ],
+    "achievements": [
+      "11 de 12 microservicios operativos y testeados",
+      "Arquitectura optimizada para Railway con 78% ahorro de costos vs multi-DB",
+      "Suite de testing end-to-end con servicios reales (no mocks)",
+      "Métricas empresariales en tiempo real con Prometheus",
+      "Dashboards personalizados en Grafana para cada microservicio",
+      "Sistema de logs centralizado con observabilidad completa"
+    ]
+  }
+}

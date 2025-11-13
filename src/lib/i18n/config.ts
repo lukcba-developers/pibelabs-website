@@ -15,6 +15,11 @@ import esBlog from "./locales/es/blog.json";
 import esContact from "./locales/es/contact.json";
 import esFooter from "./locales/es/footer.json";
 import esValidation from "./locales/es/validation.json";
+import esNewsletter from "./locales/es/newsletter.json";
+import esFaq from "./locales/es/faq.json";
+import esCookies from "./locales/es/cookies.json";
+import esProjects from "./locales/es/projects.json";
+import esPosts from "./locales/es/posts.json";
 
 import enCommon from "./locales/en/common.json";
 import enNavigation from "./locales/en/navigation.json";
@@ -28,6 +33,11 @@ import enBlog from "./locales/en/blog.json";
 import enContact from "./locales/en/contact.json";
 import enFooter from "./locales/en/footer.json";
 import enValidation from "./locales/en/validation.json";
+import enNewsletter from "./locales/en/newsletter.json";
+import enFaq from "./locales/en/faq.json";
+import enCookies from "./locales/en/cookies.json";
+import enProjects from "./locales/en/projects.json";
+import enPosts from "./locales/en/posts.json";
 
 /* ============================================
    i18n Configuration - Enhanced
@@ -47,26 +57,17 @@ export const languageFlags: Record<SupportedLanguage, string> = {
   en: "🇺🇸",
 };
 
-// Intelligent browser language detection with fallback mapping
-const detectBrowserLanguage = (): SupportedLanguage => {
-  if (typeof navigator === "undefined") return defaultLanguage;
-
-  const browserLang = navigator.language.split("-")[0].toLowerCase();
-
-  // Map related languages to supported ones
-  const languageMap: Record<string, SupportedLanguage> = {
-    es: "es",
-    en: "en",
-    pt: "es", // Portuguese → Spanish (closer culturally)
-    fr: "en", // French → English
-    de: "en", // German → English
-    it: "es", // Italian → Spanish (closer culturally)
-    ca: "es", // Catalan → Spanish
-    gl: "es", // Galician → Spanish
-    eu: "es", // Basque → Spanish
-  };
-
-  return languageMap[browserLang] || defaultLanguage;
+// Map related languages to supported ones (reusable)
+const languageMap: Record<string, SupportedLanguage> = {
+  es: "es",
+  en: "en",
+  pt: "es", // Portuguese → Spanish (closer culturally)
+  fr: "en", // French → English
+  de: "en", // German → English
+  it: "es", // Italian → Spanish (closer culturally)
+  ca: "es", // Catalan → Spanish
+  gl: "es", // Galician → Spanish
+  eu: "es", // Basque → Spanish
 };
 
 const resources = {
@@ -83,6 +84,11 @@ const resources = {
     contact: esContact,
     footer: esFooter,
     validation: esValidation,
+    newsletter: esNewsletter,
+    faq: esFaq,
+    cookies: esCookies,
+    projects: esProjects,
+    posts: esPosts,
   },
   en: {
     common: enCommon,
@@ -97,6 +103,11 @@ const resources = {
     contact: enContact,
     footer: enFooter,
     validation: enValidation,
+    newsletter: enNewsletter,
+    faq: enFaq,
+    cookies: enCookies,
+    projects: enProjects,
+    posts: enPosts,
   },
 };
 
@@ -120,6 +131,11 @@ i18n
       "contact",
       "footer",
       "validation",
+      "newsletter",
+      "faq",
+      "cookies",
+      "projects",
+      "posts",
     ],
     fallbackNS: "common",
     fallbackLng: defaultLanguage,
@@ -143,18 +159,7 @@ i18n
       lookupFromPathIndex: 0,
       // Custom converter for intelligent language detection
       convertDetectedLanguage: (lng: string) => {
-        const detected = lng.split("-")[0].toLowerCase();
-        const languageMap: Record<string, SupportedLanguage> = {
-          es: "es",
-          en: "en",
-          pt: "es",
-          fr: "en",
-          de: "en",
-          it: "es",
-          ca: "es",
-          gl: "es",
-          eu: "es",
-        };
+        const detected = lng.split("-")[0]?.toLowerCase() || "";
         return languageMap[detected] || defaultLanguage;
       },
     },
@@ -171,7 +176,7 @@ i18n
 
     // Performance
     saveMissing: import.meta.env.DEV,
-    missingKeyHandler: (lng, ns, key) => {
+    missingKeyHandler: (lng, _ns, key) => {
       if (import.meta.env.DEV) {
         console.warn(`Missing translation key: ${key} for language: ${lng}`);
       }

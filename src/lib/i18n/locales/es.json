@@ -98,6 +98,7 @@
     "description": "Explora algunos de nuestros proyectos más destacados y descubre cómo transformamos ideas en soluciones digitales excepcionales.",
     "viewProject": "Ver proyecto",
     "viewDetails": "Ver Detalles",
+    "viewProjectLive": "Ver Proyecto en Vivo",
     "categories": {
       "all": "Todos",
       "web": "Web",
@@ -165,6 +166,7 @@
       "success": "¡Mensaje Enviado!",
       "successMessage": "Gracias por contactarnos. Nuestro equipo revisará tu mensaje y te responderá en menos de 24 horas.",
       "error": "Error al enviar. Intenta nuevamente.",
+      "errorTitle": "Error al Enviar",
       "privacyNote": "Al enviar este formulario, aceptas nuestra política de privacidad. Nunca compartiremos tu información con terceros."
     },
     "validation": {

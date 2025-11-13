@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import { NAV_LINKS, COMPANY_INFO } from "@/lib/constants/config";
+import { useTranslation } from "react-i18next";
+import { COMPANY_INFO } from "@/lib/constants/config";
 
 /* ============================================
    Mobile Menu Component (Organism)
@@ -12,6 +13,29 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
+  const { t } = useTranslation(["navigation", "hero"]);
+
+  const NAV_LINKS = [
+    { id: "inicio", label: t("home", { ns: "navigation" }), href: "#hero" },
+    {
+      id: "servicios",
+      label: t("services", { ns: "navigation" }),
+      href: "#services",
+    },
+    {
+      id: "portfolio",
+      label: t("portfolio", { ns: "navigation" }),
+      href: "#portfolio",
+    },
+    { id: "nosotros", label: t("about", { ns: "navigation" }), href: "#about" },
+    { id: "blog", label: t("blog", { ns: "navigation" }), href: "#blog" },
+    {
+      id: "contacto",
+      label: t("contact", { ns: "navigation" }),
+      href: "#contact",
+    },
+  ];
+
   const scrollToSection = (href: string) => {
     onClose();
     setTimeout(() => {
@@ -79,7 +103,7 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
                 onClick={() => scrollToSection("#contact")}
                 className="w-full px-8 py-5 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-rajdhani font-bold text-xl rounded-xl shadow-[0_0_30px_rgba(0,217,255,0.6)] transition-all"
               >
-                Comenzar Proyecto →
+                {t("cta", { ns: "hero" })} →
               </button>
             </div>
           </motion.div>

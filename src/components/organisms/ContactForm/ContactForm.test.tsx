@@ -19,6 +19,10 @@ vi.mock("framer-motion", () => ({
 vi.mock("@/hooks", () => ({
   useInView: vi.fn(() => true),
   useReducedMotion: vi.fn(() => false),
+  useRateLimit: vi.fn(() => ({
+    isRateLimited: false,
+    checkRateLimit: vi.fn(() => false),
+  })),
 }));
 
 // Mock toast

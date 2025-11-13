@@ -143,7 +143,7 @@ const TeamMemberCard = ({
 };
 
 const AboutSection = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("about");
   const prefersReducedMotion = useReducedMotion();
 
   return (
@@ -170,16 +170,16 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
           >
-            {t("about.title")}
+            {t("title")}
           </motion.span>
 
           <h2 className="font-orbitron font-bold text-4xl md:text-5xl text-white mb-6">
-            {t("about.subtitle")}{" "}
-            <span className="text-cyan-neon">{t("about.team.title")}</span>
+            {t("subtitle")}{" "}
+            <span className="text-cyan-neon">{t("team.title")}</span>
           </h2>
 
           <p className="font-poppins text-lg text-gray-300 max-w-3xl mx-auto mb-12">
-            {t("about.description")}
+            {t("description")}
           </p>
 
           {/* Misión, Visión, Valores - Modernized */}

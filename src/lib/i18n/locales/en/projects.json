@@ -1,0 +1,50 @@
+{
+  "tercer-tiempo-fc": {
+    "title": "Tercer Tiempo FC - Official Website",
+    "description": "Complete SPA for amateur football club with conversion funnel optimized for local sponsors. Includes JSON content management system, Instagram Basic Display API integration, Google Analytics 4 with 18 predefined events, Google AdSense, WhatsApp Business API with pre-loaded messages, and component-driven architecture with custom hooks.",
+    "features": [
+      "Conversion funnel optimized for local sponsor acquisition",
+      "Dynamic content management system with JSON files",
+      "Complete Instagram Basic Display API integration",
+      "Google Analytics 4 with 18 predefined business events",
+      "Monetization with Google AdSense on strategic pages",
+      "WhatsApp Business API with contextual pre-loaded messages",
+      "Atomic Design architecture (Atoms, Molecules, Organisms)",
+      "9 reusable custom hooks for business logic",
+      "Image lazy loading and automatic code splitting",
+      "Optimized SEO system with dynamic meta tags"
+    ],
+    "achievements": [
+      "51 unit and integration tests with 95% coverage",
+      "Lighthouse Score: 95+ in Performance and Accessibility",
+      "Load time < 2s on 3G with advanced optimizations",
+      "Optimized bundle size: ~89kB gzipped",
+      "Automatic CI/CD with GitHub Actions + Husky pre-commit",
+      "Automatic deployment to Hostinger via FTP on each push"
+    ]
+  },
+  "clubpulse": {
+    "title": "ClubPulse - Multi-Tenant Sports Management",
+    "description": "Complete microservices ecosystem for sports club management with event-driven architecture. 11 independent Go microservices with React TypeScript frontend, dual database mode optimized for Railway, WebSocket for real-time, distributed Redis cache, Prometheus + Grafana for observability, and complete notification system.",
+    "features": [
+      "11 independent Go microservices (Auth, User, Calendar, Championship, Membership, Facilities, Notification, Payments, Booking, Super-Admin, BFF)",
+      "Event-driven architecture with inter-service communication",
+      "Dual database mode: single DB for production (78% cost savings) or multi-DB for development",
+      "React TypeScript frontend with scalable modular architecture",
+      "WebSocket for real-time communication between clients",
+      "Redis for distributed cache and session management",
+      "Circuit breakers for resilience to service failures",
+      "Complete notification system with SendGrid (Email, SMS)",
+      "Payment gateway integration (Stripe, Mercado Pago)",
+      "API Gateway (BFF) with rate limiting and centralized authentication"
+    ],
+    "achievements": [
+      "11 of 12 microservices operational and tested",
+      "Architecture optimized for Railway with 78% cost savings vs multi-DB",
+      "End-to-end testing suite with real services (no mocks)",
+      "Real-time enterprise metrics with Prometheus",
+      "Custom Grafana dashboards for each microservice",
+      "Centralized logging system with complete observability"
+    ]
+  }
+}

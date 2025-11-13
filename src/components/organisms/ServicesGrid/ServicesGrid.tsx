@@ -10,6 +10,7 @@ import type { Service } from "@/types";
 
 const ServiceCard = memo(
   ({ service, index }: { service: Service; index: number }) => {
+    const { t } = useTranslation("common");
     const isEven = index % 2 === 0;
 
     return (
@@ -97,7 +98,7 @@ const ServiceCard = memo(
           className="relative inline-flex items-center gap-2 font-rajdhani font-semibold text-cyan-neon cursor-pointer group/link"
           whileHover={{ x: 5 }}
         >
-          <span>Más información</span>
+          <span>{t("common.learnMore")}</span>
           <motion.span
             animate={{ x: [0, 5, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
@@ -121,17 +122,17 @@ const ServiceCard = memo(
 ServiceCard.displayName = "ServiceCard";
 
 const ServicesGrid = memo(() => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("services");
 
   // Map service IDs to translation keys
   const getServiceTranslations = (serviceId: string) => {
     const keyMap: Record<string, string> = {
-      web: "services.web",
-      ia: "services.ia",
-      design: "services.design",
-      cloud: "services.cloud",
-      security: "services.security",
-      consulting: "services.consulting",
+      web: "web",
+      ia: "ia",
+      design: "design",
+      cloud: "cloud",
+      security: "security",
+      consulting: "consulting",
     };
     return keyMap[serviceId] || serviceId;
   };
@@ -153,16 +154,15 @@ const ServicesGrid = memo(() => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            {t("services.badge")}
+            {t("badge")}
           </motion.span>
 
           <h2 className="font-orbitron font-bold text-4xl md:text-5xl text-gray-dark mb-4">
-            {t("services.title")}{" "}
-            <span className="text-cyan-neon">{t("services.subtitle")}</span>
+            {t("title")} <span className="text-cyan-neon">{t("subtitle")}</span>
           </h2>
 
           <p className="font-poppins text-lg text-text-secondary max-w-3xl mx-auto">
-            {t("services.description")}
+            {t("description")}
           </p>
         </motion.div>
 
@@ -170,14 +170,46 @@ const ServicesGrid = memo(() => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {SERVICES.map((service, index) => {
             const translationKey = getServiceTranslations(service.id);
-            const translatedService = {
-              ...service,
-              title: t(`${translationKey}.title`),
-              description: t(`${translationKey}.description`),
-              features: t(`${translationKey}.features`, {
+
+            // Get translated features with fallback to original
+            let features: string[] = service.features || [];
+
+            try {
+              const featuresTranslation = t(`${translationKey}.features`, {
                 returnObjects: true,
-              }) as string[],
+                defaultValue: service.features,
+              });
+
+              // Validate it's an array of strings
+              if (
+                Array.isArray(featuresTranslation) &&
+                featuresTranslation.length > 0
+              ) {
+                const validFeatures = featuresTranslation.filter(
+                  (item) => typeof item === "string",
+                );
+                if (validFeatures.length > 0) {
+                  features = validFeatures as string[];
+                }
+              }
+            } catch (error) {
+              console.warn(
+                `Translation error for ${translationKey}.features:`,
+                error,
+              );
+            }
+
+            const translatedService: Service = {
+              ...service,
+              title: t(`${translationKey}.title`, {
+                defaultValue: service.title,
+              }),
+              description: t(`${translationKey}.description`, {
+                defaultValue: service.description,
+              }),
+              features: features,
             };
+
             return (
               <ServiceCard
                 key={service.id}
@@ -196,9 +228,7 @@ const ServicesGrid = memo(() => {
           viewport={{ once: true }}
           transition={{ delay: 0.8 }}
         >
-          <p className="font-poppins text-text-secondary mb-6">
-            {t("services.cta")}
-          </p>
+          <p className="font-poppins text-text-secondary mb-6">{t("cta")}</p>
           <motion.button
             className="px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-neon to-magenta-neon text-white font-rajdhani font-semibold text-lg hover:shadow-glow-cyan transition-all"
             whileHover={{ scale: 1.05 }}
@@ -208,7 +238,7 @@ const ServicesGrid = memo(() => {
               if (element) element.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            {t("services.ctaButton")}
+            {t("ctaButton")}
           </motion.button>
         </motion.div>
       </div>

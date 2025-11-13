@@ -1,0 +1,32 @@
+{
+  "future-of-ai": {
+    "title": "El Futuro de la IA en el Desarrollo Web",
+    "excerpt": "Exploramos cómo la inteligencia artificial está transformando la manera en que construimos aplicaciones web modernas.",
+    "category": "Inteligencia Artificial"
+  },
+  "react-performance": {
+    "title": "10 Tips para Optimizar Performance en React",
+    "excerpt": "Técnicas avanzadas y best practices para hacer tus aplicaciones React más rápidas y eficientes.",
+    "category": "Desarrollo Web"
+  },
+  "design-systems": {
+    "title": "Creando Design Systems Escalables",
+    "excerpt": "Guía completa para construir y mantener design systems que crecen con tu producto.",
+    "category": "Diseño"
+  },
+  "cloud-architecture": {
+    "title": "Arquitectura Cloud Moderna: Best Practices",
+    "excerpt": "Patrones y estrategias para construir soluciones cloud resilientes y escalables.",
+    "category": "Cloud"
+  },
+  "typescript-advanced": {
+    "title": "TypeScript Avanzado: Más Allá de lo Básico",
+    "excerpt": "Profundizamos en características avanzadas de TypeScript para escribir código más seguro y mantenible.",
+    "category": "Desarrollo Web"
+  },
+  "ux-research": {
+    "title": "UX Research: Cómo Entender Realmente a tus Usuarios",
+    "excerpt": "Métodos y técnicas prácticas para realizar investigación de usuarios efectiva y aplicar los aprendizajes.",
+    "category": "Diseño"
+  }
+}

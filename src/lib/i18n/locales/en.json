@@ -98,6 +98,7 @@
     "description": "Explore some of our most outstanding projects and discover how we transform ideas into exceptional digital solutions.",
     "viewProject": "View project",
     "viewDetails": "View Details",
+    "viewProjectLive": "View Live Project",
     "categories": {
       "all": "All",
       "web": "Web",
@@ -165,6 +166,7 @@
       "success": "Message Sent!",
       "successMessage": "Thanks for contacting us. Our team will review your message and respond within 24 hours.",
       "error": "Error sending. Please try again.",
+      "errorTitle": "Error Sending",
       "privacyNote": "By submitting this form, you accept our privacy policy. We will never share your information with third parties."
     },
     "validation": {

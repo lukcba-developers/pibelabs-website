@@ -1,0 +1,32 @@
+{
+  "title": "🍪 Cookies & Privacy",
+  "message": "We use cookies to improve your experience, analyze traffic and personalize content. By clicking \"Accept all\", you accept our use of cookies.",
+  "privacyLink": "View Privacy Policy →",
+  "customize": "Customize",
+  "reject": "Reject",
+  "acceptAll": "Accept all",
+  "modal": {
+    "title": "Cookie Preferences",
+    "subtitle": "Select which types of cookies you want to allow",
+    "cancel": "Cancel",
+    "save": "Save Preferences",
+    "categories": {
+      "necessary": {
+        "title": "Necessary Cookies",
+        "description": "Essential for the site to function. They cannot be disabled."
+      },
+      "analytics": {
+        "title": "Analytics Cookies",
+        "description": "Help us understand how visitors interact with the site (Google Analytics)."
+      },
+      "marketing": {
+        "title": "Marketing Cookies",
+        "description": "Used to track visitors across websites and display relevant ads."
+      },
+      "functional": {
+        "title": "Functional Cookies",
+        "description": "Enable enhanced functionality and personalization (theme, language, etc.)."
+      }
+    }
+  }
+}
