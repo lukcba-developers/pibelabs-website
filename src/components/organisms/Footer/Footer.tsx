@@ -66,7 +66,7 @@ const Footer = () => {
                 </div>
               </div>
               <p className="font-poppins text-sm text-gray-400 max-w-md mb-4">
-                {t("company:description")}
+                {t("description", { ns: "company" })}
               </p>
               <div className="flex gap-4">
                 {/* Social Links */}
@@ -149,7 +149,7 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <h4 className="font-rajdhani font-bold text-white text-lg mb-4">
-                {t("contact:title")}
+                {t("title", { ns: "contact" })}
               </h4>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">

@@ -14,10 +14,13 @@ const ServiceCard = memo(
     const isEven = index % 2 === 0;
 
     // Get translated service data
-    const translatedTitle = t(`services.${service.id}.title`);
-    const translatedDescription = t(`services.${service.id}.description`);
-    const featuresData = t(`services.${service.id}.features`, {
+    const translatedTitle = t(`${service.id}.title`, { ns: "services" });
+    const translatedDescription = t(`${service.id}.description`, {
+      ns: "services",
+    });
+    const featuresData = t(`${service.id}.features`, {
       returnObjects: true,
+      ns: "services",
     });
     const translatedFeatures = Array.isArray(featuresData) ? featuresData : [];
 
@@ -109,7 +112,7 @@ const ServiceCard = memo(
           className="relative inline-flex items-center gap-2 font-rajdhani font-semibold text-cyan-neon cursor-pointer group/link"
           whileHover={{ x: 5 }}
         >
-          <span>{t("common:learnMore")}</span>
+          <span>{t("learnMore", { ns: "common" })}</span>
           <motion.span
             animate={{ x: [0, 5, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}

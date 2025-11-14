@@ -238,9 +238,9 @@ const Hero = () => {
             }}
           >
             {[
-              { value: "50+", label: t("stats:projects") },
-              { value: "98%", label: t("stats:retention") },
-              { value: "4sem", label: t("stats:mvp") },
+              { value: "50+", label: t("projects", { ns: "stats" }) },
+              { value: "98%", label: t("retention", { ns: "stats" }) },
+              { value: "4sem", label: t("mvp", { ns: "stats" }) },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

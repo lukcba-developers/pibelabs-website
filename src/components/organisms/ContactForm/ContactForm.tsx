@@ -399,10 +399,9 @@ const ContactForm = () => {
                   <option value="">{t("form.servicePlaceholder")}</option>
                   {SERVICES.map((service) => {
                     const serviceKey = service.id;
-                    const translationKey = `services:${serviceKey}.title`;
                     return (
                       <option key={service.id} value={service.id}>
-                        {t(translationKey)}
+                        {t(`${serviceKey}.title`, { ns: "services" })}
                       </option>
                     );
                   })}
