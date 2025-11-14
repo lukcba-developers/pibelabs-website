@@ -7,6 +7,11 @@ afterEach(() => {
   cleanup();
 });
 
+// Mock global.SharedArrayBuffer if not available
+if (typeof global.SharedArrayBuffer === "undefined") {
+  (global as any).SharedArrayBuffer = ArrayBuffer;
+}
+
 // Mock window.matchMedia
 Object.defineProperty(window, "matchMedia", {
   writable: true,

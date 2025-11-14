@@ -23,6 +23,25 @@
     "retention": "Client retention",
     "mvp": "MVP to production"
   },
+  "common": {
+    "changeLanguage": "Change language",
+    "learnMore": "Learn more",
+    "loading": "Loading...",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "download": "Download",
+    "share": "Share"
+  },
   "services": {
     "title": "Services",
     "subtitle": "Comprehensive Technology Solutions",
@@ -215,5 +234,180 @@
     "client_other": "clients",
     "member_one": "member",
     "member_other": "members"
+  },
+  "projects": {
+    "tercer-tiempo-fc": {
+      "title": "Tercer Tiempo FC",
+      "description": "Complete sports management platform for amateur football clubs, with reservation system, online payments and tournament management.",
+      "features": [
+        "Real-time field booking system",
+        "Comprehensive tournament and league management",
+        "Online payments with Mercado Pago",
+        "Native mobile app for players",
+        "Advanced administrative dashboard",
+        "Automatic notification system",
+        "Team and player management",
+        "Real-time statistics and metrics",
+        "Points and rankings system",
+        "Social media integration"
+      ],
+      "achievements": [
+        "Over 500 registered clubs",
+        "10,000+ monthly reservations",
+        "95% user satisfaction",
+        "40% reduction in operational costs",
+        "Nationally scalable system",
+        "Complete payment system integration"
+      ]
+    },
+    "clubpulse": {
+      "title": "ClubPulse",
+      "description": "Comprehensive management system for gyms and sports centers with access control, payments and member tracking.",
+      "features": [
+        "QR code access control",
+        "Membership and payment management",
+        "Attendance tracking",
+        "Mobile app for members",
+        "Real-time metrics dashboard",
+        "Class booking system",
+        "Automatic push notifications",
+        "Wearables integration",
+        "Trainer management",
+        "Feedback and review system"
+      ],
+      "achievements": [
+        "Implemented in 50+ gyms",
+        "20,000 active users",
+        "98% system uptime",
+        "60% reduction in administrative tasks",
+        "35% increase in member retention",
+        "Complete billing system integration"
+      ]
+    },
+    "aura-stock": {
+      "title": "Aura Stock",
+      "description": "Intelligent inventory management system with AI for demand prediction and stock optimization.",
+      "features": [
+        "Machine Learning demand prediction",
+        "Automatic replenishment alerts",
+        "Multi-warehouse management",
+        "Barcode and QR code",
+        "Dashboard with advanced analytics",
+        "E-commerce integration",
+        "Customizable reports",
+        "Expiry control",
+        "Supplier management",
+        "Complete REST API"
+      ],
+      "achievements": [
+        "30% reduction in inventory costs",
+        "95% prediction accuracy",
+        "Implemented in 100+ stores",
+        "Average savings of 15 hours/week",
+        "Positive ROI in 3 months",
+        "Integration with major ERPs"
+      ]
+    },
+    "aura-delivery": {
+      "title": "Aura Delivery",
+      "description": "Delivery platform with real-time tracking, AI route optimization and complete order management.",
+      "features": [
+        "Real-time GPS tracking",
+        "AI route optimization",
+        "App for delivery and customers",
+        "Rating system",
+        "Control panel for businesses",
+        "Fleet management",
+        "Real-time notifications",
+        "Multiple payment methods",
+        "Promotion system",
+        "Analytics and reports"
+      ],
+      "achievements": [
+        "5,000+ daily deliveries",
+        "25% reduction in delivery times",
+        "92% customer satisfaction",
+        "Implemented in 3 cities",
+        "30% savings in operational costs",
+        "Integration with major platforms"
+      ]
+    },
+    "ecommerce-ai": {
+      "title": "E-commerce AI",
+      "description": "E-commerce platform with personalized recommendations through artificial intelligence and predictive analytics.",
+      "features": [
+        "AI recommendation system",
+        "24/7 customer service chatbot",
+        "Cart abandonment prediction",
+        "Experience personalization",
+        "Advanced analytics",
+        "Conversion optimization",
+        "Automated A/B Testing",
+        "Campaign management",
+        "Multiple payment gateways",
+        "Intelligent review system"
+      ],
+      "achievements": [
+        "40% increase in conversion",
+        "50% reduction in cart abandonment",
+        "15,000+ products managed",
+        "100,000+ monthly transactions",
+        "Load time under 2 seconds",
+        "Integration with major marketplaces"
+      ]
+    },
+    "chatbot-nlp": {
+      "title": "Chatbot NLP",
+      "description": "Intelligent virtual assistant with natural language processing for automated customer service.",
+      "features": [
+        "Advanced NLP in Spanish",
+        "Multichannel integration",
+        "Continuous learning",
+        "Automatic scaling",
+        "Metrics dashboard",
+        "Contextual responses",
+        "CRM integration",
+        "Sentiment analysis",
+        "Transfer to humans",
+        "Multilingual support"
+      ],
+      "achievements": [
+        "10,000+ daily conversations",
+        "85% automatic resolution",
+        "70% reduction in response time",
+        "92% user satisfaction",
+        "24/7 availability",
+        "Positive ROI in 2 months"
+      ]
+    },
+    "design-system": {
+      "title": "Design System",
+      "description": "Scalable design system with reusable components, interactive documentation and design tokens.",
+      "features": [
+        "React component library",
+        "Design tokens",
+        "Interactive documentation",
+        "Customizable themes",
+        "WCAG 2.1 accessibility",
+        "Design tokens in code",
+        "Integrated Storybook",
+        "Automated testing",
+        "Semantic versioning",
+        "Figma to code"
+      ],
+      "achievements": [
+        "100+ developed components",
+        "Adopted by 5 teams",
+        "60% reduction in development time",
+        "AA accessibility",
+        "Complete documentation",
+        "CI/CD integration"
+      ]
+    }
+  },
+  "cloud-security": {
+    "title": "Cloud Security",
+    "excerpt": "Best practices to protect your cloud applications and sensitive data in 2024.",
+    "category": "Security"
   }
 }

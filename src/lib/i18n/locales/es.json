@@ -23,6 +23,25 @@
     "retention": "Retención clientes",
     "mvp": "MVP a producción"
   },
+  "common": {
+    "changeLanguage": "Cambiar idioma",
+    "learnMore": "Conocer más",
+    "loading": "Cargando...",
+    "close": "Cerrar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "clear": "Limpiar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "view": "Ver",
+    "download": "Descargar",
+    "share": "Compartir"
+  },
   "services": {
     "title": "Servicios",
     "subtitle": "Soluciones Tecnológicas Integrales",

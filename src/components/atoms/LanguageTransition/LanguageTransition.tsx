@@ -13,17 +13,11 @@ interface LanguageTransitionProps {
 export const LanguageTransition = ({ children }: LanguageTransitionProps) => {
   const { i18n } = useTranslation();
   const [currentLang, setCurrentLang] = useState(i18n.language);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const handleLanguageChange = (lng: string) => {
       if (lng !== currentLang) {
-        setIsTransitioning(true);
-        // Wait for fade out
-        setTimeout(() => {
-          setCurrentLang(lng);
-          setIsTransitioning(false);
-        }, 150);
+        setCurrentLang(lng);
       }
     };
 
@@ -38,16 +32,14 @@ export const LanguageTransition = ({ children }: LanguageTransitionProps) => {
     <AnimatePresence mode="wait">
       <motion.div
         key={currentLang}
-        initial={{ opacity: 0, y: 5 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -5 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         transition={{
-          duration: 0.2,
-          ease: [0.25, 0.1, 0.25, 1],
+          duration: 0.15,
+          ease: "easeInOut",
         }}
-        style={{
-          willChange: isTransitioning ? "opacity, transform" : "auto",
-        }}
+        style={{ willChange: "opacity" }}
       >
         {children}
       </motion.div>

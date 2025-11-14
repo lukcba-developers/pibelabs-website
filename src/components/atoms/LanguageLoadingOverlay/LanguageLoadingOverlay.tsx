@@ -19,7 +19,7 @@ export const LanguageLoadingOverlay = () => {
       // Keep overlay visible for smooth transition
       timeout = setTimeout(() => {
         setIsChanging(false);
-      }, 400);
+      }, 180);
     };
 
     i18n.on("languageChanged", handleLanguageChanged);
@@ -37,8 +37,8 @@ export const LanguageLoadingOverlay = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-dark-primary/40 backdrop-blur-[2px]"
+          transition={{ duration: 0.15, ease: "easeInOut" }}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-dark-primary/20 backdrop-blur-sm"
           style={{ pointerEvents: isChanging ? "all" : "none" }}
         >
           <motion.div

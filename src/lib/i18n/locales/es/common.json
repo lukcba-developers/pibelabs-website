@@ -26,5 +26,7 @@
   "client": "cliente",
   "client_other": "clientes",
   "member": "miembro",
-  "member_other": "miembros"
+  "member_other": "miembros",
+  "languageChanged": "Idioma cambiado a {{language}}",
+  "switchLanguage": "Cambiar a {{language}}"
 }
