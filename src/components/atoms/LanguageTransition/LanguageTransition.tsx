@@ -32,14 +32,14 @@ export const LanguageTransition = ({ children }: LanguageTransitionProps) => {
     <AnimatePresence mode="wait">
       <motion.div
         key={currentLang}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
         transition={{
-          duration: 0.15,
-          ease: "easeInOut",
+          duration: 0.2,
+          ease: [0.4, 0, 0.2, 1],
         }}
-        style={{ willChange: "opacity" }}
+        style={{ willChange: "opacity, transform" }}
       >
         {children}
       </motion.div>

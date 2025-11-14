@@ -55,6 +55,10 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./src/test/setup.ts",
     css: true,
+    // Ensure React is in development mode for tests
+    define: {
+      "process.env.NODE_ENV": JSON.stringify("test"),
+    },
     // Include test files
     include: ["**/*.{test,spec}.{js,ts,jsx,tsx}"],
     // Exclude patterns
