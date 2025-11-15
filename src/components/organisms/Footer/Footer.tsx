@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { COMPANY_INFO, NAV_LINKS } from "@/lib/constants/config";
+import { useTranslation } from "react-i18next";
+import { COMPANY_INFO } from "@/lib/constants/config";
 import Newsletter from "@/components/molecules/Newsletter";
 
 /* ============================================
@@ -7,7 +8,16 @@ import Newsletter from "@/components/molecules/Newsletter";
    ============================================ */
 
 const Footer = () => {
+  const { t } = useTranslation(["footer", "company", "contact"]);
   const currentYear = new Date().getFullYear();
+
+  const footerLinks = [
+    { label: t("links.services"), href: "#services" },
+    { label: t("links.portfolio"), href: "#portfolio" },
+    { label: t("links.about"), href: "#about" },
+    { label: t("links.blog"), href: "#blog" },
+    { label: t("links.contact"), href: "#contact" },
+  ];
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -56,7 +66,7 @@ const Footer = () => {
                 </div>
               </div>
               <p className="font-poppins text-sm text-gray-400 max-w-md mb-4">
-                {COMPANY_INFO.description}
+                {t("description", { ns: "company" })}
               </p>
               <div className="flex gap-4">
                 {/* Social Links */}
@@ -111,11 +121,11 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <h4 className="font-rajdhani font-bold text-white text-lg mb-4">
-                Enlaces Rápidos
+                {t("links.services")}
               </h4>
               <ul className="space-y-2">
-                {NAV_LINKS.map((link) => (
-                  <li key={link.id}>
+                {footerLinks.map((link) => (
+                  <li key={link.href}>
                     <a
                       href={link.href}
                       onClick={(e) => {
@@ -139,7 +149,7 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <h4 className="font-rajdhani font-bold text-white text-lg mb-4">
-                Contacto
+                {t("title", { ns: "contact" })}
               </h4>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">

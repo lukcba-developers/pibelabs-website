@@ -2,8 +2,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const Newsletter = () => {
+  const { t } = useTranslation("newsletter");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -11,13 +13,13 @@ const Newsletter = () => {
     e.preventDefault();
 
     if (!email) {
-      toast.error("Por favor ingresa tu email");
+      toast.error(t("validation.emailRequired"));
       return;
     }
 
     setIsLoading(true);
     setTimeout(() => {
-      toast.success("¡Gracias por suscribirte! 🎉");
+      toast.success(t("success"));
       setEmail("");
       setIsLoading(false);
     }, 1500);
@@ -36,11 +38,9 @@ const Newsletter = () => {
         </div>
         <div>
           <h3 className="text-xl font-orbitron font-bold text-white mb-2">
-            Newsletter Tech
+            {t("title")}
           </h3>
-          <p className="text-gray-300 text-sm">
-            Recibe tips, recursos y novedades sobre desarrollo y tecnología
-          </p>
+          <p className="text-gray-300 text-sm">{t("description")}</p>
         </div>
       </div>
 
@@ -49,7 +49,7 @@ const Newsletter = () => {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="tu@email.com"
+          placeholder={t("placeholder")}
           className="flex-1 px-4 py-3 bg-dark-primary border-2 border-gray-700 focus:border-cyan-neon rounded-lg text-white placeholder:text-gray-500 font-poppins transition-all outline-none focus:ring-4 focus:ring-cyan-neon/20"
         />
         <motion.button
@@ -58,14 +58,12 @@ const Newsletter = () => {
           className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-rajdhani font-bold rounded-lg shadow-[0_0_20px_rgba(0,217,255,0.4)] transition-all flex items-center gap-2"
           whileHover={{ scale: 1.05 }}
         >
-          {isLoading ? "Enviando..." : "Suscribirme"}
+          {isLoading ? t("buttonLoading") : t("button")}
           <ArrowRight size={18} />
         </motion.button>
       </form>
 
-      <p className="text-xs text-gray-400 mt-3">
-        📬 Sin spam. Cancela cuando quieras.
-      </p>
+      <p className="text-xs text-gray-400 mt-3">{t("disclaimer")}</p>
     </motion.div>
   );
 };

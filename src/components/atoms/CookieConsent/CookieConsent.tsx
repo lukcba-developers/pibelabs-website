@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { useLocalStorage, useReducedMotion } from "@/hooks";
 import { sendEvent } from "@/lib/analytics/googleAnalytics";
 
@@ -38,10 +39,12 @@ const defaultPreferences: CookiePreferences = {
 const CookieConsent = ({
   onAccept,
   onReject,
-  message = 'Utilizamos cookies para mejorar tu experiencia, analizar el tráfico y personalizar el contenido. Al hacer clic en "Aceptar todo", aceptas nuestro uso de cookies.',
+  message,
   position = "bottom",
   showCustomize = true,
 }: CookieConsentProps) => {
+  const { t } = useTranslation("cookies");
+  const displayMessage = message || t("message");
   const [cookieConsent, setCookieConsent] = useLocalStorage<
     "accepted" | "rejected" | null
   >("pibelabs_cookie_consent", null);
@@ -217,16 +220,16 @@ const CookieConsent = ({
                   {/* Text */}
                   <div className="flex-1">
                     <h3 className="font-rajdhani font-bold text-lg text-white mb-2">
-                      🍪 Cookies & Privacidad
+                      {t("title")}
                     </h3>
                     <p className="font-poppins text-sm text-gray-300 leading-relaxed">
-                      {message}
+                      {displayMessage}
                     </p>
                     <a
                       href="/privacy-policy"
                       className="inline-block mt-2 text-cyan-neon text-sm font-poppins hover:underline"
                     >
-                      Ver Política de Privacidad →
+                      {t("privacyLink")}
                     </a>
                   </div>
                 </div>
@@ -242,7 +245,7 @@ const CookieConsent = ({
                       whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
                       whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
                     >
-                      Personalizar
+                      {t("customize")}
                     </motion.button>
                   )}
 
@@ -253,7 +256,7 @@ const CookieConsent = ({
                     whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
                     whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
                   >
-                    Rechazar
+                    {t("reject")}
                   </motion.button>
 
                   <motion.button
@@ -264,7 +267,7 @@ const CookieConsent = ({
                     whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                     whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
                   >
-                    Aceptar todo
+                    {t("acceptAll")}
                   </motion.button>
                 </div>
               </div>
@@ -302,7 +305,7 @@ const CookieConsent = ({
                 <div className="p-6 border-b border-gray-700">
                   <div className="flex items-center justify-between">
                     <h2 className="font-orbitron font-bold text-2xl text-white">
-                      Preferencias de Cookies
+                      {t("modal.title")}
                     </h2>
                     <button
                       onClick={() => setShowCustomizeModal(false)}
@@ -324,7 +327,7 @@ const CookieConsent = ({
                     </button>
                   </div>
                   <p className="font-poppins text-sm text-gray-400 mt-2">
-                    Selecciona qué tipos de cookies deseas permitir
+                    {t("modal.subtitle")}
                   </p>
                 </div>
 
@@ -332,8 +335,8 @@ const CookieConsent = ({
                 <div className="p-6 space-y-6">
                   {/* Necessary Cookies */}
                   <CookieCategory
-                    title="Cookies Necesarias"
-                    description="Esenciales para el funcionamiento del sitio. No pueden ser desactivadas."
+                    title={t("modal.categories.necessary.title")}
+                    description={t("modal.categories.necessary.description")}
                     enabled={preferences.necessary}
                     disabled={true}
                     onChange={() => {}}
@@ -341,24 +344,24 @@ const CookieConsent = ({
 
                   {/* Analytics Cookies */}
                   <CookieCategory
-                    title="Cookies de Análisis"
-                    description="Nos ayudan a entender cómo los visitantes interactúan con el sitio (Google Analytics)."
+                    title={t("modal.categories.analytics.title")}
+                    description={t("modal.categories.analytics.description")}
                     enabled={preferences.analytics}
                     onChange={() => togglePreference("analytics")}
                   />
 
                   {/* Marketing Cookies */}
                   <CookieCategory
-                    title="Cookies de Marketing"
-                    description="Utilizadas para rastrear visitantes en sitios web y mostrar anuncios relevantes."
+                    title={t("modal.categories.marketing.title")}
+                    description={t("modal.categories.marketing.description")}
                     enabled={preferences.marketing}
                     onChange={() => togglePreference("marketing")}
                   />
 
                   {/* Functional Cookies */}
                   <CookieCategory
-                    title="Cookies Funcionales"
-                    description="Permiten funcionalidades mejoradas y personalización (tema, idioma, etc.)."
+                    title={t("modal.categories.functional.title")}
+                    description={t("modal.categories.functional.description")}
                     enabled={preferences.functional}
                     onChange={() => togglePreference("functional")}
                   />
@@ -372,7 +375,7 @@ const CookieConsent = ({
                              font-rajdhani font-semibold hover:border-cyan-neon/50 hover:text-cyan-neon
                              transition-all"
                   >
-                    Cancelar
+                    {t("modal.cancel")}
                   </button>
                   <button
                     onClick={handleSavePreferences}
@@ -380,7 +383,7 @@ const CookieConsent = ({
                              text-white font-rajdhani font-semibold shadow-glow-cyan hover:shadow-glow-magenta
                              transition-all"
                   >
-                    Guardar Preferencias
+                    {t("modal.save")}
                   </button>
                 </div>
               </div>

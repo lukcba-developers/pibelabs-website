@@ -1,0 +1,33 @@
+{
+  "title": "Tech Newsletter",
+  "subtitle": "Subscribe to our Newsletter",
+  "description": "Get tips, resources and news about development and technology",
+  "placeholder": "your@email.com",
+  "button": "Subscribe",
+  "buttonLoading": "Sending...",
+  "success": "Thank you for subscribing! 🎉",
+  "disclaimer": "📬 No spam. Unsubscribe anytime.",
+  "benefits": {
+    "articles": "Exclusive articles about development",
+    "offers": "Special offers and discounts",
+    "resources": "Free resources and tools"
+  },
+  "form": {
+    "namePlaceholder": "Your name (optional)",
+    "emailPlaceholder": "your@email.com",
+    "submit": "I want to subscribe!",
+    "submitting": "Subscribing...",
+    "success": "Successfully Subscribed!",
+    "successMessage": "Check your email to confirm your subscription.",
+    "error": "Error subscribing. Please try again."
+  },
+  "validation": {
+    "invalidEmail": "Invalid email",
+    "emailRequired": "Please enter your email",
+    "nameMinLength": "Name must have at least {{count}} characters",
+    "required": "This field is required"
+  },
+  "privacy": "We don't share your information. You can unsubscribe anytime.",
+  "closeButton": "Close",
+  "notFound": "Can't find what you're looking for?"
+}

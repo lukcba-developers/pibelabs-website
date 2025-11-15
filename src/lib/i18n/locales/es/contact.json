@@ -1,0 +1,41 @@
+{
+  "title": "Conversemos sobre tu proyecto",
+  "subtitle": "¿Listo para Innovar?",
+  "form": {
+    "description": "Cuéntanos sobre tu proyecto y descubre cómo podemos ayudarte a alcanzar tus objetivos.",
+    "name": "Nombre Completo",
+    "namePlaceholder": "Ej: Juan Pérez",
+    "email": "Email",
+    "emailPlaceholder": "tu@email.com",
+    "emailNote": "(Nunca spam, prometido 🤝)",
+    "message": "Mensaje",
+    "messagePlaceholder": "Cuéntanos sobre tu proyecto...",
+    "messageHint": "Mínimo 10 caracteres, máximo 500 caracteres",
+    "service": "Servicio de Interés",
+    "serviceNote": "(Elige el que mejor se ajuste)",
+    "servicePlaceholder": "Selecciona un servicio",
+    "submit": "Enviar Mensaje",
+    "submitting": "Enviando...",
+    "success": "¡Mensaje Enviado!",
+    "successMessage": "Gracias por contactarnos. Nuestro equipo revisará tu mensaje y te responderá en menos de 24 horas.",
+    "error": "Error al enviar. Intenta nuevamente.",
+    "privacyNote": "Al enviar este formulario, aceptas nuestra política de privacidad. Nunca compartiremos tu información con terceros."
+  },
+  "validation": {
+    "nameRequired": "El nombre es requerido",
+    "minLength": "Mínimo {{count}} caracteres",
+    "maxLength": "Máximo {{count}} caracteres",
+    "invalidEmail": "Email inválido",
+    "invalidFormat": "Formato inválido",
+    "invalidService": "Selecciona un servicio válido",
+    "disposableEmail": "No se permiten emails temporales o desechables",
+    "spamDetected": "El mensaje contiene contenido no permitido",
+    "required": "Este campo es requerido"
+  },
+  "info": {
+    "email": "Email",
+    "phone": "Teléfono",
+    "location": "Ubicación",
+    "whatsapp": "WhatsApp"
+  }
+}

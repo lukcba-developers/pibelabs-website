@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { STATS } from "@/lib/constants/config";
 import type { Stat } from "@/types";
 
@@ -37,7 +38,17 @@ const AnimatedCounter = ({ value }: { value: number; duration?: number }) => {
 };
 
 // Stat Card Component
-const StatCard = ({ stat, index }: { stat: Stat; index: number }) => {
+const StatCard = ({
+  stat,
+  index,
+  label,
+  description,
+}: {
+  stat: Stat;
+  index: number;
+  label: string;
+  description: string;
+}) => {
   const isNumeric = typeof stat.value === "number";
 
   return (
@@ -78,13 +89,13 @@ const StatCard = ({ stat, index }: { stat: Stat; index: number }) => {
 
         {/* Label */}
         <p className="relative font-rajdhani text-lg text-text-secondary group-hover:text-text-primary transition-colors">
-          {stat.label}
+          {label}
         </p>
 
         {/* Description (context) */}
-        {stat.description && (
+        {description && (
           <p className="relative font-poppins text-sm text-gray-400 mt-1 italic">
-            {stat.description}
+            {description}
           </p>
         )}
 
@@ -107,6 +118,8 @@ const StatCard = ({ stat, index }: { stat: Stat; index: number }) => {
 };
 
 const StatsSection = () => {
+  const { t } = useTranslation("stats");
+
   return (
     <section className="section bg-gradient-to-br from-light-secondary via-white to-light-secondary py-20 relative overflow-hidden">
       {/* Background Pattern */}
@@ -138,25 +151,39 @@ const StatsSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            Nuestro Impacto
+            {t("badge")}
           </motion.span>
 
           <h2 className="font-orbitron font-bold text-4xl md:text-5xl text-gray-dark mb-4">
-            Resultados que{" "}
-            <span className="text-magenta-neon">Hablan por Sí Solos</span>
+            {t("title")}{" "}
+            <span className="text-magenta-neon">{t("titleHighlight")}</span>
           </h2>
 
           <p className="font-poppins text-lg text-text-secondary max-w-3xl mx-auto">
-            Números que reflejan nuestro compromiso con la excelencia y la
-            innovación tecnológica.
+            {t("subtitle")}
           </p>
         </motion.div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {STATS.map((stat, index) => (
-            <StatCard key={stat.id} stat={stat} index={index} />
-          ))}
+          {STATS.map((stat, index) => {
+            const label = t(`items.${stat.id}.label`, {
+              defaultValue: stat.label,
+            });
+            const description = t(`items.${stat.id}.description`, {
+              defaultValue: stat.description || "",
+            });
+
+            return (
+              <StatCard
+                key={stat.id}
+                stat={stat}
+                index={index}
+                label={label}
+                description={description}
+              />
+            );
+          })}
         </div>
 
         {/* Bottom Text */}
@@ -168,9 +195,9 @@ const StatsSection = () => {
           transition={{ delay: 0.6 }}
         >
           <p className="font-poppins text-text-secondary">
-            Cada número representa horas de dedicación, innovación y{" "}
+            {t("bottomText")}{" "}
             <span className="text-magenta-neon font-semibold">
-              compromiso con nuestros clientes
+              {t("bottomHighlight")}
             </span>
             .
           </p>

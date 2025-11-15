@@ -1,12 +1,17 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
+import { HelmetProvider } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 import { Loader } from "./components/atoms/Loader";
 import ScrollToTop from "./components/atoms/ScrollToTop";
 import ErrorBoundary from "./components/atoms/ErrorBoundary";
 import SEO from "./components/atoms/SEO";
+import { LanguageHead } from "./components/SEO";
+import { LanguageTransition } from "./components/atoms/LanguageTransition";
+import { LanguageLoadingOverlay } from "./components/atoms/LanguageLoadingOverlay";
 import { initGA } from "@/lib/analytics";
 import { reportWebVitals, logWebVitals } from "@/lib/performance/webVitals";
-import { useScrollDepth } from "@/hooks";
+import { useScrollDepth, useLanguageUrl } from "@/hooks";
 
 // Eager load Header (always visible)
 import Header from "./components/organisms/Header";
@@ -40,6 +45,8 @@ const NewsletterPopup = lazy(
    ============================================ */
 
 function App() {
+  const { t } = useTranslation("common");
+
   // Initialize Google Analytics
   useEffect(() => {
     initGA();
@@ -49,142 +56,154 @@ function App() {
   // Track scroll depth for engagement analytics (Sprint 5)
   useScrollDepth([25, 50, 75, 100]);
 
+  // Sync language with URL query params
+  useLanguageUrl();
+
+  // Detect system language changes (disabled by default - uncomment to enable)
+  // useSystemLanguage({ enabled: true, showPrompt: true });
+
   return (
-    <ErrorBoundary>
-      <SEO />
-      <div className="App">
-        {/* Skip to main content for accessibility */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 bg-cyan-neon text-dark-primary px-4 py-2 rounded-lg font-semibold"
-        >
-          Saltar al contenido principal
-        </a>
+    <HelmetProvider>
+      <ErrorBoundary>
+        <SEO />
+        <LanguageHead />
+        <div className="App">
+          {/* Skip to main content for accessibility */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 bg-cyan-neon text-dark-primary px-4 py-2 rounded-lg font-semibold"
+          >
+            {t("skipToContent")}
+          </a>
 
-        {/* Header with navigation - Always loaded */}
-        <Header />
+          {/* Header with navigation - Always loaded */}
+          <Header />
 
-        {/* Scroll Progress Indicator */}
-        <Suspense fallback={null}>
-          <ScrollProgress
-            color="from-cyan-500 to-magenta-500"
-            height={3}
-            showPercentage={false}
-          />
-        </Suspense>
+          {/* Scroll Progress Indicator */}
+          <Suspense fallback={null}>
+            <ScrollProgress
+              color="from-cyan-500 to-magenta-500"
+              height={3}
+              showPercentage={false}
+            />
+          </Suspense>
 
-        {/* Main content - Lazy loaded with suspense */}
-        <Suspense
-          fallback={<Loader message="Cargando experiencia futurista..." />}
-        >
-          <main id="main-content">
-            {/* Hero Section */}
-            <Hero />
+          {/* Main content - Lazy loaded with suspense */}
+          <Suspense fallback={<Loader message={t("loadingExperience")} />}>
+            <LanguageTransition>
+              <main id="main-content">
+                {/* Hero Section */}
+                <Hero />
 
-            {/* Trust Badges - NEW */}
-            <TrustBadges />
+                {/* Trust Badges - NEW */}
+                <TrustBadges />
 
-            {/* Stats Section */}
-            <StatsSection />
+                {/* Stats Section */}
+                <StatsSection />
 
-            {/* Services Grid */}
-            <ServicesGrid />
+                {/* Services Grid */}
+                <ServicesGrid />
 
-            {/* Portfolio Section */}
-            <PortfolioSection />
+                {/* Portfolio Section */}
+                <PortfolioSection />
 
-            {/* Testimonials Section - UNIFIED (replaces SocialProof, TestimonialCarousel, and testimonials from AboutSection) */}
-            <Suspense fallback={<Loader />}>
-              <TestimonialsSection
-                variant="grid"
-                showClientLogos={true}
-                showCTA={true}
-                bgStyle="dark"
-                maxItems={3}
-              />
-            </Suspense>
+                {/* Testimonials Section - UNIFIED (replaces SocialProof, TestimonialCarousel, and testimonials from AboutSection) */}
+                <Suspense fallback={<Loader />}>
+                  <TestimonialsSection
+                    variant="grid"
+                    showClientLogos={true}
+                    showCTA={true}
+                    bgStyle="dark"
+                    maxItems={3}
+                  />
+                </Suspense>
 
-            {/* About Section (Mission, Vision, Values & Team) */}
-            <AboutSection />
+                {/* About Section (Mission, Vision, Values & Team) */}
+                <AboutSection />
 
-            {/* FAQ Section - NEW */}
-            <Suspense fallback={<Loader />}>
-              <FAQSection />
-            </Suspense>
+                {/* FAQ Section - NEW */}
+                <Suspense fallback={<Loader />}>
+                  <FAQSection />
+                </Suspense>
 
-            {/* Blog Section */}
-            <BlogSection />
+                {/* Blog Section */}
+                <BlogSection />
 
-            {/* Contact Form */}
-            <ContactForm />
-          </main>
+                {/* Contact Form */}
+                <ContactForm />
+              </main>
 
-          {/* Footer */}
-          <Footer />
-        </Suspense>
+              {/* Footer */}
+              <Footer />
+            </LanguageTransition>
+          </Suspense>
 
-        {/* Floating WhatsApp Button */}
-        <Suspense fallback={null}>
-          <WhatsAppWidget
-            phoneNumber="5491112345678"
-            message="¡Hola! Me gustaría obtener más información sobre sus servicios."
-          />
-        </Suspense>
+          {/* Floating WhatsApp Button */}
+          <Suspense fallback={null}>
+            <WhatsAppWidget
+              phoneNumber="5491112345678"
+              message={t("whatsappDefaultMessage")}
+            />
+          </Suspense>
 
-        {/* Sticky CTA for Mobile (improves conversion) */}
-        <Suspense fallback={null}>
-          <StickyCTA
-            text="¿Listo para empezar tu proyecto?"
-            ctaText="Agenda consulta gratis"
-            scrollThreshold={500}
-            showOnMobileOnly={true}
-          />
-        </Suspense>
+          {/* Sticky CTA for Mobile (improves conversion) */}
+          <Suspense fallback={null}>
+            <StickyCTA
+              text={t("readyToStart")}
+              ctaText={t("scheduleConsultation")}
+              scrollThreshold={500}
+              showOnMobileOnly={true}
+            />
+          </Suspense>
 
-        {/* Scroll to Top Button */}
-        <ScrollToTop />
+          {/* Scroll to Top Button */}
+          <ScrollToTop />
 
-        {/* Toast Notifications */}
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 4000,
-            style: {
-              background: "#0a0e27",
-              color: "#fff",
-              border: "1px solid #00d9ff",
-            },
-            success: {
-              iconTheme: {
-                primary: "#00d9ff",
-                secondary: "#fff",
+          {/* Toast Notifications */}
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: "#0a0e27",
+                color: "#fff",
+                border: "1px solid #00d9ff",
               },
-            },
-            error: {
-              iconTheme: {
-                primary: "#ff006a",
-                secondary: "#fff",
+              success: {
+                iconTheme: {
+                  primary: "#00d9ff",
+                  secondary: "#fff",
+                },
               },
-            },
-          }}
-        />
-
-        {/* Cookie Consent Banner - Sprint 6 */}
-        <Suspense fallback={null}>
-          <CookieConsent position="bottom" showCustomize={true} />
-        </Suspense>
-
-        {/* Newsletter Popup with Exit-Intent - Sprint 6 */}
-        <Suspense fallback={null}>
-          <NewsletterPopup
-            exitIntent={true}
-            delay={10000}
-            scrollPercentage={50}
-            dismissDays={7}
+              error: {
+                iconTheme: {
+                  primary: "#ff006a",
+                  secondary: "#fff",
+                },
+              },
+            }}
           />
-        </Suspense>
-      </div>
-    </ErrorBoundary>
+
+          {/* Cookie Consent Banner - Sprint 6 */}
+          <Suspense fallback={null}>
+            <CookieConsent position="bottom" showCustomize={true} />
+          </Suspense>
+
+          {/* Newsletter Popup with Exit-Intent - Sprint 6 */}
+          <Suspense fallback={null}>
+            <NewsletterPopup
+              exitIntent={true}
+              delay={10000}
+              scrollPercentage={50}
+              dismissDays={7}
+            />
+          </Suspense>
+
+          {/* Language Loading Overlay */}
+          <LanguageLoadingOverlay />
+        </div>
+      </ErrorBoundary>
+    </HelmetProvider>
   );
 }
 

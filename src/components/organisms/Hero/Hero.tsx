@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { COMPANY_INFO } from "@/lib/constants/config";
+import { useTranslation } from "react-i18next";
 import { useReducedMotion } from "@/hooks";
 
 /* ============================================
@@ -7,6 +7,7 @@ import { useReducedMotion } from "@/hooks";
    ============================================ */
 
 const Hero = () => {
+  const { t } = useTranslation(["hero", "stats"]);
   const prefersReducedMotion = useReducedMotion();
 
   const scrollToContact = () => {
@@ -165,7 +166,7 @@ const Hero = () => {
             }}
           >
             <span className="inline-block bg-gradient-to-r from-cyan-400 via-cyan-300 to-magenta-400 bg-clip-text text-transparent drop-shadow-lg">
-              {COMPANY_INFO.heroHeadline}
+              {t("headline")}
             </span>
           </motion.h1>
 
@@ -183,7 +184,7 @@ const Hero = () => {
               delay: prefersReducedMotion ? 0 : 0.4,
             }}
           >
-            {COMPANY_INFO.heroSubheadline}
+            {t("subheadline")}
           </motion.p>
 
           {/* CTA Buttons - More prominent with better copy */}
@@ -207,7 +208,7 @@ const Hero = () => {
               whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -3 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
             >
-              <span className="relative z-10">Agenda consulta gratuita →</span>
+              <span className="relative z-10">{t("cta")} →</span>
               <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></div>
             </motion.button>
 
@@ -218,7 +219,7 @@ const Hero = () => {
               whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -3 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
             >
-              Ver casos de éxito
+              {t("ctaSecondary")}
             </motion.button>
           </motion.div>
 
@@ -236,7 +237,11 @@ const Hero = () => {
               delay: prefersReducedMotion ? 0 : 0.8,
             }}
           >
-            {COMPANY_INFO.stats.map((stat, index) => (
+            {[
+              { value: "50+", label: t("projects", { ns: "stats" }) },
+              { value: "98%", label: t("retention", { ns: "stats" }) },
+              { value: "4sem", label: t("mvp", { ns: "stats" }) },
+            ].map((stat, index) => (
               <motion.div
                 key={stat.label}
                 className="text-center"

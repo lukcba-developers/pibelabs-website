@@ -1,0 +1,1 @@
+export { LanguageHead } from "./LanguageHead";

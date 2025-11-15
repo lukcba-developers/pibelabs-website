@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Target, Eye, Diamond } from "lucide-react";
 import { TEAM_MEMBERS } from "@/lib/constants/config";
 import type { TeamMember } from "@/types";
@@ -142,6 +143,7 @@ const TeamMemberCard = ({
 };
 
 const AboutSection = () => {
+  const { t } = useTranslation("about");
   const prefersReducedMotion = useReducedMotion();
 
   return (
@@ -168,17 +170,16 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
           >
-            Sobre Nosotros
+            {t("title")}
           </motion.span>
 
           <h2 className="font-orbitron font-bold text-4xl md:text-5xl text-white mb-6">
-            Conoce al <span className="text-cyan-neon">Equipo</span> PibeLabs
+            {t("subtitle")}{" "}
+            <span className="text-cyan-neon">{t("team.title")}</span>
           </h2>
 
           <p className="font-poppins text-lg text-gray-300 max-w-3xl mx-auto mb-12">
-            Somos un equipo multidisciplinario de expertos apasionados por la
-            tecnología y la innovación, con el objetivo de transformar ideas en
-            realidad digital.
+            {t("description")}
           </p>
 
           {/* Misión, Visión, Valores - Modernized */}

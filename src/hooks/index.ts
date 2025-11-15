@@ -753,3 +753,9 @@ export function useRateLimit(limit: number = 3, windowMs: number = 60000) {
 
 // Export useScrollDepth from separate file (Sprint 5)
 export { useScrollDepth } from "./useScrollDepth";
+
+// Export useLanguageUrl for i18n URL sync
+export { useLanguageUrl } from "./useLanguageUrl";
+
+// Export useSystemLanguage for system language detection
+export { useSystemLanguage } from "./useSystemLanguage";

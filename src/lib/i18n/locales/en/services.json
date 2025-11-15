@@ -1,0 +1,68 @@
+{
+  "title": "Services",
+  "subtitle": "Comprehensive Technology Solutions",
+  "description": "We transform your ideas into exceptional digital products with cutting-edge technology and a results-focused approach.",
+  "badge": "Our Services",
+  "cta": "Can't find what you need? We work with custom solutions.",
+  "ctaButton": "Let's talk about your project",
+  "web": {
+    "title": "Web Development",
+    "description": "Modern, fast and scalable web applications with the latest technologies.",
+    "features": [
+      "React, Next.js, Vue",
+      "TypeScript & Node.js",
+      "RESTful API & GraphQL",
+      "Progressive Web Apps"
+    ]
+  },
+  "ia": {
+    "title": "Artificial Intelligence",
+    "description": "AI and Machine Learning solutions to automate and optimize processes.",
+    "features": [
+      "Machine Learning",
+      "NLP & Computer Vision",
+      "Chatbots & Assistants",
+      "Predictive Analytics"
+    ]
+  },
+  "design": {
+    "title": "UX/UI Design",
+    "description": "Intuitive and attractive interfaces focused on user experience.",
+    "features": [
+      "Research & Testing",
+      "Wireframes & Prototypes",
+      "Design Systems",
+      "Branding & Identity"
+    ]
+  },
+  "cloud": {
+    "title": "Cloud & DevOps",
+    "description": "Scalable, secure and optimized cloud infrastructure for your business.",
+    "features": [
+      "AWS, GCP, Azure",
+      "CI/CD Pipelines",
+      "Kubernetes & Docker",
+      "Monitoring & Logging"
+    ]
+  },
+  "security": {
+    "title": "Cybersecurity",
+    "description": "Comprehensive protection against threats and security audits.",
+    "features": [
+      "Pentesting & Audits",
+      "OWASP Top 10",
+      "Encryption & Auth",
+      "Compliance & GDPR"
+    ]
+  },
+  "consulting": {
+    "title": "Tech Consulting",
+    "description": "Strategic advice to transform your business with technology.",
+    "features": [
+      "Software Architecture",
+      "Tech Stack Selection",
+      "Code Review & Refactor",
+      "Team Training"
+    ]
+  }
+}

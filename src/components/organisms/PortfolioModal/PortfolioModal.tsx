@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { PortfolioProject } from "@/types";
 import { useFocusTrap, useReducedMotion } from "@/hooks";
 import LazyImage from "@/components/atoms/LazyImage";
@@ -18,6 +19,7 @@ interface PortfolioModalProps {
 }
 
 const PortfolioModal = ({ project, isOpen, onClose }: PortfolioModalProps) => {
+  const { t } = useTranslation("common");
   const modalRef = useFocusTrap(isOpen);
   const prefersReducedMotion = useReducedMotion();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -425,7 +427,7 @@ const PortfolioModal = ({ project, isOpen, onClose }: PortfolioModalProps) => {
                     className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white font-rajdhani font-bold rounded-xl transition-all"
                   >
                     <ExternalLink size={20} />
-                    Ver Proyecto en Vivo
+                    {t("portfolio.viewProjectLive")}
                   </a>
                 </div>
               )}

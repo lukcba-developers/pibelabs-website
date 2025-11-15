@@ -1,0 +1,170 @@
+{
+  "tercer-tiempo-fc": {
+    "title": "Tercer Tiempo FC - Official Website",
+    "description": "Complete SPA for amateur football club with conversion funnel optimized for local sponsors. Includes JSON content management system, Instagram Basic Display API integration, Google Analytics 4 with 18 predefined events, Google AdSense, WhatsApp Business API with pre-loaded messages, and component-driven architecture with custom hooks.",
+    "features": [
+      "Conversion funnel optimized for local sponsor acquisition",
+      "Dynamic content management system with JSON files",
+      "Complete Instagram Basic Display API integration",
+      "Google Analytics 4 with 18 predefined business events",
+      "Monetization with Google AdSense on strategic pages",
+      "WhatsApp Business API with contextual pre-loaded messages",
+      "Atomic Design architecture (Atoms, Molecules, Organisms)",
+      "9 reusable custom hooks for business logic",
+      "Image lazy loading and automatic code splitting",
+      "Optimized SEO system with dynamic meta tags"
+    ],
+    "achievements": [
+      "51 unit and integration tests with 95% coverage",
+      "Lighthouse Score: 95+ in Performance and Accessibility",
+      "Load time < 2s on 3G with advanced optimizations",
+      "Optimized bundle size: ~89kB gzipped",
+      "Automatic CI/CD with GitHub Actions + Husky pre-commit",
+      "Automatic deployment to Hostinger via FTP on each push"
+    ]
+  },
+  "clubpulse": {
+    "title": "ClubPulse - Multi-Tenant Sports Management",
+    "description": "Complete microservices ecosystem for sports club management with event-driven architecture. 11 independent Go microservices with React TypeScript frontend, dual database mode optimized for Railway, WebSocket for real-time, distributed Redis cache, Prometheus + Grafana for observability, and complete notification system.",
+    "features": [
+      "11 independent Go microservices (Auth, User, Calendar, Championship, Membership, Facilities, Notification, Payments, Booking, Super-Admin, BFF)",
+      "Event-driven architecture with inter-service communication",
+      "Dual database mode: single DB for production (78% cost savings) or multi-DB for development",
+      "React TypeScript frontend with scalable modular architecture",
+      "WebSocket for real-time communication between clients",
+      "Redis for distributed cache and session management",
+      "Circuit breakers for resilience to service failures",
+      "Complete notification system with SendGrid (Email, SMS)",
+      "Payment gateway integration (Stripe, Mercado Pago)",
+      "API Gateway (BFF) with rate limiting and centralized authentication"
+    ],
+    "achievements": [
+      "11 of 12 microservices operational and tested",
+      "Architecture optimized for Railway with 78% cost savings vs multi-DB",
+      "End-to-end testing suite with real services (no mocks)",
+      "Real-time enterprise metrics with Prometheus",
+      "Custom Grafana dashboards for each microservice",
+      "Centralized logging system with complete observability"
+    ]
+  },
+  "aura-stock": {
+    "title": "Aura Stock - Intelligent Inventory Management",
+    "description": "Complete inventory management platform with machine learning for stock optimization and demand forecasting. Multi-tenant system with granular RBAC, FastAPI backend with hexagonal architecture, automated ML pipelines, Celery for async tasks, PostgreSQL with TimescaleDB for time series, and Stripe for international payments.",
+    "features": [
+      "ML model for demand prediction with 92% accuracy",
+      "Intelligent alerting system based on business rules",
+      "Multi-tenant with PostgreSQL schema isolation",
+      "Granular RBAC with dynamic roles and composable permissions",
+      "RESTful API + GraphQL for maximum flexibility",
+      "Background jobs with Celery + Redis for heavy tasks",
+      "TimescaleDB for sales time series analysis",
+      "Supplier integration via API (webhook + polling)",
+      "Multi-channel notification system (email, Slack, SMS)",
+      "Stripe Connect for multi-tenant payments with commissions"
+    ],
+    "achievements": [
+      "87% reduction in stockouts with ML predictions",
+      "API rate: 2000 req/s with p95 latency < 100ms",
+      "5 ML pipelines in production with automatic retraining",
+      "Testable hexagonal architecture: 93% backend coverage",
+      "Complete audit system with event sourcing",
+      "Disaster recovery: RTO < 1h, RPO < 15min"
+    ]
+  },
+  "aura-delivery": {
+    "title": "Aura Delivery - Last-Mile Logistics Platform",
+    "description": "Complete ecosystem for last-mile delivery with real-time GPS tracking, route optimization with advanced algorithms, Firebase messaging system, serverless architecture on AWS Lambda, integration with multiple couriers, payment system with MercadoPago + Stripe, and API Gateway with multi-factor authentication.",
+    "features": [
+      "Real-time GPS tracking with geofencing and automatic notifications",
+      "Route optimization with TSP algorithms and K-means clustering",
+      "Push messaging system with Firebase Cloud Messaging",
+      "Serverless architecture on AWS Lambda with auto-scaling",
+      "React admin panel with interactive maps (Mapbox)",
+      "Courier integrations (Rappi, Uber Direct, Loggi, Glovo)",
+      "Dual payment system: MercadoPago (LATAM) + Stripe (international)",
+      "API Gateway with per-client rate limiting and MFA authentication",
+      "Driver scoring system based on performance metrics",
+      "Analytics dashboard with real-time operational metrics"
+    ],
+    "achievements": [
+      "35% reduction in average delivery time with ML optimization",
+      "Tracking system with 30s updates without degradation",
+      "Serverless architecture reduces costs by 60% vs traditional",
+      "99.95% uptime in 6 months with multi-region failover",
+      "Integration with 5 couriers with intelligent rate limiting",
+      "Notification system with 98% delivery rate"
+    ]
+  },
+  "ecommerce-ai": {
+    "title": "AI E-commerce - Personalized Recommendations",
+    "description": "E-commerce platform with AI-based recommendation system using collaborative filtering and content-based filtering. Includes Next.js 14 with App Router, Supabase for backend, semantic search system with embeddings, persistent cart with optimistic UI, and international payment system.",
+    "features": [
+      "Hybrid recommendation system (collaborative + content-based)",
+      "Semantic search with embeddings and vector similarity",
+      "Next.js 14 with App Router, Server Components and Streaming",
+      "Supabase (PostgreSQL + Auth + Storage + Edge Functions)",
+      "Persistent cart with optimistic updates and conflict resolution",
+      "Stripe Checkout + Webhooks for payments and fulfillment",
+      "Review system with sentiment analysis",
+      "Automatic image optimization with Next.js Image + Cloudflare",
+      "Edge caching with Vercel Edge Network",
+      "Conversion analytics with custom behavior events"
+    ],
+    "achievements": [
+      "28% increase in conversion with personalized recommendations",
+      "Semantic search with 91% relevance vs 74% keyword-based",
+      "First Contentful Paint < 1s with Server Components + Streaming",
+      "Edge caching reduces global latency by 65%",
+      "Review system processes 10k reviews/day with NLP",
+      "Cart abandonment rate reduced from 72% to 54%"
+    ]
+  },
+  "chatbot-nlp": {
+    "title": "Intelligent Chatbot - Automated Support",
+    "description": "Enterprise chatbot with advanced NLP using spaCy, Hugging Face transformers and RASA for intent recognition. Includes multi-channel integration (web, WhatsApp, Slack), conversation analytics, automatic escalation system to humans, and model fine-tuning pipeline.",
+    "features": [
+      "NLP pipeline with spaCy + Transformers + RASA",
+      "Intent recognition with domain-specific fine-tuned BERT",
+      "Multi-channel: Web widget, WhatsApp Business API, Slack",
+      "Fallback system with automatic escalation to agents",
+      "Knowledge base with semantic search and RAG (Retrieval-Augmented Generation)",
+      "Fine-tuning pipeline with feedback loop from human agents",
+      "A/B testing of responses for continuous optimization",
+      "Analytics dashboard with satisfaction and resolution metrics",
+      "Training system with active learning",
+      "Webhook API for custom integrations"
+    ],
+    "achievements": [
+      "84% of queries resolved without human intervention",
+      "Intent recognition accuracy: 92% with fine-tuned model",
+      "Average response time: 1.8s vs 8min with agents",
+      "67% reduction in operational support costs",
+      "Feedback loop system improves model by 3% each month",
+      "Multi-channel with 10k messages/day processed"
+    ]
+  },
+  "design-system": {
+    "title": "Enterprise Design System - Reusable Components",
+    "description": "Complete design system with 60+ React + TypeScript components, interactive documentation with Storybook, design tokens with theming, AAA accessibility, automated testing with Chromatic, and published npm package. Includes synced Figma design kit and CI/CD pipeline for releases.",
+    "features": [
+      "60+ React components with complete TypeScript and PropTypes",
+      "Design tokens with theming system (light/dark + custom themes)",
+      "Interactive documentation with Storybook + Addon A11y",
+      "WCAG AAA accessibility with automated testing",
+      "Visual regression testing with Chromatic on every PR",
+      "Published npm package with automatic semantic versioning",
+      "Figma design kit with auto-sync via Figma API",
+      "Automatic tree-shaking to optimize bundle size",
+      "Unit tests with Jest + React Testing Library (95% coverage)",
+      "CI/CD pipeline with automatic releases and changelog"
+    ],
+    "achievements": [
+      "60+ components with 95% test coverage and 100% TS typed",
+      "40% reduction in feature development time",
+      "Zero accessibility issues in WCAG AAA audit",
+      "Optimized bundle size: tree-shakeable components",
+      "Living documentation with 180+ stories in Storybook",
+      "Adopted by 8 internal teams in 3 months"
+    ]
+  }
+}

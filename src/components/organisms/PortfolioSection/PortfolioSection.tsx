@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { PORTFOLIO_PROJECTS } from "@/lib/constants/config";
 import type { PortfolioProject, PortfolioCategory } from "@/types";
 import LazyImage from "@/components/atoms/LazyImage";
@@ -11,23 +12,23 @@ import { sendEvent, trackPortfolioView } from "@/lib/analytics/googleAnalytics";
    Portfolio Section Component (Organism)
    ============================================ */
 
-const CATEGORIES: { id: PortfolioCategory; label: string }[] = [
-  { id: "all", label: "Todos" },
-  { id: "web", label: "Web" },
-  { id: "ia", label: "IA" },
-  { id: "design", label: "Diseño" },
-  { id: "cloud", label: "Cloud" },
-];
-
 // Project Card
 const ProjectCard = ({
   project,
   prefersReducedMotion,
   onClick,
+  viewDetailsText,
+  statusTexts,
 }: {
   project: PortfolioProject;
   prefersReducedMotion: boolean;
   onClick: () => void;
+  viewDetailsText: string;
+  statusTexts: {
+    production: string;
+    development: string;
+    completed: string;
+  };
 }) => {
   return (
     <motion.div
@@ -76,7 +77,7 @@ const ProjectCard = ({
             </svg>
           </motion.div>
           <div className="text-white font-rajdhani font-semibold text-lg">
-            Ver Detalles
+            {viewDetailsText}
           </div>
         </motion.div>
 
@@ -92,10 +93,10 @@ const ProjectCard = ({
             }`}
           >
             {project.status === "production"
-              ? "✓ Producción"
+              ? statusTexts.production
               : project.status === "development"
-                ? "🔧 En Desarrollo"
-                : "Completado"}
+                ? statusTexts.development
+                : statusTexts.completed}
           </div>
         )}
 
@@ -151,12 +152,22 @@ const ProjectCard = ({
 };
 
 const PortfolioSection = () => {
+  const { t } = useTranslation(["portfolio", "projects"]);
   const [activeCategory, setActiveCategory] =
     useState<PortfolioCategory>("all");
   const [selectedProject, setSelectedProject] =
     useState<PortfolioProject | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+
+  // Dynamic categories with translations
+  const CATEGORIES: { id: PortfolioCategory; label: string }[] = [
+    { id: "all", label: t("categories.all") },
+    { id: "web", label: t("categories.web") },
+    { id: "ia", label: t("categories.ai") },
+    { id: "design", label: t("categories.design") },
+    { id: "cloud", label: t("categories.cloud") },
+  ];
 
   // Deep linking: Read category from URL hash on mount
   useEffect(() => {
@@ -168,6 +179,7 @@ const PortfolioSection = () => {
     if (category && CATEGORIES.find((c) => c.id === category)) {
       setActiveCategory(category);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Update URL when category changes (deep linking)
@@ -183,10 +195,88 @@ const PortfolioSection = () => {
     }
   }, [activeCategory]);
 
+  // Translate projects
+  const translatedProjects = PORTFOLIO_PROJECTS.map((project) => {
+    // Get translated features
+    let features: string[] = project.features || [];
+    try {
+      const featuresTranslation = t(`projects:${project.id}.features`, {
+        returnObjects: true,
+        defaultValue: project.features,
+      });
+
+      // Handle both array and object formats
+      if (featuresTranslation) {
+        if (Array.isArray(featuresTranslation)) {
+          const validFeatures = featuresTranslation.filter(
+            (item): item is string => typeof item === "string",
+          );
+          if (validFeatures.length > 0) {
+            features = validFeatures;
+          }
+        } else if (typeof featuresTranslation === "object") {
+          // Convert object with numeric keys to array
+          const featuresArray = Object.values(featuresTranslation);
+          const validFeatures = featuresArray.filter(
+            (item): item is string => typeof item === "string",
+          );
+          if (validFeatures.length > 0) {
+            features = validFeatures;
+          }
+        }
+      }
+    } catch (error) {
+      // Use default features
+    }
+
+    // Get translated achievements
+    let achievements: string[] = project.achievements || [];
+    try {
+      const achievementsTranslation = t(`projects:${project.id}.achievements`, {
+        returnObjects: true,
+        defaultValue: project.achievements,
+      });
+
+      // Handle both array and object formats
+      if (achievementsTranslation) {
+        if (Array.isArray(achievementsTranslation)) {
+          const validAchievements = achievementsTranslation.filter(
+            (item): item is string => typeof item === "string",
+          );
+          if (validAchievements.length > 0) {
+            achievements = validAchievements;
+          }
+        } else if (typeof achievementsTranslation === "object") {
+          // Convert object with numeric keys to array
+          const achievementsArray = Object.values(achievementsTranslation);
+          const validAchievements = achievementsArray.filter(
+            (item): item is string => typeof item === "string",
+          );
+          if (validAchievements.length > 0) {
+            achievements = validAchievements;
+          }
+        }
+      }
+    } catch (error) {
+      // Use default achievements
+    }
+
+    const translated = {
+      ...project,
+      title: t(`projects:${project.id}.title`, { defaultValue: project.title }),
+      description: t(`projects:${project.id}.description`, {
+        defaultValue: project.description,
+      }),
+      features,
+      achievements,
+    };
+    return translated;
+  });
+
   const filteredProjects =
     activeCategory === "all"
-      ? PORTFOLIO_PROJECTS
-      : PORTFOLIO_PROJECTS.filter(
+      ? translatedProjects
+      : translatedProjects.filter(
           (project) => project.category === activeCategory,
         );
 
@@ -242,16 +332,15 @@ const PortfolioSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            Nuestro Trabajo
+            {t("badge")}
           </motion.span>
 
           <h2 className="font-orbitron font-bold text-4xl md:text-5xl text-gray-dark mb-4">
-            Portfolio de <span className="text-cyan-neon">Proyectos</span>
+            {t("title")} <span className="text-cyan-neon">{t("subtitle")}</span>
           </h2>
 
           <p className="font-poppins text-lg text-text-secondary max-w-3xl mx-auto">
-            Explora algunos de nuestros proyectos más destacados y descubre cómo
-            transformamos ideas en soluciones digitales excepcionales.
+            {t("description")}
           </p>
         </motion.div>
 
@@ -326,6 +415,12 @@ const PortfolioSection = () => {
                 project={project}
                 prefersReducedMotion={prefersReducedMotion}
                 onClick={() => handleProjectClick(project)}
+                viewDetailsText={t("viewDetails")}
+                statusTexts={{
+                  production: t("status.production"),
+                  development: t("status.development"),
+                  completed: t("status.completed"),
+                }}
               />
             ))}
           </AnimatePresence>
@@ -339,7 +434,7 @@ const PortfolioSection = () => {
             animate={{ opacity: 1 }}
           >
             <p className="font-poppins text-text-secondary">
-              No hay proyectos en esta categoría.
+              {t("emptyState")}
             </p>
           </motion.div>
         )}
@@ -354,9 +449,7 @@ const PortfolioSection = () => {
           viewport={{ once: true }}
           transition={{ delay: prefersReducedMotion ? 0 : 0.4 }}
         >
-          <p className="font-poppins text-text-secondary mb-6">
-            ¿Te gustaría ser parte de nuestra próxima historia de éxito?
-          </p>
+          <p className="font-poppins text-text-secondary mb-6">{t("cta")}</p>
           <motion.button
             className="px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-neon to-magenta-neon text-white font-rajdhani font-semibold text-lg hover:shadow-glow-cyan transition-all"
             whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
@@ -369,7 +462,7 @@ const PortfolioSection = () => {
                 });
             }}
           >
-            Iniciar Tu Proyecto
+            {t("ctaButton")}
           </motion.button>
         </motion.div>
       </div>

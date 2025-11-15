@@ -1,109 +1,98 @@
-name: Deploy to Hostinger
+# WORKFLOW COMENTADO - NO SE DESPLIEGA EN CI POR AHORA
+# Descomentar cuando esté listo para desplegar automáticamente
 
-on:
-  push:
-    branches:
-      - main  # Deploy cuando haya push a main
-  workflow_dispatch:  # Permite ejecutar manualmente desde GitHub
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      # 1. Checkout del código
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # 2. Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-
-      # 3. Instalar dependencias
-      - name: Install dependencies
-        run: npm ci
-
-      # 4. Run tests, linting and type-check
-      - name: Run tests
-        run: npm run test:run || echo "⚠️ Tests not configured yet"
-
-      - name: Run ESLint
-        run: npm run lint
-
-      - name: Run TypeScript type-check
-        run: npm run type-check
-
-      # 5. Build del proyecto
-      - name: Build project
-        run: npm run build
-        env:
-          CI: false  # Desactiva warnings como errores
-
-      # 6. Debug - Verificar credenciales FTP (sin exponer password)
-      - name: Debug FTP Configuration
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          echo "🔍 Verificando configuración FTP..."
-          echo "FTP Server: ${FTP_SERVER}"
-          echo "FTP Username: ${FTP_USERNAME}"
-          echo "Password configured: $(if [ -n "$FTP_PASSWORD" ]; then echo "YES (length: ${#FTP_PASSWORD})"; else echo "NO (EMPTY!)"; fi)"
-          echo "Server-dir: /public_html/"
-          echo "Local-dir: ./dist/"
-
-          # Verificar que los secrets no estén vacíos
-          if [ -z "$FTP_SERVER" ]; then
-            echo "❌ ERROR: FTP_SERVER está vacío"
-            exit 1
-          fi
-          if [ -z "$FTP_USERNAME" ]; then
-            echo "❌ ERROR: FTP_USERNAME está vacío"
-            exit 1
-          fi
-          if [ -z "$FTP_PASSWORD" ]; then
-            echo "❌ ERROR: FTP_PASSWORD está vacío"
-            exit 1
-          fi
-
-          echo "✅ Todos los secrets están configurados"
-
-          # Test DNS resolution y ping
-          echo ""
-          echo "🌐 Probando resolución DNS del servidor..."
-          nslookup ${FTP_SERVER} || echo "⚠️ nslookup falló"
-
-          echo ""
-          echo "🔌 Intentando ping al servidor..."
-          ping -c 2 ${FTP_SERVER} || echo "⚠️ ping falló (puede estar bloqueado)"
-
-          echo ""
-          echo "🔍 Probando conexión FTP en puerto 21..."
-          nc -zv ${FTP_SERVER} 21 || echo "⚠️ Puerto 21 no responde"
-
-          echo ""
-          echo "🔒 Probando conexión FTPS en puerto 21 (explicit TLS)..."
-          timeout 5 openssl s_client -connect ${FTP_SERVER}:21 -starttls ftp 2>&1 | grep "Verify return code" || echo "⚠️ FTPS no disponible o requiere configuración"
-
-      # 7. Deploy via FTPS (FTP over TLS)
-      - name: Deploy to Hostinger via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          port: 21
-          protocol: ftps  # Changed from 'ftp' to 'ftps' for encrypted connection
-          timeout: 600000
-          log-level: verbose
-          dangerous-clean-slate: true
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
+# name: Deploy to Hostinger
+#
+# on:
+#   push:
+#     branches:
+#       - main  # Deploy cuando haya push a main
+#   workflow_dispatch:  # Permite ejecutar manualmente desde GitHub
+#
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+#
+#     steps:
+#       # 1. Checkout del código
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+#
+#       # 2. Setup Node.js
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: '18'
+#           cache: 'npm'
+#
+#       # 3. Instalar dependencias
+#       - name: Install dependencies
+#         run: npm ci
+#
+#       # 4. Build del proyecto
+#       - name: Build project
+#         run: npm run build
+#         env:
+#           CI: false  # Desactiva warnings como errores
+#
+#       # 5. Debug - Verificar credenciales FTP (sin exponer password)
+#       - name: Debug FTP Configuration
+#         env:
+#           FTP_SERVER: ${{ secrets.FTP_SERVER }}
+#           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+#           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+#         run: |
+#           echo "🔍 Verificando configuración FTP..."
+#           echo "FTP Server: ${FTP_SERVER}"
+#           echo "FTP Username: ${FTP_USERNAME}"
+#           echo "Password configured: $(if [ -n "$FTP_PASSWORD" ]; then echo "YES (length: ${#FTP_PASSWORD})"; else echo "NO (EMPTY!)"; fi)"
+#           echo "Server-dir: /public_html/"
+#           echo "Local-dir: ./dist/"
+#
+#           # Verificar que los secrets no estén vacíos
+#           if [ -z "$FTP_SERVER" ]; then
+#             echo "❌ ERROR: FTP_SERVER está vacío"
+#             exit 1
+#           fi
+#           if [ -z "$FTP_USERNAME" ]; then
+#             echo "❌ ERROR: FTP_USERNAME está vacío"
+#             exit 1
+#           fi
+#           if [ -z "$FTP_PASSWORD" ]; then
+#             echo "❌ ERROR: FTP_PASSWORD está vacío"
+#             exit 1
+#           fi
+#
+#           echo "✅ Todos los secrets están configurados"
+#
+#           # Test DNS resolution y ping
+#           echo ""
+#           echo "🌐 Probando resolución DNS del servidor..."
+#           nslookup ${FTP_SERVER} || echo "⚠️ nslookup falló"
+#
+#           echo ""
+#           echo "🔌 Intentando ping al servidor..."
+#           ping -c 2 ${FTP_SERVER} || echo "⚠️ ping falló (puede estar bloqueado)"
+#
+#           echo ""
+#           echo "🔍 Probando conexión FTP en puerto 21..."
+#           nc -zv ${FTP_SERVER} 21 || echo "⚠️ Puerto 21 no responde"
+#
+#       # 6. Deploy via FTP
+#       - name: Deploy to Hostinger via FTP
+#         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+#         with:
+#           server: ${{ secrets.FTP_SERVER }}
+#           username: ${{ secrets.FTP_USERNAME }}
+#           password: ${{ secrets.FTP_PASSWORD }}
+#           local-dir: ./dist/
+#           server-dir: /domains/pibelabs.com/public_html/
+#           port: 21
+#           protocol: ftp
+#           timeout: 600000
+#           log-level: verbose
+#           dangerous-clean-slate: true
+#           exclude: |
+#             **/.git*
+#             **/.git*/**
+#             **/node_modules/**

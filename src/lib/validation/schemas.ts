@@ -1,9 +1,64 @@
 import { z } from "zod";
+import i18n from "@/lib/i18n";
 import { FORM_CONFIG } from "@/lib/constants/config";
 
 /* ============================================
-   PIBELABS - Zod Validation Schemas
+   PIBELABS - Zod Validation Schemas with i18n
    ============================================ */
+
+// ============================================
+// Custom Error Map with i18n
+// ============================================
+
+const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
+  const t = (key: string, options?: object) =>
+    i18n.t(key, { ns: "validation", ...options });
+
+  switch (issue.code) {
+    case z.ZodIssueCode.too_small:
+      if (issue.type === "string") {
+        if (issue.minimum === 1) {
+          return { message: t("required") };
+        }
+        return {
+          message: t("too_small", {
+            count: Number(issue.minimum),
+          }),
+        };
+      }
+      break;
+
+    case z.ZodIssueCode.too_big:
+      if (issue.type === "string") {
+        return {
+          message: t("too_big", {
+            count: Number(issue.maximum),
+          }),
+        };
+      }
+      break;
+
+    case z.ZodIssueCode.invalid_string:
+      if (issue.validation === "email") {
+        return { message: t("invalid_email") };
+      }
+      if (issue.validation === "regex") {
+        return { message: t("custom") };
+      }
+      break;
+
+    case z.ZodIssueCode.invalid_enum_value:
+      return { message: t("invalid_enum_value") };
+
+    default:
+      break;
+  }
+
+  return { message: ctx.defaultError };
+};
+
+// Set custom error map globally
+z.setErrorMap(customErrorMap);
 
 // ============================================
 // Helper Functions
@@ -45,47 +100,30 @@ const containsSpamKeywords = (message: string): boolean => {
 export const contactFormSchema = z.object({
   name: z
     .string()
-    .min(
-      FORM_CONFIG.minNameLength,
-      `El nombre debe tener al menos ${FORM_CONFIG.minNameLength} caracteres`,
-    )
-    .max(
-      FORM_CONFIG.maxNameLength,
-      `El nombre no puede exceder ${FORM_CONFIG.maxNameLength} caracteres`,
-    )
-    .regex(
-      /^[A-Za-zÀ-ÿ\s]+$/,
-      "El nombre solo puede contener letras y espacios",
-    )
+    .min(FORM_CONFIG.minNameLength)
+    .max(FORM_CONFIG.maxNameLength)
+    .regex(/^[A-Za-zÀ-ÿ\s]+$/)
     .transform((val) => val.trim()),
 
   email: z
     .string()
-    .email("Por favor ingresa un email válido")
+    .email()
     .toLowerCase()
     .refine(
       (email) => !isDisposableEmail(email),
-      "No se permiten emails temporales o desechables",
+      () => ({ message: i18n.t("contact.validation.disposableEmail") }),
     )
     .transform((val) => val.trim()),
 
-  service: z.enum(["web", "ia", "design", "cloud", "security", "consulting"], {
-    errorMap: () => ({ message: "Por favor selecciona un servicio válido" }),
-  }),
+  service: z.enum(["web", "ia", "design", "cloud", "security", "consulting"]),
 
   message: z
     .string()
-    .min(
-      FORM_CONFIG.minMessageLength,
-      `El mensaje debe tener al menos ${FORM_CONFIG.minMessageLength} caracteres`,
-    )
-    .max(
-      FORM_CONFIG.maxMessageLength,
-      `El mensaje no puede exceder ${FORM_CONFIG.maxMessageLength} caracteres`,
-    )
+    .min(FORM_CONFIG.minMessageLength)
+    .max(FORM_CONFIG.maxMessageLength)
     .refine(
       (message) => !containsSpamKeywords(message),
-      "El mensaje contiene contenido no permitido",
+      () => ({ message: i18n.t("contact.validation.spamDetected") }),
     )
     .transform((val) => val.trim()),
 });

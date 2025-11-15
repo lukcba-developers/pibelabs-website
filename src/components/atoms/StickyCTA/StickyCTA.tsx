@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 /* ============================================
    Sticky CTA Component
@@ -16,12 +17,16 @@ interface StickyCTAProps {
 }
 
 const StickyCTA = ({
-  text = "¿Listo para empezar tu proyecto?",
-  ctaText = "Agenda consulta gratis",
+  text,
+  ctaText,
   onAction,
   scrollThreshold = 300,
   showOnMobileOnly = true,
 }: StickyCTAProps) => {
+  const { t } = useTranslation("common");
+
+  const displayText = text || t("readyToStart");
+  const displayCtaText = ctaText || t("scheduleConsultation");
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
 
@@ -74,7 +79,7 @@ const StickyCTA = ({
                 {/* Text */}
                 <div className="flex-1 min-w-0">
                   <p className="text-white font-rajdhani font-semibold text-sm truncate">
-                    {text}
+                    {displayText}
                   </p>
                 </div>
 
@@ -92,7 +97,7 @@ const StickyCTA = ({
                   "
                   whileTap={{ scale: 0.95 }}
                 >
-                  {ctaText} →
+                  {displayCtaText} →
                 </motion.button>
 
                 {/* Dismiss Button */}
@@ -106,7 +111,7 @@ const StickyCTA = ({
                   "
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  aria-label="Cerrar"
+                  aria-label={t("close")}
                 >
                   <X size={18} />
                 </motion.button>

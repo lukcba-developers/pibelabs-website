@@ -1,0 +1,24 @@
+{
+  "badge": "Nuestro Trabajo",
+  "title": "Portfolio de",
+  "subtitle": "Proyectos",
+  "description": "Explora algunos de nuestros proyectos más destacados y descubre cómo transformamos ideas en soluciones digitales excepcionales.",
+  "viewProject": "Ver proyecto",
+  "viewDetails": "Ver Detalles",
+  "categories": {
+    "all": "Todos",
+    "web": "Web",
+    "mobile": "Mobile",
+    "ai": "IA",
+    "design": "Diseño",
+    "cloud": "Cloud"
+  },
+  "status": {
+    "production": "✓ Producción",
+    "development": "🔧 En Desarrollo",
+    "completed": "Completado"
+  },
+  "emptyState": "No hay proyectos en esta categoría.",
+  "cta": "¿Te gustaría ser parte de nuestra próxima historia de éxito?",
+  "ctaButton": "Iniciar Tu Proyecto"
+}

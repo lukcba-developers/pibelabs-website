@@ -1,0 +1,23 @@
+{
+  "title": "About Us",
+  "subtitle": "Senior team with international track record",
+  "description": "PibeLabs was born from the shared vision of Lucas Benavidez and Juan Cruz Ferri: combining technical excellence with product mindset. With experience in Y2C startups, international consultancies and Fortune 500 companies, we understand both code and business.",
+  "values": {
+    "quality": {
+      "title": "Non-negotiable quality",
+      "description": "Code reviews, automated testing, complete documentation"
+    },
+    "agile": {
+      "title": "Real agility",
+      "description": "2-week sprints, frequent demos, continuous feedback"
+    },
+    "transparency": {
+      "title": "Total transparency",
+      "description": "Access to repos, real-time metrics, direct communication"
+    }
+  },
+  "team": {
+    "title": "Team",
+    "founders": "Founders"
+  }
+}

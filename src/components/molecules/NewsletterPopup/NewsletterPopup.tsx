@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useTranslation } from "react-i18next";
 import { useLocalStorage, useReducedMotion } from "@/hooks";
 import { sendEvent } from "@/lib/analytics/googleAnalytics";
 
@@ -11,12 +12,10 @@ import { sendEvent } from "@/lib/analytics/googleAnalytics";
    Exit-Intent Newsletter Subscription Modal
    ============================================ */
 
-const newsletterSchema = z.object({
-  email: z.string().email("Email inválido"),
-  name: z.string().min(2, "Nombre debe tener al menos 2 caracteres").optional(),
-});
-
-type NewsletterFormData = z.infer<typeof newsletterSchema>;
+type NewsletterFormData = {
+  email: string;
+  name?: string;
+};
 
 interface NewsletterPopupProps {
   /** Enable exit-intent trigger */
@@ -35,6 +34,7 @@ const NewsletterPopup = ({
   scrollPercentage = 50,
   dismissDays = 7,
 }: NewsletterPopupProps) => {
+  const { t } = useTranslation("newsletter");
   const [showPopup, setShowPopup] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -47,6 +47,14 @@ const NewsletterPopup = ({
     false,
   );
   const prefersReducedMotion = useReducedMotion();
+
+  const newsletterSchema = z.object({
+    email: z.string().email(t("validation.invalidEmail")),
+    name: z
+      .string()
+      .min(2, t("validation.nameMinLength", { count: 2 }))
+      .optional(),
+  });
 
   const {
     register,
@@ -219,6 +227,7 @@ const NewsletterPopup = ({
                 onClick={handleClose}
                 className="absolute top-4 right-4 p-2 hover:bg-gray-700/50 rounded-lg
                          transition-colors z-10"
+                aria-label={t("closeButton")}
               >
                 <svg
                   className="w-6 h-6 text-gray-400 hover:text-white"
@@ -275,22 +284,20 @@ const NewsletterPopup = ({
 
                     {/* Title */}
                     <h2 className="font-orbitron font-bold text-2xl text-white text-center mb-3">
-                      ¡No te pierdas nuestras novedades!
+                      {t("title")}
                     </h2>
 
                     {/* Subtitle */}
                     <p className="font-poppins text-gray-300 text-center mb-6">
-                      Recibe contenido exclusivo sobre tecnología, tips de
-                      desarrollo y ofertas especiales directamente en tu bandeja
-                      de entrada.
+                      {t("description")}
                     </p>
 
                     {/* Benefits */}
                     <div className="space-y-2 mb-6">
                       {[
-                        "Artículos exclusivos sobre desarrollo",
-                        "Ofertas y descuentos especiales",
-                        "Recursos y herramientas gratis",
+                        t("benefits.articles"),
+                        t("benefits.offers"),
+                        t("benefits.resources"),
                       ].map((benefit, index) => (
                         <div key={index} className="flex items-center gap-3">
                           <svg
@@ -323,7 +330,7 @@ const NewsletterPopup = ({
                         <input
                           {...register("name")}
                           type="text"
-                          placeholder="Tu nombre (opcional)"
+                          placeholder={t("form.namePlaceholder")}
                           className="w-full px-4 py-3 rounded-lg bg-dark-secondary border-2 border-gray-600
                                    text-white font-poppins placeholder-gray-500
                                    focus:border-cyan-neon focus:outline-none transition-colors"
@@ -340,7 +347,7 @@ const NewsletterPopup = ({
                         <input
                           {...register("email")}
                           type="email"
-                          placeholder="tu@email.com"
+                          placeholder={t("form.emailPlaceholder")}
                           className="w-full px-4 py-3 rounded-lg bg-dark-secondary border-2 border-gray-600
                                    text-white font-poppins placeholder-gray-500
                                    focus:border-cyan-neon focus:outline-none transition-colors"
@@ -392,18 +399,17 @@ const NewsletterPopup = ({
                                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                               />
                             </svg>
-                            Suscribiendo...
+                            {t("form.submitting")}
                           </span>
                         ) : (
-                          "¡Quiero suscribirme!"
+                          t("form.submit")
                         )}
                       </motion.button>
                     </form>
 
                     {/* Privacy Note */}
                     <p className="text-xs text-gray-500 text-center mt-4 font-poppins">
-                      No compartimos tu información. Puedes darte de baja en
-                      cualquier momento.
+                      {t("privacy")}
                     </p>
                   </>
                 ) : (
@@ -436,10 +442,10 @@ const NewsletterPopup = ({
                     </motion.div>
 
                     <h3 className="font-orbitron font-bold text-2xl text-white mb-3">
-                      ¡Suscripción Exitosa!
+                      {t("form.success")}
                     </h3>
                     <p className="font-poppins text-gray-300">
-                      Revisa tu email para confirmar tu suscripción.
+                      {t("form.successMessage")}
                     </p>
                   </div>
                 )}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   contactFormSchema,
   suggestEmailDomain,
@@ -25,6 +26,7 @@ import {
    ============================================ */
 
 const ContactForm = () => {
+  const { t } = useTranslation(["contact", "services"]);
   const [formState, setFormState] = useState<ContactFormState>({
     isSubmitting: false,
     isSuccess: false,
@@ -182,16 +184,15 @@ const ContactForm = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            Contacto
+            {t("title")}
           </motion.span>
 
           <h2 className="font-orbitron font-bold text-4xl md:text-5xl text-white mb-4">
-            ¿Listo para <span className="text-magenta-neon">Innovar</span>?
+            {t("subtitle")}
           </h2>
 
           <p className="font-poppins text-lg text-gray-300 max-w-2xl mx-auto">
-            Cuéntanos sobre tu proyecto y descubre cómo podemos ayudarte a
-            alcanzar tus objetivos.
+            {t("form.description")}
           </p>
         </motion.div>
 
@@ -217,11 +218,10 @@ const ContactForm = () => {
                     <span className="text-4xl">✅</span>
                     <div>
                       <h3 className="font-rajdhani font-bold text-xl text-green-400 mb-2">
-                        ¡Mensaje Enviado!
+                        {t("form.success")}
                       </h3>
                       <p className="font-poppins text-gray-300">
-                        Gracias por contactarnos. Nuestro equipo revisará tu
-                        mensaje y te responderá en menos de 24 horas.
+                        {t("form.successMessage")}
                       </p>
                     </div>
                   </div>
@@ -268,7 +268,7 @@ const ContactForm = () => {
                     <span className="text-4xl">❌</span>
                     <div>
                       <h3 className="font-rajdhani font-bold text-xl text-red-400 mb-2">
-                        Error al Enviar
+                        {t("form.errorTitle")}
                       </h3>
                       <p className="font-poppins text-gray-300">
                         {formState.errorMessage}
@@ -292,8 +292,8 @@ const ContactForm = () => {
                   {...register("name")}
                   type="text"
                   name="name"
-                  label="Nombre Completo"
-                  placeholder="Ej: Juan Pérez"
+                  label={t("form.name")}
+                  placeholder={t("form.namePlaceholder")}
                   required
                   error={errors.name?.message}
                   onFocus={handleFormStart}
@@ -317,17 +317,17 @@ const ContactForm = () => {
                   htmlFor="email"
                   className="block mb-2 font-rajdhani font-medium text-white"
                 >
-                  Email
+                  {t("form.email")}
                   <span className="text-cyan-neon ml-1">*</span>
                   <span className="text-xs text-gray-400 font-normal ml-2">
-                    (Nunca spam, prometido 🤝)
+                    {t("form.emailNote")}
                   </span>
                 </label>
                 <Input
                   {...register("email")}
                   type="email"
                   name="email"
-                  placeholder="tu@email.com"
+                  placeholder={t("form.emailPlaceholder")}
                   required
                   error={errors.email?.message}
                   onFocus={handleFormStart}
@@ -382,10 +382,10 @@ const ContactForm = () => {
                   htmlFor="service-select"
                   className="block mb-2 font-rajdhani font-medium text-white"
                 >
-                  Servicio de Interés
+                  {t("form.service")}
                   <span className="text-magenta-neon ml-1">*</span>
                   <span className="text-xs text-gray-400 font-normal ml-2">
-                    (Elige el que mejor se ajuste)
+                    {t("form.serviceNote")}
                   </span>
                 </label>
                 <select
@@ -396,12 +396,15 @@ const ContactForm = () => {
                   onFocus={handleFormStart}
                   onBlur={() => handleFieldBlur("service")}
                 >
-                  <option value="">Selecciona un servicio</option>
-                  {SERVICES.map((service) => (
-                    <option key={service.id} value={service.id}>
-                      {service.icon} {service.title}
-                    </option>
-                  ))}
+                  <option value="">{t("form.servicePlaceholder")}</option>
+                  {SERVICES.map((service) => {
+                    const serviceKey = service.id;
+                    return (
+                      <option key={service.id} value={service.id}>
+                        {t(`${serviceKey}.title`, { ns: "services" })}
+                      </option>
+                    );
+                  })}
                 </select>
                 {errors.service && (
                   <p className="mt-2 text-sm text-red-500 font-poppins">
@@ -421,8 +424,8 @@ const ContactForm = () => {
                   {...register("message")}
                   type="textarea"
                   name="message"
-                  label="Mensaje"
-                  placeholder="Cuéntanos sobre tu proyecto..."
+                  label={t("form.message")}
+                  placeholder={t("form.messagePlaceholder")}
                   required
                   error={errors.message?.message}
                   onFocus={handleFormStart}
@@ -430,7 +433,7 @@ const ContactForm = () => {
                   className="bg-dark-primary text-white"
                 />
                 <p className="mt-2 text-xs text-gray-400 font-poppins">
-                  Mínimo 10 caracteres, máximo 500 caracteres
+                  {t("form.messageHint")}
                 </p>
               </motion.div>
 
@@ -449,9 +452,11 @@ const ContactForm = () => {
                   loading={formState.isSubmitting}
                   disabled={formState.isSubmitting}
                   className="w-full"
-                  ariaLabel="Enviar formulario de contacto"
+                  ariaLabel={t("form.submit")}
                 >
-                  {formState.isSubmitting ? "Enviando..." : "Enviar Mensaje"}
+                  {formState.isSubmitting
+                    ? t("form.submitting")
+                    : t("form.submit")}
                 </Button>
               </motion.div>
 
@@ -463,8 +468,7 @@ const ContactForm = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.6 }}
               >
-                Al enviar este formulario, aceptas nuestra política de
-                privacidad. Nunca compartiremos tu información con terceros.
+                {t("form.privacyNote")}
               </motion.p>
             </form>
           </motion.div>

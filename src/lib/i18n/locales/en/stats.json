@@ -1,0 +1,33 @@
+{
+  "badge": "Our Impact",
+  "title": "Results that",
+  "titleHighlight": "Speak for Themselves",
+  "subtitle": "Numbers that reflect our commitment to excellence and technological innovation.",
+  "bottomText": "Each number represents hours of dedication, innovation and",
+  "bottomHighlight": "commitment to our clients",
+  "projects": "Successful projects",
+  "retention": "Client retention",
+  "mvp": "MVP to production",
+  "items": {
+    "projects": {
+      "label": "Projects Completed",
+      "description": "Since 2020 to date",
+      "value": "50+"
+    },
+    "clients": {
+      "label": "Satisfied Clients",
+      "description": "In 15 countries",
+      "value": "30+"
+    },
+    "experience": {
+      "label": "Years of Experience",
+      "description": "Constant innovation",
+      "value": "5+"
+    },
+    "satisfaction": {
+      "label": "Client Satisfaction",
+      "description": "Based on 200+ reviews",
+      "value": "98%"
+    }
+  }
+}
