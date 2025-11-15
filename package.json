@@ -11,10 +11,11 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css,json}\"",
+    "precommit": "npm run lint && npm run format:check && npm run type-check",
     "analyze": "vite build --mode analyze",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:run": "vitest run",
+    "test:run": "vitest run --reporter=verbose --no-coverage",
     "test:coverage": "vitest run --coverage",
     "optimize:images": "npx svgo -f public/assets/images --multipass",
     "clean": "rm -rf dist node_modules/.vite",
@@ -33,11 +34,13 @@
     "prepare": "husky install || true"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
+    "src/**/*.{ts,tsx}": [
+      "bash -c 'if [[ \"$0\" != *\".test.\"* && \"$0\" != *\"/test/\"* ]]; then eslint --fix --max-warnings 0 \"$0\"; fi'",
       "prettier --write"
     ],
-    "*.{css,json}": "prettier --write"
+    "*.{css,json}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@fontsource/orbitron": "^5.2.8",

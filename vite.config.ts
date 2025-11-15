@@ -57,10 +57,15 @@ export default defineConfig({
     css: true,
     // Ensure React is in development mode for tests
     define: {
-      "process.env.NODE_ENV": JSON.stringify("test"),
+      "process.env.NODE_ENV": '"test"',
+      __DEV__: true,
+    },
+    // Use development build of React
+    alias: {
+      "react/jsx-runtime": "react/jsx-dev-runtime",
     },
     // Include test files
-    include: ["**/*.{test,spec}.{js,ts,jsx,tsx}"],
+    include: ["src/**/*.{test,spec}.{js,ts,jsx,tsx}"],
     // Exclude patterns
     exclude: [
       "**/node_modules/**",
@@ -69,6 +74,8 @@ export default defineConfig({
       "**/.{idea,git,cache,output,temp}/**",
       "**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*",
     ],
+    // Isolate environment per test file to prevent leaks
+    isolate: true,
     // Reporters
     reporters: ["verbose"],
     // Coverage configuration

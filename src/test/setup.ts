@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { cleanup } from "@testing-library/react";
-import { afterEach, vi } from "vitest";
+import { afterEach } from "vitest";
 
 // Cleanup after each test
 afterEach(() => {
@@ -19,21 +19,22 @@ if (typeof global.SharedArrayBuffer === "undefined") {
   (global as any).SharedArrayBuffer = ArrayBuffer;
 }
 
-// Mock WeakMap globals for webidl-conversions
-if (typeof global.WeakMap === "undefined") {
-  global.WeakMap = class WeakMap {
-    private _map = new Map();
-    get(key: any) {
+// Ensure WeakMap is properly initialized before any module imports
+const originalWeakMap = global.WeakMap;
+if (!originalWeakMap || !originalWeakMap.prototype) {
+  global.WeakMap = class WeakMap<K extends object = object, V = any> {
+    private _map = new Map<K, V>();
+    get(key: K): V | undefined {
       return this._map.get(key);
     }
-    set(key: any, value: any) {
+    set(key: K, value: V): this {
       this._map.set(key, value);
       return this;
     }
-    has(key: any) {
+    has(key: K): boolean {
       return this._map.has(key);
     }
-    delete(key: any) {
+    delete(key: K): boolean {
       return this._map.delete(key);
     }
   } as any;
