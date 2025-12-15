@@ -759,3 +759,4 @@ export { useLanguageUrl } from "./useLanguageUrl";
 
 // Export useSystemLanguage for system language detection
 export { useSystemLanguage } from "./useSystemLanguage";
+export { usePerformance, usePageLoadTime } from "./usePerformance";
